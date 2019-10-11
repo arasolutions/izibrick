@@ -268,8 +268,12 @@
                                 <li class="list-header">Accueil</li>
 
 
+                                {% if app.request.get('_route') == 'dashboard' %}
                                 <li class="active-link">
-                                    <a href="widgets.html">
+                            {% else %}
+                                <li>
+                                    {% endif %}
+                                    <a href="{{ path('dashboard') }}">
                                         <i class="ti-world"></i>
                                         <span class="menu-title">
 												Tableau de bord
@@ -285,7 +289,11 @@
                                 <li class="list-header">Pages</li>
 
                                 <!--Menu list item-->
+                                {% if app.request.get('_route') == 'bo-accueil' %}
+                                <li class="active-link">
+                            {% else %}
                                 <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-accueil') }}">
                                         <i class="ti-home"></i>
                                         <span class="menu-title">
@@ -318,8 +326,11 @@
                                 <li class="list-divider"></li>
 
                                 <li class="list-header">Paramètres globaux</li>
-
+                                {% if app.request.get('_route') == 'bo-global-parameters' %}
+                                <li class="active-link">
+                                    {% else %}
                                 <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-global-parameters') }}">
                                         <i class="ti-world"></i>
                                         <span class="menu-title">
