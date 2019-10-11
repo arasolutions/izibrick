@@ -19,10 +19,31 @@
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form) }}
-            {{ form_label(form.keys) }}
-            {{ form_widget(form.keys, {'attr':{'data-role':'tagsinput'}}) }}
-            {{ form_end(form) }}
+            <div class="col-sm-12 form-group">
+                {{ form_label(form.keys) }}
+                {{ form_widget(form.keys, {'attr':{'data-role':'tagsinput'}}) }}
+            </div>
 
+            <div class="col-sm-12 form-group">
+                {{ form_label(form.facebook) }}
+                {{ form_widget(form.facebook, {'attr':{'class':'form-control'}}) }}
+            </div>
+
+            <div class="col-sm-12 form-group">
+                {{ form_label(form.twitter) }}
+                {{ form_widget(form.twitter, {'attr':{'class':'form-control'}}) }}
+            </div>
+
+            <div class="col-sm-12 form-group">
+                {{ form_label(form.instagram) }}
+                {{ form_widget(form.instagram, {'attr':{'class':'form-control'}}) }}
+            </div>
+            <div class="col-sm-12 form-group">
+                <button class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

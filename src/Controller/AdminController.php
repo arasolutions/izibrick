@@ -98,18 +98,24 @@ class AdminController extends AbstractController
 
         $command = new GlobalParametersCommand();
 
+        $success = false;
+
         $form = $this->createForm(GlobalParametersType::class, $command);
         $form->handleRequest($request);
-        /*if ($form->isSubmitted()) {
-            $site->getHome()->setContent($command->getContent());
+        if ($form->isSubmitted()) {
+            $site->setKeyWords($command->getKeys());
+            $site->setFacebook($command->getFacebook());
+            $site->setTwitter($command->getTwitter());
+            $site->setInstagram($command->getInstagram());
             $this->siteRepository->save($site);
-        }*/
+            $success = true;
+        }
 
         return $this->render('admin/global-parameters/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'form' => $form->createView(),
-            'success' => false
+            'success' => $success
         ]);
     }
 

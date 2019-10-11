@@ -89,6 +89,31 @@ class Site
     private $domain;
 
     /**
+     * @ORM\Column(type="string", length=1023, nullable=true)
+     */
+    private $keyWords;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $favicon;
+
+    /**
+     * @ORM\Column(type="string", length=1023, nullable=true)
+     */
+    private $facebook;
+
+    /**
+     * @ORM\Column(type="string", length=1023, nullable=true)
+     */
+    private $instagram;
+
+    /**
+     * @ORM\Column(type="string", length=1023, nullable=true)
+     */
+    private $twitter;
+
+    /**
      * @return string
      */
     public function getLogo(): ?string
@@ -276,6 +301,66 @@ class Site
     public function setDomain(?string $domain): self
     {
         $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function getKeyWords(): ?string
+    {
+        return $this->keyWords;
+    }
+
+    public function setKeyWords(?string $keyWords): self
+    {
+        $this->keyWords = $keyWords;
+
+        return $this;
+    }
+
+    public function getFavicon(): ?string
+    {
+        return $this->favicon;
+    }
+
+    public function setFavicon(?string $favicon): self
+    {
+        $this->favicon = $favicon;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): self
+    {
+        $this->twitter = $twitter;
 
         return $this;
     }

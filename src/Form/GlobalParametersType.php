@@ -14,7 +14,18 @@ class GlobalParametersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('keys', TextType::class)
+            ->add('keys', TextType::class, [
+                'label'=>'Mots-clé'
+            ])
+            ->add('facebook', TextType::class, [
+                'label'=>'Lien page Facebook'
+            ])
+            ->add('twitter', TextType::class, [
+                'label'=>'Lien compte Twitter'
+            ])
+            ->add('instagram', TextType::class, [
+                'label'=>'Lien compte Instagram'
+            ])
         ;
     }
 
