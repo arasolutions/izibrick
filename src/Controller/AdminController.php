@@ -6,6 +6,7 @@ use App\Command\GlobalParametersCommand;
 use App\Command\HomeCommand;
 use App\Entity\Site;
 use App\Entity\User;
+use App\Entity\UserSite;
 use App\Form\GlobalParametersType;
 use App\Form\HomeType;
 use App\Form\SiteOptionsType;
@@ -39,17 +40,17 @@ class AdminController extends AbstractController
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
             if (sizeof($user->getSites()) == 1) {
-                /** @var Site $site */
-                $site = $user->getSites()[0];
-                $_SESSION['SITE_ID'] = $site->getId();
+                /** @var UserSite $userSite */
+                $userSite = $user->getSites()[0];
+                $_SESSION['SITE_ID'] = $userSite->getSite()->getId();
             }
         }
 
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $userSite = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
         return $this->render('admin/dashboard/index.html.twig', [
             'controller_name' => 'AdminController',
-            'site' => $site
+            'site' => $userSite
         ]);
     }
 
