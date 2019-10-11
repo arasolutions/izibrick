@@ -6,6 +6,7 @@ use App\Command\GlobalParametersCommand;
 use App\Command\HomeCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,15 +19,15 @@ class GlobalParametersType extends AbstractType
                 'label'=>'Mots-clé',
                 'required'=>false
             ])
-            ->add('facebook', TextType::class, [
+            ->add('facebook', UrlType::class, [
                 'label'=>'Lien page Facebook',
                 'required'=>false
             ])
-            ->add('twitter', TextType::class, [
+            ->add('twitter', UrlType::class, [
                 'label'=>'Lien compte Twitter',
                 'required'=>false
             ])
-            ->add('instagram', TextType::class, [
+            ->add('instagram', UrlType::class, [
                 'label'=>'Lien compte Instagram',
                 'required'=>false
             ])
