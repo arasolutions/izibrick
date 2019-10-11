@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Accueil{% endblock %}
+
+{% block description %}Représente la première page de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+    <div class="alert alert-success">
+        <strong>Parfait !</strong> Votre accueil à bien été mis à jour.
+    </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form) }}
+            <p>Vous pouvez modifier les éléments de votre page d'accueil</p>
+            <div class="col-sm-12">
+                <button id="demo-edit-text" class="btn btn-primary" type="button">Modifier</button>
+                <button id="demo-test-text" class="btn btn-primary" type="button" style="display: none">Tester</button>
+                <button id="demo-save-text" class="btn btn-success pull-right" type="submit" style="display: none">
+                    Enregistrer
+                </button>
+                <button id="demo-revert-text" class="btn btn-danger pull-right margin-right-10" type="button"
+                        style="display: none">
+                    Annuler
+                </button>
+            </div>
+
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+
+            <!--Summernote-->
+            <!--===================================================-->
+            <div class="col-sm-12">
+                <div id="demo-summernote-edit">
+                    {{ site.home.content | raw }}
+                </div>
+            </div>
+            <!--===================================================-->
+            <!-- End Summernote -->
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/js/demo/form-text-editor.js') }}"></script>
+{% endblock %}

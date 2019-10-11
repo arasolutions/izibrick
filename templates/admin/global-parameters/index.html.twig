@@ -1,0 +1,32 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Les paramètres globaux{% endblock %}
+
+{% block description %}Tous les paramètres liés à votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Vos paramètres ont bien été mis à jour.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form) }}
+            {{ form_label(form.keys) }}
+            {{ form_widget(form.keys, {'attr':{'data-role':'tagsinput'}}) }}
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+{% endblock %}

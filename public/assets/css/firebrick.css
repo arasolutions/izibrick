@@ -1,0 +1,45 @@
+.form-errors {
+    margin-top: -10px;
+}
+
+.form-errors > ul {
+    padding-left: 10px;
+}
+
+.form-errors > ul > li {
+    color: #C00;
+    list-style-type: none;
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.bloc-price {
+    text-align: center;
+    padding-right: 10px;
+}
+
+.bloc-price > .price {
+    font-weight: bold;
+    color: #29b2a6;
+}
+
+.ug-thumb-wrapper.ug-tile.selected .ug-textpanel-bg.ug-trans-enabled{
+    background-color: #0b141e !important;
+}
+
+.ug-textpanel .ug-trans-enabled{
+    cursor: pointer;
+}
+
+.margin-right-10{
+    margin-right: 10px !important;
+}
+
+.navbar-content .username{
+    padding-left: 10px;
+}
+
+.header-description{
+    margin-left: 10px;
+    font-style: italic;
+}

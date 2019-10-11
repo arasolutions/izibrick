@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Firebrick | Administration | {% block title %}{% endblock %}</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="{{ asset('assets/css/nifty.min.css') }}" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="{{ asset('assets/css/demo/nifty-demo-icons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/themify-icons/themify-icons.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/css/firebrick.css') }}" rel="stylesheet">
+
+
+    <!--=================================================-->
+
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="{{ asset('assets/plugins/pace/pace.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('assets/plugins/pace/pace.min.js') }}"></script>
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="{{ asset('assets/css/demo/nifty-demo.min.css') }}" rel="stylesheet">
+
+
+    {% block stylesheets %}{% endblock %}
+
+    <!--=================================================
+
+    REQUIRED
+    You must include this in your project.
+
+
+    RECOMMENDED
+    This category must be included but you may modify which plugins or components which should be included in your project.
+
+
+    OPTIONAL
+    Optional plugins. You may choose whether to include it in your project or not.
+
+
+    DEMONSTRATION
+    This is to be removed, used for demonstration purposes only. This category must not be included in your project.
+
+
+    SAMPLE
+    Some script samples which explain how to initialize plugins or components. This category should not be included in your project.
+
+
+    Detailed information and more samples can be found in the document.
+
+    =================================================-->
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+<body>
+<div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+    <!--NAVBAR-->
+    <!--===================================================-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed">
+
+            <!--Brand logo & name-->
+            <!--================================-->
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="Nifty Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">Nifty</span>
+                    </div>
+                </a>
+            </div>
+            <!--================================-->
+            <!--End brand logo & name-->
+
+
+            <!--Navbar Dropdown-->
+            <!--================================-->
+            <div class="navbar-content">
+                <ul class="nav navbar-top-links">
+
+
+                    <!--Mega dropdown-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li id="dropdown-user" class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                            <div class="username hidden-xs">{{ app.user.username }}</div>
+                            <span class="ic-user pull-right">
+                                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                                <!--You can use an image instead of an icon.-->
+                                <!--<img class="img-circle img-user media-object" src="img/profile-photos/1.png" alt="Profile Picture">-->
+                                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                                    <img class="img-circle img-user media-object"
+                                         src="{{ asset('/assets/img/profile-photos/1.png') }}" alt="Profile Picture">
+
+                                </span>
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <!--You can also display a user name in the navbar.-->
+                            <!--<div class="username hidden-xs">Aaron Chavez</div>-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        </a>
+
+
+                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
+                            <ul class="head-list">
+                                <li>
+                                    <a href="#"><i class="demo-pli-male icon-lg icon-fw"></i> Mon profil</a>
+                                </li>
+                                <li>
+                                    <a href="#"><span class="badge badge-danger pull-right">9</span><i
+                                                class="demo-pli-mail icon-lg icon-fw"></i> Mes notifications</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="demo-pli-gear icon-lg icon-fw"></i> Paramètres</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('fos_user_security_logout') }}"><i
+                                                class="demo-pli-unlock icon-lg icon-fw"></i>
+                                        Déconnexion</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End mega dropdown-->
+
+                </ul>
+            </div>
+            <!--================================-->
+            <!--End Navbar Dropdown-->
+
+        </div>
+    </header>
+
+    <div class="boxed">
+        <div id="content-container">
+            <div id="page-head">
+
+                <!--Page Title-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <div id="page-title">
+                    <h1 class="page-header text-overflow">{{ block('title') }}</h1>
+                </div>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End page title-->
+
+                <ol class="breadcrumb">
+                    <li class="header-description"><i
+                                class="ti-arrow-right"></i>&nbsp;{% block description %}{% endblock %}</li>
+                </ol>
+            </div>
+            <div id="page-content">
+                <hr class="new-section-xs bord-no">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <nav id="mainnav-container">
+            <div id="mainnav">
+
+
+                <!--OPTIONAL : ADD YOUR LOGO TO THE NAVIGATION-->
+                <!--It will only appear on small screen devices.-->
+                <!--================================
+                <div class="mainnav-brand">
+                    <a href="index.html" class="brand">
+                        <img src="img/logo.png" alt="Nifty Logo" class="brand-icon">
+                        <span class="brand-text">Nifty</span>
+                    </a>
+                    <a href="#" class="mainnav-toggle"><i class="pci-cross pci-circle icon-lg"></i></a>
+                </div>
+                -->
+
+
+                <!--Menu-->
+                <!--================================-->
+                <div id="mainnav-menu-wrap">
+                    <div class="nano">
+                        <div class="nano-content">
+
+                            <!--Profile Widget-->
+                            <!--================================-->
+                            <div id="mainnav-profile" class="mainnav-profile">
+                                <div class="profile-wrap text-center">
+                                    <div class="pad-btm">
+                                        Mon site
+                                    </div>
+                                    <div class="pad-btm">
+                                        <img class="img-circle img-md"
+                                             src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
+                                             alt="{{ site.name }} logo">
+                                    </div>
+                                    <p class="mnp-name">{{ site.name }}</p>
+                                    <span class="mnp-desc">
+                                        <a href="http://{{ site.domain }}"
+                                           target="_blank">{{ site.domain }}
+                                        </a>
+                                    </span>
+
+                                </div>
+                            </div>
+
+
+                            <!--Shortcut buttons-->
+                            <!--================================-->
+                            <div id="mainnav-shortcut" class="hidden">
+                                <ul class="list-unstyled shortcut-wrap">
+                                    <li class="col-xs-3" data-content="My Profile">
+                                        <a class="shortcut-grid" href="#">
+                                            <div class="icon-wrap icon-wrap-sm icon-circle bg-mint">
+                                                <i class="demo-pli-male"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="col-xs-3" data-content="Messages">
+                                        <a class="shortcut-grid" href="#">
+                                            <div class="icon-wrap icon-wrap-sm icon-circle bg-warning">
+                                                <i class="demo-pli-speech-bubble-3"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="col-xs-3" data-content="Activity">
+                                        <a class="shortcut-grid" href="#">
+                                            <div class="icon-wrap icon-wrap-sm icon-circle bg-success">
+                                                <i class="demo-pli-thunder"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="col-xs-3" data-content="Lock Screen">
+                                        <a class="shortcut-grid" href="#">
+                                            <div class="icon-wrap icon-wrap-sm icon-circle bg-purple">
+                                                <i class="demo-pli-lock-2"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--================================-->
+                            <!--End shortcut buttons-->
+
+
+                            <ul id="mainnav-menu" class="list-group">
+
+                                <li class="list-header">Accueil</li>
+
+
+                                <li class="active-link">
+                                    <a href="widgets.html">
+                                        <i class="ti-world"></i>
+                                        <span class="menu-title">
+												Tableau de bord
+                                            <!--<span class="pull-right badge badge-warning">24</span>-->
+											</span>
+                                    </a>
+                                </li>
+
+
+                                <li class="list-divider"></li>
+
+                                <!--Category name-->
+                                <li class="list-header">Pages</li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="{{ path('bo-accueil') }}">
+                                        <i class="ti-home"></i>
+                                        <span class="menu-title">
+												Accueil
+                                            <!--<span class="pull-right badge badge-warning">24</span>-->
+											</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="widgets.html">
+                                        <i class="ti-announcement"></i>
+                                        <span class="menu-title">
+												Présentation
+                                            <!--<span class="pull-right badge badge-warning">24</span>-->
+											</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="widgets.html">
+                                        <i class="ti-wallet"></i>
+                                        <span class="menu-title">
+												Blog / Articles
+                                            <!--<span class="pull-right badge badge-warning">24</span>-->
+											</span>
+                                    </a>
+                                </li>
+
+                                <li class="list-divider"></li>
+
+                                <li class="list-header">Paramètres globaux</li>
+
+                                <li>
+                                    <a href="{{ path('bo-global-parameters') }}">
+                                        <i class="ti-world"></i>
+                                        <span class="menu-title">
+												Paramètres du site
+                                            <!--<span class="pull-right badge badge-warning">24</span>-->
+											</span>
+                                    </a>
+                                </li>
+
+                                <!--Category name-->
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End widget-->
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--================================-->
+    <!--End menu-->
+
+</div>
+</nav>
+</div>
+<footer id="footer">
+
+    <!-- Visible when footer positions are fixed -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="show-fixed pad-rgt pull-right">
+        You have <a href="#" class="text-main"><span class="badge badge-danger">3</span> pending action.</a>
+    </div>
+
+
+    <!-- Visible when footer positions are static -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <div class="hide-fixed pull-right pad-rgt">
+        14GB of <strong>512GB</strong> Free.
+    </div>
+
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+    <p class="pad-lft">&#0169; 2018 Your Company</p>
+
+
+</footer>
+<button class="scroll-top btn">
+    <i class="pci-chevron chevron-up"></i>
+</button>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+
+<!--BootstrapJS [ RECOMMENDED ]-->
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+
+<!--NiftyJS [ RECOMMENDED ]-->
+<script src="{{ asset('assets/js/nifty.min.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</div>
+</body>
+</html>
