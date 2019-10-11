@@ -96,7 +96,7 @@ class AdminController extends AbstractController
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
-        $command = new GlobalParametersCommand();
+        $command = new GlobalParametersCommand($site);
 
         $success = false;
 

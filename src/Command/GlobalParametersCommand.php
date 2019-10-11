@@ -5,6 +5,7 @@ namespace App\Command;
 
 
 use App\Entity\Product;
+use App\Entity\Site;
 
 class GlobalParametersCommand
 {
@@ -14,6 +15,19 @@ class GlobalParametersCommand
     private $facebook;
     private $twitter;
     private $instagram;
+
+    /**
+     * GlobalParametersCommand constructor.
+     * @param Site $site
+     */
+    public function __construct(Site $site)
+    {
+        $this->instagram = $site->getInstagram();
+        $this->facebook=$site->getFacebook();
+        $this->keys=$site->getKeyWords();
+        $this->twitter=$site->getTwitter();
+    }
+
 
     /**
      * @return mixed
