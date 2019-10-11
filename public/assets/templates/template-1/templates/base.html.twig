@@ -225,22 +225,24 @@
                 <p>© Copyright 2018 by Vertex. All Rights Reserved.</p>
 
                 <div class="clearfix pull-right">
-                    <a href="#" class="social-icon si-borderless si-facebook mb-0" title="Facebook">
+                    {% if site.facebook  %}
+                    <a href="{{ site.facebook }}" class="social-icon si-borderless si-facebook mb-0" title="Facebook" target="_blank">
                         <i class="si-icon-facebook"></i>
                         <i class="si-icon-facebook"></i>
                     </a>
-                    <a href="#" class="social-icon si-borderless si-twitter mb-0" title="Twitter">
+                    {% endif %}
+                    {% if site.twitter  %}
+                    <a href="{{ site.twitter }}" class="social-icon si-borderless si-twitter mb-0" title="Twitter" target="_blank">
                         <i class="si-icon-twitter"></i>
                         <i class="si-icon-twitter"></i>
                     </a>
-                    <a href="#" class="social-icon si-borderless si-instagram mb-0" title="Instagram">
+                    {% endif %}
+                    {% if site.instagram  %}
+                    <a href="{{ site.instagram }}" class="social-icon si-borderless si-instagram mb-0" title="Instagram" target="_blank">
                         <i class="si-icon-instagram"></i>
                         <i class="si-icon-instagram"></i>
                     </a>
-                    <a href="#" class="social-icon si-borderless si-vk mb-0" title="Vk">
-                        <i class="si-icon-vk"></i>
-                        <i class="si-icon-vk"></i>
-                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

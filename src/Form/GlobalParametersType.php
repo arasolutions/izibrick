@@ -15,16 +15,20 @@ class GlobalParametersType extends AbstractType
     {
         $builder
             ->add('keys', TextType::class, [
-                'label'=>'Mots-clé'
+                'label'=>'Mots-clé',
+                'required'=>false
             ])
             ->add('facebook', TextType::class, [
-                'label'=>'Lien page Facebook'
+                'label'=>'Lien page Facebook',
+                'required'=>false
             ])
             ->add('twitter', TextType::class, [
-                'label'=>'Lien compte Twitter'
+                'label'=>'Lien compte Twitter',
+                'required'=>false
             ])
             ->add('instagram', TextType::class, [
-                'label'=>'Lien compte Instagram'
+                'label'=>'Lien compte Instagram',
+                'required'=>false
             ])
         ;
     }

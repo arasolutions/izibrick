@@ -6,7 +6,7 @@ namespace App\Enum;
 
 class SiteStatus
 {
-    const A_CREER = array('name' => 'A_CREE');
+    const A_CREER = array('name' => 'A_CRE');
     const INITIALISE = array('name' => 'INIT');
 
     public static function getByName($type)
