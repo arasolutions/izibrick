@@ -12,75 +12,80 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="panel">
                     <div class="panel-body">
-                        {{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
-                        <div class="col-sm-9">
-                            <div class="form-group">
-                                <div class="pull-left text-3x">Allez c'est parti ! créons votre site</div>
+                        <div id="wizard">
+                            {% include 'bo/order/wizard.html.twig' %}
+                            <div id="wizard-tab2" class="tab-pane">
+                                {{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div class="pull-left text-3x">Allez c'est parti ! créons votre site</div>
+                                    </div>
+                                </div>
+                                {% if site.product %}
+                                    <div class="col-sm-3">
+                                        <div class="pull-right bloc-price">A partir de <br/><span
+                                                    class="price text-2x">{{ site.product.price }}€</span>/mois
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="col-sm-12 form-group">
+                                    <label>Nom du produit</label>
+                                    <div>{{ site.product.name }}</div>
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    <label>Nom du thème</label>
+                                    <div>{{ site.template.name }}</div>
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    <label>Couleur du thème</label>
+                                    <div>{{ site.colorTheme }}</div>
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    <label>Nom du site</label>
+                                    <div>{{ site.name }}</div>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    {{ form_label(form.managerLastName, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.managerLastName, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-6 form-group pull-right margin-right-10">
+                                    {{ form_label(form.managerFirstName, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.managerFirstName, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    {{ form_label(form.businessName, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.businessName, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-6 form-group pull-right margin-right-10">
+                                    {{ form_label(form.managerPhone, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.managerPhone, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    {{ form_label(form.address, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.address, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-6 form-group pull-right margin-right-10">
+                                    {{ form_label(form.address2, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.address2, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    {{ form_label(form.postCode, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.postCode, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-4 form-group pull-right margin-right-10">
+                                    {{ form_label(form.country, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.country, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-4 form-group pull-right margin-right-10">
+                                    {{ form_label(form.city, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.city, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-12 form-group text-right">
+                                    <button type="submit" class="btn btn-mint btn-lg">Créer mon compte</button>
+                                </div>
+                                {{ form_end(form) }}
                             </div>
                         </div>
-                        {% if site.product %}
-                        <div class="col-sm-3">
-                            <div class="pull-right bloc-price">A partir de <br/><span
-                                        class="price text-2x">{{ site.product.price }}€</span>/mois
-                            </div>
-                        </div>
-                        {% endif %}
-                        <div class="col-sm-12 form-group">
-                            <label>Nom du produit</label>
-                            <div>{{ site.product.name }}</div>
-                        </div>
-                        <div class="col-sm-12 form-group">
-                            <label>Nom du thème</label>
-                            <div>{{ site.template.name }}</div>
-                        </div>
-                        <div class="col-sm-12 form-group">
-                            <label>Couleur du thème</label>
-                            <div>{{ site.colorTheme }}</div>
-                        </div>
-                        <div class="col-sm-12 form-group">
-                            <label>Nom du site</label>
-                            <div>{{ site.name }}</div>
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            {{ form_label(form.managerLastName, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.managerLastName, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-6 form-group pull-right margin-right-10">
-                            {{ form_label(form.managerFirstName, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.managerFirstName, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            {{ form_label(form.businessName, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.businessName, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-6 form-group pull-right margin-right-10">
-                            {{ form_label(form.managerPhone, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.managerPhone, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            {{ form_label(form.address, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.address, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-6 form-group pull-right margin-right-10">
-                            {{ form_label(form.address2, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.address2, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            {{ form_label(form.postCode, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.postCode, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-4 form-group pull-right margin-right-10">
-                            {{ form_label(form.country, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.country, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-4 form-group pull-right margin-right-10">
-                            {{ form_label(form.city, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.city, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                        <div class="col-sm-12 form-group">
-                            <button type="submit" class="btn btn-mint btn-lg">Créer mon compte</button>
-                        </div>
-                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>
@@ -119,19 +124,19 @@
                 tile_textpanel_css_title: {
                     "font-size": "12px",
                 },
-                tile_as_link:true,
-                tile_overlay_opacity:.4
+                tile_as_link: true,
+                tile_overlay_opacity: .4
 
             });
 
-            $(".ug-thumb-wrapper.ug-tile").on('click', function(e){
+            $(".ug-thumb-wrapper.ug-tile").on('click', function (e) {
                 e.preventDefault();
                 $(".ug-thumb-wrapper.ug-tile").removeClass('selected');
                 $(this).addClass('selected');
                 $('#order_template').val($(this).attr('href').substr(1, $(this).attr('href').length));
             });
 
-            $(".ug-thumb-wrapper.ug-tile .ug-tile-icon.ug-icon-link").on('click', function(e){
+            $(".ug-thumb-wrapper.ug-tile .ug-tile-icon.ug-icon-link").on('click', function (e) {
                 e.preventDefault();
             });
 

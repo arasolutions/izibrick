@@ -53,7 +53,7 @@ class OrderController extends AbstractController
 
 
     /**
-     * @Route("/order/{product}", name="order")
+     * @Route("/order/{product}", name="order", methods={"GET","POST"})
      * @param int $product
      * @param Request $request
      * @return Response
@@ -77,7 +77,7 @@ class OrderController extends AbstractController
                 $newProduct = $this->productRepository->findOneBy(array('codePromotion' => $order->getCodePromo()));
 
                 if ($newProduct != null) {
-                    return $this->redirectToRoute('order', array('offer' => $newProduct->getId()));
+                    return $this->redirectToRoute('order', array('product' => $newProduct->getId()));
                 } else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
@@ -92,7 +92,9 @@ class OrderController extends AbstractController
                     $site->setColorTheme($order->getColorTheme());
                     $templateChosen = $this->templateRepository->findOneBy(array('id' => $order->getTemplate()));
                     $site->setTemplate($templateChosen);
-                    $site->setLogoFile($order->getLogo());
+                    if ($order->getLogo() != null) {
+                        $site->setLogoFile($order->getLogo());
+                    }
                     $site = $this->siteRepository->save($site);
                     return $this->redirectToRoute('customer', array('siteId' => $site->getId()));
                 }
@@ -104,7 +106,8 @@ class OrderController extends AbstractController
         return $this->render('bo/order/index.html.twig', [
             'form' => $form->createView(),
             'product' => $productChosen,
-            'templates' => $templates
+            'templates' => $templates,
+            'step' => 1
         ]);
     }
 
@@ -151,7 +154,8 @@ class OrderController extends AbstractController
 
         return $this->render('bo/order/customer.html.twig', [
             'form' => $form->createView(),
-            'site' => $site
+            'site' => $site,
+            'step' => 2
         ]);
     }
 
@@ -175,7 +179,8 @@ class OrderController extends AbstractController
 
         return $this->render('bo/order/options.html.twig', [
             'form' => $form->createView(),
-            'site' => $site
+            'site' => $site,
+            'step' => 3
         ]);
     }
 }

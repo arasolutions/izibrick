@@ -23,6 +23,7 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
+                'required' => false,
                 'label' => 'Nom du site'
             ))
             ->add('productId', HiddenType::class)
@@ -39,6 +40,7 @@ class OrderType extends AbstractType
                 'error_bubbling'=>false
             ))
             ->add('logo', FileType::class, array(
+                'required' => false,
                 'label' => 'Choisissez un logo'
             ));
     }

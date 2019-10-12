@@ -1,0 +1,31 @@
+<!--nav-->
+<ul class="row wz-step wz-icon-bw wz-nav-off mar-top">
+    <li class="col-xs-3 {% if step >= 1 %}active{% endif %}">
+        <a data-toggle="tab" href="#wizard-tab1">
+            <span class="text-danger"><i class="demo-pli-information icon-2x"></i></span>
+            <h5 class="mar-no">Thème</h5>
+        </a>
+    </li>
+    <li class="col-xs-3  {% if step >= 2 %}active{% endif %}">
+        <a data-toggle="tab" href="#wizard-tab2">
+            <span class="text-warning"><i class="demo-pli-male icon-2x"></i></span>
+            <h5 class="mar-no">Compte</h5>
+        </a>
+    </li>
+    <li class="col-xs-3  {% if step >= 3 %}active{% endif %}">
+        <a data-toggle="tab" href="#demo-main-tab3">
+            <span class="text-info"><i class="demo-pli-home icon-2x"></i></span>
+            <h5 class="mar-no">Options</h5>
+        </a>
+    </li>
+    <li class="col-xs-3  {% if step >= 4 %}active{% endif %}">
+        <a data-toggle="tab" href="#demo-main-tab4">
+            <span class="text-success"><i class="demo-pli-medal-2 icon-2x"></i></span>
+            <h5 class="mar-no">Fin</h5>
+        </a>
+    </li>
+</ul>
+<!--progress bar-->
+<div class="progress progress-sm">
+    <div class="progress-bar progress-bar-primary" style="width:{{ 25 * step }}%"></div>
+</div>

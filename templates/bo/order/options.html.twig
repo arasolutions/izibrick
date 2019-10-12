@@ -12,27 +12,33 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="panel">
                     <div class="panel-body">
-                        {{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
-                        <div class="col-sm-9">
-                            <div class="form-group">
-                                <div class="pull-left text-3x">Allez c'est parti ! créons votre site</div>
-                            </div>
-                        </div>
-                        {% if site.product %}
-                            <div class="col-sm-3">
-                                <div class="pull-right bloc-price">A partir de <br/><span
-                                            class="price text-2x">{{ site.product.price }}€</span>/mois
+                        <div id="wizard">
+                            {% include 'bo/order/wizard.html.twig' %}
+                            <!--First tab-->
+                            <div id="wizard-tab3" class="tab-pane">
+                                {{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <div class="pull-left text-3x">Allez c'est parti ! créons votre site</div>
+                                    </div>
                                 </div>
+                                {% if site.product %}
+                                    <div class="col-sm-3">
+                                        <div class="pull-right bloc-price">A partir de <br/><span
+                                                    class="price text-2x">{{ site.product.price }}€</span>/mois
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.domain, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.domain, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    <button type="submit" class="btn btn-mint btn-lg">Valider mes options</button>
+                                </div>
+                                {{ form_end(form) }}
                             </div>
-                        {% endif %}
-                        <div class="col-sm-12 form-group">
-                            {{ form_label(form.domain, null, {'label_attr':{'class':'control-label'}}) }}
-                            {{ form_widget(form.domain, {'attr':{'class':'form-control input-lg'}}) }}
                         </div>
-                        <div class="col-sm-12 form-group">
-                            <button type="submit" class="btn btn-mint btn-lg">Valider mes options</button>
-                        </div>
-                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>

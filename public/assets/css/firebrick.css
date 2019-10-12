@@ -43,3 +43,21 @@
     margin-left: 10px;
     font-style: italic;
 }
+
+#wizard ul{
+    padding-inline-start: 0;
+}
+
+#wizard li {
+    list-style: none;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#wizard li:not(.active) h5{
+    font-weight: normal;
+}
+
+#wizard li i.icon-2x{
+    padding-bottom: 5px;
+}

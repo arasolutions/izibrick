@@ -132,7 +132,7 @@ class Site
     /**
      * @return File
      */
-    public function getLogoFile(): File
+    public function getLogoFile(): ?File
     {
         return $this->logoFile;
     }
