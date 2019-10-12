@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Site;
 use App\Entity\UserSite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -17,6 +18,20 @@ class UserSiteRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserSite::class);
+    }
+
+
+    /**
+     * @param UserSite $userSite
+     * @return UserSite
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(UserSite $userSite)
+    {
+        $this->getEntityManager()->persist($userSite);
+        $this->getEntityManager()->flush();
+        return $userSite;
     }
 
     // /**

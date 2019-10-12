@@ -28,6 +28,17 @@ class UserSite
      */
     private $site;
 
+    /**
+     * UserSite constructor.
+     * @param $user
+     * @param $site
+     */
+    public function __construct($user, $site)
+    {
+        $this->user = $user;
+        $this->site = $site;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
