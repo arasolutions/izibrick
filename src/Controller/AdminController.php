@@ -39,7 +39,7 @@ class AdminController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
-            if (sizeof($user->getSites()) == 1) {
+            if (sizeof($user->getSites()) >= 1) {
                 /** @var UserSite $userSite */
                 $userSite = $user->getSites()[0];
                 $_SESSION['SITE_ID'] = $userSite->getSite()->getId();

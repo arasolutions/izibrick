@@ -55,4 +55,27 @@ class SiteRepository extends ServiceEntityRepository
             return null;
         }
     }
+
+    /**
+     * @param $siteName
+     * @return mixed|null
+     */
+    public function getByName($siteName)
+    {
+        try {
+            $q = $this->createQueryBuilder('s')
+                ->andWhere('LOWER(s.name) = :val')
+                ->setParameter('val', strtolower($siteName))
+                ->getQuery();
+
+            //var_dump($q->getSQL());die();
+
+            return $q->getSingleResult();
+            //var_dump($site);die();
+        } catch (NoResultException $e) {
+            return null;
+        } catch (NonUniqueResultException $e) {
+            return null;
+        }
+    }
 }

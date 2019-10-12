@@ -42,11 +42,20 @@ class SiteController extends AbstractController
      *     requirements={"nobackoffice"="^((?!www.new-cloud.test).)*$"},
      *     defaults={"nobackoffice"=""}
      *     )
+     * @Route("/site/{siteName<.*>}/", name="site_homepage_by_id",
+     *     host="www.new-cloud.test")
+     * @param string $siteName
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function accueil()
+    public function accueil($siteName = null)
     {
         /** @var Site $site */
-        $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+
+        if ($siteName != null) {
+            $site = $this->siteRepository->getByName($siteName);
+        } else {
+            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+        }
 
         return $this->render('sites/site-' . $site->getId() . '/index/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
