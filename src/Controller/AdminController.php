@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Command\GlobalParametersCommand;
 use App\Command\HomeCommand;
+use App\Command\PresentationCommand;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
 use App\Form\GlobalParametersType;
 use App\Form\HomeType;
+use App\Form\PresentationType;
 use App\Form\SiteOptionsType;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,6 +81,38 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/accueil/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
+
+    /**
+     * @Route("/presentation", name="bo-presentation")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function presentation(Request $request)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+
+        $command = new PresentationCommand();
+        $command->setOriginalContent($site->getPresentation()->getContent());
+
+        $success = false;
+
+        $form = $this->createForm(PresentationType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $site->getPresentation()->setContent($command->getContent());
+            $this->siteRepository->save($site);
+            $success = true;
+        }
+
+        return $this->render('admin/presentation/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'form' => $form->createView(),

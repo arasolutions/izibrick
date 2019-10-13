@@ -50,7 +50,7 @@ $(document).on('nifty.ready', function() {
 
     $('#demo-test-text').on('click', function(){
         $('#demo-summernote-edit').summernote('destroy');
-        $('#home_content').val($('#demo-summernote-edit').html());
+        itemContent.val($('#demo-summernote-edit').html());
         $('#demo-edit-text').show();
         $('#demo-revert-text').show();
         $('#demo-save-text').show();
@@ -63,7 +63,7 @@ $(document).on('nifty.ready', function() {
         $('#demo-test-text').hide();
         $(this).hide();
         $('#demo-save-text').hide();
-        $('#home_content').val($('#home_originalContent').html());
+        itemContent.val(originalContent.html());
     });
 
     $('#demo-save-text').on('click', function(e){

@@ -79,6 +79,11 @@ class Site
     private $home;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Presentation", mappedBy="site", cascade={"persist", "remove"})
+     */
+    private $presentation;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSite", mappedBy="site")
      */
     private $users;
@@ -257,6 +262,24 @@ class Site
         $newSite = $home === null ? null : $this;
         if ($newSite !== $home->getSite()) {
             $home->setSite($newSite);
+        }
+
+        return $this;
+    }
+
+    public function getPresentation(): ?Presentation
+    {
+        return $this->presentation;
+    }
+
+    public function setPresentation(?Presentation $presentation): self
+    {
+        $this->presentation = $presentation;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSite = $presentation === null ? null : $this;
+        if ($newSite !== $presentation->getSite()) {
+            $presentation->setSite($newSite);
         }
 
         return $this;

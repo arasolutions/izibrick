@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Accueil{% endblock %}
+{% block title %}Page Présentation{% endblock %}
 
-{% block description %}Représente la première page de votre site{% endblock %}
+{% block description %}Représente la page présentation de votre site{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -13,13 +13,13 @@
 {% block body %}
     {% if success %}
     <div class="alert alert-success">
-        <strong>Parfait !</strong> Votre accueil à bien été mis à jour.
+        <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
     </div>
     {% endif %}
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form) }}
-            <p>Vous pouvez modifier les éléments de votre page d'accueil</p>
+            <p>Vous pouvez modifier les éléments de votre page de présentation</p>
             <div class="col-sm-12">
                 <button id="demo-edit-text" class="btn btn-primary" type="button">Modifier</button>
                 <button id="demo-test-text" class="btn btn-primary" type="button" style="display: none">Tester</button>
@@ -40,7 +40,7 @@
             <!--===================================================-->
             <div class="col-sm-12">
                 <div id="demo-summernote-edit">
-                    {{ site.home.content | raw }}
+                    {{ site.presentation.content | raw }}
                 </div>
             </div>
             <!--===================================================-->
@@ -54,8 +54,8 @@
 {% block javascripts %}
     <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
-        var originalContent=$('#home_originalContent');
-        var itemContent=$('#home_content');
+        var originalContent=$('#presentation_originalContent');
+        var itemContent=$('#presentation_content');
     </script>
     <script src="{{ asset('assets/js/demo/form-text-editor.js') }}"></script>
 {% endblock %}
