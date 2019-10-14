@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Command\ContactCommand;
 use App\Command\GlobalParametersCommand;
 use App\Command\HomeCommand;
 use App\Command\PresentationCommand;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
+use App\Form\ContactType;
 use App\Form\GlobalParametersType;
 use App\Form\HomeType;
 use App\Form\PresentationType;
@@ -98,7 +100,7 @@ class AdminController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function bopresentation(Request $request)
+    public function boPresentation(Request $request)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
@@ -116,6 +118,39 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/presentation/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
+
+
+    /**
+     * @Route("/bo-contact", name="bo-contact")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function boContact(Request $request)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+
+        $command = new ContactCommand();
+        $command->setEmail($site->getContact()->getEmail());
+
+        $success = false;
+
+        $form = $this->createForm(ContactType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $site->getContact()->setEmail($command->getEmail());
+            $this->siteRepository->save($site);
+            $success = true;
+        }
+
+        return $this->render('admin/contact/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'form' => $form->createView(),

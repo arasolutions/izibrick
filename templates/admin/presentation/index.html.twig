@@ -39,9 +39,20 @@
             <!--Summernote-->
             <!--===================================================-->
             <div class="col-sm-12">
-                <div id="demo-summernote-edit">
+                <div id="summernote-edit">
                     {{ site.presentation.content | raw }}
                 </div>
+            </div>
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                <button id="form-submit" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right margin-right-10" type="button">
+                    Annuler
+                </button>
             </div>
             <!--===================================================-->
             <!-- End Summernote -->
@@ -50,7 +61,6 @@
         </div>
     </div>
 {% endblock %}
-
 {% block javascripts %}
     <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
