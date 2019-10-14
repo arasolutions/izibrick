@@ -2,8 +2,15 @@ vich_uploader:
     db_driver: orm
     mappings:
         logo_site:
-            uri_prefix:         /uploads/site
-            upload_destination: '%kernel.root_dir%/../public/uploads/site'
+            uri_prefix:         /uploads/site/logo
+            upload_destination: '%kernel.root_dir%/../public/uploads/site/logo'
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer: namer.md5
+        main_picture_site:
+            uri_prefix:         /uploads/site/main-picture
+            upload_destination: '%kernel.root_dir%/../public/uploads/site/main-picture'
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true

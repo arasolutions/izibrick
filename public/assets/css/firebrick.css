@@ -61,3 +61,8 @@
 #wizard li i.icon-2x{
     padding-bottom: 5px;
 }
+
+#summernote-edit{
+    border-left: solid 2px #CCC;
+    padding: 5px;
+}

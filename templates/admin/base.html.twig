@@ -289,12 +289,12 @@
                                 <li class="list-header">Pages</li>
 
                                 <!--Menu list item-->
-                                {% if app.request.get('_route') == 'bo-accueil' %}
+                                {% if app.request.get('_route') == 'bo-home' %}
                                 <li class="active-link">
                             {% else %}
                                 <li>
                                     {% endif %}
-                                    <a href="{{ path('bo-accueil') }}">
+                                    <a href="{{ path('bo-home') }}">
                                         <i class="ti-home"></i>
                                         <span class="menu-title">
                                                 Accueil

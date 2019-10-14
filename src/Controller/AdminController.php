@@ -57,13 +57,13 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/accueil", name="bo-accueil")
+     * @Route("/home", name="bo-home")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function accueil(Request $request)
+    public function home(Request $request)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
@@ -76,6 +76,9 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $site->getHome()->setContent($command->getContent());
+            if ($command->getMainPicture() != null) {
+                $site->getHome()->setMainPictureFile($command->getMainPicture());
+            }
             $this->siteRepository->save($site);
             $success = true;
         }
@@ -153,5 +156,4 @@ class AdminController extends AbstractController
             'success' => $success
         ]);
     }
-
 }

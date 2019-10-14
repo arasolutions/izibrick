@@ -7,6 +7,23 @@ class HomeCommand
 {
     private $content;
     private $originalContent;
+    private $mainPicture;
+
+    /**
+     * @return mixed
+     */
+    public function getMainPicture()
+    {
+        return $this->mainPicture;
+    }
+
+    /**
+     * @param mixed $mainPicture
+     */
+    public function setMainPicture($mainPicture): void
+    {
+        $this->mainPicture = $mainPicture;
+    }
 
     /**
      * @return mixed

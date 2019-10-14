@@ -59,6 +59,7 @@ class Site
      * @ORM\Column(type="string", length=5)
      */
     private $status;
+
     /**
      * @var string
      *

@@ -2,9 +2,11 @@
 
 namespace App\Command;
 
+use App\Entity\Home;
 use App\Entity\Site;
 use App\Entity\UserSite;
 use App\Enum\SiteStatus;
+use App\Repository\HomeRepository;
 use App\Repository\SiteRepository;
 use App\Repository\UserSiteRepository;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -26,6 +28,9 @@ class FirebrickCreateProjectCommand extends Command
     /** @var UserSiteRepository */
     private $userSiteRepository;
 
+    /** @var HomeRepository */
+    private $homeRepository;
+
     /** @var UserManagerInterface */
     private $userManager;
 
@@ -35,17 +40,20 @@ class FirebrickCreateProjectCommand extends Command
      * FirebrickCreateProjectCommand constructor.
      * @param SiteRepository $siteRepository
      * @param UserSiteRepository $userSiteRepository
+     * @param HomeRepository $homeRepository
      * @param UserManagerInterface $userManager
      * @param $path
      */
-    public function __construct(SiteRepository $siteRepository, UserSiteRepository $userSiteRepository, UserManagerInterface $userManager, $path)
+    public function __construct(SiteRepository $siteRepository, UserSiteRepository $userSiteRepository, HomeRepository $homeRepository, UserManagerInterface $userManager, $path)
     {
         $this->siteRepository = $siteRepository;
         $this->userSiteRepository = $userSiteRepository;
+        $this->homeRepository = $homeRepository;
         $this->userManager = $userManager;
         $this->path = $path;
         parent::__construct();
     }
+
 
     protected function configure()
     {
@@ -99,6 +107,10 @@ class FirebrickCreateProjectCommand extends Command
 
             file_put_contents($sitePublicDir . '/assets/css/firebrick.css', $str);
         }
+
+        //Création du home
+        $home = new Home($site);
+        $this->homeRepository->save($home);
 
         // Création du compte
         $io->comment('Création du compte utilisateur');

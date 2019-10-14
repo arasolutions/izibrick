@@ -50,7 +50,6 @@ class SiteController extends AbstractController
     public function accueil($siteName = null)
     {
         /** @var Site $site */
-
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {

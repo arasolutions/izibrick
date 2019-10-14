@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Command\HomeCommand;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,9 +15,14 @@ class HomeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', HiddenType::class)
-            ->add('originalContent', HiddenType::class)
-        ;
+            ->add('mainPicture', FileType::class, [
+                'required' => false,
+                'label' => 'Image principale'
+            ])
+            ->add('content', HiddenType::class, [
+                'label' => 'Contenu'
+            ])
+            ->add('originalContent', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
