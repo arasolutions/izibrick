@@ -1,4 +1,4 @@
-{% extends 'sites/site-' ~ site.id ~ '/base.html.twig' %}
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
 {% block title %}{{site.name}} | Accueil{% endblock %}
 
@@ -11,7 +11,7 @@
             <ul>
                 <li data-transition="fade" data-title="Welcome to Vertex">
 
-                    <img src="{{ asset('assets/img/fond.jpg') }}" alt=""
+                    <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('logo') }}" alt=""
                          data-bgposition="center center"
                          data-bgfit="cover"
                          data-bgrepeat="no-repeat"

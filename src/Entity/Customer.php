@@ -68,6 +68,11 @@ class Customer
      */
     private $sites;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $managerMail;
+
     public function __construct()
     {
         $this->sites = new ArrayCollection();
@@ -213,6 +218,18 @@ class Customer
                 $site->setCustomer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getManagerMail(): ?string
+    {
+        return $this->managerMail;
+    }
+
+    public function setManagerMail(string $managerMail): self
+    {
+        $this->managerMail = $managerMail;
 
         return $this;
     }

@@ -56,7 +56,7 @@ class SiteController extends AbstractController
             $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
         }
 
-        return $this->render('sites/site-' . $site->getId() . '/index/index.html.twig', [
+        return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site
         ]);

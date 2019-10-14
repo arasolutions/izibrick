@@ -6,9 +6,11 @@ use App\Entity\Home;
 use App\Entity\Site;
 use App\Entity\UserSite;
 use App\Enum\SiteStatus;
+use App\Helper\UserHelper;
 use App\Repository\HomeRepository;
 use App\Repository\SiteRepository;
 use App\Repository\UserSiteRepository;
+use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -35,6 +37,7 @@ class FirebrickCreateProjectCommand extends Command
     private $userManager;
 
     private $path;
+
 
     /**
      * FirebrickCreateProjectCommand constructor.
@@ -89,24 +92,14 @@ class FirebrickCreateProjectCommand extends Command
         // Copie du template
         $filesystem = new Filesystem();
         $templateDir = $this->path . '/public/assets/templates/template-' . $site->getTemplate()->getId() . '/templates';
-        $siteDir = $this->path . '/templates/sites/site-' . $site->getId();
         $sitePublicDir = $this->path . '/public/sites/site-' . $site->getId();
-        if (!is_dir($siteDir)) {
-            $io->comment('Création du dossier ' . $siteDir);
-            $filesystem->mkdir($siteDir);
-
-            $io->comment('Copie des templates');
-            $filesystem->mirror($templateDir, $siteDir);
-            $filesystem->mkdir($sitePublicDir);
-            $filesystem->copy($templateDir . '/../assets/css/firebrick.css', $sitePublicDir . '/assets/css/firebrick.css');
-
-            $io->comment('Mise en place de la couleur du thème');
-            $str = file_get_contents($sitePublicDir . '/assets/css/firebrick.css');
-
-            $str = str_replace("COLOR_THEME", $site->getColorTheme(), $str);
-
-            file_put_contents($sitePublicDir . '/assets/css/firebrick.css', $str);
-        }
+        $io->comment('Copie des templates');
+        $filesystem->mkdir($sitePublicDir);
+        $filesystem->copy($templateDir . '/../assets/css/firebrick.css', $sitePublicDir . '/assets/css/firebrick.css');
+        $io->comment('Mise en place de la couleur du thème');
+        $str = file_get_contents($sitePublicDir . '/assets/css/firebrick.css');
+        $str = str_replace("COLOR_THEME", $site->getColorTheme(), $str);
+        file_put_contents($sitePublicDir . '/assets/css/firebrick.css', $str);
 
         //Création du home
         $home = new Home($site);
@@ -114,13 +107,22 @@ class FirebrickCreateProjectCommand extends Command
 
         // Création du compte
         $io->comment('Création du compte utilisateur');
-        $user = $this->userManager->createUser();
-        $user->setEmail('te.te@te.com');
-        $user->setUsername('tete');
-        $user->setPlainPassword('admin');
-        $this->userManager->updateUser($user);
 
-        // Envoi d'un mail de confirmation
+        $user = $this->userManager->findUserByEmail($site->getCustomer()->getManagerMail());
+
+        if ($user == null) {
+            $user = $this->userManager->createUser();
+            $user->setEmail($site->getCustomer()->getManagerMail());
+            $user->setUsername(UserHelper::generateUsername($site->getCustomer()->getManagerFirstName(), $site->getCustomer()->getManagerLastName()));
+            $user->setPlainPassword(UserHelper::generatePassword());
+            $user->setConfirmationToken("coucou");
+            $this->userManager->updateUser($user);
+
+            // Envoi d'un mail de confirmation de création de compte
+            $mailer=$this->get('fos_user.mailer.default');
+            $mailer->sendConfirmationEmailMessage($user);
+        }
+
 
         // Jointure du user sur le site
         $userSite = new UserSite($user, $site);
