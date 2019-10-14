@@ -1,6 +1,6 @@
-{% extends 'sites/site-' ~ site.id ~ '/base.html.twig' %}
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}{{site.name}} | Contact{% endblock %}
 
 {% block contactActive %}active{% endblock %}
 

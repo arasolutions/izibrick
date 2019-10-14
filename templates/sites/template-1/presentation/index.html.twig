@@ -1,0 +1,29 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | Présentation{% endblock %}
+
+{% block quiSommesNousActive %}active{% endblock %}
+
+{% block body %}
+    <section
+            class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0"
+            data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="img/mix/desktop-9.jpg">
+        <div class="container py-5">
+            <div class="row text-left mb-9 center">
+                <div class="col-md-12">
+                    <h1 class="line-height-2 mb-3 fs-60">Présentation</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+
+        <div class="v-bg-stylish pb-0">
+            <div class="container">
+                    {{ site.presentation.content|raw }}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

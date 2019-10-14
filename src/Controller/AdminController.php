@@ -92,13 +92,13 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/presentation", name="bo-presentation")
+     * @Route("/bo-presentation", name="bo-presentation")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function presentation(Request $request)
+    public function bopresentation(Request $request)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
