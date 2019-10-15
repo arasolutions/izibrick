@@ -13,16 +13,20 @@ use App\Firebrock\CommandHandler\EditContactCommandHandler;
 use App\Firebrock\CommandHandler\EditGlobalParametersCommandHandler;
 use App\Firebrock\CommandHandler\EditHomeCommandHandler;
 use App\Firebrock\CommandHandler\EditPresentationCommandHandler;
-use App\Form\ContactType;
-use App\Form\GlobalParametersType;
-use App\Form\HomeType;
-use App\Form\PresentationType;
-use App\Form\SiteOptionsType;
+use App\Form\EditContactType;
+use App\Form\EditGlobalParametersType;
+use App\Form\EditHomeType;
+use App\Form\EditPresentationType;
+use App\Form\AddSiteOptionsType;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class AdminController
+ * @package App\Controller
+ */
 class AdminController extends AbstractController
 {
     /** @var SiteRepository */
@@ -36,7 +40,6 @@ class AdminController extends AbstractController
     {
         $this->siteRepository = $siteRepository;
     }
-
 
     /**
      * @Route("/dashboard", name="dashboard")
@@ -78,7 +81,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(HomeType::class, $command);
+        $form = $this->createForm(EditHomeType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $editHomeCommandHandler->handle($command, $site);
@@ -110,7 +113,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(PresentationType::class, $command);
+        $form = $this->createForm(EditPresentationType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editPresentationCommandHandler->handle($command, $site);
@@ -143,7 +146,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(ContactType::class, $command);
+        $form = $this->createForm(EditContactType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editContactCommandHandler->handle($command, $site);
@@ -174,7 +177,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(GlobalParametersType::class, $command);
+        $form = $this->createForm(EditGlobalParametersType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editGlobalParametersCommandHandler->handle($command, $site);

@@ -10,9 +10,9 @@ use App\Firebrock\Command\OrderCommand;
 use App\Firebrock\Command\SiteOptionsCommand;
 use App\Firebrock\CommandHandler\AddCustomerCommandHandler;
 use App\Firebrock\CommandHandler\AddOrderCommandHandler;
-use App\Form\CustomerType;
-use App\Form\OrderType;
-use App\Form\SiteOptionsType;
+use App\Form\AddCustomerType;
+use App\Form\AddOrderType;
+use App\Form\AddSiteOptionsType;
 use App\Repository\CustomerRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
@@ -69,7 +69,7 @@ class OrderController extends AbstractController
 
         $order->setProductId($productChosen->getId());
 
-        $form = $this->createForm(OrderType::class, $order);
+        $form = $this->createForm(AddOrderType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -118,7 +118,7 @@ class OrderController extends AbstractController
 
         $customer = new CustomerCommand();
 
-        $form = $this->createForm(CustomerType::class, $customer);
+        $form = $this->createForm(AddCustomerType::class, $customer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -152,7 +152,7 @@ class OrderController extends AbstractController
 
         $customer = new SiteOptionsCommand();
 
-        $form = $this->createForm(SiteOptionsType::class, $customer);
+        $form = $this->createForm(AddSiteOptionsType::class, $customer);
         $form->handleRequest($request);
 
         return $this->render('bo/order/options.html.twig', [
