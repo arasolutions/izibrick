@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Firebrock\Command\CustomerCommand;
+use App\Firebrock\Command\AddCustomerCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -15,45 +15,24 @@ class AddCustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('businessName', TextType::class, array(
-                'label' => 'Société',
-                'required' => false
-            ))
-            ->add('address', TextType::class, array(
-                'label' => 'Adresse'
-            ))
-            ->add('address2', TextType::class, array(
-                'label' => 'Complément d\'adresse',
-                'required' => false
-            ))
-            ->add('postCode', TextType::class, array(
-                'label' => 'Code postal'
-            ))
-            ->add('city', TextType::class, array(
-                'label' => 'Ville'
-            ))
-            ->add('country', TextType::class, array(
-                'label' => 'Pays',
-                'required' => false
-            ))
             ->add('managerLastName', TextType::class, array(
-                'label' => 'Nom du responsable'
+                'label' => 'Nom'
             ))
             ->add('managerFirstName', TextType::class, array(
-                'label' => 'Prénom du responsable'
+                'label' => 'Prénom'
             ))
             ->add('managerPhone', TelType::class, array(
                 'label' => 'Numéro de téléphone'
             ))
             ->add('managerMail', EmailType::class, array(
-                'label' => 'Email du responsable'
+                'label' => 'Email'
             ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CustomerCommand::class,
+            'data_class' => AddCustomerCommand::class,
         ]);
     }
 }

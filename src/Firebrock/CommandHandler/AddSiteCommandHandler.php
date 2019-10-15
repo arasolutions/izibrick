@@ -6,17 +6,17 @@ namespace App\Firebrock\CommandHandler;
 
 use App\Entity\Site;
 use App\Entity\User;
-use App\Firebrock\Command\OrderCommand;
+use App\Firebrock\Command\AddSiteCommand;
 use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class AddOrderCommandHandler
+ * Class AddSiteCommandHandler
  * @package App\Firebrock\CommandHandler
  */
-class AddOrderCommandHandler
+class AddSiteCommandHandler
 {
     /** @var SiteRepository */
     private $siteRepository;
@@ -41,7 +41,7 @@ class AddOrderCommandHandler
     }
 
 
-    public function handle(OrderCommand $command)
+    public function handle(AddSiteCommand $command)
     {
         $site = new Site();
         $site->setProduct($this->productRepository->findOneBy(array('id' => $command->getProductId())));

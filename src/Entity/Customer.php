@@ -24,7 +24,7 @@ class Customer
     private $businessName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;
 
@@ -39,12 +39,12 @@ class Customer
     private $postCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=63)
+     * @ORM\Column(type="string", length=63, nullable=true)
      */
     private $country;
 
@@ -59,7 +59,7 @@ class Customer
     private $managerFirstName;
 
     /**
-     * @ORM\Column(type="string", length=31, nullable=true)
+     * @ORM\Column(type="string", length=31)
      */
     private $managerPhone;
 

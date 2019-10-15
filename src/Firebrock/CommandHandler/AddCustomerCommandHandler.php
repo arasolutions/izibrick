@@ -7,8 +7,8 @@ namespace App\Firebrock\CommandHandler;
 use App\Entity\Customer;
 use App\Entity\Site;
 use App\Entity\User;
-use App\Firebrock\Command\CustomerCommand;
-use App\Firebrock\Command\OrderCommand;
+use App\Firebrock\Command\AddCustomerCommand;
+use App\Firebrock\Command\AddSiteCommand;
 use App\Repository\CustomerRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
@@ -38,19 +38,13 @@ class AddCustomerCommandHandler
         $this->customerRepository = $customerRepository;
     }
 
-    public function handle(CustomerCommand $command, Site $site)
+    public function handle(AddCustomerCommand $command, Site $site)
     {
         $newCustomer = new Customer();
-        $newCustomer->setAddress($command->getAddress());
-        $newCustomer->setAddress2($command->getAddress2());
-        $newCustomer->setBusinessName($command->getBusinessName());
-        $newCustomer->setCity($command->getCity());
-        $newCustomer->setCountry($command->getCountry());
         $newCustomer->setManagerFirstName($command->getManagerFirstName());
         $newCustomer->setManagerLastName($command->getManagerLastName());
         $newCustomer->setManagerPhone($command->getManagerPhone());
         $newCustomer->setManagerMail($command->getManagerMail());
-        $newCustomer->setPostCode($command->getPostCode());
 
         $newCustomer = $this->customerRepository->save($newCustomer);
 

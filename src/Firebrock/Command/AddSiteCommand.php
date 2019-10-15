@@ -6,7 +6,7 @@ namespace App\Firebrock\Command;
 
 use App\Entity\Product;
 
-class OrderCommand
+class AddSiteCommand
 {
     private $name;
     private $colorTheme;

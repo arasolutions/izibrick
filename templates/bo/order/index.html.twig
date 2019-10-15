@@ -68,7 +68,7 @@
                                                 {% for template in templates %}
                                                     <a href="#{{ template.id }}" id="coucou">
                                                         <img alt="{{ template.name }}"
-                                                             src="{{ asset('assets/templates/template-' ~ template.id ~ '/sticker.png') }}"
+                                                             src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
                                                              data-description="{{ template.description }}"
                                                              style="display:none">
                                                     </a>
@@ -109,8 +109,8 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#codePromoBtn').on('click', function (e) {
-                    if ($('#order_codePromo').val() !== '') {
-                        $('#order_hasCodePromo').val(1);
+                    if ($('#add_order_codePromo').val() !== '') {
+                        $('#add_order_hasCodePromo').val(1);
                     } else {
                         e.preventDefault();
                     }
@@ -142,7 +142,7 @@
                     e.preventDefault();
                     $(".ug-thumb-wrapper.ug-tile").removeClass('selected');
                     $(this).addClass('selected');
-                    $('#order_template').val($(this).attr('href').substr(1, $(this).attr('href').length));
+                    $('#add_order_template').val($(this).attr('href').substr(1, $(this).attr('href').length));
                 });
 
                 $(".ug-thumb-wrapper.ug-tile .ug-tile-icon.ug-icon-link").on('click', function (e) {

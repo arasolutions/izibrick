@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Site;
-use App\Firebrock\Command\OrderCommand;
+use App\Firebrock\Command\AddSiteCommand;
 use App\Repository\ProductRepository;
 use Liip\ImagineBundle\Form\Type\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -48,7 +48,7 @@ class AddOrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => OrderCommand::class,
+            'data_class' => AddSiteCommand::class,
         ]);
     }
 }

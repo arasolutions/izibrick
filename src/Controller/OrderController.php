@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Entity\Customer;
 use App\Entity\Product;
 use App\Entity\Site;
-use App\Firebrock\Command\CustomerCommand;
-use App\Firebrock\Command\OrderCommand;
+use App\Firebrock\Command\AddCustomerCommand;
+use App\Firebrock\Command\AddSiteCommand;
 use App\Firebrock\Command\SiteOptionsCommand;
 use App\Firebrock\CommandHandler\AddCustomerCommandHandler;
-use App\Firebrock\CommandHandler\AddOrderCommandHandler;
+use App\Firebrock\CommandHandler\AddSiteCommandHandler;
 use App\Form\AddCustomerType;
 use App\Form\AddOrderType;
 use App\Form\AddSiteOptionsType;
@@ -58,14 +58,14 @@ class OrderController extends AbstractController
      * @Route("/order/{product}", name="order", methods={"GET","POST"})
      * @param int $product
      * @param Request $request
-     * @param AddOrderCommandHandler $addOrderCommandHandler
+     * @param AddSiteCommandHandler $addSiteCommandHandler
      * @return Response
      */
-    public function index($product, Request $request, AddOrderCommandHandler $addOrderCommandHandler)
+    public function index($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
     {
         $productChosen = $this->productRepository->findOneBy(array('id' => $product));
 
-        $order = new OrderCommand();
+        $order = new AddSiteCommand();
 
         $order->setProductId($productChosen->getId());
 
@@ -87,7 +87,7 @@ class OrderController extends AbstractController
                     $form->get('template')->addError(new FormError('Veuillez choisir un thème'));
                 } else {
                     // Nouveau site
-                    $site = $addOrderCommandHandler->handle($order);
+                    $site = $addSiteCommandHandler->handle($order);
                     return $this->redirectToRoute('customer', array('siteId' => $site->getId()));
                 }
             }
@@ -107,24 +107,20 @@ class OrderController extends AbstractController
      * @Route("/order/{siteId}/customer", name="customer")
      * @param int $siteId
      * @param Request $request
+     * @param AddCustomerCommandHandler $addCustomerCommandHandler
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function customer($siteId, Request $request, AddCustomerCommandHandler $addCustomerCommandHandler)
     {
-
         $site = $this->siteRepository->getById($siteId);
 
-        $customer = new CustomerCommand();
+        $customer = new AddCustomerCommand();
 
         $form = $this->createForm(AddCustomerType::class, $customer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $newCustomer = $addCustomerCommandHandler->handle($customer, $site);
-
             if ($newCustomer->getId() != null) {
                 return $this->redirectToRoute('options', array('siteId' => $site->getId()));
             }
@@ -160,5 +156,15 @@ class OrderController extends AbstractController
             'site' => $site,
             'step' => 3
         ]);
+    }
+
+    /**
+     * @Route("/order/{siteId}/end", name="end")
+     * @param $siteId
+     * @param Request $request
+     */
+    public function end($siteId, Request $request){
+        $site = $this->siteRepository->getById($siteId);
+
     }
 }
