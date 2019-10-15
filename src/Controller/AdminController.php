@@ -129,6 +129,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/bo-contact", name="bo-contact")
      * @param Request $request
+     * @param EditContactCommandHandler $editContactCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
