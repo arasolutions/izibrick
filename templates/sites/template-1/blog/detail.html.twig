@@ -1,0 +1,99 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | Blog{% endblock %}
+
+{% block blogActive %}active{% endblock %}
+
+{% block body %}
+    <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
+        <div class="container py-9">
+            <div class="row text-left">
+                <div class="col-lg-12">
+                    <p class="v-smash-text-large-2x">Blog</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="v-page-wrap has-right-sidebar has-one-sidebar">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+
+                    <article>
+
+                        <figure class="media-wrap">
+                            <img src="img/blog/b-fw-6.jpg" />
+                        </figure>
+
+                        <h3 class="blog-post-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+
+                        <div class="post-info clearfix">
+                                <span class="vcard author">
+                                    Posted by <a href="page-about-me.html" class="fn">Vertex</a> on <span class="date updated">November 9, 2018</span>
+                                </span>
+                        </div>
+
+                        <section class="article-body-wrap">
+
+                            <div class="body-text clearfix">
+                                <p>
+                                    <span class="dropcap1">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam massa quis mauris
+                                    sollicitudin commodo venenatis ligula commodo. Sed blandit convallis dignissim. Pellentesque
+                                    pharetra velit eu velit elementum et convallis erat vulputate. Sed in nulla ut elit mollis posuere.
+                                    Praesent a felis accumsan neque interdum molestie ut id massa. In hac habitasse platea dictumst.
+                                    Nulla ut lorem ante. In convallis, felis eget consequat faucibus, mi diam consequat augue, quis
+                                    porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet vel, aliquet sit amet risus. Maecenas
+                                    nec tempus velit. Praesent gravida mi et mauris sollicitudin ultricies. Duis molestie quam sem, ac
+                                    faucibus velit. Curabitur dolor dolor, fringilla vel fringilla tempor, ultricies sed tellus. Cras
+                                    aliquet, nulla a feugiat adipiscing, mi enim ornare nisl, eu pellentesque nunc diam eu purus.
+                                    Aliquam a arcu ac arcu aliquam vulputate ac a diam. Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Etiam aliquam massa quis mauris sollicitudin commodo venenatis ligula commodo.
+                                    Sed blandit convallis dignissim. Pellentesque pharetra velit eu velit elementum et convallis erat
+                                    vulputate. Sed in nulla ut elit mollis posuere. Praesent a felis accumsan neque interdum molestie
+                                    ut id massa. In hac habitasse platea dictumst. Nulla ut lorem ante. In convallis, felis eget consequat
+                                    faucibus, mi diam consequat augue, quis porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet
+                                    vel, aliquet sit amet risus.
+                                </p>
+                                <blockquote class="pullquote">
+                                        <span style="color: #888888;">
+                                            Nulla ut lorem ante. In convallis, felis eget consequat faucibus, mi diam
+                                            consequat augue, quis porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet vel,
+                                            aliquet sit amet risus. Maecenas nec tempus velit. Praesent gravida mi et mauris sollicitudin
+                                            ultricies. Duis molestie quam sem, ac faucibus velit. Curabitur dolor dolor, fringilla vel
+                                            fringilla tempor, ultricies sed tellus.
+                                        </span>
+                                </blockquote>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam massa quis mauris
+                                    sollicitudin commodo venenatis ligula commodo. Sed blandit convallis dignissim. Pellentesque
+                                    pharetra velit eu velit elementum et convallis erat vulputate. Sed in nulla ut elit mollis
+                                    posuere. Praesent a felis accumsan neque interdum molestie ut id massa. In hac habitasse
+                                    platea dictumst. Nulla ut lorem ante. In convallis, felis eget consequat faucibus, mi diam
+                                    consequat augue, quis porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet vel,
+                                    aliquet sit amet risus. Maecenas nec tempus velit. Praesent gravida mi et mauris sollicitudin
+                                    ultricies. Duis molestie quam sem, ac faucibus velit. Curabitur dolor dolor, fringilla vel
+                                    fringilla tempor, ultricies sed tellus. Cras aliquet, nulla a feugiat adipiscing, mi enim
+                                    ornare nisl, eu pellentesque nunc diam eu purus.
+                                </p>
+                                <p>
+                                    Maecenas nec tempus velit. Praesent gravida mi et mauris sollicitudin ultricies. Duis molestie
+                                    quam sem, ac faucibus velit. Curabitur dolor dolor, fringilla vel fringilla tempor, ultricies
+                                    sed tellus. Cras aliquet, nulla a feugiat adipiscing, mi enim ornare nisl, eu pellentesque
+                                    nunc diam eu purus. Aliquam a arcu ac arcu aliquam vulputate ac a diam. Lorem ipsum dolor
+                                    sit amet, consectetur adipiscing elit. Etiam aliquam massa quis mauris sollicitudin commodo
+                                    ligula commodo. Sed blandit convallis dignissim. Pellentesque pharetra velit eu velit
+                                    elementum et convallis erat vulputate. Sed in nulla ut elit mollis posuere.
+                                </p>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
