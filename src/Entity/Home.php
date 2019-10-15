@@ -44,6 +44,11 @@ class Home
     private $mainPictureFile;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @return string
      */
     public function getMainPicture(): ?string
@@ -54,7 +59,7 @@ class Home
     /**
      * @param string $mainPicture
      */
-    public function setMainPicture(string $mainPicture): void
+    public function setMainPicture(?string $mainPicture): void
     {
         $this->mainPicture = $mainPicture;
     }
@@ -70,9 +75,12 @@ class Home
     /**
      * @param File $mainPictureFile
      */
-    public function setMainPictureFile(File $mainPictureFile): void
+    public function setMainPictureFile(?File $mainPictureFile): void
     {
         $this->mainPictureFile = $mainPictureFile;
+        if ($mainPictureFile != null) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 
     /**
@@ -109,6 +117,18 @@ class Home
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

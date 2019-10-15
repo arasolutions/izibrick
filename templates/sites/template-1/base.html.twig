@@ -14,34 +14,37 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
 
     <!-- Libs CSS -->
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/header.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/portfolio.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/blog.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/font-icons.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/shortcodes.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/utilities.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/header.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/portfolio.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/blog.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-icons.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/shortcodes.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/utilities.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet"/>
 
     <!-- Current Page CSS -->
-    <link href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/css/settings.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/css/settings.css') }}" rel="stylesheet"/>
 
     <!-- Skin -->
-    <link rel="stylesheet" href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/skin/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/skin/default.css') }}">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/custom.css') }}">
+    <style type="text/css">
+        :root{--colorTheme:{{ site.colorTheme }};}
+    </style>
 
     <!-- Firebrick LESS -->
-    <link rel="stylesheet" href="{{ asset('sites/site-' ~ site.id ~ '/assets/css/firebrick.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/firebrick.scss') }}">
 </head>
 
 <body>
@@ -266,25 +269,25 @@
 </div>
 
 <!-- Libs -->
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/popper.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.flexslider-min.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.easing.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.fitvids.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.carouFredSel.min.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.validate.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/theme-plugins.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/jquery.isotope.min.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/imagesloaded.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/view.min.js?auto') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/popper.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.flexslider-min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.easing.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.fitvids.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.carouFredSel.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.validate.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme-plugins.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.isotope.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/imagesloaded.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/view.min.js?auto') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.js') }}"></script>
 
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
 
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/theme-core.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/theme.js') }}"></script>
-<script src="{{ asset('assets/templates/template-' ~ site.template.id ~ '/assets/js/theme.init.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme-core.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme.init.js') }}"></script>
 </body>
 </html>

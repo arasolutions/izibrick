@@ -129,7 +129,7 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+            $site = $this->siteRepository->getById($_SERVER['ROOT']);
         }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
