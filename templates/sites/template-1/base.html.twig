@@ -14,33 +14,46 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
 
     <!-- Libs CSS -->
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}"
+          rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}"
+          rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/header.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/portfolio.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/blog.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}"
+          rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-icons.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/shortcodes.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/utilities.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}"
+          rel="stylesheet"/>
 
     <!-- Current Page CSS -->
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/css/settings.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/css/settings.css') }}"
+          rel="stylesheet"/>
 
     <!-- Skin -->
-    <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/skin/default.css') }}">
+    <link rel="stylesheet"
+          href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/skin/default.css') }}">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/custom.css') }}">
     <style type="text/css">
-        :root{--colorTheme:{{ site.colorTheme }};}
+        :root {
+            --colorTheme: {{ site.colorTheme }};
+        }
     </style>
 
     <!-- Firebrick LESS -->
@@ -58,7 +71,8 @@
                 <div class="header-column justify-content-start">
                     <div class="header-logo">
                         <a href="{{ path('site_homepage') }}">
-                            <img alt="Vertex" height="35" src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}">
+                            <img alt="Vertex" height="35"
+                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}">
                         </a>
                     </div>
                 </div>
@@ -68,27 +82,32 @@
                             <nav class="collapse">
                                 <ul class="nav flex-column flex-lg-row" id="mainNav">
                                     <li class="dropdown dropdown-mega">
-                                        <a class="dropdown-item {% block indexActive %}{% endblock %}" href="{{ path('home') }}">
+                                        <a class="dropdown-item {% block indexActive %}{% endblock %}"
+                                           href="{{ path('home') }}">
                                             Accueil
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                        <a class="dropdown-item {% block presentationActive %}{% endblock %}" href="{{ path('presentation') }}">
+                                        <a class="dropdown-item {% block presentationActive %}{% endblock %}"
+                                           href="{{ path('presentation') }}">
                                             Présentation
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                        <a class="dropdown-item {% block blogActive %}{% endblock %}" href="{{ path('blog') }}">
+                                        <a class="dropdown-item {% block blogActive %}{% endblock %}"
+                                           href="{{ path('blog') }}">
                                             Blog
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                        <a class="dropdown-item {% block devisActive %}{% endblock %}" href="{{ path('devis') }}">
+                                        <a class="dropdown-item {% block devisActive %}{% endblock %}"
+                                           href="{{ path('devis') }}">
                                             Devis
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                        <a class="dropdown-item {% block contactActive %}{% endblock %}" href="{{ path('contact') }}">
+                                        <a class="dropdown-item {% block contactActive %}{% endblock %}"
+                                           href="{{ path('contact') }}">
                                             Contact
                                         </a>
                                     </li>
@@ -243,23 +262,26 @@
                 <p>© Copyright 2018 by Vertex. All Rights Reserved.</p>
 
                 <div class="clearfix pull-right">
-                    {% if site.facebook  %}
-                    <a href="{{ site.facebook }}" class="social-icon si-borderless si-facebook mb-0" title="Facebook" target="_blank">
-                        <i class="si-icon-facebook"></i>
-                        <i class="si-icon-facebook"></i>
-                    </a>
+                    {% if site.facebook %}
+                        <a href="{{ site.facebook }}" class="social-icon si-borderless si-facebook mb-0"
+                           title="Facebook" target="_blank">
+                            <i class="si-icon-facebook"></i>
+                            <i class="si-icon-facebook"></i>
+                        </a>
                     {% endif %}
-                    {% if site.twitter  %}
-                    <a href="{{ site.twitter }}" class="social-icon si-borderless si-twitter mb-0" title="Twitter" target="_blank">
-                        <i class="si-icon-twitter"></i>
-                        <i class="si-icon-twitter"></i>
-                    </a>
+                    {% if site.twitter %}
+                        <a href="{{ site.twitter }}" class="social-icon si-borderless si-twitter mb-0" title="Twitter"
+                           target="_blank">
+                            <i class="si-icon-twitter"></i>
+                            <i class="si-icon-twitter"></i>
+                        </a>
                     {% endif %}
-                    {% if site.instagram  %}
-                    <a href="{{ site.instagram }}" class="social-icon si-borderless si-instagram mb-0" title="Instagram" target="_blank">
-                        <i class="si-icon-instagram"></i>
-                        <i class="si-icon-instagram"></i>
-                    </a>
+                    {% if site.instagram %}
+                        <a href="{{ site.instagram }}" class="social-icon si-borderless si-instagram mb-0"
+                           title="Instagram" target="_blank">
+                            <i class="si-icon-instagram"></i>
+                            <i class="si-icon-instagram"></i>
+                        </a>
                     {% endif %}
                 </div>
             </div>
