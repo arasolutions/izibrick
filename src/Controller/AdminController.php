@@ -7,14 +7,17 @@ use App\Entity\User;
 use App\Entity\UserSite;
 use App\Firebrock\Command\ContactCommand;
 use App\Firebrock\Command\GlobalParametersCommand;
+use App\Firebrock\Command\BlogCommand;
 use App\Firebrock\Command\HomeCommand;
 use App\Firebrock\Command\PresentationCommand;
 use App\Firebrock\CommandHandler\EditContactCommandHandler;
 use App\Firebrock\CommandHandler\EditGlobalParametersCommandHandler;
+use App\Firebrock\CommandHandler\EditBlogCommandHandler;
 use App\Firebrock\CommandHandler\EditHomeCommandHandler;
 use App\Firebrock\CommandHandler\EditPresentationCommandHandler;
 use App\Form\EditContactType;
 use App\Form\EditGlobalParametersType;
+use App\Form\EditBlogType;
 use App\Form\EditHomeType;
 use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
@@ -161,23 +164,23 @@ class AdminController extends AbstractController
     /**
      * @Route("/bo-blog/add", name="bo-add-blog")
      * @param Request $request
-     * @param EditPresentationCommandHandler $editPresentationCommandHandler
+     * @param EditBlogCommandHandler $editBlogCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function boaddBlog(Request $request, EditPresentationCommandHandler $editPresentationCommandHandler)
+    public function boAddBlog(Request $request, EditBlogCommandHandler $editBlogCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
-        $command = new PresentationCommand();
+        $command = new BlogCommand();
 
         $success = false;
 
-        $form = $this->createForm(EditPresentationType::class, $command);
+        $form = $this->createForm(EditBlogType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $editPresentationCommandHandler->handle($command, $site);
+            $editBlogCommandHandler->handle($command, $site);
             $success = true;
         }
 

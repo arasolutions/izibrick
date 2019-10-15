@@ -85,6 +85,12 @@ class Site
     private $presentation;
 
     /**
+     * @var ArrayCollection|Blogs[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Blog", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $blogs;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Contact", mappedBy="site", cascade={"persist", "remove"})
      */
     private $contact;
@@ -125,6 +131,17 @@ class Site
     private $twitter;
 
     /**
+     * Site constructor.
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->status = SiteStatus::A_CREER['name'];
+        $this->users = new ArrayCollection();
+        $this->blogs = new ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function getLogo(): ?string
@@ -154,16 +171,6 @@ class Site
     public function setLogoFile(File $logoFile): void
     {
         $this->logoFile = $logoFile;
-    }
-
-    /**
-     * Site constructor.
-     */
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-        $this->status = SiteStatus::A_CREER['name'];
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -290,6 +297,7 @@ class Site
 
         return $this;
     }
+
 
     public function getContact(): ?Contact
     {
