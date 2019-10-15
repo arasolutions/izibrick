@@ -140,6 +140,7 @@ class OrderController extends AbstractController
             $newCustomer->setManagerFirstName($customer->getManagerFirstName());
             $newCustomer->setManagerLastName($customer->getManagerLastName());
             $newCustomer->setManagerPhone($customer->getManagerPhone());
+            $newCustomer->setManagerMail($customer->getManagerMail());
             $newCustomer->setPostCode($customer->getPostCode());
 
             $newCustomer = $this->customerRepository->save($newCustomer);

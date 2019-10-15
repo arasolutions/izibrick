@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Command\CustomerCommand;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,6 +44,9 @@ class CustomerType extends AbstractType
             ))
             ->add('managerPhone', TelType::class, array(
                 'label' => 'Numéro de téléphone'
+            ))
+            ->add('managerMail', EmailType::class, array(
+                'label' => 'Email du responsable'
             ));
     }
 

@@ -17,6 +17,23 @@ class CustomerCommand
     private $managerLastName;
     private $managerFirstName;
     private $managerPhone;
+    private $managerMail;
+
+    /**
+     * @return mixed
+     */
+    public function getManagerMail()
+    {
+        return $this->managerMail;
+    }
+
+    /**
+     * @param mixed $managerMail
+     */
+    public function setManagerMail($managerMail): void
+    {
+        $this->managerMail = $managerMail;
+    }
 
     /**
      * @return mixed

@@ -10,6 +10,7 @@ use App\Helper\UserHelper;
 use App\Repository\HomeRepository;
 use App\Repository\SiteRepository;
 use App\Repository\UserSiteRepository;
+use FOS\UserBundle\Mailer\Mailer;
 use FOS\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -112,15 +113,14 @@ class FirebrickCreateProjectCommand extends Command
 
         if ($user == null) {
             $user = $this->userManager->createUser();
-            $user->setEmail($site->getCustomer()->getManagerMail());
+            $user->setEmail("arnaud.lutringer@gmail.com"/*$site->getCustomer()->getManagerMail()*/);
             $user->setUsername(UserHelper::generateUsername($site->getCustomer()->getManagerFirstName(), $site->getCustomer()->getManagerLastName()));
             $user->setPlainPassword(UserHelper::generatePassword());
             $user->setConfirmationToken("coucou");
             $this->userManager->updateUser($user);
 
             // Envoi d'un mail de confirmation de création de compte
-            $mailer=$this->get('fos_user.mailer.default');
-            $mailer->sendConfirmationEmailMessage($user);
+            //$this->mailer->sendConfirmationEmailMessage($user);
         }
 
 

@@ -62,7 +62,7 @@ class Home
     /**
      * @return File
      */
-    public function getMainPictureFile(): File
+    public function getMainPictureFile(): ?File
     {
         return $this->mainPictureFile;
     }
