@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
-use App\Command\ContactCommand;
-use App\Command\GlobalParametersCommand;
-use App\Command\HomeCommand;
-use App\Command\PresentationCommand;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
+use App\Firebrock\Command\ContactCommand;
+use App\Firebrock\Command\GlobalParametersCommand;
+use App\Firebrock\Command\HomeCommand;
+use App\Firebrock\Command\PresentationCommand;
+use App\Firebrock\CommandHandler\EditContactCommandHandler;
+use App\Firebrock\CommandHandler\EditGlobalParametersCommandHandler;
+use App\Firebrock\CommandHandler\EditHomeCommandHandler;
+use App\Firebrock\CommandHandler\EditPresentationCommandHandler;
 use App\Form\ContactType;
 use App\Form\GlobalParametersType;
 use App\Form\HomeType;
@@ -39,7 +43,6 @@ class AdminController extends AbstractController
      */
     public function index()
     {
-
         /** @var User $user */
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
@@ -61,11 +64,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/home", name="bo-home")
      * @param Request $request
+     * @param EditHomeCommandHandler $editHomeCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function home(Request $request)
+    public function home(Request $request, EditHomeCommandHandler $editHomeCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
@@ -76,12 +80,8 @@ class AdminController extends AbstractController
 
         $form = $this->createForm(HomeType::class, $command);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $site->getHome()->setContent($command->getContent());
-            if ($command->getMainPicture() != null) {
-                $site->getHome()->setMainPictureFile($command->getMainPicture());
-            }
-            $this->siteRepository->save($site);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editHomeCommandHandler->handle($command, $site);
             $success = true;
         }
 
@@ -96,11 +96,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/bo-presentation", name="bo-presentation")
      * @param Request $request
+     * @param EditPresentationCommandHandler $editPresentationCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function boPresentation(Request $request)
+    public function boPresentation(Request $request, EditPresentationCommandHandler $editPresentationCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
@@ -112,8 +113,7 @@ class AdminController extends AbstractController
         $form = $this->createForm(PresentationType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $site->getPresentation()->setContent($command->getContent());
-            $this->siteRepository->save($site);
+            $editPresentationCommandHandler->handle($command, $site);
             $success = true;
         }
 
@@ -133,7 +133,7 @@ class AdminController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function boContact(Request $request)
+    public function boContact(Request $request, EditContactCommandHandler $editContactCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
@@ -145,8 +145,7 @@ class AdminController extends AbstractController
         $form = $this->createForm(ContactType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $site->getContact()->setEmail($command->getEmail());
-            $this->siteRepository->save($site);
+            $editContactCommandHandler->handle($command, $site);
             $success = true;
         }
 
@@ -161,11 +160,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/global-parameters", name="bo-global-parameters")
      * @param Request $request
+     * @param EditGlobalParametersCommandHandler $editGlobalParametersCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function globalParams(Request $request)
+    public function globalParams(Request $request, EditGlobalParametersCommandHandler $editGlobalParametersCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
@@ -176,11 +176,7 @@ class AdminController extends AbstractController
         $form = $this->createForm(GlobalParametersType::class, $command);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $site->setKeyWords($command->getKeys());
-            $site->setFacebook($command->getFacebook());
-            $site->setTwitter($command->getTwitter());
-            $site->setInstagram($command->getInstagram());
-            $this->siteRepository->save($site);
+            $editGlobalParametersCommandHandler->handle($command, $site);
             $success = true;
         }
 

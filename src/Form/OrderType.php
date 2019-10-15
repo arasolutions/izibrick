@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
-use App\Command\OrderCommand;
 use App\Entity\Product;
 use App\Entity\Site;
+use App\Firebrock\Command\OrderCommand;
 use App\Repository\ProductRepository;
 use Liip\ImagineBundle\Form\Type\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

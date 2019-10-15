@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use App\Command\CustomerCommand;
-use App\Command\OrderCommand;
-use App\Command\SiteOptionsCommand;
 use App\Entity\Customer;
 use App\Entity\Product;
 use App\Entity\Site;
+use App\Firebrock\Command\CustomerCommand;
+use App\Firebrock\Command\OrderCommand;
+use App\Firebrock\Command\SiteOptionsCommand;
+use App\Firebrock\CommandHandler\AddCustomerCommandHandler;
+use App\Firebrock\CommandHandler\AddOrderCommandHandler;
 use App\Form\CustomerType;
 use App\Form\OrderType;
 use App\Form\SiteOptionsType;
@@ -56,11 +58,10 @@ class OrderController extends AbstractController
      * @Route("/order/{product}", name="order", methods={"GET","POST"})
      * @param int $product
      * @param Request $request
+     * @param AddOrderCommandHandler $addOrderCommandHandler
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function index($product, Request $request)
+    public function index($product, Request $request, AddOrderCommandHandler $addOrderCommandHandler)
     {
         $productChosen = $this->productRepository->findOneBy(array('id' => $product));
 
@@ -86,16 +87,7 @@ class OrderController extends AbstractController
                     $form->get('template')->addError(new FormError('Veuillez choisir un thème'));
                 } else {
                     // Nouveau site
-                    $site = new Site();
-                    $site->setProduct($productChosen);
-                    $site->setName($order->getName());
-                    $site->setColorTheme($order->getColorTheme());
-                    $templateChosen = $this->templateRepository->findOneBy(array('id' => $order->getTemplate()));
-                    $site->setTemplate($templateChosen);
-                    if ($order->getLogo() != null) {
-                        $site->setLogoFile($order->getLogo());
-                    }
-                    $site = $this->siteRepository->save($site);
+                    $site = $addOrderCommandHandler->handle($order);
                     return $this->redirectToRoute('customer', array('siteId' => $site->getId()));
                 }
             }
@@ -119,7 +111,7 @@ class OrderController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function customer($siteId, Request $request)
+    public function customer($siteId, Request $request, AddCustomerCommandHandler $addCustomerCommandHandler)
     {
 
         $site = $this->siteRepository->getById($siteId);
@@ -131,24 +123,9 @@ class OrderController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $newCustomer = new Customer();
-            $newCustomer->setAddress($customer->getAddress());
-            $newCustomer->setAddress2($customer->getAddress2());
-            $newCustomer->setBusinessName($customer->getBusinessName());
-            $newCustomer->setCity($customer->getCity());
-            $newCustomer->setCountry($customer->getCountry());
-            $newCustomer->setManagerFirstName($customer->getManagerFirstName());
-            $newCustomer->setManagerLastName($customer->getManagerLastName());
-            $newCustomer->setManagerPhone($customer->getManagerPhone());
-            $newCustomer->setManagerMail($customer->getManagerMail());
-            $newCustomer->setPostCode($customer->getPostCode());
-
-            $newCustomer = $this->customerRepository->save($newCustomer);
+            $newCustomer = $addCustomerCommandHandler->handle($customer, $site);
 
             if ($newCustomer->getId() != null) {
-                // Affiliation du site au nouveau client
-                $site->setCustomer($newCustomer);
-                $this->siteRepository->save($site);
                 return $this->redirectToRoute('options', array('siteId' => $site->getId()));
             }
         }

@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Command\CustomerCommand;
-use App\Command\SiteOptionsCommand;
+use App\Firebrock\Command\SiteOptionsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;

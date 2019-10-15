@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Command\GlobalParametersCommand;
-use App\Command\HomeCommand;
+use App\Firebrock\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Command;
+namespace App\Firebrock\Command;
 
 class HomeCommand
 {
