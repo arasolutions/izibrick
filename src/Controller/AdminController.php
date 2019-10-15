@@ -109,7 +109,6 @@ class AdminController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
         $command = new PresentationCommand();
-        $command->setOriginalContent($site->getPresentation()->getContent());
 
         $success = false;
 
@@ -128,6 +127,67 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/bo-blog", name="bo-blog")
+     * @param Request $request
+     * @param EditPresentationCommandHandler $editPresentationCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function boBlog(Request $request, EditPresentationCommandHandler $editPresentationCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+
+        $command = new PresentationCommand();
+
+        $success = false;
+
+        $form = $this->createForm(EditPresentationType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editPresentationCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/blog/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
+
+    /**
+     * @Route("/bo-blog/add", name="bo-add-blog")
+     * @param Request $request
+     * @param EditPresentationCommandHandler $editPresentationCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function boaddBlog(Request $request, EditPresentationCommandHandler $editPresentationCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+
+        $command = new PresentationCommand();
+
+        $success = false;
+
+        $form = $this->createForm(EditPresentationType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editPresentationCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/blog/add.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
 
     /**
      * @Route("/bo-contact", name="bo-contact")

@@ -1,0 +1,65 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Présentation{% endblock %}
+
+{% block description %}Représente la page présentation de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+
+
+            <div id="page-content">
+
+                <div style="text-align: right;"><button id="demo-edit-text" class="btn btn-primary" type="button">Ajouter un article</button></div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Mes articles</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="demo-dt-basic" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Description</th>
+                                <th>Date de création</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>Edinburgh</td>
+                                <td>
+                                    <button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Modifier</button>
+                                    <button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Supprimer</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <!--DataTables [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/datatables/media/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/media/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <!--DataTables Sample [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/tables-datatables.js') }}"></script>
+{% endblock %}

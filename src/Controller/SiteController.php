@@ -58,6 +58,24 @@ class SiteController extends AbstractController
     }
 
     /**
+     * @Route("/blog/1", name="blog_detail")
+     */
+    public function blogDetail($siteName = null)
+    {
+        /** @var Site $site */
+        if ($siteName != null) {
+            $site = $this->siteRepository->getByName($siteName);
+        } else {
+            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+        }
+
+        return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/detail.html.twig', [
+            'controller_name' => 'SiteController' . $site->getName(),
+            'site' => $site
+        ]);
+    }
+
+    /**
      * @Route("/devis", name="devis")
      */
     public function devis($siteName = null)

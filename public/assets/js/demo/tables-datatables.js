@@ -29,7 +29,8 @@ $(document).on('nifty.ready', function() {
             "paginate": {
               "previous": '<i class="demo-psi-arrow-left"></i>',
               "next": '<i class="demo-psi-arrow-right"></i>'
-            }
+            },
+            "url": "/assets/js/demo/date-table-fr.json"
         }
     } );
 

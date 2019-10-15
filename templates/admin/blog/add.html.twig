@@ -1,0 +1,47 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Présentation{% endblock %}
+
+{% block description %}Représente la page présentation de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+
+        Ajouter un article
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                <button id="form-submit" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right margin-right-10" type="button">
+                    Annuler
+                </button>
+            </div>
+            <!--===================================================-->
+            <!-- End Summernote -->
+            {{ form_end(form) }}
+
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
