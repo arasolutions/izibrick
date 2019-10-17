@@ -22,7 +22,11 @@
 
             <div id="page-content">
 
-                <div style="text-align: right;"><button id="demo-edit-text" class="btn btn-primary" type="button">Ajouter un article</button></div>
+                <div style="text-align: right;">
+                    <a href="{{ path('bo-add-blog') }}">
+                        <button id="demo-edit-text" class="btn btn-primary" type="button">Ajouter un article</button>
+                    </a>
+                </div>
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Mes articles</h3>
@@ -38,15 +42,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>
-                                    <button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Modifier</button>
-                                    <button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Supprimer</button>
-                                </td>
-                            </tr>
+
+                            {% if blogs|length > 0 %}
+                                {% for blog in blogs %}
+                                    <tr>
+                                        <td>{{ blog.title }}</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>
+                                            <a href="{{ path('bo-edit-blog', {id: blog.id}) }}"><button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Modifier</button></a>
+                                            <button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Supprimer</button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4">Aucun article</td>
+                                </tr>
+                            {% endif %}
                             </tbody>
                         </table>
                     </div>

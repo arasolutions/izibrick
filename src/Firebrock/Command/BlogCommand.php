@@ -25,4 +25,9 @@ class BlogCommand
      */
     public $content;
 
+    /**
+     * @var string
+     */
+    public $originalContent;
+
 }

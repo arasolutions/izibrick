@@ -70,4 +70,9 @@ $(document).on('nifty.ready', function () {
         $('#summernote-edit').summernote('destroy');
     });
 
+    $('#form-submit-whitout-valid').on('click', function (e) {
+        $('#summernote').summernote('destroy');
+        itemContent.val($('#summernote').html());
+    });
+
 })

@@ -298,6 +298,13 @@ class Site
         return $this;
     }
 
+    /**
+     * @return ArrayCollection|Blog[]
+     */
+    public function getBlogs()
+    {
+        return $this->blogs;
+    }
 
     public function getContact(): ?Contact
     {

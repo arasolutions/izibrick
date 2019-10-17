@@ -6,6 +6,7 @@ use App\Firebrock\Command\BlogCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
@@ -24,7 +25,7 @@ class EditBlogType extends AbstractType
                     ))
                 )
             ])
-            ->add('introduction', TextType::class, [
+            ->add('introduction', TextareaType::class, [
                 'label' => 'Introduction',
                 'constraints' => array (
                     new Length(array (

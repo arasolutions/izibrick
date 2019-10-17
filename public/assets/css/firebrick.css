@@ -66,3 +66,7 @@
     border-left: solid 2px #CCC;
     padding: 5px;
 }
+
+#footer{
+    position: unset;
+}

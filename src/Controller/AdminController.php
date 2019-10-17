@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Blog;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
@@ -156,6 +157,7 @@ class AdminController extends AbstractController
         return $this->render('admin/blog/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
+            'blogs' => $site->getBlogs(),
             'form' => $form->createView(),
             'success' => $success
         ]);
@@ -187,6 +189,44 @@ class AdminController extends AbstractController
         return $this->render('admin/blog/add.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
+
+    /**
+     * @Route("/bo-blog/edit/{id}", name="bo-edit-blog")
+     * @param Blog $blog
+     * @param Request $request
+     * @param EditBlogCommandHandler $editBlogCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function boEditBlog(Blog $blog, Request $request, EditBlogCommandHandler $editBlogCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+
+        $command = new BlogCommand();
+        $command->id = $blog->getId();
+        $command->title = $blog->getTitle();
+        $command->introduction = $blog->getIntroduction();
+        $command->content = $blog->getContent();
+        $command->originalContent = $blog->getContent();
+
+        $success = false;
+
+        $form = $this->createForm(EditBlogType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editBlogCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/blog/add.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'blog' => $blog,
             'form' => $form->createView(),
             'success' => $success
         ]);
