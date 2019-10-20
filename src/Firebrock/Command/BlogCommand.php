@@ -2,6 +2,8 @@
 
 
 namespace App\Firebrock\Command;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class BlogCommand
 {
@@ -29,5 +31,10 @@ class BlogCommand
      * @var string
      */
     public $originalContent;
+
+    /**
+     * @var mixed
+     */
+    public $image;
 
 }

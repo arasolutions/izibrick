@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Site;
+use App\Entity\Blog;
 use App\Repository\BlogRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,9 +66,10 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/blog/1", name="blog_detail")
+     * @param Blog $blog
+     * @Route("/blog/{blog}", name="blog_detail")
      */
-    public function blogDetail($siteName = null)
+    public function blogDetail(Blog $blog, $siteName = null)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -76,9 +78,11 @@ class SiteController extends AbstractController
             $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
         }
 
+
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/detail.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
-            'site' => $site
+            'site' => $site,
+            'blog' => $blog
         ]);
     }
 

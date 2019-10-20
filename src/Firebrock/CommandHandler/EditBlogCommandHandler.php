@@ -56,6 +56,9 @@ class EditBlogCommandHandler
         $blog->setTitle($command->title);
         $blog->setIntroduction($command->introduction);
         $blog->setContent($command->content);
+        if ($command->image != null) {
+            $blog->setImageFile($command->image);
+        }
         $this->blogRepository->save($blog);
     }
 

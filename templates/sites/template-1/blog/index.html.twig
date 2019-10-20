@@ -28,8 +28,10 @@
                                     <li class="v-blog-item col-sm-12">
                                         <div class="mini-v-blog-item-wrap">
                                             <figure class="animated-overlay overlay-alt">
-                                                <img src="" />
-                                                <a href="blog-standard-post.html" class="link-to-post"></a>
+                                                {% if blog.image is defined and blog.image is not null %}
+                                                    <img src="{{ vich_uploader_asset(blog, 'imageFile') | imagine_filter('main_picture') }}" />
+                                                {% endif %}
+                                                <a href="{{ path('blog_detail', {blog: blog.id}) }}" class="link-to-post"></a>
                                                 <figcaption>
                                                     <div class="thumb-info thumb-info-v2"><i class="fa fa-angle-right"></i></div>
                                                 </figcaption>
@@ -42,7 +44,7 @@
                                                         {{ blog.introduction }}
                                                     </p>
                                                 </div>
-                                                <a class="btn v-btn standard white sf-icon-stroke" href="blog-standard-post-2.html" target="_self">
+                                                <a class="btn v-btn standard white sf-icon-stroke" href="{{ path('blog_detail', {blog: blog.id}) }}" target="_self">
                                                     <i class="icon-arrow-32"></i><span class="text">Voir la suite</span>
                                                 </a>
                                             </div>

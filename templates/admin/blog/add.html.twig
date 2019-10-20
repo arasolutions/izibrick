@@ -11,29 +11,37 @@
 
 
 {% block body %}
-    {% if success %}
-        <div class="alert alert-success">
-            <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
-        </div>
-    {% endif %}
     <div class="panel">
         <div class="panel-body">
-
-        Ajouter un article
-
+            {% if blog.id is defined %}
+                Modifer un article
+            {% else %}
+                Ajouter un article
+            {% endif %}
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-            <p>Vous pouvez modifier les éléments de votre page de présentation</p>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="col-sm-3 control-label" for="demo-hor-inputemail">{{ form_label(form.title) }}</label>
-                    <div class="col-sm-9">
-                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                    </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.title) }}</label>
+                <div>
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label" for="demo-hor-inputpass">{{ form_label(form.introduction) }}</label>
-                    <div class="col-sm-9">
-                        {{ form_widget(form.introduction, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label">{{ form_label(form.introduction) }}</label>
+                <div>
+                    {{ form_widget(form.introduction, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="col-sm-12 form-group">
+                <label class="control-label">{{ form_label(form.image) }}</label>
+                <div>
+                    <div class="col-sm-2">
+                        {% if blog.image is defined %}
+                            <img src="{{ vich_uploader_asset(blog, 'imageFile') | imagine_filter('logo') }}" />
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-10">
+                    {{ form_widget(form.image, {'attr':{'class':'form-control input-lg'}}) }}
                     </div>
                 </div>
             </div>
@@ -53,9 +61,11 @@
                 <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
                     Enregistrer
                 </button>
-                <button id="form-revert" class="btn btn-danger pull-right margin-right-10" type="button">
-                    Annuler
-                </button>
+                <a href="{{ path('bo-blog') }}">
+                    <button class="btn btn-danger pull-right margin-right-10" type="button">
+                        Annuler
+                    </button>
+                </a>
             </div>
             {{ form_end(form) }}
 

@@ -46,7 +46,7 @@ class Blog
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="posts", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="post_picture_site", fileNameProperty="image")
      */
     private $imageFile;
 
@@ -162,9 +162,9 @@ class Blog
     /**
      * @param File|null $image
      */
-    public function setImageFile(File $image = null)
+    public function setImageFile(?File $imageFile): void
     {
-        $this->imageFile = $image;
+        $this->imageFile = $imageFile;
     }
 
     /**

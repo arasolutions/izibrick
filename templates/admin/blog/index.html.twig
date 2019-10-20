@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Présentation{% endblock %}
+{% block title %}Page Blog{% endblock %}
 
-{% block description %}Représente la page présentation de votre site{% endblock %}
+{% block description %}Représente la page Blog de votre site{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -11,34 +11,29 @@
 
 
 {% block body %}
-    {% if success %}
+    {% if success is defined and success == true %}
         <div class="alert alert-success">
-            <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
+            <strong>Parfait !</strong> Votre page blog à bien été mise à jour.
         </div>
     {% endif %}
     <div class="panel">
         <div class="panel-body">
-
-
+            <h3 class="panel-title">Mes articles</h3>
             <div id="page-content">
-
                 <div style="text-align: right;">
-                    <a href="{{ path('bo-add-blog') }}">
+                    <a href="{{ path('bo-blog-add') }}">
                         <button id="demo-edit-text" class="btn btn-primary" type="button">Ajouter un article</button>
                     </a>
                 </div>
                 <div class="panel">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Mes articles</h3>
-                    </div>
                     <div class="panel-body">
-                        <table id="demo-dt-basic" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Titre</th>
-                                <th>Description</th>
-                                <th>Date de création</th>
-                                <th>Actions</th>
+                                <th style="text-align: center;">Titre</th>
+                                <th style="text-align: center;">Description</th>
+                                <th style="text-align: center;">Date de création</th>
+                                <th style="text-align: center;">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,11 +42,11 @@
                                 {% for blog in blogs %}
                                     <tr>
                                         <td>{{ blog.title }}</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>
-                                            <a href="{{ path('bo-edit-blog', {id: blog.id}) }}"><button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Modifier</button></a>
-                                            <button id="demo-edit-text" class="btn btn-sm btn-primary" type="button">Supprimer</button>
+                                        <td>{{ blog.introduction }}</td>
+                                        <td>{{ blog.creationDate|date('d/m/Y') }}</td>
+                                        <td width="300px">
+                                            <a href="{{ path('bo-blog-edit', {id: blog.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-edit"></i> Modifier</button></a>
+                                            <a href="{{ path('bo-blog-remove', {id: blog.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
                                         </td>
                                     </tr>
                                 {% endfor %}

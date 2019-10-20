@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Firebrock\Command\BlogCommand;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,6 +34,10 @@ class EditBlogType extends AbstractType
                         'max' => '1023'
                     ))
                 )
+            ])
+            ->add('image', FileType::class, [
+                'required' => false,
+                'label' => 'Image'
             ])
             ->add('content', HiddenType::class)
         ;

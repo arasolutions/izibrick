@@ -26,14 +26,16 @@
                     <article>
 
                         <figure class="media-wrap">
-                            <img src="img/blog/b-fw-6.jpg" />
+                            {% if blog.image is defined and blog.image is not null %}
+                                <img src="{{ vich_uploader_asset(blog, 'imageFile') | imagine_filter('post_picture') }}" />
+                            {% endif %}
                         </figure>
 
-                        <h3 class="blog-post-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                        <h3 class="blog-post-caption">{{ blog.title }}</h3>
 
                         <div class="post-info clearfix">
                                 <span class="vcard author">
-                                    Posted by <a href="page-about-me.html" class="fn">Vertex</a> on <span class="date updated">November 9, 2018</span>
+                                    Le <span class="date updated">{{ blog.creationDate|date('d/m/Y') }}</span>
                                 </span>
                         </div>
 
@@ -41,52 +43,7 @@
 
                             <div class="body-text clearfix">
                                 <p>
-                                    <span class="dropcap1">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam massa quis mauris
-                                    sollicitudin commodo venenatis ligula commodo. Sed blandit convallis dignissim. Pellentesque
-                                    pharetra velit eu velit elementum et convallis erat vulputate. Sed in nulla ut elit mollis posuere.
-                                    Praesent a felis accumsan neque interdum molestie ut id massa. In hac habitasse platea dictumst.
-                                    Nulla ut lorem ante. In convallis, felis eget consequat faucibus, mi diam consequat augue, quis
-                                    porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet vel, aliquet sit amet risus. Maecenas
-                                    nec tempus velit. Praesent gravida mi et mauris sollicitudin ultricies. Duis molestie quam sem, ac
-                                    faucibus velit. Curabitur dolor dolor, fringilla vel fringilla tempor, ultricies sed tellus. Cras
-                                    aliquet, nulla a feugiat adipiscing, mi enim ornare nisl, eu pellentesque nunc diam eu purus.
-                                    Aliquam a arcu ac arcu aliquam vulputate ac a diam. Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Etiam aliquam massa quis mauris sollicitudin commodo venenatis ligula commodo.
-                                    Sed blandit convallis dignissim. Pellentesque pharetra velit eu velit elementum et convallis erat
-                                    vulputate. Sed in nulla ut elit mollis posuere. Praesent a felis accumsan neque interdum molestie
-                                    ut id massa. In hac habitasse platea dictumst. Nulla ut lorem ante. In convallis, felis eget consequat
-                                    faucibus, mi diam consequat augue, quis porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet
-                                    vel, aliquet sit amet risus.
-                                </p>
-                                <blockquote class="pullquote">
-                                        <span style="color: #888888;">
-                                            Nulla ut lorem ante. In convallis, felis eget consequat faucibus, mi diam
-                                            consequat augue, quis porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet vel,
-                                            aliquet sit amet risus. Maecenas nec tempus velit. Praesent gravida mi et mauris sollicitudin
-                                            ultricies. Duis molestie quam sem, ac faucibus velit. Curabitur dolor dolor, fringilla vel
-                                            fringilla tempor, ultricies sed tellus.
-                                        </span>
-                                </blockquote>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquam massa quis mauris
-                                    sollicitudin commodo venenatis ligula commodo. Sed blandit convallis dignissim. Pellentesque
-                                    pharetra velit eu velit elementum et convallis erat vulputate. Sed in nulla ut elit mollis
-                                    posuere. Praesent a felis accumsan neque interdum molestie ut id massa. In hac habitasse
-                                    platea dictumst. Nulla ut lorem ante. In convallis, felis eget consequat faucibus, mi diam
-                                    consequat augue, quis porta nibh leo a massa. Sed quam nunc, vulputate vel imperdiet vel,
-                                    aliquet sit amet risus. Maecenas nec tempus velit. Praesent gravida mi et mauris sollicitudin
-                                    ultricies. Duis molestie quam sem, ac faucibus velit. Curabitur dolor dolor, fringilla vel
-                                    fringilla tempor, ultricies sed tellus. Cras aliquet, nulla a feugiat adipiscing, mi enim
-                                    ornare nisl, eu pellentesque nunc diam eu purus.
-                                </p>
-                                <p>
-                                    Maecenas nec tempus velit. Praesent gravida mi et mauris sollicitudin ultricies. Duis molestie
-                                    quam sem, ac faucibus velit. Curabitur dolor dolor, fringilla vel fringilla tempor, ultricies
-                                    sed tellus. Cras aliquet, nulla a feugiat adipiscing, mi enim ornare nisl, eu pellentesque
-                                    nunc diam eu purus. Aliquam a arcu ac arcu aliquam vulputate ac a diam. Lorem ipsum dolor
-                                    sit amet, consectetur adipiscing elit. Etiam aliquam massa quis mauris sollicitudin commodo
-                                    ligula commodo. Sed blandit convallis dignissim. Pellentesque pharetra velit eu velit
-                                    elementum et convallis erat vulputate. Sed in nulla ut elit mollis posuere.
+                                    {{ blog.introduction }}
                                 </p>
                             </div>
                         </section>
