@@ -26,12 +26,7 @@
                         </div>
 
                         <p class="pull-bottom-small">
-                            Curabitur luctus lacus et lectus dictum ornare. Phasellus id interdum est.
-                            Nullam id nulla massa. Nullam quis euismod lorem. Nulla consectetur rutrum lacinia.
-                            Donec fermentum sapien vitae neque venenatis vestibulum. Vivamus a rhoncus eros, ac
-                            imperdiet nibh. Cras aliquet, enim nec rhoncus tincidunt, eros felis hendrerit mi,
-                            ultricies pretium orci leo vel enim. Donec cursus ligula ac est convallis, nec placerat
-                            tortor fermentum. Nullam aliquet dictum placerat.
+                            {{ contact.presentation }}
                         </p>
 
 
@@ -77,15 +72,15 @@
                     </div>
 
                     <p>
-                        Vertex Computer Inc<br/>
-                        1 Liberty St New York, NY 5006
+                        {{ contact.name }}<br/>
+                        {{ contact.postCode }} {{ contact.city }} {{ contact.country }}
                     </p>
                     <div class="v-heading-v2">
                         <h3>Téléphone & Email</h3>
                     </div>
                     <p>
-                        Email: <a href="#" target="_blank">youremail@yourdomain.com</a><br/>
-                        Phone: +44 (0) 208 0000 000<br/>
+                        Email: <a href="#" target="_blank">{{ contact.email }}</a><br/>
+                        Phone: {{ contact.phone }}<br/>
                     </p>
 
 
@@ -93,8 +88,7 @@
                         <h3>Horaires</h3>
                     </div>
                     <p>
-                        +44 (0) 208 0000 000<br/>
-                        +44 (0) 208 0000 001
+                        {{ contact.openingTime }}
                     </p>
 
 
@@ -103,10 +97,15 @@
                     </div>
 
                     <ul class="social-icons standard circle">
-                        <li class="twitter"><a href="http://www.twitter.com/#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                        <li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                        <li class="youtube"><a href="#" target="_blank"><i class="fa fa-youtube"></i></a></li>
-                        <li class="googleplus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        {% if site.twitter %}
+                            <li class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        {% endif %}
+                        {% if site.facebook %}
+                            <li class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        {% endif %}
+                        {% if site.instagram %}
+                            <li class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        {% endif %}
                     </ul>
 
                 </div>

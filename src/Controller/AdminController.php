@@ -180,7 +180,13 @@ class AdminController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
         $command = new ContactCommand();
-        $command->setEmail($site->getContact()->getEmail());
+        $command->email = $site->getContact()->getEmail();
+        $command->phone = $site->getContact()->getPhone();
+        $command->name = $site->getContact()->getName();
+        $command->postCode = $site->getContact()->getPostCode();
+        $command->city = $site->getContact()->getCity();
+        $command->country = $site->getContact()->getCountry();
+        $command->openingTime = $site->getContact()->getOpeningTime();
 
         $success = false;
 

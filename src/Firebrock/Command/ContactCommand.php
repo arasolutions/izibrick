@@ -5,22 +5,43 @@ namespace App\Firebrock\Command;
 
 class ContactCommand
 {
-    private $email;
+    /**
+     * @var string
+     */
+    public $presentation;
 
     /**
-     * @return mixed
+     * @var string
      */
-    public function getEmail()
-    {
-        return $this->email;
-    }
+    public $email;
 
     /**
-     * @param string $content
+     * @var string
      */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
+    public $phone;
 
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var string
+     */
+    public $postCode;
+
+    /**
+     * @var string
+     */
+    public $city;
+
+    /**
+     * @var string
+     */
+    public $country;
+
+    /**
+     * @var string
+     */
+    public $openingTime;
 }

@@ -20,9 +20,51 @@
         <div class="panel-body">
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
             <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.presentation) }}</label>
+                <div>
+                    {{ form_widget(form.presentation, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.name) }}</label>
+                <div>
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.postCode) }}</label>
+                <div>
+                    {{ form_widget(form.postCode, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.city) }}</label>
+                <div>
+                    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.country) }}</label>
+                <div>
+                    {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.phone) }}</label>
+                <div>
+                    {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
                 <label class="control-label">{{ form_label(form.email) }}</label>
                 <div>
                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.openingTime) }}</label>
+                <div>
+                    {{ form_widget(form.openingTime, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
             <div class="col-sm-12">

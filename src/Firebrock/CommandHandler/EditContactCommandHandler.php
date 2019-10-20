@@ -37,7 +37,14 @@ class EditContactCommandHandler
      */
     public function handle(ContactCommand $command, Site $site)
     {
-        $site->getContact()->setEmail($command->getEmail());
+        $site->getContact()->setPresentation($command->presentation);
+        $site->getContact()->setEmail($command->email);
+        $site->getContact()->setPhone($command->phone);
+        $site->getContact()->setName($command->name);
+        $site->getContact()->setPostCode($command->postCode);
+        $site->getContact()->setCity($command->city);
+        $site->getContact()->setCountry($command->country);
+        $site->getContact()->setOpeningTime($command->openingTime);
         $this->siteRepository->save($site);
     }
 

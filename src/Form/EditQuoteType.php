@@ -16,6 +16,7 @@ class EditQuoteType extends AbstractType
         $builder
             ->add('presentation', TextareaType::class, [
                 'label' => 'Présentation',
+                'attr' => array('rows' => '5'),
                 'required' => false
             ])
             ->add('email', TextType::class, [
