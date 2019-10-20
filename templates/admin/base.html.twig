@@ -213,9 +213,11 @@
                                         Mon site
                                     </div>
                                     <div class="pad-btm">
+                                        {% if site.logo is defined and site.logo is not null%}
                                         <img class="img-circle img-md"
                                              src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
                                              alt="{{ site.name }} logo">
+                                        {% endif %}
                                     </div>
                                     <p class="mnp-name">{{ site.name }}</p>
                                     <span class="mnp-desc">

@@ -26,6 +26,7 @@ class GlobalParametersCommand
         $this->facebook=$site->getFacebook();
         $this->keys=$site->getKeyWords();
         $this->twitter=$site->getTwitter();
+        $this->logo=$site->getLogo();
     }
 
 

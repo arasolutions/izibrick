@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Firebrock\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,6 +18,10 @@ class EditGlobalParametersType extends AbstractType
             ->add('keys', TextType::class, [
                 'label'=>'Mots-clé',
                 'required'=>false
+            ])
+            ->add('logo', FileType::class, [
+                'required' => false,
+                'label' => 'Logo'
             ])
             ->add('facebook', UrlType::class, [
                 'label'=>'Lien page Facebook',
