@@ -91,6 +91,11 @@ class Site
     private $blogs;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Quote", mappedBy="site", cascade={"persist", "remove"})
+     */
+    private $quote;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Contact", mappedBy="site", cascade={"persist", "remove"})
      */
     private $contact;
@@ -304,6 +309,24 @@ class Site
     public function getBlogs()
     {
         return $this->blogs;
+    }
+
+    public function getQuote(): ?Quote
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(?Quote $quote): self
+    {
+        $this->quote = $quote;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSite = $quote === null ? null : $this;
+        if ($newSite !== $quote->getSite()) {
+            $quote->setSite($newSite);
+        }
+
+        return $this;
     }
 
     public function getContact(): ?Contact

@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Contact{% endblock %}
+{% block title %}Page Devis{% endblock %}
 
-{% block description %}Représente la page contact de votre site{% endblock %}
+{% block description %}Représente la page devis de votre site{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -13,18 +13,26 @@
 {% block body %}
     {% if success %}
     <div class="alert alert-success">
-        <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
+        <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
     </div>
     {% endif %}
     <div class="panel">
         <div class="panel-body">
+
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.presentation) }}</label>
+                <div>
+                    {{ form_widget(form.presentation, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
             <div class="col-sm-12">
                 <label class="control-label">{{ form_label(form.email) }}</label>
                 <div>
                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
+
             <div class="col-sm-12">
                 <hr/>
             </div>

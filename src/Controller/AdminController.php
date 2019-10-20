@@ -11,17 +11,20 @@ use App\Firebrock\Command\GlobalParametersCommand;
 use App\Firebrock\Command\BlogCommand;
 use App\Firebrock\Command\HomeCommand;
 use App\Firebrock\Command\PresentationCommand;
+use App\Firebrock\Command\QuoteCommand;
 use App\Firebrock\CommandHandler\EditContactCommandHandler;
 use App\Firebrock\CommandHandler\EditGlobalParametersCommandHandler;
 use App\Firebrock\CommandHandler\EditBlogCommandHandler;
 use App\Firebrock\CommandHandler\EditHomeCommandHandler;
 use App\Firebrock\CommandHandler\EditPresentationCommandHandler;
+use App\Firebrock\CommandHandler\EditQuoteCommandHandler;
 use App\Form\EditContactType;
 use App\Form\EditGlobalParametersType;
 use App\Form\EditBlogType;
 use App\Form\EditHomeType;
 use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
+use App\Form\EditQuoteType;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,6 +127,39 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/presentation/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
+
+    /**
+     * @Route("/bo-quote", name="bo-quote")
+     * @param Request $request
+     * @param EditQuoteCommandHandler $editQuoteCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function boQuote(Request $request, EditQuoteCommandHandler $editQuoteCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+
+        $command = new QuoteCommand();
+        $command->presentation = $site->getQuote()->getPresentation();
+        $command->email = $site->getQuote()->getEmail();
+
+        $success = false;
+
+        $form = $this->createForm(EditQuoteType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editQuoteCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/quote/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'form' => $form->createView(),

@@ -100,7 +100,8 @@ class SiteController extends AbstractController
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/devis/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
-            'site' => $site
+            'site' => $site,
+            'quote' => $site->getQuote()
         ]);
     }
 
