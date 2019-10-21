@@ -24,7 +24,7 @@ class AddOrderType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'required' => false,
-                'label' => 'Nom du site'
+                'label' => 'Nom de votre projet'
             ))
             ->add('productId', HiddenType::class)
             ->add('hasCodePromo', HiddenType::class)
@@ -34,6 +34,10 @@ class AddOrderType extends AbstractType
             ))
             ->add('colorTheme', ColorType::class, array(
                 'label' => 'Couleur'
+            ))
+            ->add('colorThemeRgb', TextType::class, array(
+                'label' => 'Couleur (RGB)',
+                'required' => false
             ))
             ->add('template', HiddenType::class, array(
                 'label' => 'Choisissez le thème',

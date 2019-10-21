@@ -17,14 +17,23 @@ use App\Repository\CustomerRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Form\Factory\FormFactory;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Mailer\TwigSwiftMailer;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class OrderController extends AbstractController
+class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 {
     /** @var ProductRepository */
     private $productRepository;
@@ -83,12 +92,14 @@ class OrderController extends AbstractController
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
             } else {
-                if (empty($form->get('template')->getData())) {
-                    $form->get('template')->addError(new FormError('Veuillez choisir un thème'));
-                } else {
-                    // Nouveau site
-                    $site = $addSiteCommandHandler->handle($order);
-                    return $this->redirectToRoute('customer', array('siteId' => $site->getId()));
+                if ($form->isValid()) {
+                    if (empty($form->get('template')->getData())) {
+                        $form->get('template')->addError(new FormError('Veuillez choisir un thème'));
+                    } else {
+                        // Nouveau site
+                        $site = $addSiteCommandHandler->handle($order);
+                        return $this->redirectToRoute('options', array('siteId' => $site->getId()));
+                    }
                 }
             }
         }
@@ -103,35 +114,6 @@ class OrderController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/order/{siteId}/customer", name="customer")
-     * @param int $siteId
-     * @param Request $request
-     * @param AddCustomerCommandHandler $addCustomerCommandHandler
-     * @return Response
-     */
-    public function customer($siteId, Request $request, AddCustomerCommandHandler $addCustomerCommandHandler)
-    {
-        $site = $this->siteRepository->getById($siteId);
-
-        $customer = new AddCustomerCommand();
-
-        $form = $this->createForm(AddCustomerType::class, $customer);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $newCustomer = $addCustomerCommandHandler->handle($customer, $site);
-            if ($newCustomer->getId() != null) {
-                return $this->redirectToRoute('options', array('siteId' => $site->getId()));
-            }
-        }
-
-        return $this->render('bo/order/customer.html.twig', [
-            'form' => $form->createView(),
-            'site' => $site,
-            'step' => 2
-        ]);
-    }
 
     /**
      * @Route("/order/{siteId}/options", name="options")
@@ -151,6 +133,10 @@ class OrderController extends AbstractController
         $form = $this->createForm(AddSiteOptionsType::class, $customer);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirect('/register?siteId=' . $siteId);
+        }
+
         return $this->render('bo/order/options.html.twig', [
             'form' => $form->createView(),
             'site' => $site,
@@ -163,7 +149,8 @@ class OrderController extends AbstractController
      * @param $siteId
      * @param Request $request
      */
-    public function end($siteId, Request $request){
+    public function end($siteId, Request $request)
+    {
         $site = $this->siteRepository->getById($siteId);
 
     }

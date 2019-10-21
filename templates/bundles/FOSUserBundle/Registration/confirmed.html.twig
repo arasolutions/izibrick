@@ -1,0 +1,35 @@
+{% extends 'bo/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Compte activé{% endblock %}
+
+{% block body %}
+    <div id="page-content">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div id="wizard">
+                            {% include 'bo/order/wizard.html.twig' with {'step':4} %}
+                            <div id="wizard-tab2" class="tab-pane">
+                                <div class="panel panel-colorful panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Félicitations !</h3>
+                                    </div>
+                                </div>
+                                <div>
+                                    Votre compte a bien été activé.
+                                    Rendez-vous sur la page de login
+                                </div>
+                                <div>
+                                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-mint btn-lg" type="submit">Se connecter</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

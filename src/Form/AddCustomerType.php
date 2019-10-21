@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Firebrock\Command\AddCustomerCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,24 +16,29 @@ class AddCustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('managerLastName', TextType::class, array(
+            ->add('lastname', TextType::class, array(
                 'label' => 'Nom'
             ))
-            ->add('managerFirstName', TextType::class, array(
+            ->add('firstname', TextType::class, array(
                 'label' => 'Prénom'
             ))
-            ->add('managerPhone', TelType::class, array(
+            ->add('phone', TelType::class, array(
                 'label' => 'Numéro de téléphone'
             ))
-            ->add('managerMail', EmailType::class, array(
-                'label' => 'Email'
+            ->remove('username')
+            ->remove('plainPassword')
+            ->add('plainPassword', PasswordType::class, array(
+                'label' => 'Mot de passe'
             ));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        $resolver->setDefaults([
-            'data_class' => AddCustomerCommand::class,
-        ]);
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'app_user_registration';
     }
 }

@@ -1,0 +1,28 @@
+{% extends "@!FOSUser/Resetting/request.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Réinitialisation de votre mot de passe{% endblock %}
+
+{% block fos_user_content %}
+    <div id="container" class="cls-container">
+
+        <!-- BACKGROUND IMAGE -->
+        <!--===================================================-->
+        <div id="bg-overlay"></div>
+
+
+        <!-- PASSWORD RESETTING FORM -->
+        <!--===================================================-->
+        <div class="cls-content">
+            <div class="cls-content-lg panel">
+                <div class="alert alert-success">
+                    Fécilitations
+                </div>
+                <p>
+                    {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

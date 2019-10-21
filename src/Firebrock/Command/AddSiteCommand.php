@@ -5,11 +5,16 @@ namespace App\Firebrock\Command;
 
 
 use App\Entity\Product;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AddSiteCommand
 {
+    /**
+     * @Assert\NotNull(message="Le nom de votre projet ne peut être vide.")
+     */
     private $name;
     private $colorTheme;
+    private $colorThemeRgb;
     private $logo;
     private $template;
     private $productId;
@@ -22,6 +27,22 @@ class AddSiteCommand
     public function __construct()
     {
         $this->hasCodePromo = false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColorThemeRgb()
+    {
+        return $this->colorThemeRgb;
+    }
+
+    /**
+     * @param mixed $colorThemeRgb
+     */
+    public function setColorThemeRgb($colorThemeRgb): void
+    {
+        $this->colorThemeRgb = $colorThemeRgb;
     }
 
     /**

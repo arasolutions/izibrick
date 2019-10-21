@@ -11,7 +11,8 @@ class AddCustomerCommand
     private $managerLastName;
     private $managerFirstName;
     private $managerPhone;
-    private $managerMail;
+    private $email;
+    private $plainPassword;
 
     /**
      * @return mixed
@@ -64,17 +65,33 @@ class AddCustomerCommand
     /**
      * @return mixed
      */
-    public function getManagerMail()
+    public function getEmail()
     {
-        return $this->managerMail;
+        return $this->email;
     }
 
     /**
-     * @param mixed $managerMail
+     * @param mixed $email
      */
-    public function setManagerMail($managerMail): void
+    public function setEmail($email): void
     {
-        $this->managerMail = $managerMail;
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
 

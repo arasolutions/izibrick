@@ -1,0 +1,31 @@
+{% extends 'bo/base.html.twig' %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <div id="page-content">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div id="wizard">
+                            {% include 'bo/order/wizard.html.twig' with {'step':4} %}
+                            <div id="wizard-tab4" class="tab-pane">
+                                <div class="panel panel-colorful panel-success">
+                                    <div class="panel-body">
+                                        <h3 class="panel-title">Félicitations !</h3>
+                                    </div>
+                                </div>
+                                <div>
+                                    Un email vient de vous être envoyé sur {{ user.email }}.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

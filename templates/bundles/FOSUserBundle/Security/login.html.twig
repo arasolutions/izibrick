@@ -2,6 +2,8 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block title %}Connexion{% endblock %}
+
 {% block fos_user_content %}
     <div id="container" class="cls-container">
 
@@ -12,29 +14,34 @@
             <div class="cls-content-sm panel">
                 <div class="panel-body">
                     <div class="mar-ver pad-btm">
-                        <h1 class="h3">Account Login</h1>
-                        <p>Sign In to your account</p>
+                        <h1 class="h3">Connexion</h1>
+                        <p>Connectez-vous à votre compte</p>
                     </div>
+                    {% if app.request.get('from_reset') %}
+                        <div class="alert alert-success">
+                            Mot de passe changé
+                        </div>
+                    {% endif %}
                     <form action="{{ path("fos_user_security_check") }}" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username" autofocus id="username"
+                            <input type="text" class="form-control" placeholder="Email" autofocus id="username"
                                    name="_username">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" id="password"
+                            <input type="password" class="form-control" placeholder="Mot de passe" id="password"
                                    name="_password">
                         </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                         <div class="checkbox pad-btm text-left">
                             <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">
-                            <label for="demo-form-checkbox">Remember me</label>
+                            <label for="demo-form-checkbox">Se souvenir de moi</label>
                         </div>
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Sign In</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Connexion</button>
                     </form>
                 </div>
 
                 <div class="pad-all">
-                    <a href="pages-password-reminder.html" class="btn-link mar-rgt">Forgot password ?</a>
+                    <a href="{{ path('fos_user_resetting_request') }}" class="btn-link mar-rgt">Mot de passe oublié ?</a>
                 </div>
             </div>
         </div>

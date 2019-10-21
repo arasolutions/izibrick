@@ -44,21 +44,21 @@
     font-style: italic;
 }
 
-#wizard ul{
+#wizard ul.wz-step{
     padding-inline-start: 0;
 }
 
-#wizard li {
+#wizard ul.wz-step > li {
     list-style: none;
     text-align: center;
     padding-bottom: 10px;
 }
 
-#wizard li:not(.active) h5{
+#wizard ul.wz-step > li:not(.active) h5{
     font-weight: normal;
 }
 
-#wizard li i.icon-2x{
+#wizard ul.wz-step > li i.icon-2x{
     padding-bottom: 5px;
 }
 
@@ -69,4 +69,9 @@
 
 #footer{
     position: unset;
+}
+
+#wizard-tab4 .panel-body{
+    text-align: center;
+    padding-top: 25px;
 }

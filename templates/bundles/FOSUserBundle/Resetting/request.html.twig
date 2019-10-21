@@ -1,0 +1,39 @@
+{% extends "@!FOSUser/Resetting/request.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Réinitialisation de votre mot de passe{% endblock %}
+
+{% block fos_user_content %}
+    <div id="container" class="cls-container">
+
+        <!-- BACKGROUND IMAGE -->
+        <!--===================================================-->
+        <div id="bg-overlay"></div>
+
+
+        <!-- PASSWORD RESETTING FORM -->
+        <!--===================================================-->
+        <div class="cls-content">
+            <div class="cls-content-sm panel">
+                <div class="panel-body">
+                    <h1 class="h3">Réinitilisation du mot de passe</h1>
+                    <p class="pad-btm">Renseignez votre email.</p>
+                    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST"
+                          class="fos_user_resetting_request">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" placeholder="Email" required="required" class="form-control"/>
+                        </div>
+                        <div class="form-group text-right">
+                            <input class="btn btn-danger btn-lg btn-block" type="submit" value="{{ 'resetting.request.submit'|trans }}"/>
+                        </div>
+                    </form>
+                    <div class="pad-top">
+                        <a href="{{ path('fos_user_security_login') }}" class="btn-link text-bold text-main">Retour à la connexion</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

@@ -1,10 +1,11 @@
 {% extends 'bo/base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
+{% block title %}Création de votre projet | Etape 1{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/unitegallery/css/unitegallery.css') }}" rel="stylesheet">
 {% endblock %}
+
 
 {% block body %}
     <div id="page-content">
@@ -14,13 +15,14 @@
                     <div class="panel-body">
 
                         <div id="wizard">
-                            {% include 'bo/order/wizard.html.twig' %}
+                            {% include 'bo/order/wizard.html.twig' with {'step': 1} %}
                             <!--First tab-->
                             <div id="wizard-tab1" class="tab-pane">
                                 {{ form_start(form, {'attr':{'method':'post', 'action': path('order', {'product': product.id }),'class':'form-horizontal'}}) }}
                                 <div class="col-sm-9">
                                     <div class="form-group">
                                         <div class="pull-left text-3x">Site {{ product.name }}</div>
+
                                         {% if not product.codePromotion %}
                                             <div class="pull-right bloc-price">A partir de <br/><span
                                                         class="price text-2x">{{ product.price }}€</span>/mois
@@ -55,9 +57,17 @@
                                     {{ form_label(form.name, null, {'label_attr':{'class':'control-label'}}) }}
                                     {{ form_widget(form.name, {'attr':{'class':'form-control input-lg'}}) }}
                                 </div>
-                                <div class="col-sm-12 form-group">
+                                <div class="col-sm-12 form-errors">
+                                    {{ form_errors(form.name) }}
+                                </div>
+
+                                <div class="col-sm-9 form-group">
                                     {{ form_label(form.colorTheme, null, {'label_attr':{'class':'control-label'}}) }}
                                     {{ form_widget(form.colorTheme, {'attr':{'class':'form-control input-lg'}}) }}
+                                </div>
+                                <div class="col-sm-3 form-group pull-right margin-right-10">
+                                    {{ form_label(form.colorThemeRgb, null, {'label_attr':{'class':'control-label'}}) }}
+                                    {{ form_widget(form.colorThemeRgb, {'attr':{'class':'form-control input-lg'}}) }}
                                 </div>
                                 <div class="col-sm-12 form-group">
                                     {{ form_label(form.template, null, {'label_attr':{'class':'control-label'}}) }}
@@ -66,7 +76,7 @@
                                         <div class="pad-all">
                                             <div id="demo-gallery-2" style="display:none;">
                                                 {% for template in templates %}
-                                                    <a href="#{{ template.id }}" id="coucou">
+                                                    <a href="#{{ template.id }}" id="template_{{ template.id }}">
                                                         <img alt="{{ template.name }}"
                                                              src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
                                                              data-description="{{ template.description }}"
@@ -148,6 +158,16 @@
                 $(".ug-thumb-wrapper.ug-tile .ug-tile-icon.ug-icon-link").on('click', function (e) {
                     e.preventDefault();
                 });
+
+                $("#add_order_colorTheme").on('change', function (e) {
+                    $("#add_order_colorThemeRgb").val($(this).val());
+                });
+
+                $("#add_order_colorThemeRgb").on('change', function (e) {
+                    $("#add_order_colorTheme").val($(this).val());
+                });
+
+                $("#add_order_colorThemeRgb").val($(this).val());
 
             });
         </script>

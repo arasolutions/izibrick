@@ -1,0 +1,48 @@
+{% extends "@!FOSUser/Resetting/request.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Réinitialisation de votre mot de passe{% endblock %}
+
+{% block fos_user_content %}
+    <div id="container" class="cls-container">
+
+        <!-- BACKGROUND IMAGE -->
+        <!--===================================================-->
+        <div id="bg-overlay"></div>
+
+        <!-- LOCK SCREEN -->
+        <!--===================================================-->
+        <div class="cls-content">
+            <div class="cls-content-sm panel">
+                <div class="panel-body">
+                    <div class="mar-ver pad-btm">
+                        <h1 class="h3">Réinitialisation du mot de passe</h1>
+                    </div>
+                    <p>Merci d'indiquer votre nouveau mot de passe.</p>
+                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                    {% if not form.vars.valid %}
+                        <div class="alert alert-danger">
+                            Les mots de passe sont différents.
+                        </div>
+                    {% endif %}
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.plainPassword.first, null, {'label_attr':{'class':'control-label'}}) }}
+                        {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control input-lg'}}) }}
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.plainPassword.second, null, {'label_attr':{'class':'control-label'}}) }}
+                        {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control input-lg'}}) }}
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <input type="submit" class="btn btn-block btn-lg btn-success"
+                               value="{{ 'resetting.reset.submit'|trans }}"/>
+                    </div>
+                    {{ form_end(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
