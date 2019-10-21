@@ -6,18 +6,21 @@ use App\Entity\Blog;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
+use App\Entity\Contact;
 use App\Firebrock\Command\ContactCommand;
 use App\Firebrock\Command\GlobalParametersCommand;
 use App\Firebrock\Command\BlogCommand;
 use App\Firebrock\Command\HomeCommand;
 use App\Firebrock\Command\PresentationCommand;
 use App\Firebrock\Command\QuoteCommand;
+use App\Firebrock\Command\SeoCommand;
 use App\Firebrock\CommandHandler\EditContactCommandHandler;
 use App\Firebrock\CommandHandler\EditGlobalParametersCommandHandler;
 use App\Firebrock\CommandHandler\EditBlogCommandHandler;
 use App\Firebrock\CommandHandler\EditHomeCommandHandler;
 use App\Firebrock\CommandHandler\EditPresentationCommandHandler;
 use App\Firebrock\CommandHandler\EditQuoteCommandHandler;
+use App\Firebrock\CommandHandler\EditSeoCommandHandler;
 use App\Form\EditContactType;
 use App\Form\EditGlobalParametersType;
 use App\Form\EditBlogType;
@@ -25,7 +28,9 @@ use App\Form\EditHomeType;
 use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
+use App\Form\EditSeoType;
 use App\Repository\SiteRepository;
+use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,13 +44,17 @@ class AdminController extends AbstractController
     /** @var SiteRepository */
     private $siteRepository;
 
+    /** @var ContactRepository */
+    private $contactRepository;
+
     /**
      * AdminController constructor.
      * @param SiteRepository $siteRepository
      */
-    public function __construct(SiteRepository $siteRepository)
+    public function __construct(SiteRepository $siteRepository, ContactRepository $contactRepository)
     {
         $this->siteRepository = $siteRepository;
+        $this->contactRepository = $contactRepository;
     }
 
     /**
@@ -229,6 +238,41 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/global-parameters/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'success' => $success
+        ]);
+    }
+
+
+    /**
+     * @Route("/bo-seo", name="bo-seo")
+     * @param Request $request
+     * @param EditSeoCommandHandler $editSeoCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function boSeo(Request $request, EditSeoCommandHandler $editSeoCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $contact = $this->contactRepository->getBySiteId($_SESSION['SITE_ID']);
+
+        $command = new SeoCommand();//var_dump($contact);die;
+        $command->seoTitleContact = $contact->getSeoTitle();
+        $command->seoDescriptionContact = $contact->getSeoDescription();
+
+        $success = false;
+
+        $form = $this->createForm(EditSeoType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editSeoCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/seo/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'form' => $form->createView(),

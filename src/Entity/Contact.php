@@ -61,6 +61,16 @@ class Contact
      */
     private $openingTime;
 
+    /**
+     * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
+     */
+    private $seoTitle;
+
+    /**
+     * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
+     */
+    private $seoDescription;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,5 +199,37 @@ class Contact
     public function getOpeningTime()
     {
         return $this->openingTime;
+    }
+
+    /**
+     * @param string $seoTitle
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * @param string $seoDescription
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
     }
 }

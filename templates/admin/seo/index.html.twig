@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Contact{% endblock %}
+
+{% block description %}Représente la page contact de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+    <div class="alert alert-success">
+        <strong>Parfait !</strong> Votre modifications ont bien été prises en compte.
+    </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleContact) }}</label>
+                <div>
+                    {{ form_widget(form.seoTitleContact, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionContact) }}</label>
+                <div>
+                    {{ form_widget(form.seoDescriptionContact, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                <button id="form-submit" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right margin-right-10" type="button">
+                    Annuler
+                </button>
+            </div>
+            <!--===================================================-->
+            <!-- End Summernote -->
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

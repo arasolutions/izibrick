@@ -363,6 +363,20 @@
                                     </a>
                                 </li>
 
+                                {% if app.request.get('_route') == 'bo-seo' %}
+                                <li class="active-link">
+                                    {% else %}
+                                <li>
+                                    {% endif %}
+                                    <a href="{{ path('bo-seo') }}">
+                                        <i class="ti-stats-up"></i>
+                                        <span class="menu-title">
+                                                Référencement
+                                            <!--<span class="pull-right badge badge-warning">24</span>-->
+                                            </span>
+                                    </a>
+                                </li>
+
                                 <!--Category name-->
 
                             </ul>
