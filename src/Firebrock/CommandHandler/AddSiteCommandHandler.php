@@ -4,10 +4,20 @@
 namespace App\Firebrock\CommandHandler;
 
 
+use App\Entity\Blog;
+use App\Entity\Contact;
+use App\Entity\Home;
+use App\Entity\Presentation;
+use App\Entity\Quote;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Firebrock\Command\AddSiteCommand;
+use App\Repository\BlogRepository;
+use App\Repository\ContactRepository;
+use App\Repository\HomeRepository;
+use App\Repository\PresentationRepository;
 use App\Repository\ProductRepository;
+use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -27,17 +37,42 @@ class AddSiteCommandHandler
     /** @var TemplateRepository */
     private $templateRepository;
 
+    /** @var HomeRepository */
+    private $homeRepository;
+
+    /** @var PresentationRepository */
+    private $presentationRepository;
+
+    /** @var BlogRepository */
+    private $blogRepository;
+
+    /** @var ContactRepository */
+    private $contactRepository;
+
+    /** @var QuoteRepository */
+    private $quoteRepository;
+
     /**
-     * AddOrderCommandHandler constructor.
+     * AddSiteCommandHandler constructor.
      * @param SiteRepository $siteRepository
      * @param ProductRepository $productRepository
      * @param TemplateRepository $templateRepository
+     * @param HomeRepository $homeRepository
+     * @param PresentationRepository $presentationRepository
+     * @param BlogRepository $blogRepository
+     * @param ContactRepository $contactRepository
+     * @param QuoteRepository $quoteRepository
      */
-    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository)
+    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->productRepository = $productRepository;
         $this->templateRepository = $templateRepository;
+        $this->homeRepository = $homeRepository;
+        $this->presentationRepository = $presentationRepository;
+        $this->blogRepository = $blogRepository;
+        $this->contactRepository = $contactRepository;
+        $this->quoteRepository = $quoteRepository;
     }
 
 
@@ -52,7 +87,26 @@ class AddSiteCommandHandler
         if ($command->getLogo() != null) {
             $site->setLogoFile($command->getLogo());
         }
-        return $this->siteRepository->save($site);
+        $site = $this->siteRepository->save($site);
+
+        // Création du home
+        $home = new Home($site);
+        $this->homeRepository->save($home);
+
+        // Création de la presentation
+        $presentation = new Presentation($site);
+        $this->presentationRepository->save($presentation);
+
+
+        // Création du devis
+        $quote = new Quote($site);
+        $this->quoteRepository->save($quote);
+
+        // Création du contact
+        $contact = new Contact($site);
+        $this->contactRepository->save($contact);
+
+        return $site;
     }
 
 

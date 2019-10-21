@@ -61,6 +61,16 @@ class Contact
      */
     private $openingTime;
 
+    /**
+     * Contact constructor.
+     * @param $site
+     */
+    public function __construct($site)
+    {
+        $this->site = $site;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

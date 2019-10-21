@@ -61,9 +61,10 @@ class Blog
      */
     private $creationDate;
 
-    public function __construct()
+    public function __construct(Site $site)
     {
         $this->creationDate = new \DateTime();
+        $this->site = $site;
     }
 
     public function getId(): ?int
@@ -172,7 +173,7 @@ class Blog
      */
     public function getImageInfo()
     {
-        if (! $this->image) {
+        if (!$this->image) {
             return null;
         }
 

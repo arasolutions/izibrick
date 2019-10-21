@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Presentation
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -25,6 +26,16 @@ class Presentation
      * @ORM\Column(type="text", nullable=true)
      */
     private $content;
+
+    /**
+     * Presentation constructor.
+     * @param $site
+     */
+    public function __construct($site)
+    {
+        $this->site = $site;
+    }
+
 
     public function getId(): ?int
     {
