@@ -18,9 +18,4 @@ class ContactRepository extends AbstractRepository
     {
         parent::__construct($registry, Contact::class);
     }
-
-    public function getBySiteId($siteId)
-    {
-        return $this->findOneBy(['site' => $siteId]);
-    }
 }

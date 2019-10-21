@@ -32,6 +32,16 @@ class Quote
     private $email;
 
     /**
+     * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
+     */
+    private $seoTitle;
+
+    /**
+     * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
+     */
+    private $seoDescription;
+
+    /**
      * Quote constructor.
      * @param $site
      */
@@ -80,5 +90,37 @@ class Quote
         $this->presentation = $presentation;
 
         return $this;
+    }
+
+    /**
+     * @param string $seoTitle
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * @param string $seoDescription
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
     }
 }

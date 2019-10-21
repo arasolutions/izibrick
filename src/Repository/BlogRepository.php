@@ -18,9 +18,4 @@ class BlogRepository extends AbstractRepository
     {
         parent::__construct($registry, Blog::class);
     }
-
-    public function getBySiteId($siteId)
-    {
-        return $this->findBy(['site' => $siteId]);
-    }
 }

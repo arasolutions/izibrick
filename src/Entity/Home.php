@@ -84,6 +84,16 @@ class Home
     }
 
     /**
+     * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
+     */
+    private $seoTitle;
+
+    /**
+     * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
+     */
+    private $seoDescription;
+
+    /**
      * Home constructor.
      * @param $site
      */
@@ -131,5 +141,37 @@ class Home
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @param string $seoTitle
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * @param string $seoDescription
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
     }
 }

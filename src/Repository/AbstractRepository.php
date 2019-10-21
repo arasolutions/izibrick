@@ -34,4 +34,9 @@ abstract class AbstractRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($entity);
         $this->getEntityManager()->flush();
     }
+
+    public function getBySiteId($siteId)
+    {
+        return $this->findOneBy(['site' => $siteId]);
+    }
 }

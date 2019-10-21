@@ -10,6 +10,10 @@ use App\Firebrock\Command\GlobalParametersCommand;
 use App\Firebrock\Command\HomeCommand;
 use App\Firebrock\Command\SeoCommand;
 use App\Repository\SiteRepository;
+use App\Repository\HomeRepository;
+use App\Repository\PresentationRepository;
+use App\Repository\BlogRepository;
+use App\Repository\QuoteRepository;
 use App\Repository\ContactRepository;
 
 /**
@@ -18,6 +22,18 @@ use App\Repository\ContactRepository;
  */
 class EditSeoCommandHandler
 {
+    /** @var HomeRepository $homeRepository */
+    private $homeRepository;
+
+    /** @var PresentationRepository $presentationRepository */
+    private $presentationRepository;
+
+    /** @var BlogRepository $blogRepository */
+    private $blogRepository;
+
+    /** @var QuoteRepository $quoteRepository */
+    private $quoteRepository;
+
     /** @var ContactRepository $contactRepository */
     private $contactRepository;
 
@@ -28,8 +44,17 @@ class EditSeoCommandHandler
      * EditGlobalParametersCommandHandler constructor.
      * @param SiteRepository $siteRepository
      */
-    public function __construct(ContactRepository $contactRepository, SiteRepository $siteRepository)
+    public function __construct(HomeRepository $homeRepository,
+                                PresentationRepository $presentationRepository,
+                                BlogRepository $blogRepository,
+                                QuoteRepository $quoteRepository,
+                                ContactRepository $contactRepository,
+                                SiteRepository $siteRepository)
     {
+        $this->homeRepository = $homeRepository;
+        $this->presentationRepository = $presentationRepository;
+        $this->blogRepository = $blogRepository;
+        $this->quoteRepository = $quoteRepository;
         $this->contactRepository = $contactRepository;
         $this->siteRepository = $siteRepository;
     }

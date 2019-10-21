@@ -61,6 +61,16 @@ class Blog
      */
     private $creationDate;
 
+    /**
+     * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
+     */
+    private $seoTitle;
+
+    /**
+     * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
+     */
+    private $seoDescription;
+
     public function __construct(Site $site)
     {
         $this->creationDate = new \DateTime();
@@ -193,4 +203,35 @@ class Blog
         return $this->creationDate;
     }
 
+    /**
+     * @param string $seoTitle
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * @param string $seoDescription
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
+    }
 }

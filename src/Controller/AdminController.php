@@ -30,6 +30,10 @@ use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
 use App\Repository\SiteRepository;
+use App\Repository\HomeRepository;
+use App\Repository\PresentationRepository;
+use App\Repository\BlogRepository;
+use App\Repository\QuoteRepository;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,6 +48,18 @@ class AdminController extends AbstractController
     /** @var SiteRepository */
     private $siteRepository;
 
+    /** @var HomeRepository $homeRepository */
+    private $homeRepository;
+
+    /** @var PresentationRepository $presentationRepository */
+    private $presentationRepository;
+
+    /** @var BlogRepository $blogRepository */
+    private $blogRepository;
+
+    /** @var QuoteRepository $quoteRepository */
+    private $quoteRepository;
+
     /** @var ContactRepository */
     private $contactRepository;
 
@@ -51,9 +67,18 @@ class AdminController extends AbstractController
      * AdminController constructor.
      * @param SiteRepository $siteRepository
      */
-    public function __construct(SiteRepository $siteRepository, ContactRepository $contactRepository)
+    public function __construct(SiteRepository $siteRepository,
+                                HomeRepository $homeRepository,
+                                PresentationRepository $presentationRepository,
+                                BlogRepository $blogRepository,
+                                QuoteRepository $quoteRepository,
+                                ContactRepository $contactRepository)
     {
         $this->siteRepository = $siteRepository;
+        $this->homeRepository = $homeRepository;
+        $this->presentationRepository = $presentationRepository;
+        $this->blogRepository = $blogRepository;
+        $this->quoteRepository = $quoteRepository;
         $this->contactRepository = $contactRepository;
     }
 
@@ -257,9 +282,21 @@ class AdminController extends AbstractController
     public function boSeo(Request $request, EditSeoCommandHandler $editSeoCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $home = $this->homeRepository->getBySiteId($_SESSION['SITE_ID']);
+        $presentation = $this->presentationRepository->getBySiteId($_SESSION['SITE_ID']);
+        $blog = $this->blogRepository->getBySiteId($_SESSION['SITE_ID']);
+        $quote = $this->quoteRepository->getBySiteId($_SESSION['SITE_ID']);
         $contact = $this->contactRepository->getBySiteId($_SESSION['SITE_ID']);
 
         $command = new SeoCommand();//var_dump($contact);die;
+        $command->seoTitleHome = $home->getSeoTitle();
+        $command->seoDescriptionHome = $home->getSeoDescription();
+        $command->seoTitlePresentation = $presentation->getSeoTitle();
+        $command->seoDescriptionPresentation = $presentation->getSeoDescription();
+        $command->seoTitleBlog = $blog->getSeoTitle();
+        $command->seoDescriptionBlog = $blog->getSeoDescription();
+        $command->seoTitleQuote = $quote->getSeoTitle();
+        $command->seoDescriptionQuote = $quote->getSeoDescription();
         $command->seoTitleContact = $contact->getSeoTitle();
         $command->seoDescriptionContact = $contact->getSeoDescription();
 

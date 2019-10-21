@@ -1,7 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Contact{% endblock %}
+{% block title %}Page Référencement{% endblock %}
 
 {% block description %}Représente la page contact de votre site{% endblock %}
 
@@ -13,12 +13,72 @@
 {% block body %}
     {% if success %}
     <div class="alert alert-success">
-        <strong>Parfait !</strong> Votre modifications ont bien été prises en compte.
+        <strong>Parfait !</strong> Vos modifications ont bien été prises en compte.
     </div>
     {% endif %}
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleHome) }}</label>
+                <div>
+                    {{ form_widget(form.seoTitleHome, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionHome) }}</label>
+                <div>
+                    {{ form_widget(form.seoDescriptionHome, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitlePresentation) }}</label>
+                <div>
+                    {{ form_widget(form.seoTitlePresentation, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionPresentation) }}</label>
+                <div>
+                    {{ form_widget(form.seoDescriptionPresentation, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleBlog) }}</label>
+                <div>
+                    {{ form_widget(form.seoTitleBlog, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionBlog) }}</label>
+                <div>
+                    {{ form_widget(form.seoDescriptionBlog, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleQuote) }}</label>
+                <div>
+                    {{ form_widget(form.seoTitleQuote, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionQuote) }}</label>
+                <div>
+                    {{ form_widget(form.seoDescriptionQuote, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr/>
+            </div>
             <div class="col-sm-12">
                 <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleContact) }}</label>
                 <div>
