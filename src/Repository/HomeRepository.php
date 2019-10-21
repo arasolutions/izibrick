@@ -13,26 +13,13 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Home[]    findAll()
  * @method Home[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class HomeRepository extends ServiceEntityRepository
+class HomeRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Home::class);
     }
 
-
-    /**
-     * @param Home $home
-     * @return Home
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function save(Home $home)
-    {
-        $this->getEntityManager()->persist($home);
-        $this->getEntityManager()->flush();
-        return $home;
-    }
 
     // /**
     //  * @return Home[] Returns an array of Home objects
