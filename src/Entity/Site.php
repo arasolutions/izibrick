@@ -85,10 +85,9 @@ class Site
     private $presentation;
 
     /**
-     * @var ArrayCollection|Blogs[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Blog", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     * @ORM\OneToOne(targetEntity="App\Entity\Blog", mappedBy="site", cascade={"persist", "remove"})
      */
-    private $blogs;
+    private $blog;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Quote", mappedBy="site", cascade={"persist", "remove"})
@@ -143,7 +142,6 @@ class Site
         $this->createdAt = new \DateTime();
         $this->status = SiteStatus::A_CREER['name'];
         $this->users = new ArrayCollection();
-        $this->blogs = new ArrayCollection();
     }
 
     /**
@@ -303,12 +301,22 @@ class Site
         return $this;
     }
 
-    /**
-     * @return ArrayCollection|Blog[]
-     */
-    public function getBlogs()
+    public function getBlog(): ?Blog
     {
-        return $this->blogs;
+        return $this->blog;
+    }
+
+    public function setBlog(?Blog $blog): self
+    {
+        $this->blog = $blog;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSite = $blog === null ? null : $this;
+        if ($newSite !== $blog->getSite()) {
+            $blog->setSite($newSite);
+        }
+
+        return $this;
     }
 
     public function getQuote(): ?Quote

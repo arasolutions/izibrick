@@ -21,7 +21,7 @@
             <h3 class="panel-title">Mes articles</h3>
             <div id="page-content">
                 <div style="text-align: right;">
-                    <a href="{{ path('bo-blog-add') }}">
+                    <a href="{{ path('bo-post-add') }}">
                         <button id="demo-edit-text" class="btn btn-primary" type="button">Ajouter un article</button>
                     </a>
                 </div>
@@ -38,15 +38,15 @@
                             </thead>
                             <tbody>
 
-                            {% if blogs|length > 0 %}
-                                {% for blog in blogs %}
+                            {% if posts|length > 0 %}
+                                {% for post in posts %}
                                     <tr>
-                                        <td>{{ blog.title }}</td>
-                                        <td>{{ blog.introduction }}</td>
-                                        <td>{{ blog.creationDate|date('d/m/Y') }}</td>
+                                        <td>{{ post.title }}</td>
+                                        <td>{{ post.introduction }}</td>
+                                        <td>{{ post.creationDate|date('d/m/Y') }}</td>
                                         <td width="300px">
-                                            <a href="{{ path('bo-blog-edit', {id: blog.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-edit"></i> Modifier</button></a>
-                                            <a href="{{ path('bo-blog-remove', {id: blog.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
+                                            <a href="{{ path('bo-post-edit', {id: post.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-edit"></i> Modifier</button></a>
+                                            <a href="{{ path('bo-post-remove', {id: post.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
                                         </td>
                                     </tr>
                                 {% endfor %}

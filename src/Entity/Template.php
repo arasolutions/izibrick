@@ -48,6 +48,11 @@ class Template
      */
     private $sites;
 
+    /**
+     * @ORM\Column(name="public", type="boolean", options={"default":true})
+     */
+    private $public=true;
+
     public function __construct()
     {
         $this->sites = new ArrayCollection();
@@ -147,5 +152,21 @@ class Template
         }
 
         return $this;
+    }
+
+    /**
+     * @param bool $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return $this->public;
     }
 }

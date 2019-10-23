@@ -13,7 +13,7 @@
 {% block body %}
     <div class="panel">
         <div class="panel-body">
-            {% if blog.id is defined %}
+            {% if post.id is defined %}
                 Modifer un article
             {% else %}
                 Ajouter un article
@@ -36,8 +36,8 @@
                 <label class="control-label">{{ form_label(form.image) }}</label>
                 <div>
                     <div class="col-sm-2">
-                        {% if blog.image is defined %}
-                            <img src="{{ vich_uploader_asset(blog, 'imageFile') | imagine_filter('logo') }}" />
+                        {% if post.image is defined and post.image is not null %}
+                            <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('logo') }}" />
                         {% endif %}
                     </div>
                     <div class="col-sm-10">
@@ -51,8 +51,8 @@
             <div class="col-sm-12">
                 <label class="control-label" for="demo-hor-inputemail">Contenu</label>
                 <div id="summernote">
-                    {% if blog.content is defined %}
-                        {{ blog.content | raw }}
+                    {% if post.content is defined %}
+                        {{ post.content | raw }}
                     {% endif %}
                 </div>
             </div>
