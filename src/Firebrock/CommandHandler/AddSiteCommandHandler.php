@@ -97,6 +97,9 @@ class AddSiteCommandHandler
         $presentation = new Presentation($site);
         $this->presentationRepository->save($presentation);
 
+        // Création du blog
+        $blog = new Blog($site);
+        $this->blogRepository->save($blog);
 
         // Création du devis
         $quote = new Quote($site);
