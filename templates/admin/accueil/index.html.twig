@@ -19,33 +19,40 @@
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form) }}
-            <p>Vous pouvez modifier les éléments de votre page d'accueil</p>
 
-            <div class="col-sm-12 form-group">
-                {{ form_label(form.mainPicture, null, {'label_attr':{'class':'control-label'}}) }}
-                {{ form_widget(form.mainPicture, {'attr':{'class':'form-control input-lg'}}) }}
-            </div>
-            <div class="col-sm-9 form-group pull-left">
-                {{ form_label(form.content) }}
-            </div>
-            <div class="col-sm-3 pull-right text-right">
-                <button id="demo-edit-text" class="btn btn-primary" type="button">Modifier</button>
-                <button id="demo-test-text" class="btn btn-primary" type="button" style="display: none">Tester</button>
-            </div>
-
-
-            <!--Summernote-->
-            <!--===================================================-->
-            <div class="col-sm-12">
-                <div id="summernote-edit">
-                    {{ site.home.content | raw }}
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Image de fond</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-2">
+                        {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+                            <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('logo') }}" />
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.mainPicture, {'attr':{'class':'form-control input-lg'}}) }}
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <hr/>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Contenu de la page</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div id="summernote">
+                            {% if site.home.content is defined %}
+                                {{ site.home.content | raw }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="col-sm-12">
-                <button id="form-submit" class="btn btn-success pull-right" type="submit">
+                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
                     Enregistrer
                 </button>
                 <button id="form-revert" class="btn btn-danger pull-right margin-right-10" type="button">
@@ -63,7 +70,7 @@
 {% block javascripts %}
     <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
-        const originalContent = $('#edit_home_originalContent');
+        const originalContent = $('#edit_home_content');
         const itemContent = $('#edit_home_content');
     </script>
     <script src="{{ asset('assets/js/demo/form-text-editor.js') }}"></script>

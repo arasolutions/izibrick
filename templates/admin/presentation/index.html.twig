@@ -19,43 +19,29 @@
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form) }}
-            <p>Vous pouvez modifier les éléments de votre page de présentation</p>
-            <div class="col-sm-12">
-                <button id="demo-edit-text" class="btn btn-primary" type="button">Modifier</button>
-                <button id="demo-test-text" class="btn btn-primary" type="button" style="display: none">Tester</button>
-                <button id="demo-save-text" class="btn btn-success pull-right" type="submit" style="display: none">
-                    Enregistrer
-                </button>
-                <button id="demo-revert-text" class="btn btn-danger pull-right margin-right-10" type="button"
-                        style="display: none">
-                    Annuler
-                </button>
-            </div>
 
-            <div class="col-sm-12">
-                <hr/>
-            </div>
-
-            <!--Summernote-->
-            <!--===================================================-->
-            <div class="col-sm-12">
-                <div id="summernote-edit">
-                    {{ site.presentation.content | raw }}
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Contenu de la page</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div id="summernote">
+                            {% if site.presentation.content is defined %}
+                                {{ site.presentation.content | raw }}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <hr/>
-            </div>
-            <div class="col-sm-12">
-                <button id="form-submit" class="btn btn-success pull-right" type="submit">
+                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
                     Enregistrer
                 </button>
                 <button id="form-revert" class="btn btn-danger pull-right margin-right-10" type="button">
                     Annuler
                 </button>
             </div>
-            <!--===================================================-->
-            <!-- End Summernote -->
             {{ form_end(form) }}
 
         </div>
@@ -64,7 +50,7 @@
 {% block javascripts %}
     <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
-        const originalContent = $('#edit_presentation_originalContent');
+        const originalContent = $('#edit_presentation_content');
         const itemContent = $('#edit_presentation_content');
     </script>
     <script src="{{ asset('assets/js/demo/form-text-editor.js') }}"></script>

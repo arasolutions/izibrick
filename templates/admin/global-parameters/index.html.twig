@@ -19,30 +19,47 @@
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form) }}
-            <div class="col-sm-12 form-group">
-                {{ form_label(form.keys) }}
-                {{ form_widget(form.keys, {'attr':{'data-role':'tagsinput'}}) }}
+
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">{{ form_label(form.logo) }}</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-2">
+                        {% if site.logo is defined and site.logo is not null %}
+                            <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}" />
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
+                    </div>
+                </div>
             </div>
 
-            <div class="col-sm-12 form-group">
-                {{ form_label(form.facebook) }}
-                {{ form_widget(form.facebook, {'attr':{'class':'form-control'}}) }}
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Réseaux sociaux</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.facebook) }}
+                        {{ form_widget(form.facebook, {'attr':{'class':'form-control'}}) }}
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.twitter) }}
+                        {{ form_widget(form.twitter, {'attr':{'class':'form-control'}}) }}
+                    </div>
+
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.instagram) }}
+                        {{ form_widget(form.instagram, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                </div>
             </div>
 
-            <div class="col-sm-12 form-group">
-                {{ form_label(form.twitter) }}
-                {{ form_widget(form.twitter, {'attr':{'class':'form-control'}}) }}
-            </div>
 
-            <div class="col-sm-12 form-group">
-                {{ form_label(form.instagram) }}
-                {{ form_widget(form.instagram, {'attr':{'class':'form-control'}}) }}
-            </div>
-
-            <div class="col-sm-12 form-group">
-                {{ form_label(form.logo) }}
-                {{ form_widget(form.logo, {'attr':{'class':'form-control'}}) }}
-            </div>
             <div class="col-sm-12 form-group">
                 <button class="btn btn-success pull-right" type="submit">
                     Enregistrer

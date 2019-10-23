@@ -19,17 +19,25 @@
     <div class="panel">
         <div class="panel-body">
 
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-            <div class="col-sm-12">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.presentation) }}</label>
-                <div>
-                    {{ form_widget(form.presentation, {'attr': {'class': 'form-control'}}) }}
+            {{ form_start(form) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Formulaire de contact</label></h3>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <label class="control-label">{{ form_label(form.email) }}</label>
-                <div>
-                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.presentation) }}</label>
+                        <div>
+                            {{ form_widget(form.presentation, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.email) }}</label>
+                        <div>
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
 

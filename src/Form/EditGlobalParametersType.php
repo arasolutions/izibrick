@@ -15,10 +15,6 @@ class EditGlobalParametersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('keys', TextType::class, [
-                'label'=>'Mots-clé',
-                'required'=>false
-            ])
             ->add('logo', FileType::class, [
                 'required' => false,
                 'label' => 'Logo',

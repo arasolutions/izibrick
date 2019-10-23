@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Référencement{% endblock %}
+{% block title %}Référencement{% endblock %}
 
-{% block description %}Représente la page contact de votre site{% endblock %}
+{% block description %}Renseigner un titre et une description pour l'ensemble des pages de votre site afin d'optimiser votre référencement dans les moteurs de recherche{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -18,72 +18,108 @@
     {% endif %}
     <div class="panel">
         <div class="panel-body">
-            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-            <p class="bord-btm pad-ver text-main text-bold">Accueil</p>
-            <div class="col-sm-12">
-                <label class="control-label" style="text-align:left;">{{ form_label(form.seoTitleHome) }}</label>
-                <div>
-                    {{ form_widget(form.seoTitleHome, {'attr': {'class': 'form-control'}}) }}
+            {{ form_start(form) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Accueil</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label" style="text-align:left;">{{ form_label(form.seoTitleHome) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitleHome, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionHome) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescriptionHome, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12 mb20">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionHome) }}</label>
-                <div>
-                    {{ form_widget(form.seoDescriptionHome, {'attr': {'class': 'form-control'}}) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Présentation</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitlePresentation) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitlePresentation, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionPresentation) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescriptionPresentation, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p class="bord-btm pad-ver text-main text-bold">Présentation</p>
-            <div class="col-sm-12">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitlePresentation) }}</label>
-                <div>
-                    {{ form_widget(form.seoTitlePresentation, {'attr': {'class': 'form-control'}}) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Blog</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleBlog) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitleBlog, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionBlog) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescriptionBlog, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12 mb20">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionPresentation) }}</label>
-                <div>
-                    {{ form_widget(form.seoDescriptionPresentation, {'attr': {'class': 'form-control'}}) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Devis</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleQuote) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitleQuote, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionQuote) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescriptionQuote, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p class="bord-btm pad-ver text-main text-bold">Blog</p>
-            <div class="col-sm-12">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleBlog) }}</label>
-                <div>
-                    {{ form_widget(form.seoTitleBlog, {'attr': {'class': 'form-control'}}) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Contact</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleContact) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitleContact, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionContact) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescriptionContact, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12 mb20">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionBlog) }}</label>
-                <div>
-                    {{ form_widget(form.seoDescriptionBlog, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <p class="bord-btm pad-ver text-main text-bold">Devis</p>
-            <div class="col-sm-12">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleQuote) }}</label>
-                <div>
-                    {{ form_widget(form.seoTitleQuote, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="col-sm-12 mb20">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionQuote) }}</label>
-                <div>
-                    {{ form_widget(form.seoDescriptionQuote, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <p class="bord-btm pad-ver text-main text-bold">Contact</p>
-            <div class="col-sm-12">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitleContact) }}</label>
-                <div>
-                    {{ form_widget(form.seoTitleContact, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="col-sm-12 mb20">
-                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionContact) }}</label>
-                <div>
-                    {{ form_widget(form.seoDescriptionContact, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+
             <div class="col-sm-12">
                 <hr/>
             </div>

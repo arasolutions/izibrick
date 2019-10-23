@@ -20,7 +20,7 @@ class EditQuoteType extends AbstractType
                 'required' => false
             ])
             ->add('email', TextType::class, [
-                'label' => 'Email',
+                'label' => 'Email de destination',
                 'required' => false
             ]);
     }
