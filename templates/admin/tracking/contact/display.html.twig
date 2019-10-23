@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Devis{% endblock %}
+{% block title %}Page Contact{% endblock %}
 
-{% block description %}Visualiser la demande de devis{% endblock %}
+{% block description %}Visualiser la demande de prise de contact{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -19,8 +19,8 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <span class="bold">Nom :</span> {{ trackingQuote.name }}<br/>
-                    <span class="bold">Email :</span> {{ trackingQuote.email }}
+                    <span class="bold">Nom :</span> {{ trackingContact.name }}<br/>
+                    <span class="bold">Email :</span> {{ trackingContact.email }}
                 </div>
             </div>
             <div class="panel panel-mint">
@@ -29,7 +29,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    {{ trackingQuote.content }}
+                    {{ trackingContact.content }}
                 </div>
             </div>
             <div class="col-sm-12">

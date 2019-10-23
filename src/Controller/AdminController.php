@@ -140,6 +140,8 @@ class AdminController extends AbstractController
             'site' => $userSite,
             'referencement' => $referencement,
             'nbrReseauxSociaux' => $nbrReseauxSociaux,
+            'quotes' => $userSite->getTrackingQuotes(),
+            'contacts' => $userSite->getTrackingContacts(),
             'posts' => $blog->getPosts()
         ]);
     }

@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Suivi des devis{% endblock %}
+{% block title %}Prise de contact{% endblock %}
 
-{% block description %}Retrouvez toutes vos demandes de devis{% endblock %}
+{% block description %}Retrouvez toutes vos demandes de prise de contact{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -21,7 +21,7 @@
         <div class="panel-body">
             <div class="panel panel-mint">
                 <div class="panel-heading">
-                    <h2 class="panel-title">Mes demandes de devis</h2>
+                    <h2 class="panel-title">Mes demandes de prise de contact</h2>
                 </div>
                 <div class="panel-body">
                     <div id="page-content">
@@ -38,15 +38,15 @@
                                     </thead>
                                     <tbody>
 
-                                    {% if quotes|length > 0 %}
-                                        {% for quote in quotes %}
+                                    {% if contacts|length > 0 %}
+                                        {% for contact in contacts %}
                                             <tr>
-                                                <td>{{ quote.name }}</td>
-                                                <td>{{ quote.email }}</td>
-                                                <td>{{ quote.creationDate|date('d/m/Y') }}</td>
+                                                <td>{{ contact.name }}</td>
+                                                <td>{{ contact.email }}</td>
+                                                <td>{{ contact.creationDate|date('d/m/Y') }}</td>
                                                 <td width="300px">
-                                                    <a href="{{ path('bo-tracking-quote-display', {id: quote.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-toggle-right"></i> Visualiser</button></a>
-                                                    <a href="{{ path('bo-tracking-quote-remove', {id: quote.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
+                                                    <a href="{{ path('bo-tracking-contact-display', {id: contact.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-toggle-right"></i> Visualiser</button></a>
+                                                    <a href="{{ path('bo-tracking-contact-remove', {id: contact.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

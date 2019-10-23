@@ -87,15 +87,15 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">241</p>
-                                    <p class="mar-no">Devis</p>
+                                    <p class="text-2x mar-no text-semibold">{{ quotes|length }}</p>
+                                    <p class="mar-no">Demandes de Devis</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-sm-6 col-lg-6">
 
-                        <a href="{{ path('bo-contact') }}">
+                        <a href="{{ path('bo-tracking-contact') }}">
                             <div class="panel panel-danger panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">
@@ -103,8 +103,8 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">241</p>
-                                    <p class="mar-no">Contact</p>
+                                    <p class="text-2x mar-no text-semibold">{{ contacts|length }}</p>
+                                    <p class="mar-no">Prises de contact</p>
                                 </div>
                             </div>
                         </a>
