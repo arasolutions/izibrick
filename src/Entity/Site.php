@@ -135,6 +135,12 @@ class Site
     private $twitter;
 
     /**
+     * @var ArrayCollection|Posts[]
+     * @ORM\OneToMany(targetEntity="App\Entity\TrackingQuote", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $trackingQuotes;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -456,5 +462,14 @@ class Site
         $this->twitter = $twitter;
 
         return $this;
+    }
+
+
+    /**
+     * @return ArrayCollection|TrackingQuote[]
+     */
+    public function getTrackingQuotes()
+    {
+        return $this->trackingQuotes;
     }
 }

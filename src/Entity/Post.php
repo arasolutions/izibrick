@@ -191,5 +191,4 @@ class Post
     {
         return $this->creationDate;
     }
-
 }

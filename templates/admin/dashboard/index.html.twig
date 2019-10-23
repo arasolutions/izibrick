@@ -25,8 +25,8 @@
                             <p class="text-sm text-bold text-uppercase">Référencement</p>
                         </div>
                         <div class="col-sm-8">
-                            <a href="{{ path('bo-seo') }}"><button class="btn btn-pink mar-ver">Mettre à jour</button></a>
-                            <p class="text-xs">Optimiser la visibilité de votre site grace au référencement.</p>
+                            <a href="{{ path('bo-seo') }}"><button class="btn btn-primary mar-ver">Mettre à jour</button></a>
+                            <p class="text-xs">Optimiser la visibilité de votre site grace au référencement</p>
                             <ul class="list-unstyled text-center bord-top pad-top mar-no row">
                                 <li class="col-xs-6">
                                     <span class="text-lg text-semibold text-main">{{ referencement.referencementTitleTaux }}%</span>
@@ -60,6 +60,7 @@
                     </div>
                     <div class="col-sm-6 col-lg-6">
 
+                        <a href="{{ path('bo-global-parameters') }}">
                             <div class="panel panel-info panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">
@@ -67,17 +68,18 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">241</p>
+                                    <p class="text-2x mar-no text-semibold">{{ nbrReseauxSociaux }}/3</p>
                                     <p class="mar-no">Réseaux sociaux</p>
                                 </div>
                             </div>
+                        </a>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
 
-                        <a href="{{ path('bo-quote') }}">
+                        <a href="{{ path('bo-tracking-quote') }}">
                             <div class="panel panel-mint panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">

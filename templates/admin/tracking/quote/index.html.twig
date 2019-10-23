@@ -1,0 +1,76 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Suivi des devis{% endblock %}
+
+{% block description %}Retrouvez toutes vos demandes de devis{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success is defined and success == true %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Vos modifications ont bien été mises à jour.
+        </div>
+    {% endif %}
+
+    <div class="panel">
+        <div class="panel-body">
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Mes demandes de devis</h2>
+                </div>
+                <div class="panel-body">
+                    <div id="page-content">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered table-vcenter" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Nom</th>
+                                        <th style="text-align: center;">Email</th>
+                                        <th style="text-align: center;">Date de création</th>
+                                        <th style="text-align: center;">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% if quotes|length > 0 %}
+                                        {% for quote in quotes %}
+                                            <tr>
+                                                <td>{{ quote.name }}</td>
+                                                <td>{{ quote.email }}</td>
+                                                <td>{{ quote.creationDate|date('d/m/Y') }}</td>
+                                                <td width="300px">
+                                                    <a href="{{ path('bo-tracking-display', {id: quote.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-toggle-right"></i> Visualiser</button></a>
+                                                    <a href="{{ path('bo-tracking-quote-remove', {id: quote.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="4">Aucun article</td>
+                                        </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <!--DataTables [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/datatables/media/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/media/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <!--DataTables Sample [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/tables-datatables.js') }}"></script>
+{% endblock %}

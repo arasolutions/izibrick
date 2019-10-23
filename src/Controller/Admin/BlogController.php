@@ -164,16 +164,22 @@ class BlogController extends AbstractController
      */
     public function remove(Blog $blog, RemoveBlogCommandHandler $handler)
     {
+        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
         $command = new RemoveBlogCommand();
         $command->id = $blog->getId();
 
         try {
             $handler->handle($command);
-            $this->addFlash('success', 'Blog removed');
+            $success = true;
         } catch ( \Exception $e ) {
-            $this->addFlash('error', sprintf('Impossible to remove blog : %s', $e->getMessage()));
+            $success = false;
         }
 
-        return $this->redirectToRoute('bo-blog');
+        return $this->render('admin/blog/index.html.twig', [
+            'controller_name' => 'BlogController',
+            'site' => $site,
+            'posts' => $site->getBlog()->getPosts(),
+            'success' => $success
+        ]);
     }
 }

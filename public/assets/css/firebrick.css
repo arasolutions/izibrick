@@ -4,6 +4,9 @@
 .mb20{
     margin-bottom: 20px;
 }
+.bold{
+    font-weight: bold;
+}
 
 
 .form-errors {

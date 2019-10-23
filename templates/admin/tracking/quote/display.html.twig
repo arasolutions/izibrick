@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Blog{% endblock %}
+
+{% block description %}Représente la page présentation de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Expéditeur
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <span class="bold">Nom :</span> {{ trackingQuote.name }}<br/>
+                    <span class="bold">Email :</span> {{ trackingQuote.email }}
+                </div>
+            </div>
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Message
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {{ trackingQuote.content }}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <a href="{{ path('bo-tracking-quote') }}">
+                    <button class="btn btn-danger pull-right margin-right-10" type="button">
+                        Retour
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

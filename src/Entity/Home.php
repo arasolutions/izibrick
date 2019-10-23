@@ -49,6 +49,25 @@ class Home
     private $updatedAt;
 
     /**
+     * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
+     */
+    private $seoTitle;
+
+    /**
+     * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
+     */
+    private $seoDescription;
+
+    /**
+     * Home constructor.
+     * @param $site
+     */
+    public function __construct($site)
+    {
+        $this->site = $site;
+    }
+
+    /**
      * @return string
      */
     public function getMainPicture(): ?string
@@ -81,25 +100,6 @@ class Home
         if ($mainPictureFile != null) {
             $this->updatedAt = new \DateTime('now');
         }
-    }
-
-    /**
-     * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
-     */
-    private $seoTitle;
-
-    /**
-     * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
-     */
-    private $seoDescription;
-
-    /**
-     * Home constructor.
-     * @param $site
-     */
-    public function __construct($site)
-    {
-        $this->site = $site;
     }
 
     public function getId(): ?int

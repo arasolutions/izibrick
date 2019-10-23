@@ -128,11 +128,18 @@ class AdminController extends AbstractController
             'referencementTaux' => $referencementTaux
         );
         // Fin Référencement
+        // Début Réseaux sociaux
+        $nbrReseauxSociaux = 0;
+        if ($userSite->getFacebook() != '') $nbrReseauxSociaux++;
+        if ($userSite->getTwitter() != '') $nbrReseauxSociaux++;
+        if ($userSite->getInstagram() != '') $nbrReseauxSociaux++;
+        // Fin Réseaux sociaux
 
         return $this->render('admin/dashboard/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $userSite,
             'referencement' => $referencement,
+            'nbrReseauxSociaux' => $nbrReseauxSociaux,
             'posts' => $blog->getPosts()
         ]);
     }
