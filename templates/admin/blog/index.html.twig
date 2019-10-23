@@ -18,20 +18,21 @@
     {% endif %}
     <div class="panel">
         <div class="panel-body">
-            <h3 class="panel-title">Mes articles</h3>
+            <h2 class="panel-title">Mes articles</h2>
             <div id="page-content">
                 <div style="text-align: right;">
                     <a href="{{ path('bo-post-add') }}">
-                        <button id="demo-edit-text" class="btn btn-primary" type="button">Ajouter un article</button>
+                        <button id="demo-edit-text" class="btn btn-primary" type="button"><i class="fa fa-paint-brush"></i> Ajouter un article</button>
                     </a>
                 </div>
                 <div class="panel">
                     <div class="panel-body">
-                        <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered table-vcenter" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th style="text-align: center;width:80px;"></th>
                                 <th style="text-align: center;">Titre</th>
-                                <th style="text-align: center;">Description</th>
+                                <th style="text-align: center;">Introduction</th>
                                 <th style="text-align: center;">Date de création</th>
                                 <th style="text-align: center;">Actions</th>
                             </tr>
@@ -41,6 +42,11 @@
                             {% if posts|length > 0 %}
                                 {% for post in posts %}
                                     <tr>
+                                        <td>
+                                            {% if post.image is defined and post.image is not null %}
+                                                <img class="img-responsive img-sm" style="display: unset;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('logo') }}" alt="{{ post.title }}">
+                                            {% endif %}
+                                        </td>
                                         <td>{{ post.title }}</td>
                                         <td>{{ post.introduction }}</td>
                                         <td>{{ post.creationDate|date('d/m/Y') }}</td>

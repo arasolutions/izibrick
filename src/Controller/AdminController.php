@@ -133,7 +133,7 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
             'site' => $userSite,
             'referencement' => $referencement,
-            'blog' => $blog
+            'posts' => $blog->getPosts()
         ]);
     }
 

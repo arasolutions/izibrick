@@ -15,47 +15,47 @@ class EditSeoType extends AbstractType
     {
         $builder
             ->add('seoTitleHome', TextType::class, [
-                'label' => 'Titre de la page Home',
+                'label' => 'Titre (70 caractères maximum)',
                 'required' => false
             ])
             ->add('seoDescriptionHome', TextareaType::class, [
-                'label' => 'Description de la page Home',
+                'label' => 'Description (155 caractères maximum)',
                 'attr' => array('rows' => '5'),
                 'required' => false
             ])
             ->add('seoTitlePresentation', TextType::class, [
-                'label' => 'Titre de la page Presentation',
+                'label' => 'Titre (70 caractères maximum)',
                 'required' => false
             ])
             ->add('seoDescriptionPresentation', TextareaType::class, [
-                'label' => 'Description de la page Presentation',
+                'label' => 'Description (155 caractères maximum)',
                 'attr' => array('rows' => '5'),
                 'required' => false
             ])
             ->add('seoTitleBlog', TextType::class, [
-                'label' => 'Titre de la page Blog',
+                'label' => 'Titre (70 caractères maximum)',
                 'required' => false
             ])
             ->add('seoDescriptionBlog', TextareaType::class, [
-                'label' => 'Description de la page Blog',
+                'label' => 'Description (155 caractères maximum)',
                 'attr' => array('rows' => '5'),
                 'required' => false
             ])
             ->add('seoTitleQuote', TextType::class, [
-                'label' => 'Titre de la page Devis',
+                'label' => 'Titre (70 caractères maximum)',
                 'required' => false
             ])
             ->add('seoDescriptionQuote', TextareaType::class, [
-                'label' => 'Description de la page Devis',
+                'label' => 'Description (155 caractères maximum)',
                 'attr' => array('rows' => '5'),
                 'required' => false
             ])
             ->add('seoTitleContact', TextType::class, [
-                'label' => 'Titre de la page contact',
+                'label' => 'Titre (70 caractères maximum)',
                 'required' => false
             ])
             ->add('seoDescriptionContact', TextareaType::class, [
-                'label' => 'Description de la page contact',
+                'label' => 'Description (155 caractères maximum)',
                 'attr' => array('rows' => '5'),
                 'required' => false
             ]);
