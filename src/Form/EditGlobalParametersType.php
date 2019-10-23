@@ -21,7 +21,8 @@ class EditGlobalParametersType extends AbstractType
             ])
             ->add('logo', FileType::class, [
                 'required' => false,
-                'label' => 'Logo'
+                'label' => 'Logo',
+                'data_class' => null
             ])
             ->add('facebook', UrlType::class, [
                 'label'=>'Lien page Facebook',

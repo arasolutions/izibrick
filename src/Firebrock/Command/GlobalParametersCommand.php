@@ -3,7 +3,6 @@
 
 namespace App\Firebrock\Command;
 
-
 use App\Entity\Product;
 use App\Entity\Site;
 

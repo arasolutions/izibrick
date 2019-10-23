@@ -2,20 +2,188 @@
 
 {% block title %}Tableau de bord{% endblock %}
 
-{% block description %}Présentation générale de vos services{% endblock %}
+{% block description %}Bienvenue dans votre espace d'administration. Vous pouvez dès à présent mettre à jour le contenu de votre site.{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <div class="panel panel-body text-center">
-                <div class="panel-heading">
-                    <h3>Your content here...</h3>
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--Extra Small Weather Widget-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <div class="panel">
+                    <div class="panel-body text-center clearfix">
+                        <div class="col-sm-4 pad-top">
+                            <div class="text-lg">
+                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux }}%</p>
+                            </div>
+                            <p class="text-sm text-bold text-uppercase">Référencement</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <a href="{{ path('bo-seo') }}"><button class="btn btn-pink mar-ver">Mettre à jour</button></a>
+                            <p class="text-xs">Optimiser la visibilité de votre site grace au référencement.</p>
+                            <ul class="list-unstyled text-center bord-top pad-top mar-no row">
+                                <li class="col-xs-6">
+                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementTitleTaux }}%</span>
+                                    <p class="text-sm text-muted mar-no">Titre</p>
+                                </li>
+                                <li class="col-xs-6">
+                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementDescriptionTaux }}%</span>
+                                    <p class="text-sm text-muted mar-no">Description</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <p>Start putting content on grids or panels, you can also use different combinations of grids.
-                        <br>Please check out the dashboard and other pages.</p>
+
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6">
+
+                        <a href="{{ path('bo-blog') }}">
+                            <div class="panel panel-warning panel-colorful media middle pad-all">
+                                <div class="media-left">
+                                    <div class="pad-hor">
+                                        <i class="ti-comment icon-3x"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <p class="text-2x mar-no text-semibold">{{ blog|length }}</p>
+                                    <p class="mar-no">Articles</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+
+                            <div class="panel panel-info panel-colorful media middle pad-all">
+                                <div class="media-left">
+                                    <div class="pad-hor">
+                                        <i class="ti-layout-grid2 icon-3x"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <p class="text-2x mar-no text-semibold">241</p>
+                                    <p class="mar-no">Réseaux sociaux</p>
+                                </div>
+                            </div>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6">
+
+                        <a href="{{ path('bo-quote') }}">
+                            <div class="panel panel-mint panel-colorful media middle pad-all">
+                                <div class="media-left">
+                                    <div class="pad-hor">
+                                        <i class="ti-shopping-cart icon-3x"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <p class="text-2x mar-no text-semibold">241</p>
+                                    <p class="mar-no">Devis</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+
+                        <a href="{{ path('bo-contact') }}">
+                            <div class="panel panel-danger panel-colorful media middle pad-all">
+                                <div class="media-left">
+                                    <div class="pad-hor">
+                                        <i class="ti-email icon-3x"></i>
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <p class="text-2x mar-no text-semibold">241</p>
+                                    <p class="mar-no">Contact</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End Extra Small Weather Widget-->
+
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <!--Network Line Chart-->
+                <!--
+                <div id="demo-panel-network" class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-control">
+                            <button id="demo-panel-network-refresh" class="btn btn-default btn-active-primary" data-toggle="panel-overlay" data-target="#demo-panel-network"><i class="demo-psi-repeat-2"></i></button>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle btn btn-default btn-active-primary" data-toggle="dropdown" aria-expanded="false"><i class="demo-psi-dot-vertical"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h3 class="panel-title">Network</h3>
+                    </div>
+
+
+                    <div class="pad-all">
+                        <div id="demo-chart-network" style="height: 255px"></div>
+                    </div>
+
+
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <hr>
+
+                                <div class="pad-rgt">
+                                    <p class="text-semibold text-uppercase text-main">Trafic quotidien</p>
+                                    <p class="text-muted mar-top">Trafic du nombre de visiteurs par jour</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                -->
+                <!--End network line chart-->
+
             </div>
         </div>
+
     </div>
+    <!--===================================================-->
+    <!--End page content-->
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <!--Flot Chart [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+
+    <!--Specify page [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/dashboard.js') }}"></script>
 {% endblock %}

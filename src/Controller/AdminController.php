@@ -98,10 +98,42 @@ class AdminController extends AbstractController
         }
 
         $userSite = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $home = $this->homeRepository->getBySiteId($_SESSION['SITE_ID']);
+        $presentation = $this->presentationRepository->getBySiteId($_SESSION['SITE_ID']);
+        $blog = $this->blogRepository->getBySiteId($_SESSION['SITE_ID']);
+        $quote = $this->quoteRepository->getBySiteId($_SESSION['SITE_ID']);
+        $contact = $this->contactRepository->getBySiteId($_SESSION['SITE_ID']);
+        // Début Référencement
+        $referencementTitle = 0;
+        $referencementDescription = 0;
+        $referencementTitleTaux = 0;
+        $referencementDescriptionTaux = 0;
+        $referencementTaux = 0;
+        if ($home->getSeoTitle() != '') $referencementTitle++;
+        if ($presentation->getSeoTitle() != '') $referencementTitle++;
+        if ($blog->getSeoTitle() != '') $referencementTitle++;
+        if ($quote->getSeoTitle() != '') $referencementTitle++;
+        if ($contact->getSeoTitle() != '') $referencementTitle++;
+        if ($home->getSeoDescription() != '') $referencementDescription++;
+        if ($presentation->getSeoDescription() != '') $referencementDescription++;
+        if ($blog->getSeoDescription() != '') $referencementDescription++;
+        if ($quote->getSeoDescription() != '') $referencementDescription++;
+        if ($contact->getSeoDescription() != '') $referencementDescription++;
+        if ($referencementTitle != 0) $referencementTitleTaux = $referencementTitle / 5 * 100;
+        if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementTitle / 5 * 100;
+        if ($referencementTitle != 0 || $referencementDescription != 0 ) $referencementTaux = ($referencementTitleTaux + $referencementDescriptionTaux) / 2;
+        $referencement = array(
+            'referencementTitleTaux' => $referencementTitleTaux,
+            'referencementDescriptionTaux' => $referencementDescriptionTaux,
+            'referencementTaux' => $referencementTaux
+        );
+        // Fin Référencement
 
         return $this->render('admin/dashboard/index.html.twig', [
             'controller_name' => 'AdminController',
-            'site' => $userSite
+            'site' => $userSite,
+            'referencement' => $referencement,
+            'blog' => $blog
         ]);
     }
 

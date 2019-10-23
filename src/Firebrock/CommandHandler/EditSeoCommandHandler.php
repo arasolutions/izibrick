@@ -68,6 +68,30 @@ class EditSeoCommandHandler
     public function handle(SeoCommand $command, Site $site)
     {
         $id = $site->getId();
+        $home = $this->homeRepository->getBySiteId($id);
+        if ($home) {
+            $home->setSeoTitle($command->seoTitleHome);
+            $home->setSeoDescription($command->seoDescriptionHome);
+            $this->homeRepository->save($home);
+        }
+        $presentation = $this->presentationRepository->getBySiteId($id);
+        if ($presentation) {
+            $presentation->setSeoTitle($command->seoTitlePresentation);
+            $presentation->setSeoDescription($command->seoDescriptionPresentation);
+            $this->presentationRepository->save($presentation);
+        }
+        $blog = $this->blogRepository->getBySiteId($id);
+        if ($blog) {
+            $blog->setSeoTitle($command->seoTitleBlog);
+            $blog->setSeoDescription($command->seoDescriptionBlog);
+            $this->blogRepository->save($blog);
+        }
+        $quote = $this->quoteRepository->getBySiteId($id);
+        if ($quote) {
+            $quote->setSeoTitle($command->seoTitleQuote);
+            $quote->setSeoDescription($command->seoDescriptionQuote);
+            $this->quoteRepository->save($quote);
+        }
         $contact = $this->contactRepository->getBySiteId($id);
         if ($contact) {
             $contact->setSeoTitle($command->seoTitleContact);
