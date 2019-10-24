@@ -1,0 +1,71 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block description %}Pour toutes questions, vous pouvez nous envoyer un message.{% endblock %}
+
+{% block body %}
+
+    <div class="panel">
+        <div class="panel-body">
+
+            <h3>Laissez nous un message</h3>
+            <p>Une remarque, une question, écrvivez-nous !</p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form action="#" method="post">
+                        <div class="form-group select">
+                            <select>
+                                <option value="Support">Tous</option>
+                                <option value="Report">Facturation</option>
+                                <option value="Billing">Utilisation de l'administration</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="10" placeholder="Your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Envoyer</button>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mar-all">
+                        <div class="media">
+                            <div class="media-left">
+                                <i class="icon-lg icon-fw demo-pli-map-marker-2"></i>
+                            </div>
+                            <div class="media-body">
+                                <address>
+                                    <strong class="text-main"> My Company, Inc.</strong><br>
+                                    55 Rue Louis Lagorgette<br>
+                                    33150 Cenon, France<br>
+                                </address>
+                            </div>
+                        </div>
+
+                        <div class="pad-btm">
+                            <i class="icon-lg icon-fw demo-pli-mail"></i>
+                            <span>contact@ara-solutions.com</span>
+                        </div>
+                        <div>
+                            <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJe_A2WkUvVQ0RKAGN5XmUzLg&key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 200px;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <!--Flot Chart [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+
+    <!--Specify page [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/dashboard.js') }}"></script>
+{% endblock %}

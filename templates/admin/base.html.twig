@@ -131,15 +131,11 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                             <ul class="head-list">
                                 <li>
-                                    <a href="#"><i class="demo-pli-male icon-lg icon-fw"></i> Mon profil</a>
+                                    <a href="{{ path('bo-account') }}"><i class="demo-pli-male icon-lg icon-fw"></i> Mon profil</a>
                                 </li>
                                 <li>
-                                    <a href="#"><span class="badge badge-danger pull-right">9</span><i
-                                                class="demo-pli-mail icon-lg icon-fw"></i> Mes notifications</a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="demo-pli-gear icon-lg icon-fw"></i> Paramètres</a>
+                                    <a href="{{ path('bo-support') }}">
+                                        <i class="demo-pli-information icon-lg icon-fw"></i> Assistance</a>
                                 </li>
                                 <li>
                                     <a href="{{ path('fos_user_security_logout') }}"><i
