@@ -25,6 +25,11 @@ class User extends BaseUser
     private $sites;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Support", mappedBy="user")
+     */
+    private $support;
+
+    /**
      * @ORM\Column(type="string", length=63, nullable=true)
      */
     private $firstname;
@@ -52,6 +57,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->sites = new ArrayCollection();
+        $this->support = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,6 +96,14 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * @return Collection|Support[]
+     */
+    public function getSupport(): Collection
+    {
+        return $this->support;
+    }
+
     public function getFirstname(): ?string
     {
         return $this->firstname;
@@ -112,6 +126,20 @@ class User extends BaseUser
         $this->lastname = $lastname;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        $fullname = '';
+        if($this->firstname == '' && $this->lastname == '' ){
+            $fullname = $this->username;
+        }else{
+            $this->firstname . ' ' . $this->lastname;
+        }
+        return $fullname;
     }
 
     public function getPhone(): ?string

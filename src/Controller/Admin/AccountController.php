@@ -57,10 +57,13 @@ class AccountController extends AbstractController
     public function boAccount(Request $request, $success = false)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        /** @var User $user */
+        $user = $this->getUser();
 
         return $this->render('admin/account/index.html.twig', [
             'controller_name' => 'AccountController',
             'site' => $site,
+            'user' => $user,
             'success' => $success
         ]);
     }

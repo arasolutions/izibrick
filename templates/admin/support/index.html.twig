@@ -5,6 +5,11 @@
 {% block description %}Pour toutes questions, vous pouvez nous envoyer un message.{% endblock %}
 
 {% block body %}
+    {% if success is defined and success == true %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre message a bien été envoyé.
+        </div>
+    {% endif %}
 
     <div class="panel">
         <div class="panel-body">
@@ -13,19 +18,16 @@
             <p>Une remarque, une question, écrvivez-nous !</p>
             <div class="row">
                 <div class="col-sm-6">
-                    <form action="#" method="post">
+                    {{ form_start(form) }}
                         <div class="form-group select">
-                            <select>
-                                <option value="Support">Tous</option>
-                                <option value="Report">Facturation</option>
-                                <option value="Billing">Utilisation de l'administration</option>
-                            </select>
+                            {{ form_widget(form.type) }}
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" rows="10" placeholder="Your message"></textarea>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Envoyer</button>
-                    </form>
+
+                    {{ form_end(form) }}
                 </div>
                 <div class="col-sm-6">
                     <div class="mar-all">
