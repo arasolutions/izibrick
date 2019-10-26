@@ -105,6 +105,11 @@ class Site
     private $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Invoice", mappedBy="site")
+     */
+    private $invoices;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $domain;
@@ -392,6 +397,38 @@ class Site
             // set the owning side to null (unless already changed)
             if ($user->getSite() === $this) {
                 $user->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Invoice[]
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+    public function addInvoice(Invoice $invoice): self
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices[] = $invoice;
+            $invoice->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Invoice $invoice): self
+    {
+        if ($this->invoices->contains($invoice)) {
+            $this->invoices->removeElement($invoice);
+            // set the owning side to null (unless already changed)
+            if ($invoice->getSite() === $this) {
+                $invoice->setSite(null);
             }
         }
 

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Firebrock | Administration | {% block title %}{% endblock %}</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="{{ asset('assets/css/nifty.min.css') }}" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="{{ asset('assets/css/demo/nifty-demo-icons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/themify-icons/themify-icons.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/css/firebrick.css') }}" rel="stylesheet">
+
+
+    <!--=================================================-->
+
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="{{ asset('assets/plugins/pace/pace.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('assets/plugins/pace/pace.min.js') }}"></script>
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="{{ asset('assets/css/demo/nifty-demo.min.css') }}" rel="stylesheet">
+    <!--Font Awesome -->
+    <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!--Animate.css [ OPTIONAL ]-->
+    <link href="{{ asset('assets/plugins/animate-css/animate.min.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+
+    <!--=================================================
+
+    REQUIRED
+    You must include this in your project.
+
+
+    RECOMMENDED
+    This category must be included but you may modify which plugins or components which should be included in your project.
+
+
+    OPTIONAL
+    Optional plugins. You may choose whether to include it in your project or not.
+
+
+    DEMONSTRATION
+    This is to be removed, used for demonstration purposes only. This category must not be included in your project.
+
+
+    SAMPLE
+    Some script samples which explain how to initialize plugins or components. This category should not be included in your project.
+
+
+    Detailed information and more samples can be found in the document.
+
+    =================================================-->
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+<body>
+<div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+    <!--NAVBAR-->
+    <!--===================================================-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed">
+
+            <!--Brand logo & name-->
+            <!--================================-->
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="Nifty Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">FireBrock</span>
+                    </div>
+                </a>
+            </div>
+            <!--================================-->
+            <!--End brand logo & name-->
+
+
+            <!--Navbar Dropdown-->
+            <!--================================-->
+            <div class="navbar-content">
+
+            </div>
+            <!--================================-->
+            <!--End Navbar Dropdown-->
+
+        </div>
+    </header>
+
+    <div class="boxed">
+        <div id="content-container" style="padding-left: 0px;">
+            <div id="page-content" style="padding: 0px 10% 0;">
+                <hr class="new-section-xs bord-no">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!--================================-->
+    <!--End menu-->
+
+</div>
+</nav>
+</div>
+<button class="scroll-top btn">
+    <i class="pci-chevron chevron-up"></i>
+</button>
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+
+<!--BootstrapJS [ RECOMMENDED ]-->
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+
+<!--NiftyJS [ RECOMMENDED ]-->
+<script src="{{ asset('assets/js/nifty.min.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</div>
+</body>
+</html>
