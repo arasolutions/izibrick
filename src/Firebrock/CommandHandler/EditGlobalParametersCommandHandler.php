@@ -31,6 +31,7 @@ class EditGlobalParametersCommandHandler
     public function handle(GlobalParametersCommand $command, Site $site)
     {
         $site->setName($command->getName());
+        $site->setDomain($command->getDomain());
         $site->setKeyWords($command->getKeys());
         $site->setFacebook($command->getFacebook());
         $site->setTwitter($command->getTwitter());

@@ -25,6 +25,15 @@ class EditGlobalParametersType extends AbstractType
                     ))
                 )
             ])
+            ->add('domain', TextType::class, [
+                'label' => 'Nom de domaine (exemple : www.monsite.com)',
+                'constraints' => array (
+                    new Length(array (
+                        'min' => '2',
+                        'max' => '255'
+                    ))
+                )
+            ])
             ->add('logo', FileType::class, [
                 'required' => false,
                 'label' => 'Logo',

@@ -9,6 +9,7 @@ use App\Entity\Site;
 class GlobalParametersCommand
 {
     private $name;
+    private $domain;
     private $logo;
     private $keys;
     private $favicon;
@@ -23,6 +24,7 @@ class GlobalParametersCommand
     public function __construct(Site $site)
     {
         $this->name = $site->getName();
+        $this->domain = $site->getDomain();
         $this->instagram = $site->getInstagram();
         $this->facebook=$site->getFacebook();
         $this->keys=$site->getKeyWords();
@@ -44,6 +46,23 @@ class GlobalParametersCommand
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+
+    /**
+     * @return null|string
+     */
+    public function getDomain()
+    {
+        return $this->domain;
+    }
+
+    /**
+     * @param null|string $domain
+     */
+    public function setDomain($domain)
+    {
+        $this->domain = $domain;
     }
 
     /**
