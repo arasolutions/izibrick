@@ -5,9 +5,16 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Site;
 use App\Entity\Blog;
+use App\Firebrock\Command\AddTrackingContactCommand;
+use App\Firebrock\Command\AddTrackingQuoteCommand;
+use App\Firebrock\CommandHandler\AddTrackingContactCommandHandler;
+use App\Firebrock\CommandHandler\AddTrackingQuoteCommandHandler;
+use App\Form\AddTrackingContactType;
+use App\Form\AddTrackingQuoteType;
 use App\Repository\BlogRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SiteController extends AbstractController
@@ -90,27 +97,44 @@ class SiteController extends AbstractController
 
     /**
      * @Route("/devis", name="devis")
+     * @param Request $request
+     * @param $siteName
+     * @param AddTrackingQuoteCommandHandler $addTrackingQuoteCommandHandler
      */
-    public function devis($siteName = null)
+    public function devis(Request $request, $siteName = null, AddTrackingQuoteCommandHandler $addTrackingQuoteCommandHandler)
     {
         /** @var Site $site */
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
             $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+        }
+        $success = false;
+        $command = new AddTrackingQuoteCommand();
+
+        $form = $this->createForm(AddTrackingQuoteType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $addTrackingQuoteCommandHandler->handle($command, $site);
+            $success = true;
         }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/devis/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
-            'quote' => $site->getQuote()
+            'form' => $form->createView(),
+            'quote' => $site->getQuote(),
+            'success' => $success
         ]);
     }
 
     /**
      * @Route("/contact", name="contact")
+     * @param Request $request
+     * @param $siteName
+     * @param AddTrackingContactCommandHandler $addTrackingContactCommandHandler
      */
-    public function contact($siteName = null)
+    public function contact(Request $request, $siteName = null, AddTrackingContactCommandHandler $addTrackingContactCommandHandler)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -118,11 +142,22 @@ class SiteController extends AbstractController
         } else {
             $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
         }
+        $success = false;
+        $command = new AddTrackingContactCommand();
+
+        $form = $this->createForm(AddTrackingContactType::class, $command);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $addTrackingContactCommandHandler->handle($command, $site);
+            $success = true;
+        }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/contact/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
-            'contact' => $site->getContact()
+            'form' => $form->createView(),
+            'contact' => $site->getContact(),
+            'success' => $success
         ]);
     }
 

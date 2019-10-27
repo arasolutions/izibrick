@@ -256,6 +256,7 @@ class AdminController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
         $command = new ContactCommand();
+        $command->presentation = $site->getContact()->getPresentation();
         $command->email = $site->getContact()->getEmail();
         $command->phone = $site->getContact()->getPhone();
         $command->name = $site->getContact()->getName();

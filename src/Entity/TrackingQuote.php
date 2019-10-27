@@ -48,7 +48,7 @@ class TrackingQuote
      */
     private $creationDate;
 
-    public function __construct(Site $site)
+    public function __construct()
     {
         $this->creationDate = new \DateTime();
     }

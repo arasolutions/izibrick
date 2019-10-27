@@ -18,6 +18,12 @@
 
     <div class="v-page-wrap no-top-spacing">
         <div class="container">
+            {% if success %}
+                <div class="alert alert-success-icon alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Merci!</strong> Votre demande de prise de contact a bien été envoyée.
+                </div>
+            {% endif %}
             <div class="row">
                 <div class="col-sm-9">
                     <div class="v-comment-form">
@@ -30,28 +36,24 @@
                             {{ contact.presentation }}
                         </p>
 
-
-                        <form action="#" method="post">
+                        {{ form_start(form) }}
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label>Votre nom <span class="required">*</span></label>
-                                        <input type="text" value="" maxlength="100" class="form-control" name="name"
-                                               id="name">
+                                        {{ form_label(form.name) }} <span class="required">*</span>
+                                        {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
                                     </div>
                                     <div class="col-sm-4">
-                                        <label>Votre email <span class="required">*</span></label>
-                                        <input type="email" value="" maxlength="100" class="form-control" name="email"
-                                               id="email1">
+                                        {{ form_label(form.email) }} <span class="required">*</span>
+                                        {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label>Votre message <span class="required">*</span></label>
-                                        <textarea maxlength="5000" rows="10" class="form-control" name="comment"
-                                                  id="Textarea1"></textarea>
+                                        {{ form_label(form.content) }} <span class="required">*</span>
+                                        {{ form_widget(form.content, {'attr':{'class':'form-control'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +65,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        {{ form_end(form) }}
                     </div>
                 </div>
                 <div class="col-sm-3">
