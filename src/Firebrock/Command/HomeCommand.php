@@ -7,23 +7,8 @@ class HomeCommand
 {
     private $content;
     private $originalContent;
+    private $textPicture;
     private $mainPicture;
-
-    /**
-     * @return mixed
-     */
-    public function getMainPicture()
-    {
-        return $this->mainPicture;
-    }
-
-    /**
-     * @param mixed $mainPicture
-     */
-    public function setMainPicture($mainPicture): void
-    {
-        $this->mainPicture = $mainPicture;
-    }
 
     /**
      * @return mixed
@@ -57,4 +42,35 @@ class HomeCommand
         $this->originalContent = $originalContent;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTextPicture()
+    {
+        return $this->textPicture;
+    }
+
+    /**
+     * @param mixed $textPicture
+     */
+    public function setTextPicture($textPicture)
+    {
+        $this->textPicture = $textPicture;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMainPicture()
+    {
+        return $this->mainPicture;
+    }
+
+    /**
+     * @param mixed $mainPicture
+     */
+    public function setMainPicture($mainPicture): void
+    {
+        $this->mainPicture = $mainPicture;
+    }
 }

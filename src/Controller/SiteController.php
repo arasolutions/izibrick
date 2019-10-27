@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\Site;
 use App\Entity\Blog;
 use App\Repository\BlogRepository;
@@ -61,15 +62,16 @@ class SiteController extends AbstractController
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
-            'blogs' => $blog
+            'blog' => $blog,
+            'posts' => $blog->getPosts()
         ]);
     }
 
     /**
-     * @param Blog $blog
-     * @Route("/blog/{blog}", name="blog_detail")
+     * @param Post $post
+     * @Route("/blog/{post}", name="blog_detail")
      */
-    public function blogDetail(Blog $blog, $siteName = null)
+    public function blogDetail(Post $post, $siteName = null)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -82,7 +84,7 @@ class SiteController extends AbstractController
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/detail.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
-            'blog' => $blog
+            'post' => $post
         ]);
     }
 

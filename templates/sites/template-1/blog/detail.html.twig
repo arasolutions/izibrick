@@ -26,16 +26,16 @@
                     <article>
 
                         <figure class="media-wrap">
-                            {% if blog.image is defined and blog.image is not null %}
-                                <img src="{{ vich_uploader_asset(blog, 'imageFile') | imagine_filter('post_picture') }}" />
+                            {% if post.image is defined and post.image is not null %}
+                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}" />
                             {% endif %}
                         </figure>
 
-                        <h3 class="blog-post-caption">{{ blog.title }}</h3>
+                        <h3 class="blog-post-caption">{{ post.title }}</h3>
 
                         <div class="post-info clearfix">
                                 <span class="vcard author">
-                                    Le <span class="date updated">{{ blog.creationDate|date('d/m/Y') }}</span>
+                                    Le <span class="date updated">{{ post.creationDate|date('d/m/Y') }}</span>
                                 </span>
                         </div>
 
@@ -43,7 +43,7 @@
 
                             <div class="body-text clearfix">
                                 <p>
-                                    {{ blog.introduction }}
+                                    {{ post.introduction }}
                                 </p>
                             </div>
                         </section>

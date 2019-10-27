@@ -30,11 +30,13 @@ class EditGlobalParametersCommandHandler
      */
     public function handle(GlobalParametersCommand $command, Site $site)
     {
+        $site->setName($command->getName());
         $site->setKeyWords($command->getKeys());
         $site->setFacebook($command->getFacebook());
         $site->setTwitter($command->getTwitter());
         $site->setInstagram($command->getInstagram());
         if ($command->getLogo() != null) {
+            $site->setLogo('');
             $site->setLogoFile($command->getLogo());
         }
         $this->siteRepository->save($site);

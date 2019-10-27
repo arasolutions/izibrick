@@ -36,7 +36,9 @@ class EditHomeCommandHandler
     public function handle(HomeCommand $command, Site $site)
     {
         $site->getHome()->setContent($command->getContent());
+        $site->getHome()->setTextPicture($command->getTextPicture());
         if ($command->getMainPicture() != null) {
+            $site->setLogo('');
             $site->getHome()->setMainPictureFile($command->getMainPicture());
         }
         $this->siteRepository->save($site);

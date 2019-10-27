@@ -14,31 +14,22 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
 
     <!-- Libs CSS -->
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}"
-          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}"
-          rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}"
-          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/header.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/portfolio.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/blog.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}"
-          rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}"
-          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-icons.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/shortcodes.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/utilities.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}"
-          rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}"
-          rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}"
-          rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}"
-          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet"/>
 
     <!-- Current Page CSS -->
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/css/settings.css') }}"
@@ -74,6 +65,7 @@
                             <img alt="Vertex" height="35"
                                  src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}">
                         </a>
+                        <span class="logo-title">{{ site.name }}</span>
                     </div>
                 </div>
                 <div class="header-column justify-content-end">
@@ -139,7 +131,7 @@
 
     {% block body %}    {% endblock %}
 
-    <!--Footer-Wrap-->
+    <!--
     <div class="footer-wrap">
         <footer>
             <div class="container">
@@ -255,11 +247,11 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer>-->
 
         <div class="copyright">
             <div class="container">
-                <p>© Copyright 2018 by Vertex. All Rights Reserved.</p>
+                <p>© Copyright 2019 by <a href="https://www.firebrock.com">Firebrock</a>. Tous droits réservés.</p>
 
                 <div class="clearfix pull-right">
                     {% if site.facebook %}

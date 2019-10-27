@@ -36,6 +36,12 @@ class Home
      */
     private $mainPicture;
 
+
+    /**
+     * @ORM\Column(name="text_picture", type="string", length=256, nullable=true)
+     */
+    private $textPicture;
+
     /**
      * @var File
      *
@@ -173,5 +179,20 @@ class Home
     public function getSeoDescription()
     {
         return $this->seoDescription;
+    }
+    /**
+     * @return mixed
+     */
+    public function getTextPicture()
+    {
+        return $this->textPicture;
+    }
+
+    /**
+     * @param mixed $textPicture
+     */
+    public function setTextPicture($textPicture)
+    {
+        $this->textPicture = $textPicture;
     }
 }
