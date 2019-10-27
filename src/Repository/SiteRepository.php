@@ -78,4 +78,27 @@ class SiteRepository extends ServiceEntityRepository
             return null;
         }
     }
+
+    /**
+     * @param $domain
+     * @return mixed|null
+     */
+    public function getByDomain($domain)
+    {
+        try {
+            $q = $this->createQueryBuilder('s')
+                ->andWhere('s.domain = :val')
+                ->setParameter('val', $domain)
+                ->getQuery();
+
+            //var_dump($q->getSQL());die();
+
+            return $q->getSingleResult();
+            //var_dump($site);die();
+        } catch (NoResultException $e) {
+            return null;
+        } catch (NonUniqueResultException $e) {
+            return null;
+        }
+    }
 }

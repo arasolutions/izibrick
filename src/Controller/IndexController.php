@@ -10,7 +10,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/",
      *     name="index",
-     *     host="www.firebrick.test"
+     *     host="%base_host%"
      * )
      */
     public function index()

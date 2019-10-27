@@ -8,6 +8,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrackingContactRepository")
+ * @ORM\Table(name="fir_tracking_contact")
  * @Vich\Uploadable
  */
 class TrackingContact

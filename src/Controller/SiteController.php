@@ -44,7 +44,7 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/presentation/index.html.twig', [
@@ -62,8 +62,9 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
+
         $blog = $this->blogRepository->getBySiteId($site->getId());
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/index.html.twig', [
@@ -84,7 +85,7 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
 
 
@@ -107,7 +108,7 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
         $success = false;
         $command = new AddTrackingQuoteCommand();
@@ -140,7 +141,7 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
         $success = false;
         $command = new AddTrackingContactCommand();
@@ -162,32 +163,14 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/", name="home")
-     */
-    public function home($siteName = null)
-    {
-        /** @var Site $site */
-        if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
-        } else {
-            $site = $this->siteRepository->getById(apache_getenv('SITE_ID'));
-        }
-
-        return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
-            'controller_name' => 'SiteController' . $site->getName(),
-            'site' => $site
-        ]);
-    }
-
-    /**
      * @Route("/",
-     *     name="site_homepage",
+     *     name="home",
      *     host="{nobackoffice}",
-     *     requirements={"nobackoffice"="^((?!www.firebrick.test).)*$"},
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
      *     defaults={"nobackoffice"=""}
      *     )
      * @Route("/site/{siteName<.*>}/", name="site_homepage_by_id",
-     *     host="www.new-cloud.test")
+     *     host="%base_host%")
      * @param string $siteName
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -197,7 +180,7 @@ class SiteController extends AbstractController
         if ($siteName != null) {
             $site = $this->siteRepository->getByName($siteName);
         } else {
-            $site = $this->siteRepository->getById($_SERVER['ROOT']);
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
