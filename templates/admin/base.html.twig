@@ -205,9 +205,6 @@
                             <div id="mainnav-profile" class="mainnav-profile">
                                 <div class="profile-wrap text-center">
                                     <div class="pad-btm">
-                                        Mon site
-                                    </div>
-                                    <div class="pad-btm">
                                         {% if site.logo is defined and site.logo is not null%}
                                         <img class="img-circle img-md"
                                              src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
@@ -264,6 +261,7 @@
 
 
                             <ul id="mainnav-menu" class="list-group">
+                                <li class="list-divider"></li>
 
                                 <li class="list-header">Accueil</li>
 

@@ -11,11 +11,19 @@
             <ul>
                 <li data-transition="fade" data-title="Welcome to Vertex">
 
-                    <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}" alt=""
-                         data-bgposition="center center"
-                         data-bgfit="cover"
-                         data-bgrepeat="no-repeat"
-                         class="rev-slidebg">
+                    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}" alt=""
+                             data-bgposition="center center"
+                             data-bgfit="cover"
+                             data-bgrepeat="no-repeat"
+                             class="rev-slidebg">
+                    {% else %}
+                        <img src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}" alt=""
+                             data-bgposition="center center"
+                             data-bgfit="cover"
+                             data-bgrepeat="no-repeat"
+                             class="rev-slidebg">
+                    {% endif %}
 
                     <!--<div class="tp-caption top-label fw-6 fs-20"
                          data-x="left" data-hoffset="100"
