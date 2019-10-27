@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuoteRepository")
+ * @ORM\Table(name="fir_quote")
  */
 class Quote
 {

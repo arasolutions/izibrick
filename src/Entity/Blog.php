@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BlogRepository")
+ * @ORM\Table(name="fir_blog")
  * @Vich\Uploadable
  */
 class Blog
@@ -25,7 +27,7 @@ class Blog
     private $site;
 
     /**
-     * @var ArrayCollection|Posts[]
+     * @var ArrayCollection|Post[]
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="blog", cascade={"persist"}, fetch="LAZY")
      */
     private $posts;

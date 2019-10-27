@@ -8,6 +8,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrackingQuoteRepository")
+ * @ORM\Table(name="fir_tracking_quote")
  * @Vich\Uploadable
  */
 class TrackingQuote

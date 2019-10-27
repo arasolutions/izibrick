@@ -11,6 +11,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SiteRepository")
+ * @ORM\Table(name="fir_site", indexes={
+ *     @ORM\Index(name="site_domain_idx", columns="domain", options={"where": "(domain IS NOT NULL)"})
+ *     })
  * @Vich\Uploadable
  */
 class Site

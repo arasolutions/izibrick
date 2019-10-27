@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TemplateRepository")
+ * @ORM\Table(name="fir_template")
  */
 class Template
 {
