@@ -3,95 +3,59 @@
 {% block title %}Hello IndexController!{% endblock %}
 
 {% block body %}
-    <div id="page-content">
 
-        <hr class="new-section-sm bord-no">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="panel panel-body text-center">
-                    <div class="panel-heading">
-                        <h3>Your content here...</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>Start putting content on grids or panels, you can also use different combinations of grids.
-                            <br>Please check out the dashboard and other pages.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="row pricing pricing-no-gutter">
 
-                    <div class="col-sm-6 col-md-4">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <p class="pricing-title">Premium</p>
-                                <p class="pricing-desc">Votre site rapide avec prise en main rapide</p>
-                                <div class="pricing-price">
-                                    <p><span class="text-semibold text-mint">79€</span></p>
-                                    <p>par mois</p>
-                                </div>
-                                <ul class="pricing-list">
-                                    <li>Site <strong>responsive</strong></li>
-                                    <li>Assistance à la création</li>
-                                    <li>Accès à votre back-office</li>
-                                    <li>Support par mail</li>
-                                </ul>
-                                <a class="btn btn-block btn-success btn-lg" href="{{ path('order', {'product':1}) }}">Je
-                                    le veux</a>
-                            </div>
-                        </div>
-                    </div>
+    <div id="page-head">
 
-                    <div class="col-sm-6 col-md-4">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <div class="ribbon"><span>LE + UTILISÉ</span></div>
-                                <p class="pricing-title">Professionnel</p>
-                                <p class="pricing-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                <div class="pricing-price">
-                                    <p><span class="text-semibold text-primary">149€</span></p>
-                                    <p>par mois</p>
-                                </div>
-                                <ul class="pricing-list">
-                                    <li>Site <strong>responsive</strong></li>
-                                    <li>Assistance à la création</li>
-                                    <li>Accès à votre back-office</li>
-                                    <li>Support par mail</li>
-                                    <li>Suivi des visites</li>
-                                    <li>Campagne publicitaire</li>
-                                </ul>
-                                <a class="btn btn-block btn-success btn-lg" href="{{ path('order', {'product':2}) }}">Je
-                                    le veux</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <p class="pricing-title">Personnalisé</p>
-                                <p class="pricing-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                <div class="pricing-price">
-                                    <p><span class="text-semibold text-success text-md">Sur devis</span></p>
-                                </div>
-                                <ul class="pricing-list">
-                                    <li>Site <strong>responsive</strong></li>
-                                    <li>Assistance à la création</li>
-                                    <li>Accès à votre back-office</li>
-                                    <li>Support par mail</li>
-                                    <li>Suivi des visites</li>
-                                    <li>Campagne publicitaire</li>
-                                </ul>
-                                <a class="btn btn-block btn-success btn-lg" href="{{ path('order', {'product':3}) }}">Je
-                                    le veux</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--===================================================-->
-                </div>
-            </div>
+        <div class="banner">
+            <img src="{{ asset('assets/img/bg-img/bg12.jpg') }}" style="height:100%;width:100%;">
         </div>
     </div>
+
+
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-3">
+                <div class="panel">
+                    <div class="panel-body text-center">
+                        <div class="pad-ver mar-top text-main"><i class="demo-pli-data-settings icon-4x"></i></div>
+                        <p class="text-lg text-semibold mar-no text-main">Storage</p>
+                        <p class="text-muted">32TB Total storage</p>
+                        <p class="text-sm">The Big Oxmox advised her not to do so, because there were thousands of bad.</p>
+                        <button class="btn btn-primary mar-ver">Get it now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="panel">
+                    <div class="panel-body text-center">
+                        <div class="pad-ver mar-top text-main"><i class="demo-pli-computer-secure icon-4x"></i></div>
+                        <p class="text-lg text-semibold mar-no text-main">Secured</p>
+                        <p class="text-muted">Latest Technology</p>
+                        <p class="text-sm">The Big Oxmox advised her not to do so, because there were thousands of bad.</p>
+                        <button class="btn btn-primary mar-ver">View reports</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="panel">
+                    <div class="panel-body text-center">
+                        <div class="pad-ver mar-top text-main"><i class="demo-pli-consulting icon-4x"></i></div>
+                        <p class="text-lg text-semibold mar-no text-main">Support</p>
+                        <p class="text-muted">We are here 24/7</p>
+                        <p class="text-sm">The Big Oxmox advised her not to do so, because there were thousands of bad.</p>
+                        <button class="btn btn-primary mar-ver">Contact us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--===================================================-->
+    <!--End page content-->
+
+
 {% endblock %}

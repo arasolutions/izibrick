@@ -147,14 +147,14 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/home", name="bo-home")
+     * @Route("/bo-home", name="bo-home")
      * @param Request $request
      * @param EditHomeCommandHandler $editHomeCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function home(Request $request, EditHomeCommandHandler $editHomeCommandHandler)
+    public function boHome(Request $request, EditHomeCommandHandler $editHomeCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 

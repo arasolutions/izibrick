@@ -86,3 +86,11 @@
     text-align: center;
     padding-top: 25px;
 }
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

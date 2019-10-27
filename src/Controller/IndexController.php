@@ -5,6 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * Class AccountController
+ * @Route("/")
+ * @package App\Controller\Admin
+ */
 class IndexController extends AbstractController
 {
     /**
@@ -16,6 +22,18 @@ class IndexController extends AbstractController
     public function index()
     {
         return $this->render('bo/index/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
+
+    /**
+     * @Route("/price",
+     *     name="price"
+     * )
+     */
+    public function price()
+    {
+        return $this->render('bo/price/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }

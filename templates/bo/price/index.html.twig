@@ -1,0 +1,97 @@
+{% extends 'bo/base.html.twig' %}
+
+{% block title %} | Nos tarifs{% endblock %}
+
+{% block body %}
+    <div id="page-content">
+
+        <hr class="new-section-sm bord-no">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="panel panel-body text-center">
+                    <div class="panel-heading">
+                        <h3>Nos tarifs</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Votre site rapide avec prise en main rapide.<br/>
+                        Trois offres disponibles en fonction de votre besoin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="row pricing pricing-no-gutter">
+
+                    <div class="col-sm-6 col-md-4">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <p class="pricing-title">Premium</p>
+                                <p class="pricing-desc">Adaptés aux Particuliers</p>
+                                <div class="pricing-price">
+                                    <p><span class="text-semibold text-mint">79€</span></p>
+                                    <p>par mois</p>
+                                </div>
+                                <ul class="pricing-list">
+                                    <li>Site <strong>responsive</strong></li>
+                                    <li>Référencement naturel</li>
+                                    <li>Assistance à la création</li>
+                                    <li>Accès à votre back-office</li>
+                                    <li>Support par mail</li>
+                                </ul>
+                                <a class="btn btn-block btn-success btn-lg" href="{{ path('order', {'product':1}) }}"><i class="fa fa-thumbs-o-up"></i> Je le veux</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="ribbon"><span>LE + UTILISÉ</span></div>
+                                <p class="pricing-title">Professionnel</p>
+                                <p class="pricing-desc">Adaptés aux Artisans et aux Indépendants</p>
+                                <div class="pricing-price">
+                                    <p><span class="text-semibold text-primary">149€</span></p>
+                                    <p>par mois</p>
+                                </div>
+                                <ul class="pricing-list">
+                                    <li>Site <strong>responsive</strong></li>
+                                    <li>Référencement naturel</li>
+                                    <li>Assistance à la création</li>
+                                    <li>Accès à votre back-office</li>
+                                    <li>Support par mail</li>
+                                    <li>Suivi des visites</li>
+                                    <li>Campagne publicitaire</li>
+                                </ul>
+                                <a class="btn btn-block btn-success btn-lg" href="{{ path('order', {'product':2}) }}"><i class="fa fa-thumbs-o-up"></i> Je le veux</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <p class="pricing-title">Personnalisé</p>
+                                <p class="pricing-desc">Nécessité de développer vos propres fonctionnalités</p>
+                                <div class="pricing-price">
+                                    <p><span class="text-semibold text-success text-md">Sur devis</span></p>
+                                </div>
+                                <ul class="pricing-list">
+                                    <li>Site <strong>responsive</strong></li>
+                                    <li>Référencement naturel</li>
+                                    <li>Assistance à la création</li>
+                                    <li>Accès à votre back-office</li>
+                                    <li>Support par mail</li>
+                                    <li>Suivi des visites</li>
+                                    <li>Campagne publicitaire</li>
+                                </ul>
+                                <a class="btn btn-block btn-success btn-lg" href="{{ path('order', {'product':3}) }}"><i class="fa fa-thumbs-o-up"></i> Je le veux</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--===================================================-->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
