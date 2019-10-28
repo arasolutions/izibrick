@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
+use KunicMarko\ColorPickerBundle\Form\Type\ColorPickerType;
 
 class EditGlobalParametersType extends AbstractType
 {
@@ -58,9 +59,7 @@ class EditGlobalParametersType extends AbstractType
                 'class' => Template::class,
                 'choice_label' => 'name'
             ])
-            ->add('colorTheme', TextType::class, [
-                'label' => 'Couleur',
-            ])
+            ->add('colorTheme', ColorPickerType::class)
         ;
     }
 

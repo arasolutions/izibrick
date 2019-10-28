@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-sm-12 form-group">
                         {{ form_label(form.colorTheme) }}
-                        {{ form_widget(form.colorTheme, {'attr':{'class':'form-control'}}) }}
+                        {{ form_widget(form.colorTheme) }}
                     </div>
                 </div>
             </div>
@@ -103,4 +103,8 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
+    <script type="text/javascript">
+        $('.colorpicker').colorPicker();
+    </script>
 {% endblock %}
