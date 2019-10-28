@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Template;
 use App\Firebrock\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -51,6 +53,11 @@ class EditGlobalParametersType extends AbstractType
                 'label'=>'Lien compte Instagram',
                 'required'=>false
             ])
+           ->add('template', EntityType::class, [
+                'required' => true,
+                'class' => Template::class,
+                'choice_label' => 'name'
+            ]);
         ;
     }
 

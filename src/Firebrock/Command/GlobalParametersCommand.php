@@ -16,6 +16,7 @@ class GlobalParametersCommand
     private $facebook;
     private $twitter;
     private $instagram;
+    private $template;
 
     /**
      * GlobalParametersCommand constructor.
@@ -30,6 +31,7 @@ class GlobalParametersCommand
         $this->keys=$site->getKeyWords();
         $this->twitter=$site->getTwitter();
         $this->logo=$site->getLogo();
+        $this->template=$site->getTemplate();
     }
 
     /**
@@ -161,5 +163,20 @@ class GlobalParametersCommand
         $this->instagram = $instagram;
     }
 
+    /**
+     * @return \App\Entity\Template|null
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param \App\Entity\Template|null $template
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
+    }
 
 }

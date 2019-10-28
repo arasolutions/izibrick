@@ -36,6 +36,7 @@ class EditGlobalParametersCommandHandler
         $site->setFacebook($command->getFacebook());
         $site->setTwitter($command->getTwitter());
         $site->setInstagram($command->getInstagram());
+        $site->setTemplate($command->getTemplate());
         if ($command->getLogo() != null) {
             $site->setLogo('');
             $site->setLogoFile($command->getLogo());
