@@ -26,7 +26,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-sm-2">
-                        {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+                        {% if site.home.mainPicture is defined and site.home.mainPicture is not null and site.home.mainPicture != '' %}
                             <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('logo') }}" />
                         {% endif %}
                     </div>

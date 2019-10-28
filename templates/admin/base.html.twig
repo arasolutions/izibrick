@@ -205,7 +205,7 @@
                             <div id="mainnav-profile" class="mainnav-profile">
                                 <div class="profile-wrap text-center">
                                     <div class="pad-btm">
-                                        {% if site.logo is defined and site.logo is not null%}
+                                        {% if site.logo is defined and site.logo is not null and site.logo != '' %}
                                         <img class="img-circle img-md"
                                              src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
                                              alt="{{ site.name }} logo">
