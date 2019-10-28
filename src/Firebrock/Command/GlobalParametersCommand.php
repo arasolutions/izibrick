@@ -17,6 +17,7 @@ class GlobalParametersCommand
     private $twitter;
     private $instagram;
     private $template;
+    private $colorTheme;
 
     /**
      * GlobalParametersCommand constructor.
@@ -32,6 +33,7 @@ class GlobalParametersCommand
         $this->twitter=$site->getTwitter();
         $this->logo=$site->getLogo();
         $this->template=$site->getTemplate();
+        $this->colorTheme=$site->getColorTheme();
     }
 
     /**
@@ -177,6 +179,22 @@ class GlobalParametersCommand
     public function setTemplate($template)
     {
         $this->template = $template;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getColorTheme()
+    {
+        return $this->colorTheme;
+    }
+
+    /**
+     * @param null|string $colorTheme
+     */
+    public function setColorTheme($colorTheme)
+    {
+        $this->colorTheme = $colorTheme;
     }
 
 }

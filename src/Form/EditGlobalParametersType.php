@@ -57,7 +57,10 @@ class EditGlobalParametersType extends AbstractType
                 'required' => true,
                 'class' => Template::class,
                 'choice_label' => 'name'
-            ]);
+            ])
+            ->add('colorTheme', TextType::class, [
+                'label' => 'Couleur',
+            ])
         ;
     }
 
