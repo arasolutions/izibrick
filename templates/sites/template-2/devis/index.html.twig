@@ -1,0 +1,70 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | Devis{% endblock %}
+
+{% block devisActive %}active{% endblock %}
+
+{% block body %}
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
+    {% else %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
+        {% endif %}
+        <div class="container py-5">
+            <div class="row pt-9 mt-9">
+                <div class="col-md-12 mt-4">
+                </div>
+            </div>
+            <div class="row text-left mb-9 center">
+                <div class="col-md-12">
+                    <h1 class="line-height-2 mb-3 fs-60">Devis</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="v-page-wrap has-right-sidebar has-one-sidebar">
+        <div class="container">
+            {% if success %}
+                <div class="alert alert-success-icon alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Merci!</strong> Votre demande de devis a bien été envoyée.
+                </div>
+            {% endif %}
+            <div class="post-block-wrap" id="comment-area">
+                <h3 class="v-heading"><span>Demander un devis</span></h3>
+                <p>{{ quote.presentation }}</p>
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                {{ form_label(form.name) }} <span class="required">*</span>
+                                {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_label(form.email) }} <span class="required">*</span>
+                                {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{ form_label(form.content) }} <span class="required">*</span>
+                                {{ form_widget(form.content, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button name="submit" type="submit" id="Button1" class="btn v-btn v-btn-default no-three-d"><i class="fa fa-send-o" aria-hidden="true"></i> Envoyer</button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

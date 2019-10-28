@@ -1,0 +1,65 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | Blog{% endblock %}
+
+{% block blogActive %}active{% endblock %}
+
+{% block body %}
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
+    {% else %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
+        {% endif %}
+        <div class="container py-5">
+            <div class="row pt-9 mt-9">
+                <div class="col-md-12 mt-4">
+                </div>
+            </div>
+            <div class="row text-left mb-9 center">
+                <div class="col-md-12">
+                    <h1 class="line-height-2 mb-3 fs-60">Blog</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+
+    <div class="v-page-wrap has-right-sidebar has-one-sidebar">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+
+                    <article>
+
+                        <figure class="media-wrap">
+                            {% if post.image is defined and post.image is not null %}
+                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}" />
+                            {% endif %}
+                        </figure>
+
+                        <h3 class="blog-post-caption">{{ post.title }}</h3>
+
+                        <div class="post-info clearfix">
+                                <span class="vcard author">
+                                    Le <span class="date updated">{{ post.creationDate|date('d/m/Y') }}</span>
+                                </span>
+                        </div>
+
+                        <section class="article-body-wrap">
+
+                            <div class="body-text clearfix">
+                                <p>
+                                    {{ post.introduction }}
+                                </p>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

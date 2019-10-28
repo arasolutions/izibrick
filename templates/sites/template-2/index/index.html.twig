@@ -1,0 +1,67 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | Accueil{% endblock %}
+
+{% block indexActive %}active{% endblock %}
+
+{% block body %}
+    <div class="slider-container slider-container-height-720 rev_slider_wrapper">
+        <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.7" data-plugin-revolution-slider
+             data-plugin-options="{'delay': 9000, 'gridwidth': [1140,960,720,540], 'gridheight': [720,720,720,720], 'disableProgressBar': 'on', 'responsiveLevels': [4096,1200,992,576], 'navigation' : {'arrows': { 'enable': true, 'style': 'slider-arrows-style-1' }, 'bullets': {'enable': true, 'style': 'bullets-style-1', 'h_align': 'center', 'v_align': 'bottom', 'space': 7, 'v_offset': 35, 'h_offset': 0}}}">
+            <ul>
+                <li data-transition="fade" data-title="Welcome to Vertex">
+
+                    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}" alt=""
+                             data-bgposition="center center"
+                             data-bgfit="cover"
+                             data-bgrepeat="no-repeat"
+                             class="rev-slidebg">
+                    {% else %}
+                        <img src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}" alt=""
+                             data-bgposition="center center"
+                             data-bgfit="cover"
+                             data-bgrepeat="no-repeat"
+                             class="rev-slidebg">
+                    {% endif %}
+
+                    <!--<div class="tp-caption top-label fw-6 fs-20"
+                         data-x="left" data-hoffset="100"
+                         data-y="center" data-voffset="-125"
+                         data-start="1000"
+                         data-transform_in="y:[-300%];opacity:0;s:400;">Bienvenue
+                    </div>-->
+
+                    <div class="tp-caption main-label"
+                         data-x="left" data-hoffset="100"
+                         data-y="center" data-voffset="-70"
+                         data-fontsize="['40','70','34','44']"
+                         data-start="1500"
+                         data-whitespace="nowrap"
+                         data-transform_in="y:[100%];s:400;"
+                         data-transform_out="opacity:0;s:400;"
+                         style="z-index: 5"
+                         data-mask_in="x:0px;y:0px;">{{ site.home.textPicture }}
+                    </div>
+
+                    <!--<div class="tp-caption text-white"
+                         data-x="left" data-hoffset="100"
+                         data-width="['none','none','none','400']"
+                         data-y="center" data-voffset="15"
+                         data-start="2000"
+                         style="font-size:17px;font-weight: 300;line-height: 24px; color:#e0e0e0!important;font-family: 'Museo500Regular', Arial, Helvetica, Tahoma, sans-serif;"
+                         data-transform_in="y:[100%];opacity:0;s:400;">
+                        Créée en 1012
+                    </div>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+        <div class="v-bg-stylish pb-0">
+            <div class="container">
+                {{ site.home.content|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

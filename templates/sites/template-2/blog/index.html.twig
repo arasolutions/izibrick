@@ -1,0 +1,87 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | Blog{% endblock %}
+
+{% block blogActive %}active{% endblock %}
+
+{% block body %}
+
+<style>
+    .masonry-items .v-blog-item .v-blog-masonry-item,
+    .masonry-items .v-portfolio-item-info { background: #ffffff; }
+</style>
+
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
+    {% else %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
+        {% endif %}
+        <div class="container py-5">
+            <div class="row pt-9 mt-9">
+                <div class="col-md-12 mt-4">
+                </div>
+            </div>
+            <div class="row text-left mb-9 center">
+                <div class="col-md-12">
+                    <h1 class="line-height-2 mb-3 fs-60">Blog</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+
+    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+        <div class="v-bg-stylish pb-0">
+            <div class="container">
+
+
+
+                <div class="row">
+                    <div class="v-blog-widget col-sm-12">
+                        <div class="v-blog-wrap">
+                            {% if posts|length > 0 %}
+                            <div class="v-blog-items-wrap v-blog-masonry">
+                                <ul class="v-blog-items row masonry-items first-load clearfix" id="blogGrid">
+                                    {% for post in posts %}
+                                    <li class="v-blog-item col-sm-4">
+                                        <div class="v-blog-masonry-item">
+                                            <figure class="animated-overlay overlay-alt">
+                                                {% if post.image is defined and post.image is not null %}
+                                                    <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('main_picture') }}" />
+                                                {% endif %}
+                                                <a href="{{ path('blog_detail', {post: post.id}) }}" class="link-to-post"></a>
+                                                <figcaption>
+                                                    <div class="thumb-info thumb-info-v2"><i class="fa fa-angle-right"></i></div>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="v-blog-item-info clearfix">
+                                                <h4><a href="blog-standard-post.html">{{ post.title }}</a></h4>
+                                                <div class="v-blog-item-details">Le {{ post.creationDate|date('d/m/Y') }}</div>
+                                                <div class="excerpt">
+                                                    <p>
+                                                        {{ post.introduction }}
+                                                    </p>
+                                                </div>
+                                                <a class="btn v-btn standard white sf-icon-stroke mb-0" href="{{ path('blog_detail', {post: post.id}) }}" target="_self">
+                                                    <i class="icon-arrow-32"></i><span class="text">Voir la suite</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            {% else %}
+                                Aucun article n'a été publié.
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
