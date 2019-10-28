@@ -160,6 +160,7 @@ class AdminController extends AbstractController
 
         $command = new HomeCommand();
         $command->setOriginalContent($site->getHome()->getContent());
+        $command->setTextPicture($site->getHome()->getTextPicture());
 
         $success = false;
 

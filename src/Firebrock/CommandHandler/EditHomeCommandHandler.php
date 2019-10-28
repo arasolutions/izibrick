@@ -38,7 +38,7 @@ class EditHomeCommandHandler
         $site->getHome()->setContent($command->getContent());
         $site->getHome()->setTextPicture($command->getTextPicture());
         if ($command->getMainPicture() != null) {
-            $site->setLogo('');
+            $site->getHome()->setMainPicture('');
             $site->getHome()->setMainPictureFile($command->getMainPicture());
         }
         $this->siteRepository->save($site);
