@@ -1,0 +1,64 @@
+:root {
+    --color-firebrock: #25476a;
+}
+
+::selection {
+    color: #fff;
+    background-color: var(--color-firebrock);
+}
+
+.g-bg-firebrock {
+    background-color: var(--color-firebrock);
+}
+
+.u-btn-firebrock {
+    background-color: var(--color-firebrock);
+    color: white;
+}
+
+.u-btn-firebrock:hover {
+    background-color: var(--color-firebrock);
+    color: white;
+}
+
+.u-btn-outline-firebrock {
+    color: var(--color-firebrock);
+    border-color: var(--color-firebrock);
+    background-color: transparent;
+}
+
+.u-btn-outline-firebrock:hover {
+    color: #fff !important;
+    background-color: var(--color-firebrock);
+}
+
+#navBar a:hover {
+    color: var(--color-firebrock) !important;
+}
+
+#banner {
+    background-color: var(--color-firebrock) !important;
+}
+
+.g-bg-firebrock-light-v5 {
+    background-color: #ecf0f5 !important;
+}
+
+.nav-link i {
+    line-height: 1.6 !important;
+}
+
+.nav-link.active {
+    background-color: var(--color-firebrock);
+    color: white;
+    border: none;
+}
+
+.cbp-item.selected > .cbp-item-wrapper > div:last-child {
+    background-color: var(--color-firebrock) !important;
+    color: white !important;
+}
+
+.progress-bar-firebrock{
+    background-color: var(--color-firebrock);
+}

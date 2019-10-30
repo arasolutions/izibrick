@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Entity\Site;
 use App\Firebrock\Command\AddSiteCommand;
 use App\Repository\ProductRepository;
+use KunicMarko\ColorPickerBundle\Form\Type\ColorPickerType;
 use Liip\ImagineBundle\Form\Type\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,12 +33,8 @@ class AddOrderType extends AbstractType
                 'required' => false,
                 'label' => false
             ))
-            ->add('colorTheme', ColorType::class, array(
+            ->add('colorTheme', ColorPickerType::class, array(
                 'label' => 'Couleur'
-            ))
-            ->add('colorThemeRgb', TextType::class, array(
-                'label' => 'Couleur (RGB)',
-                'required' => false
             ))
             ->add('template', HiddenType::class, array(
                 'label' => 'Choisissez le thème',

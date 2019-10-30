@@ -1,31 +1,43 @@
-<!--nav-->
-<ul class="row wz-step wz-icon-bw wz-nav-off mar-top">
-    <li class="col-xs-3 {% if step >= 1 %}active{% endif %}">
-        <a data-toggle="tab" href="#wizard-tab1">
-            <span class="text-danger"><i class="demo-pli-information icon-2x"></i></span>
-            <h5 class="mar-no">Thème</h5>
+<ul class="nav text-center nav-justified u-nav-v1-2" role="tablist"
+    data-target="nav-1-2-default-hor-left-big-icons" data-tabs-mobile-type="slide-up-down"
+    data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
+    <li class="nav-item">
+        <a class="nav-link {% if step == 1 %}active{% endif %}" data-toggle="tab"
+           href="#nav-1-2-default-hor-left-big-icons--1" role="tab">
+            <i class="icon-food-032 u-line-icon-pro icon-2x d-block g-font-size-25 u-tab-line-icon-pro"></i>
+            Formule
         </a>
     </li>
-    <li class="col-xs-3  {% if step >= 2 %}active{% endif %}">
-        <a data-toggle="tab" href="#wizard-tab2">
-            <span class="text-warning"><i class="demo-pli-gear icon-2x"></i></span>
-            <h5 class="mar-no">Options</h5>
+    <li class="nav-item">
+        <a class="nav-link {% if step == 2 %}active{% endif %}" data-toggle="tab"
+           href="#nav-1-2-default-hor-left-big-icons--2" role="tab">
+            <i class="icon-control-play icon-2x d-block g-font-size-25 u-tab-line-icon-pro"></i>
+            Thème
         </a>
     </li>
-    <li class="col-xs-3  {% if step >= 3 %}active{% endif %}">
-        <a data-toggle="tab" href="#wizard-tab4">
-            <span class="text-primary"><i class="demo-pli-male icon-2x"></i></span>
-            <h5 class="mar-no">Compte</h5>
+    <li class="nav-item">
+        <a class="nav-link  {% if step == 3 %}active{% endif %}" data-toggle="tab"
+           href="#nav-1-2-default-hor-left-big-icons--3" role="tab">
+            <i class="icon-directions icon-2x d-block g-font-size-25 u-tab-line-icon-pro"></i>
+            Options
         </a>
     </li>
-    <li class="col-xs-3  {% if step >= 4 %}active{% endif %}">
-        <a data-toggle="tab" href="#wizard-tab4">
-            <span class="text-success"><i class="demo-pli-medal-2 icon-2x"></i></span>
-            <h5 class="mar-no">Fin</h5>
+    <li class="nav-item">
+        <a class="nav-link {% if step == 4 %}active{% endif %}" data-toggle="tab"
+           href="#nav-1-2-default-hor-left-big-icons--4" role="tab">
+            <i class="icon-user u-line-icon-pro d-block g-font-size-25 u-tab-line-icon-pro"></i>
+            Compte
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  {% if step == 5 %}active{% endif %}" data-toggle="tab"
+           href="#nav-1-2-default-hor-left-big-icons--5" role="tab">
+            <i class="icon-sport-118 u-line-icon-pro d-block g-font-size-25 u-tab-line-icon-pro"></i>
+            Fin
         </a>
     </li>
 </ul>
 <!--progress bar-->
 <div class="progress progress-sm">
-    <div class="progress-bar progress-bar-primary" style="width:{{ 25 * step }}%"></div>
+    <div class="progress-bar progress-bar-firebrock" style="width:{{ 20 * step }}%"></div>
 </div>

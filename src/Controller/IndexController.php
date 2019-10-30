@@ -37,4 +37,16 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+
+    /**
+     * @Route("/features",
+     *     name="features"
+     * )
+     */
+    public function features()
+    {
+        return $this->render('bo/price/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }

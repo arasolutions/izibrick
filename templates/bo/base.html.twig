@@ -1,129 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
+    <!-- Title -->
+    <title>firebrock.com | {% block title %}{% endblock %}</title>
+
+    <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Firebrock.com | Création de site web {% block title %}{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
-    <!--STYLESHEET-->
-    <!--=================================================-->
-    <!--Open Sans Font [ OPTIONAL ]-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-
-    <!--Bootstrap Stylesheet [ REQUIRED ]-->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!--Nifty Stylesheet [ REQUIRED ]-->
-    <link href="{{ asset('assets/css/nifty.min.css') }}" rel="stylesheet">
-
-    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
-    <link href="{{ asset('assets/css/demo/nifty-demo-icons.min.css') }}" rel="stylesheet">
-    <!--Font Awesome -->
-    <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/firebrick.css') }}" rel="stylesheet">
-
-    <!--=================================================-->
-
-    <!--Pace - Page Load Progress Par [OPTIONAL]-->
-    <link href="{{ asset('assets/plugins/pace/pace.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('assets/plugins/pace/pace.min.js') }}"></script>
-
-    <!--Demo [ DEMONSTRATION ]-->
-    <link href="{{ asset('assets/css/demo/nifty-demo.min.css') }}" rel="stylesheet">
-
-
-    <!--Morris.js [ OPTIONAL ]-->
-    <link href="{{ asset('assets/css/themes/type-d/theme-navy.min.css') }}" rel="stylesheet">
-
-
-    <!--Morris.js [ OPTIONAL ]-->
-    <link href="{{ asset('assets/plugins/morris-js/morris.min.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/icon-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/icon-line/css/simple-line-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/icon-etlinefont/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/icon-line-pro/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/icon-hs/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/dzsparallaxer/dzsparallaxer.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/dzsparallaxer/dzsscroller/scroller.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/dzsparallaxer/advancedscroller/plugin.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/fancybox/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/slick-carousel/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/typedjs/typed.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/hs-megamenu/src/hs.megamenu.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/vendor/hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-core.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-components.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-globals.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/firebrock.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/custom.css') }}">
     {% block stylesheets %}{% endblock %}
-
 </head>
 
-<!--TIPS-->
-<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
 <body>
-<div id="container" class="effect aside-float aside-bright mainnav-out">
+<main>
 
 
+    <!-- Header -->
+    <header id="js-header" class="u-header u-header--static">
+        <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10">
+            <nav class="js-mega-menu navbar navbar-expand-lg hs-menu-initialized hs-menu-horizontal">
+                <div class="container">
+                    <!-- Responsive Toggle Button -->
+                    <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-3 g-right-0"
+                            type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar"
+                            data-toggle="collapse" data-target="#navBar">
+              <span class="hamburger hamburger--slider">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+              </span>
+              </span>
+                    </button>
+                    <!-- End Responsive Toggle Button -->
 
-    <header id="navbar">
-        <div id="navbar-container" class="boxed">
+                    <!-- Logo -->
+                    <a href="{{ path('index') }}" class="navbar-brand">
+                        <img src="{{ asset('assets/img/logo/logo-firebrock-mini.png') }}" alt="firebrock.com" style="width:60px;">
+                    </a>
+                    <!-- End Logo -->
 
-            <!--Brand logo & name-->
-            <!--================================-->
-            <div class="navbar-header">
-                <a href="{{ path('home') }}" class="navbar-brand">
-                    <img src="{{ asset('assets/img/logo.png') }}" alt="Nifty Logo" class="brand-icon">
-                    <div class="brand-title">
-                        <span class="brand-text">Firebrock</span>
+                    <!-- Navigation -->
+                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg"
+                         id="navBar">
+                        <ul class="navbar-nav text-uppercase g-pos-rel g-font-weight-600 ml-auto">
+                            <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                                <a href="{{ path('index') }}" class="nav-link g-py-7 g-px-0">Accueil</a>
+                            </li>
+                            <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                                <a href="{{ path('features') }}" class="nav-link g-py-7 g-px-0">Fonctionnalités</a>
+                            </li>
+                            <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                                <a href="{{ path('price') }}" class="nav-link g-py-7 g-px-0">Tarifs</a>
+                            </li>
+                            <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                                <a href="{{ path('contact') }}" class="nav-link g-py-7 g-px-0">Contact</a>
+                            </li>
+
+                        </ul>
                     </div>
-                </a>
-            </div>
-            <!--================================-->
-            <!--End brand logo & name-->
+                    <!-- End Navigation -->
 
-
-            <!--Navbar Dropdown-->
-            <!--================================-->
-            <div class="navbar-content">
-                <ul class="nav navbar-top-links">
-                    <li>
-                        <a href="{{ path('price') }}">
-                            Fonctionnalités
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('price') }}">
-                            Tarifs
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('fos_user_security_login') }}">
-                            Se connecter
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!--================================-->
-            <!--End Navbar Dropdown-->
-
+                    <div class="d-inline-block g-hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
+                        <a class="btn u-btn-outline-firebrock g-font-size-13 text-uppercase g-py-10 g-px-15"
+                           href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                    </div>
+                </div>
+            </nav>
         </div>
     </header>
-    <!--===================================================-->
+    <section>
+        {% block body %}{% endblock %}
+    </section>
+    <footer class="g-bg-gray-dark-v1 g-color-white-opacity-0_8 g-py-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 text-center text-md-left g-mb-10 g-mb-0--md">
+                    <div class="d-lg-flex">
+                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">2018 &copy; All Rights
+                            Reserved.</small>
+                        <ul class="u-list-inline">
+                            <li class="list-inline-item">
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">Privacy Policy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <span>|</span>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">Terms of Use</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <span>|</span>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">License</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <span>|</span>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-    <div class="boxed">
-        <div id="content-container">
-            {% block body %}{% endblock %}
+                <div class="col-md-4 align-self-center">
+                    <ul class="list-inline text-center text-md-right mb-0">
+                        <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top"
+                            title="Facebook">
+                            <a href="#!" class="g-color-white-opacity-0_5 g-color-white--hover">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Skype">
+                            <a href="#!" class="g-color-white-opacity-0_5 g-color-white--hover">
+                                <i class="fa fa-skype"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top"
+                            title="Linkedin">
+                            <a href="#!" class="g-color-white-opacity-0_5 g-color-white--hover">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top"
+                            title="Pinterest">
+                            <a href="#!" class="g-color-white-opacity-0_5 g-color-white--hover">
+                                <i class="fa fa-pinterest"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top" title="Twitter">
+                            <a href="#!" class="g-color-white-opacity-0_5 g-color-white--hover">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top"
+                            title="Dribbble">
+                            <a href="#!" class="g-color-white-opacity-0_5 g-color-white--hover">
+                                <i class="fa fa-dribbble"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </footer>
+    <!-- End Copyright Footer -->
+    <a class="js-go-to u-go-to-v1" href="#!" data-type="fixed" data-position='{
+     "bottom": 15,
+     "right": 15
+   }' data-offset-top="400" data-compensation="#js-header" data-show-effect="zoomIn">
+        <i class="hs-icon hs-icon-arrow-top"></i>
+    </a>
+</main>
 
+<div class="u-outer-spaces-helper"></div>
 
+<script src="{{ asset('assets/bo//vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/bo//vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/popper.min.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/slick-carousel/slick/slick.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/hs-megamenu/src/hs.megamenu.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/dzsparallaxer/dzsparallaxer.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/dzsparallaxer/dzsscroller/scroller.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/dzsparallaxer/advancedscroller/plugin.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/fancybox/jquery.fancybox.min.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/typedjs/typed.min.js') }}"></script>
+<script src="{{ asset('assets/bo/js/hs.core.js') }}"></script>
+<script src="{{ asset('assets/bo/js/components/hs.carousel.js') }}"></script>
+<script src="{{ asset('assets/bo/js/components/hs.header.js') }}"></script>
+<script src="{{ asset('assets/bo/js/helpers/hs.hamburgers.js') }}"></script>
+<script src="{{ asset('assets/bo/js/components/hs.tabs.js') }}"></script>
+<script src="{{ asset('assets/bo/js/components/hs.popup.js') }}"></script>
+<script src="{{ asset('assets/bo/js/components/text-animation/hs.text-slideshow.js') }}"></script>
+<script src="{{ asset('assets/bo/js/components/hs.go-to.js') }}"></script>
+<script src="{{ asset('assets/bo/js/custom.js') }}"></script>
 
+<!-- JS Plugins Init. -->
+<script>
+    $(document).on('ready', function () {
+        // initialization of carousel
+        $.HSCore.components.HSCarousel.init('.js-carousel');
 
-        <footer id="footer">
-            <p class="pad-lft">&#0169; 2019 FireBrock - Solutions par <a href="https://www.ara-solutions.com" target="_blank">ARA Solutions</a></p>
-        </footer>
-        <button class="scroll-top btn">
-            <i class="pci-chevron chevron-up"></i>
-        </button>
-    </div>
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        // initialization of tabs
+        $.HSCore.components.HSTabs.init('[role="tablist"]');
 
+        // initialization of popups
+        $.HSCore.components.HSPopup.init('.js-fancybox');
 
-    <!--BootstrapJS [ RECOMMENDED ]-->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        // initialization of go to
+        $.HSCore.components.HSGoTo.init('.js-go-to');
 
+        // initialization of text animation (typing)
+        $(".u-text-animation.u-text-animation--typing").typed({
+            strings: [
+                "an awesome template",
+                "perfect template",
+                "just like a boss"
+            ],
+            typeSpeed: 60,
+            loop: true,
+            backDelay: 1500
+        });
+    });
 
-    <!--NiftyJS [ RECOMMENDED ]-->
-    <script src="{{ asset('assets/js/nifty.min.js') }}"></script>
-    {% block javascripts %}{% endblock %}
-</div>
+    $(window).on('load', function () {
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#js-header'));
+        $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+        // initialization of HSMegaMenu component
+        $('.js-mega-menu').HSMegaMenu({
+            event: 'hover',
+            pageContainer: $('.container'),
+            breakpoint: 991
+        });
+    });
+
+    $(window).on('resize', function () {
+        setTimeout(function () {
+            $.HSCore.components.HSTabs.init('[role="tablist"]');
+        }, 200);
+    });
+</script>
+{% block javascripts %}{% endblock %}
 </body>
+
 </html>

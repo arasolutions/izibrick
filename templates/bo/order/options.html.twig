@@ -7,27 +7,27 @@
 {% endblock %}
 
 {% block body %}
-    <div id="page-content">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="panel">
-                    <div class="panel-body">
-                        <div id="wizard">
-                            {% include 'bo/order/wizard.html.twig' with {'step': 2}  %}
-                            <!--First tab-->
-                            <div id="wizard-tab3" class="tab-pane">
+<section class="g-bg-firebrock-light-v5">
+    <div class="container g-py-100">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-lg-10">
+                <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+                    {% include 'bo/order/wizard.html.twig' with {'step': 3} %}
+
+                    <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
+                        <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
+                             role="tabpanel">
+                            <div id="wizard-tab1" class="tab-pane">
                                 {{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
-                                <div class="col-sm-9">
-                                    <div class="form-group">
-                                        <div class="pull-left text-3x">Allez c'est parti ! créons votre site</div>
-                                    </div>
+                                <div class="row col-sm-12">
+                                        <h2 class="pull-left text-3x">Allez c'est parti ! créons votre site</h2>
                                 </div>
                                 {% if site.product %}
-                                    <div class="col-sm-3">
+                                    <!--<div class="col-sm-3">
                                         <div class="pull-right bloc-price">A partir de <br/><span
                                                     class="price text-2x">{{ site.product.price }}€</span>/mois
                                         </div>
-                                    </div>
+                                    </div>-->
                                 {% endif %}
                                 <div class="col-sm-12 form-group">
                                     {{ form_label(form.domain, null, {'label_attr':{'class':'control-label'}}) }}
@@ -44,6 +44,7 @@
             </div>
         </div>
     </div>
+</section>
 
 {% endblock %}
 

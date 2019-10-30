@@ -3,172 +3,175 @@
 {% block title %}Création de votre projet | Etape 1{% endblock %}
 
 {% block stylesheets %}
-    <link href="{{ asset('assets/plugins/unitegallery/css/unitegallery.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bo/vendor/cubeportfolio-full/cubeportfolio/css/cubeportfolio.min.css') }}"
+          rel="stylesheet">
 {% endblock %}
 
 
 {% block body %}
-    <div id="page-content">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="panel">
-                    <div class="panel-body">
+    <section class="g-bg-firebrock-light-v5">
+        <div class="container g-py-100">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-lg-10">
+                    <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+                        {% include 'bo/order/wizard.html.twig' with {'step': 1} %}
 
-                        <div id="wizard">
-                            {% include 'bo/order/wizard.html.twig' with {'step': 1} %}
-                            <!--First tab-->
-                            <div id="wizard-tab1" class="tab-pane">
-                                {{ form_start(form, {'attr':{'method':'post', 'action': path('order', {'product': product.id }),'class':'form-horizontal'}}) }}
-                                <div class="col-sm-9">
-                                    <div class="form-group">
-                                        <div class="pull-left text-3x">Site {{ product.name }}</div>
-
-                                        {% if not product.codePromotion %}
-                                            <div class="pull-right bloc-price">A partir de <br/><span
-                                                        class="price text-2x">{{ product.price }}€</span>/mois
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                {% if not product.codePromotion %}
-                                    <div class="col-sm-3">
+                        <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
+                            <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
+                                 role="tabpanel">
+                                <div id="wizard-tab1" class="tab-pane">
+                                    {{ form_start(form, {'attr':{'method':'post', 'action': path('order', {'product': product.id }),'class':'form-horizontal'}}) }}
+                                    <div class="col-sm-9">
                                         <div class="form-group">
-                                            <div class="input-group mar-btm">
-                                                {{ form_widget(form.codePromo, {'attr':{'class':'form-control input-md', 'placeholder':'Code promotion'}}) }}
-                                                <span class="input-group-btn">
+                                            <div class="pull-left text-3x">Site {{ product.name }}</div>
+
+                                            {% if not product.codePromotion %}
+                                                <div class="pull-right bloc-price">A partir de <br/><span
+                                                            class="price text-2x">{{ product.price }}€</span>/mois
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% if not product.codePromotion %}
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div class="input-group mar-btm">
+                                                    {{ form_widget(form.codePromo, {'attr':{'class':'form-control input-md', 'placeholder':'Code promotion'}}) }}
+                                                    <span class="input-group-btn">
                                                                 <button id="codePromoBtn" type="submit"
                                                                         class="btn btn-mint btn-md">OK !</button>
                                                             </span>
-                                            </div>
-                                            <div class="form-errors">
-                                                {{ form_errors(form.codePromo) }}
+                                                </div>
+                                                <div class="form-errors">
+                                                    {{ form_errors(form.codePromo) }}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                {% else %}
-                                    <div class="col-sm-3">
-                                        <div class="pull-right bloc-price">A partir de <br/><span
-                                                    class="price text-2x">{{ product.price }}€</span>/mois
+                                    {% else %}
+                                        <div class="col-sm-3">
+                                            <div class="pull-right bloc-price">A partir de <br/><span
+                                                        class="price text-2x">{{ product.price }}€</span>/mois
+                                            </div>
+                                            {{ form_widget(form.codePromo, {'attr':{'class':'hidden'}}) }}
                                         </div>
-                                        {{ form_widget(form.codePromo, {'attr':{'class':'hidden'}}) }}
+                                    {% endif %}
+                                    <div class="col-sm-12 form-group">
+                                        {{ form_label(form.name, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                        {{ form_widget(form.name, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
                                     </div>
-                                {% endif %}
-                                <div class="col-sm-12 form-group">
-                                    {{ form_label(form.name, null, {'label_attr':{'class':'control-label'}}) }}
-                                    {{ form_widget(form.name, {'attr':{'class':'form-control input-lg'}}) }}
-                                </div>
-                                <div class="col-sm-12 form-errors">
-                                    {{ form_errors(form.name) }}
-                                </div>
+                                    <div class="col-sm-12 form-errors">
+                                        {{ form_errors(form.name) }}
+                                    </div>
 
-                                <div class="col-sm-9 form-group">
-                                    {{ form_label(form.colorTheme, null, {'label_attr':{'class':'control-label'}}) }}
-                                    {{ form_widget(form.colorTheme, {'attr':{'class':'form-control input-lg'}}) }}
-                                </div>
-                                <div class="col-sm-3 form-group pull-right margin-right-10">
-                                    {{ form_label(form.colorThemeRgb, null, {'label_attr':{'class':'control-label'}}) }}
-                                    {{ form_widget(form.colorThemeRgb, {'attr':{'class':'form-control input-lg'}}) }}
-                                </div>
-                                <div class="col-sm-12 form-group">
-                                    {{ form_label(form.template, null, {'label_attr':{'class':'control-label'}}) }}
-                                    <span class="form-errors">{{ form_errors(form.template) }}</span>
-                                    <div class="panel">
-                                        <div class="pad-all">
-                                            <div id="demo-gallery-2" style="display:none;">
-                                                {% for template in templates %}
-                                                    <a href="#{{ template.id }}" id="template_{{ template.id }}">
-                                                        <img alt="{{ template.name }}"
+                                    <div class="col-sm-12 form-group">
+                                        {{ form_label(form.colorTheme, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                        {{ form_widget(form.colorTheme, {'attr':{'class':'form-control form-control-md rounded-0 colorpicker'}}) }}
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        {{ form_label(form.logo, null, {'label_attr':{'class':'control-label'}}) }}
+                                        {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        {{ form_label(form.template, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                        <span class="form-errors">{{ form_errors(form.template) }}</span>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <!-- Cube Portfolio Blocks - Filter -->
+                                        <ul id="filterControls" class="d-block list-inline text-center g-mb-50">
+                                            <li class="list-inline-item cbp-filter-item cbp-filter-item-active g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
+                                                role="button" data-filter="*">All
+                                            </li>
+                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
+                                                role="button" data-filter=".identity">Identity
+                                            </li>
+                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
+                                                role="button" data-filter=".design">Design
+                                            </li>
+                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
+                                                role="button" data-filter=".graphic">Graphic
+                                            </li>
+                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
+                                                role="button" data-filter=".graphic, .identity">Design &amp; Identity
+                                            </li>
+                                        </ul>
+                                        <div class="cbp" data-controls="#filterControls" data-animation="quicksand"
+                                             data-x-gap="10" data-y-gap="10" data-media-queries='[
+                                                 {"width": 1500, "cols": 6},
+                                                 {"width": 1100, "cols": 6},
+                                                 {"width": 800, "cols": 4},
+                                                 {"width": 480, "cols": 3},
+                                                 {"width": 300, "cols": 2},
+                                                 {"width": 0, "cols": 1}
+                                               ]'>
+                                            <!-- Cube Portfolio Blocks - Item -->
+                                            {% for template in templates %}
+                                                <div class="cbp-item identity design" data-id="{{ template.id }}">
+                                                    <div class="u-block-hover g-parent">
+                                                        <img class="img-fluid g-transform-scale-1_1--parent-hover g-transition-0_5 g-transition--ease-in-out"
                                                              src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
-                                                             data-description="{{ template.description }}"
-                                                             style="display:none">
-                                                    </a>
-                                                {% endfor %}
-                                            </div>
+                                                             alt="Image description">
+                                                        <div class="d-flex w-100 h-100 g-bg-black-opacity-0_6 opacity-0 g-opacity-1--parent-hover g-pos-abs g-top-0 g-left-0 g-transition-0_3 g-transition--ease-in u-block-hover__additional--fade u-block-hover__additional--fade-in g-pa-15">
+                                                            <ul class="align-items-end flex-column list-inline mt-auto ml-auto mb-0">
+                                                                <li class="list-inline-item">
+                                                                    <a class="u-icon-v2 u-icon-size--xs g-brd-white g-color-black g-bg-white rounded-circle"
+                                                                       href="#">
+                                                                        <i class="icon-communication-095 u-line-icon-pro"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="g-bg-white text-center g-pa-15">
+                                                        <h3 class="h6 g-color-black g-font-weight-700 mb-1">{{ template.name }}</h3>
+                                                        <p class="g-font-size-13 mb-0">{{ template.description }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 form-group">
-                                    {{ form_label(form.logo, null, {'label_attr':{'class':'control-label'}}) }}
-                                    {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
-                                </div>
 
-                                <div class="col-sm-12 form-group text-right">
-                                    <button type="submit" class="btn btn-mint btn-lg">Suivant</button>
-                                </div>
+                                    <div class="col-sm-12 form-group text-right">
+                                        <button type="submit" class="btn btn-mint btn-lg">Suivant</button>
+                                    </div>
 
-                                {{ form_end(form) }}
+                                    {{ form_end(form) }}
+                                </div>
                             </div>
                         </div>
+                        <!-- End Tab panes -->
                     </div>
-
-                    <!--===================================================-->
-                    <!-- End Form wizard with Validation -->
-
                 </div>
-
-
             </div>
         </div>
-    </div>
-
+    </section>
 {% endblock %}
 
     {% block javascripts %}
+        <script src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/unitegallery/js/unitegallery.js') }}"></script>
         <script src="{{ asset('assets/plugins/unitegallery/themes/tilesgrid/ug-theme-tilesgrid.js') }}"></script>
+        <script src="{{ asset('assets/bo/js/components/hs.tabs.js') }}"></script>
+        <script src="{{ asset('assets/bo/vendor/cubeportfolio-full/cubeportfolio/js/jquery.cubeportfolio.min.js') }}"></script>
+        <script src="{{ asset('assets/bo/js/components/hs.cubeportfolio.js') }}"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('#codePromoBtn').on('click', function (e) {
-                    if ($('#add_order_codePromo').val() !== '') {
-                        $('#add_order_hasCodePromo').val(1);
-                    } else {
-                        e.preventDefault();
-                    }
-                });
-            });
-            $(document).on('nifty.ready', function () {
-                $("#demo-gallery-2").unitegallery({
-                    grid_num_rows: 2,
-                    tile_enable_border: false,
-                    tile_enable_shadow: false,
-                    theme_navigation_type: "arrows",
-                    tile_enable_textpanel: true,
-                    tile_textpanel_title_text_align: "center",
-                    tile_textpanel_always_on: true,
-                    tile_textpanel_bg_color: "#FFF",
-                    tile_textpanel_bg_opacity: 1,
-                    tile_textpanel_title_color: "grey",
-                    tile_textpanel_title_bold: "normal",
-                    tile_textpanel_position: "bottom",
-                    tile_textpanel_css_title: {
-                        "font-size": "12px",
-                    },
-                    tile_as_link: true,
-                    tile_overlay_opacity: .4
+            $(document).on('ready', function () {
+                // initialization of tabs
+                $.HSCore.components.HSTabs.init('[role="tablist"]');
 
-                });
+                setTimeout(function () {
+                    $.HSCore.components.HSTabs.init('[role="tablist"]');
+                }, 200);
 
-                $(".ug-thumb-wrapper.ug-tile").on('click', function (e) {
-                    e.preventDefault();
-                    $(".ug-thumb-wrapper.ug-tile").removeClass('selected');
+                // initialization of cubeportfolio
+                $.HSCore.components.HSCubeportfolio.init('.cbp');
+
+                $(".cbp-item").on('click', function (e) {
+                    $(".cbp-item").removeClass('selected');
                     $(this).addClass('selected');
-                    $('#add_order_template').val($(this).attr('href').substr(1, $(this).attr('href').length));
+                    $('#add_order_template').val($(this).data('id'));
                 });
 
-                $(".ug-thumb-wrapper.ug-tile .ug-tile-icon.ug-icon-link").on('click', function (e) {
-                    e.preventDefault();
-                });
-
-                $("#add_order_colorTheme").on('change', function (e) {
-                    $("#add_order_colorThemeRgb").val($(this).val());
-                });
-
-                $("#add_order_colorThemeRgb").on('change', function (e) {
-                    $("#add_order_colorTheme").val($(this).val());
-                });
-
-                $("#add_order_colorThemeRgb").val($(this).val());
-
+                $('.colorpicker').colorPicker();
             });
         </script>
     {% endblock %}
