@@ -45,7 +45,7 @@ class IndexController extends AbstractController
      */
     public function features()
     {
-        return $this->render('bo/price/index.html.twig', [
+        return $this->render('bo/feature/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }
