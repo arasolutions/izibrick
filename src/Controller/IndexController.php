@@ -49,4 +49,16 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+
+    /**
+     * @Route("/our-contact",
+     *     name="our-contact"
+     * )
+     */
+    public function ourContact()
+    {
+        return $this->render('bo/contact/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }
