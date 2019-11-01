@@ -97,40 +97,122 @@
     <section>
         {% block body %}{% endblock %}
     </section>
+    <section class="g-bg-primary g-color-white g-pa-30" style="background-image: url({{ asset('templates/bo/img/pattern5.png') }});">
+        <div class="d-md-flex justify-content-md-center text-center">
+            <div class="align-self-md-center">
+                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">Offrez vous votre site internet professionnel</p>
+            </div>
+            <div class="align-self-md-center">
+                <a class="btn btn-lg u-btn-white text-uppercase g-font-weight-600 g-font-size-12" target="_blank" href="https://wrapbootstrap.com/theme/unify-responsive-website-template-WB0412697?ref=htmlstream">Purchase Now</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="contacts-section" class="g-bg-black-opacity-0_9 g-color-white-opacity-0_8 g-py-60">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Content -->
+                <div class="col-lg-4 col-md-6 g-mb-40 g-mb-0--lg">
+                    <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
+                        <h2 class="u-heading-v2__title h6 text-uppercase mb-0">FireBrock</h2>
+                    </div>
+                    <p>Créer votre site internet professionnel en quelques minutes.</p>
+                </div>
+                <!-- End Footer Content -->
+
+                <!-- Footer Content -->
+                <div class="col-lg-4 col-md-6 g-mb-40 g-mb-0--lg">
+                    <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
+                        <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Liens utiles</h2>
+                    </div>
+
+                    <nav class="text-uppercase1">
+                        <ul class="list-unstyled g-mt-minus-10 mb-0">
+                            <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
+                                <h4 class="h6 g-pr-20 mb-0">
+                                    <a class="g-color-white-opacity-0_8 g-color-white--hover" href="{{ path('features') }}">Fonctionnalités</a>
+                                    <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
+                                </h4>
+                            </li>
+                            <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
+                                <h4 class="h6 g-pr-20 mb-0">
+                                    <a class="g-color-white-opacity-0_8 g-color-white--hover" href="{{ path('price') }}">Tarifs</a>
+                                    <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
+                                </h4>
+                            </li>
+                            <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
+                                <h4 class="h6 g-pr-20 mb-0">
+                                    <a class="g-color-white-opacity-0_8 g-color-white--hover" href="{{ path('contact') }}">Contact</a>
+                                    <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
+                                </h4>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- End Footer Content -->
+
+                <!-- Footer Content -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
+                        <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Nous contacter</h2>
+                    </div>
+
+                    <address class="g-bg-no-repeat g-font-size-12 mb-0" style="background-image: url({{ asset('templates/bo/img/map2.png') }});">
+                        <!-- Location -->
+                        <div class="d-flex g-mb-20">
+                            <div class="g-mr-10">
+                              <span class="u-icon-v3 u-icon-size--xs g-bg-white-opacity-0_1 g-color-white-opacity-0_6">
+                                <i class="fa fa-map-marker"></i>
+                              </span>
+                            </div>
+                            <p class="mb-0">55 Rue Louis Lagorgette <br> 33150 Cenon</p>
+                        </div>
+                        <!-- End Location -->
+
+                        <!--
+                        <div class="d-flex g-mb-20">
+                            <div class="g-mr-10">
+              <span class="u-icon-v3 u-icon-size--xs g-bg-white-opacity-0_1 g-color-white-opacity-0_6">
+                <i class="fa fa-phone"></i>
+              </span>
+                            </div>
+                            <p class="mb-0">(+123) 456 7890 <br> (+123) 456 7891</p>
+                        </div>
+                        -->
+
+                        <!-- Email and Website -->
+                        <div class="d-flex g-mb-20">
+                            <div class="g-mr-10">
+                              <span class="u-icon-v3 u-icon-size--xs g-bg-white-opacity-0_1 g-color-white-opacity-0_6">
+                                <i class="fa fa-globe"></i>
+                              </span>
+                            </div>
+                            <p class="mb-0">
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="mailto:info@htmlstream.com">info@htmlstream.com</a>
+                                <br>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">www.htmlstream.com</a>
+                            </p>
+                        </div>
+                        <!-- End Email and Website -->
+                    </address>
+                </div>
+                <!-- End Footer Content -->
+            </div>
+        </div>
+    </div>
+
     <footer class="g-bg-gray-dark-v1 g-color-white-opacity-0_8 g-py-20">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 text-center text-md-left g-mb-10 g-mb-0--md">
                     <div class="d-lg-flex">
-                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">2018 &copy; All Rights
-                            Reserved.</small>
-                        <ul class="u-list-inline">
-                            <li class="list-inline-item">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">Privacy Policy</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <span>|</span>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">Terms of Use</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <span>|</span>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">License</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <span>|</span>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="#!">Support</a>
-                            </li>
-                        </ul>
+                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">2019 &copy; Tous droits réservés.</small>
+                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">FireBrock - Développé par <a href="https://www.ara-solutions.com" target="_blank">ARA Solutions</a></small>
                     </div>
                 </div>
 
                 <div class="col-md-4 align-self-center">
+                    <!--
                     <ul class="list-inline text-center text-md-right mb-0">
                         <li class="list-inline-item g-mx-10" data-toggle="tooltip" data-placement="top"
                             title="Facebook">
@@ -166,7 +248,7 @@
                                 <i class="fa fa-dribbble"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
         </div>
