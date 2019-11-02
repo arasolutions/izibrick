@@ -3,7 +3,7 @@
 
 <head>
     <!-- Title -->
-    <title>firebrock.com | {% block title %}{% endblock %}</title>
+    <title>FireBrock | {% block title %}{% endblock %}</title>
 
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-globals.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/firebrock.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/blue.css') }}">
     {% block stylesheets %}{% endblock %}
 </head>
 
@@ -97,13 +98,14 @@
     <section>
         {% block body %}{% endblock %}
     </section>
+
     <section class="g-bg-primary g-color-white g-pa-30" style="background-image: url({{ asset('templates/bo/img/pattern5.png') }});">
         <div class="d-md-flex justify-content-md-center text-center">
             <div class="align-self-md-center">
-                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">Offrez vous votre site internet professionnel</p>
+                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">FireBrock - Votre site internet professionnel</p>
             </div>
             <div class="align-self-md-center">
-                <a class="btn btn-lg u-btn-white text-uppercase g-font-weight-600 g-font-size-12" target="_blank" href="https://wrapbootstrap.com/theme/unify-responsive-website-template-WB0412697?ref=htmlstream">Purchase Now</a>
+                <a class="btn btn-lg u-btn-teal text-uppercase g-font-weight-600 g-font-size-12" target="_blank" href="https://wrapbootstrap.com/theme/unify-responsive-website-template-WB0412697?ref=htmlstream">Je crée mon site</a>
             </div>
         </div>
     </section>

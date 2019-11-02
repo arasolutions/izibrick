@@ -3,17 +3,20 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+
+
     <section class="g-pos-rel">
-        <div id="banner" style="background-image:url({{ asset('templates/bo/img/bg6.jpg') }});" class="auto-init height-is-based-on-content use-loading mode-scroll" data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "150"}'>
-            <div class="divimage  w-100" style="height: 130%;"></div>
-            <div class="container g-py-100">
+        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll" data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "150"}'>
+            <div class="divimage dzsparallaxer--target w-100 g-bg-cover g-bg-pos-top-center g-bg-img-hero g-bg-bluegray-opacity-0_2--after" style="height: 130%; background-image: url({{ asset('templates/bo/img/bg6.jpg') }});"></div>
+
+            <div class="container g-bg-cover__inner g-py-100">
                 <div class="row align-items-center text-center">
-                    <div class="col-lg-6 offset-lg-3 g-pt-30 g-mb-30 g-mb-0--lg g-bg-primary-dark-v3">
-                        <h2 class="h1 text-uppercase g-color-white g-mb-30">
+                    <div class="col-lg-6 offset-lg-3 g-mb-30 g-mb-0--lg g-bg-primary-dark-v3">
+                        <h2 class="h1 text-uppercase g-color-white g-mb-30 pt20">
                             <span class="g-bg-primary-dark-v3 g-px-5" style="font-weight:bold;">Créez votre site internet professionnel en 15 minutes</span><br>
                         </h2>
                         <h3 class="h4 g-color-white">
-                            <a href="#" class="btn btn-md u-btn-white u-btn-inset btn-xxl g-mr-10 g-mb-15">Je crée</a>
+                            <a href="#" class="btn btn-md u-btn-teal u-btn-inset btn-xxl g-mr-10 g-mb-15">Je crée mon site</a>
                         </h3>
                     </div>
                 </div>
@@ -21,10 +24,17 @@
         </div>
     </section>
 
-
     <!-- Icon Blocks -->
     <section class="g-py-100">
         <div class="container">
+            <div class="col-lg-12">
+                <!-- Heading -->
+                <div class="text-center mb20">
+                    <h2 class="h3 g-color-black text-uppercase mb-50">Nos services</h2>
+                    <div class="d-inline-block g-width-35 g-height-2 g-bg-primary mb-2"></div>
+                </div>
+                <!-- End Heading -->
+            </div>
             <div class="row no-gutters">
                 <div class="col-lg-4 g-px-40 g-mb-50 g-mb-0--lg">
                     <!-- Icon Blocks -->
@@ -64,7 +74,83 @@
             </div>
         </div>
     </section>
+
+    <section class="g-bg-primary g-color-white g-pa-30" style="background-image: url({{ asset('templates/bo/img/pattern5.png') }});">
+        <div class="d-md-flex justify-content-md-center text-center">
+            <div class="align-self-md-center">
+                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">FireBrock - Votre site internet professionnel en ligne en quelques clics</p>
+            </div>
+        </div>
+    </section>
+
     <!-- End Icon Blocks -->
+    <section class="g-bg-secondary">
+        <div class="container g-pt-100 g-pb-40">
+            <div class="row justify-content-center g-mb-60">
+                <div class="col-lg-7">
+                    <!-- Heading -->
+                    <div class="text-center">
+                        <h2 class="h3 g-color-black text-uppercase mb-2">Comment ca marche ?</h2>
+                        <div class="d-inline-block g-width-35 g-height-2 g-bg-primary mb-2"></div>
+                        <p class="lead mb-0">Votre site en ligne en quatre étapes</p>
+                    </div>
+                    <!-- End Heading -->
+                </div>
+            </div>
+
+            <!-- Static Process -->
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <i class="u-dot-line-v1-2 g-brd-transparent--before g-brd-gray-light-v2--after g-mb-20">
+                            <span class="u-dot-line-v1__inner g-bg-white g-bg-primary--before g-brd-gray-light-v2"></span>
+                        </i>
+                        <h3 class="h5 g-color-black mb-20">Etape 1</h3>
+                        <p class="mb-0">Créer votre compte afin de vous connecter à votre interface d'administration</p>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+
+                <div class="col-sm-6 col-lg-3 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <i class="u-dot-line-v1-2 g-brd-gray-light-v2--before g-brd-gray-light-v2--after g-mb-20">
+                            <span class="u-dot-line-v1__inner g-bg-white g-bg-primary--before g-brd-gray-light-v2"></span>
+                        </i>
+                        <h3 class="h5 g-color-black mb-20">Etape 2</h3>
+                        <p class="mb-0">Sélectionnez l'offre FireBrock adaptée à votre besoin</p>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+
+                <div class="col-sm-6 col-lg-3 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <i class="u-dot-line-v1-2 g-brd-gray-light-v2--before g-brd-gray-light-v2--after g-mb-20">
+                            <span class="u-dot-line-v1__inner g-bg-white g-bg-primary--before g-brd-gray-light-v2"></span>
+                        </i>
+                        <h3 class="h5 g-color-black mb-20">Etape 3</h3>
+                        <p class="mb-0">Choisissez le nom, le thème et la couleur de votre site</p>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+
+                <div class="col-sm-6 col-lg-3 g-mb-60">
+                    <!-- Static Process -->
+                    <div class="text-center">
+                        <i class="u-dot-line-v1-2 g-brd-gray-light-v2--before g-brd-transparent--after g-mb-20">
+                            <span class="u-dot-line-v1__inner g-bg-white g-bg-primary--before g-brd-gray-light-v2"></span>
+                        </i>
+                        <h3 class="h5 g-color-black mb-20">Etape 4</h3>
+                        <p class="mb-0">Votre site est en ligne. Vous pouvez administrer les pages depuis l'interface d'adminisation</p>
+                    </div>
+                    <!-- End Static Process -->
+                </div>
+            </div>
+            <!-- End Static Process -->
+        </div>
+    </section>
 
 
 {% endblock %}

@@ -1,1 +1,9 @@
-/* Add here all your css styles (customizations) */
+.pt20 {
+    padding-top: 20px;
+}
+.mb20 {
+    margin-bottom: 20px;
+}
+.mb50 {
+    margin-bottom: 50px;
+}
