@@ -1,9 +1,79 @@
 .pt20 {
     padding-top: 20px;
 }
+.ml20 {
+    margin-left: 20px;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.mt50 {
+    margin-top: 50px;
+}
 .mb20 {
     margin-bottom: 20px;
 }
 .mb50 {
     margin-bottom: 50px;
 }
+.w20 {
+    width: 20%;
+}
+.text-bold {
+    font-weight: bold;
+}
+
+.btn-blue {
+    color: #FFF;
+    background-color: #25476a;
+}
+
+.bandeau-blue {
+    color: #FFF;
+    background-color: #25476a;
+    padding: 10px;
+}.bandeau-blue {
+     color: #FFF;
+     background-color: #25476a;
+     padding: 10px;
+ }
+.bandeau-white {
+    color: #25476a;
+    background-color: #FFF;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* STRIPE */
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+    box-sizing: border-box;
+
+    height: 40px;
+
+    padding: 10px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}
+/* FIN STRIPE */

@@ -21,26 +21,23 @@
                                  role="tabpanel">
                                 <div id="wizard-tab1" class="tab-pane">
                                     {{ form_start(form, {'attr':{'method':'post', 'action': path('order', {'product': product.id }),'class':'form-horizontal'}}) }}
-                                    <div class="col-sm-9">
-                                        <div class="form-group">
-                                            <div class="pull-left text-3x">Site {{ product.name }}</div>
-
-                                            {% if not product.codePromotion %}
-                                                <div class="pull-right bloc-price">A partir de <br/><span
-                                                            class="price text-2x">{{ product.price }}€</span>/mois
-                                                </div>
-                                            {% endif %}
-                                        </div>
+                                    <div class="row text-center mt20">
+                                        <div class="col-sm-6 text-bold bandeau-blue">Site {{ product.name }}</div>
+                                        {% if not product.codePromotion %}
+                                            <div class="col-sm-6 bandeau-white">A partir de
+                                                <span class="">{{ product.price }} €</span>/mois
+                                            </div>
+                                        {% endif %}
                                     </div>
+                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
                                     {% if not product.codePromotion %}
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <div class="input-group mar-btm">
-                                                    {{ form_widget(form.codePromo, {'attr':{'class':'form-control input-md', 'placeholder':'Code promotion'}}) }}
-                                                    <span class="input-group-btn">
-                                                                <button id="codePromoBtn" type="submit"
-                                                                        class="btn btn-mint btn-md">OK !</button>
-                                                            </span>
+                                                    {{ form_widget(form.codePromo, {'attr':{'class':'form-control', 'placeholder':'Code promotion'}}) }}
+                                                    <span class="input-group-btn ml20">
+                                                        <button id="codePromoBtn" type="submit" class="btn btn-blue btn-lg">OK !</button>
+                                                    </span>
                                                 </div>
                                                 <div class="form-errors">
                                                     {{ form_errors(form.codePromo) }}
@@ -48,13 +45,12 @@
                                             </div>
                                         </div>
                                     {% else %}
-                                        <div class="col-sm-3">
-                                            <div class="pull-right bloc-price">A partir de <br/><span
-                                                        class="price text-2x">{{ product.price }}€</span>/mois
-                                            </div>
+                                        <div class="col-sm-6 bandeau-white">A partir de <br/>
+                                            <span class="price text-2x">{{ product.price }}€</span>/mois
                                             {{ form_widget(form.codePromo, {'attr':{'class':'hidden'}}) }}
                                         </div>
                                     {% endif %}
+                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
                                     <div class="col-sm-12 form-group">
                                         {{ form_label(form.name, null, {'label_attr':{'class':'g-mb-10'}}) }}
                                         {{ form_widget(form.name, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
@@ -62,21 +58,18 @@
                                     <div class="col-sm-12 form-errors">
                                         {{ form_errors(form.name) }}
                                     </div>
-
-                                    <div class="col-sm-12 form-group">
-                                        {{ form_label(form.colorTheme, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                        {{ form_widget(form.colorTheme, {'attr':{'class':'form-control form-control-md rounded-0 colorpicker'}}) }}
-                                    </div>
                                     <div class="col-sm-12 form-group">
                                         {{ form_label(form.logo, null, {'label_attr':{'class':'control-label'}}) }}
                                         {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
                                     </div>
+                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
+
                                     <div class="col-sm-12 form-group">
                                         {{ form_label(form.template, null, {'label_attr':{'class':'g-mb-10'}}) }}
                                         <span class="form-errors">{{ form_errors(form.template) }}</span>
                                     </div>
                                     <div class="col-sm-12">
-                                        <!-- Cube Portfolio Blocks - Filter -->
+                                        <!--
                                         <ul id="filterControls" class="d-block list-inline text-center g-mb-50">
                                             <li class="list-inline-item cbp-filter-item cbp-filter-item-active g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
                                                 role="button" data-filter="*">All
@@ -93,8 +86,8 @@
                                             <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
                                                 role="button" data-filter=".graphic, .identity">Design &amp; Identity
                                             </li>
-                                        </ul>
-                                        <div class="cbp" data-controls="#filterControls" data-animation="quicksand"
+                                        </ul>-->
+                                        <div class="cbp text-center" data-controls="#filterControls" data-animation="quicksand"
                                              data-x-gap="10" data-y-gap="10" data-media-queries='[
                                                  {"width": 1500, "cols": 6},
                                                  {"width": 1100, "cols": 6},
@@ -129,9 +122,13 @@
                                             {% endfor %}
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 form-group">
+                                        {{ form_label(form.colorTheme, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                        {{ form_widget(form.colorTheme, {'attr':{'class':'form-control form-control-md rounded-0 colorpicker'}}) }}
+                                    </div>
 
-                                    <div class="col-sm-12 form-group text-right">
-                                        <button type="submit" class="btn btn-mint btn-lg">Suivant</button>
+                                    <div class="col-sm-12 form-group text-right mt50">
+                                        <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
                                     </div>
 
                                     {{ form_end(form) }}

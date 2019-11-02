@@ -140,7 +140,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         return $this->render('bo/order/options.html.twig', [
             'form' => $form->createView(),
             'site' => $site,
-            'step' => 3
+            'step' => 2
         ]);
     }
 
@@ -153,5 +153,24 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     {
         $site = $this->siteRepository->getById($siteId);
 
+    }
+
+    /**
+     * @Route("/order/{siteId}/payment", name="payment")
+     * @param int $siteId
+     * @param Request $request
+     * @return Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function payment($siteId, Request $request)
+    {
+
+        $site = $this->siteRepository->getById($siteId);
+
+        return $this->render('bo/order/payment.html.twig', [
+            'site' => $site,
+            'step' => 3
+        ]);
     }
 }

@@ -103,13 +103,15 @@ class RegistrationController extends BaseController
                 $this->siteRepository->save($site);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('fos_user_registration_confirmed');
-                    $response = new RedirectResponse($url);
+                    //$url = $this->generateUrl('fos_user_registration_confirmed');
+                    //$response = new RedirectResponse($url);
                 }
 
                 $eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-                return $response;
+                //return $response;
+
+                return $this->redirectToRoute('payment', array('siteId' => $site->getId()));
             }
 
             $event = new FormEvent($formRegister, $request);

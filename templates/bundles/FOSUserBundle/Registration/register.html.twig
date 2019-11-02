@@ -10,23 +10,18 @@
             <div class="row justify-content-center">
                 <div class="col-sm-12 col-lg-10">
                     <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
-                        {% include 'bo/order/wizard.html.twig' with {'step': 4} %}
+                        {% include 'bo/order/wizard.html.twig' with {'step': 3} %}
 
                         <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
                             <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
                                  role="tabpanel">
                                 <div id="wizard-tab1" class="tab-pane">
-                                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-group'}}) }}
-                                    <div class="col-sm-12">
-                                        <h2>Votre site est prêt à être pris en charge. Créez votre compte </h2>
-                                    </div>
+                                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-group mt20'}}) }}
                                 </div>
                                 {% if error is defined %}
                                     <div class="g-mt-10 alert alert-danger">
-                                        <strong>Aïe</strong> {{ error }} <a
-                                                href="{{ path('fos_user_security_login') }}" class="alert-link">Connectez-vous</a>
+                                        <strong>Aïe</strong> {{ error }} <a href="{{ path('fos_user_security_login') }}" class="alert-link">Connectez-vous</a>
                                     </div>
-
                                 {% endif %}
                                 <div class="row">
                                     <div class="col-sm-6 form-group">
@@ -58,7 +53,9 @@
                                         {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
                                     </div>
                                 </div>
-                                <button class="btn text-uppercase u-btn-firebrock g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10" type="submit">S'inscrire</button>
+                                <div class="col-sm-12 form-group text-right mt50">
+                                    <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
+                                </div>
                                 {{ form_end(form) }}
                             </div>
                         </div>

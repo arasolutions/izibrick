@@ -12,16 +12,13 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-lg-10">
                 <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
-                    {% include 'bo/order/wizard.html.twig' with {'step': 3} %}
+                    {% include 'bo/order/wizard.html.twig' with {'step': 2} %}
 
                     <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
                         <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
                              role="tabpanel">
                             <div id="wizard-tab1" class="tab-pane">
-                                {{ form_start(form, {'attr':{'class':'form-horizontal'}}) }}
-                                <div class="row col-sm-12">
-                                        <h2 class="pull-left text-3x">Allez c'est parti ! créons votre site</h2>
-                                </div>
+                                {{ form_start(form, {'attr':{'class':'form-horizontal mt20'}}) }}
                                 {% if site.product %}
                                     <!--<div class="col-sm-3">
                                         <div class="pull-right bloc-price">A partir de <br/><span
@@ -33,8 +30,8 @@
                                     {{ form_label(form.domain, null, {'label_attr':{'class':'control-label'}}) }}
                                     {{ form_widget(form.domain, {'attr':{'class':'form-control input-lg'}}) }}
                                 </div>
-                                <div class="col-sm-12 form-group">
-                                    <button type="submit" class="btn btn-mint btn-lg">Valider mes options</button>
+                                <div class="col-sm-12 form-group text-right mt50">
+                                    <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
                                 </div>
                                 {{ form_end(form) }}
                             </div>
