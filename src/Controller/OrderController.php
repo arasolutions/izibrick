@@ -13,10 +13,14 @@ use App\Firebrock\CommandHandler\AddSiteCommandHandler;
 use App\Form\AddCustomerType;
 use App\Form\AddOrderType;
 use App\Form\AddSiteOptionsType;
+use App\Helper\Stripe;
+use App\Repository\CodePromotionRepository;
 use App\Repository\CustomerRepository;
+use App\Repository\InvoiceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
+use App\Repository\UserRepository;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -47,30 +51,58 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     /** @var CustomerRepository */
     private $customerRepository;
 
+    /** @var UserRepository */
+    private $userRepository;
+
+    /** @var CodePromotionRepository */
+    private $codePromotionRepository;
+
+    /** @var InvoiceRepository */
+    private $invoiceRepository;
+
     /**
      * OrderController constructor.
      * @param ProductRepository $productRepository
      * @param TemplateRepository $templateRepository
      * @param SiteRepository $siteRepository
      * @param CustomerRepository $customerRepository
+     * @param UserRepository $userRepository
+     * @param CodePromotionRepository $codePromotionRepository
+     * @param InvoiceRepository $invoiceRepository
      */
-    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, CustomerRepository $customerRepository)
+    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, CustomerRepository $customerRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository)
     {
         $this->productRepository = $productRepository;
         $this->templateRepository = $templateRepository;
         $this->siteRepository = $siteRepository;
         $this->customerRepository = $customerRepository;
+        $this->userRepository = $userRepository;
+        $this->codePromotionRepository = $codePromotionRepository;
+        $this->invoiceRepository = $invoiceRepository;
     }
 
 
     /**
-     * @Route("/order/{product}", name="order", methods={"GET","POST"})
+     * @Route("/order", name="order", methods={"GET","POST"}, name="order")
+     * @param Request $request
+     * @param AddSiteCommandHandler $addSiteCommandHandler
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        return $this->render('bo/order/index.html.twig', [
+            'step' => 1
+        ]);
+    }
+
+    /**
+     * @Route("/order/{product}", name="order", methods={"GET","POST"}, name="order-product")
      * @param int $product
      * @param Request $request
      * @param AddSiteCommandHandler $addSiteCommandHandler
      * @return Response
      */
-    public function index($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
+    public function indexOrder($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
     {
         $productChosen = $this->productRepository->findOneBy(array('id' => $product));
 
@@ -80,15 +112,17 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         $form = $this->createForm(AddOrderType::class, $order);
         $form->handleRequest($request);
+        $newPrice = 0;
+        $codePromo = '';
 
         if ($form->isSubmitted()) {
-            if ($order->getHasCodePromo() === "1") {
+            if ($request->get('checkCodePromotion') == '1' && $form->get('codePromo')->getData() != '') {
                 //Recherche si le code promo est OK
-                $newProduct = $this->productRepository->findOneBy(array('codePromotion' => $order->getCodePromo()));
-
-                if ($newProduct != null) {
-                    return $this->redirectToRoute('order', array('product' => $newProduct->getId()));
-                } else {
+                $newProduct = $this->codePromotionRepository->getByName($form->get('codePromo')->getData(), $productChosen);
+                if($newProduct){
+                    $codePromo = $form->get('codePromo')->getData();
+                    $newPrice = $newProduct->getPrice();
+                }else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
             } else {
@@ -106,11 +140,13 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         $templates = $this->templateRepository->findBy(array('active' => 1));
 
-        return $this->render('bo/order/index.html.twig', [
+        return $this->render('bo/order/order.html.twig', [
             'form' => $form->createView(),
             'product' => $productChosen,
             'templates' => $templates,
-            'step' => 1
+            'newPrice' => $newPrice,
+            'codePromo' => $codePromo,
+            'step' => 2
         ]);
     }
 
@@ -140,7 +176,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         return $this->render('bo/order/options.html.twig', [
             'form' => $form->createView(),
             'site' => $site,
-            'step' => 2
+            'step' => 3
         ]);
     }
 
@@ -156,21 +192,38 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     }
 
     /**
-     * @Route("/order/{siteId}/payment", name="payment")
+     * @Route("/order/{siteId}/{userId}/payment", name="payment")
      * @param int $siteId
      * @param Request $request
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function payment($siteId, Request $request)
+    public function payment($siteId, $userId, Request $request)
     {
-
         $site = $this->siteRepository->getById($siteId);
+        $user = $this->userRepository->get($userId);
+        $invoice = $this->invoiceRepository->getBySiteId($siteId);
+
+        if ($request->isMethod('POST')) {
+            $token = $request->request->get('tokenId');
+            $stripe = new Stripe();
+            // Enregistrement de la carte dans Stripe
+            //$card = $stripe->createCard($user->getStripeCustomerId(), $token);
+            //var_dump($card);die;
+            // On exécute le paiement
+            $charge = $stripe->createCharge($invoice->getTotalAmount(), $token, $invoice->getTitle().' - '.$invoice->getDescription());
+            if($charge){
+                // Paiement accepté
+
+            }
+        }
 
         return $this->render('bo/order/payment.html.twig', [
             'site' => $site,
-            'step' => 3
+            'user' => $user,
+            'invoice' => $invoice,
+            'step' => 5
         ]);
     }
 }

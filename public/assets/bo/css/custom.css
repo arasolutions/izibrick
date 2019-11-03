@@ -77,3 +77,40 @@
     background-color: #fefde5 !important;
 }
 /* FIN STRIPE */
+
+/* ORDER */
+.old-price {
+    color: red;
+    text-decoration: line-through;
+}
+.new-price {
+    color: green;
+}
+.form-errors {
+    color: red;
+    font-weight: bold;
+}
+.form-errors ul{
+    list-style:none;
+}
+
+.nav-link.active {
+    background-color: var(--color-firebrock);
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.nav-link.active i{
+    color: var(--color-firebrock)white;
+    font-weight: bold;
+}
+.label-payment {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.logo-title {
+    color: var(--color-firebrock);
+    font-weight: bold;
+    font-size: 1.5em;
+}
+/* FIN ORDER */

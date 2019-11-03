@@ -67,8 +67,10 @@
                     <!-- End Logo -->
 
                     <!-- Navigation -->
-                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg"
-                         id="navBar">
+                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg" id="navBar">
+                        <a href="{{ path('index') }}" class="navbar-brand">
+                            <span class="logo-title">FireBrock</span>
+                        </a>
                         <ul class="navbar-nav text-uppercase g-pos-rel g-font-weight-600 ml-auto">
                             <li class="nav-item  g-mx-10--lg g-mx-15--xl">
                                 <a href="{{ path('index') }}" class="nav-link g-py-7 g-px-0">Accueil</a>
@@ -266,8 +268,8 @@
 
 <div class="u-outer-spaces-helper"></div>
 
-<script src="{{ asset('assets/bo//vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/bo//vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/bo/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
 <script src="{{ asset('assets/bo/vendor/popper.min.js') }}"></script>
 <script src="{{ asset('assets/bo/vendor/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/bo/vendor/slick-carousel/slick/slick.js') }}"></script>

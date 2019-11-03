@@ -3,12 +3,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Invoice;
 use App\Entity\UserSite;
 use App\Firebrock\Command\RegistrationCommand;
 use App\Firebrock\CommandHandler\CreateUserCommandHandler;
 use App\Form\RegistrationType;
+use App\Helper\Stripe;
+use App\Repository\InvoiceRepository;
 use App\Repository\SiteRepository;
 use App\Repository\UserSiteRepository;
+use App\Repository\UserRepository;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
@@ -35,22 +39,38 @@ class RegistrationController extends BaseController
     /** @var UserSiteRepository */
     private $userSiteRepository;
 
+    /** @var UserRepository */
+    private $userRepository;
+
+    /** @var InvoiceRepository */
+    private $invoiceRepository;
+
     /**
      * RegistrationController constructor.
      * @param FactoryInterface $formFactory
      * @param CreateUserCommandHandler $handler
      * @param SiteRepository $siteRepository
      * @param UserSiteRepository $userSiteRepository
+     * @param UserRepository $userRepository
+     * @param InvoiceRepository $invoiceRepository
      */
-    public function __construct(FactoryInterface $formFactory, CreateUserCommandHandler $handler, SiteRepository $siteRepository, UserSiteRepository $userSiteRepository)
+    public function __construct(FactoryInterface $formFactory, CreateUserCommandHandler $handler, SiteRepository $siteRepository, UserSiteRepository $userSiteRepository, UserRepository $userRepository, InvoiceRepository $invoiceRepository)
     {
         $this->formFactory = $formFactory;
         $this->handler = $handler;
         $this->siteRepository = $siteRepository;
         $this->userSiteRepository = $userSiteRepository;
+        $this->userRepository = $userRepository;
+        $this->invoiceRepository = $invoiceRepository;
     }
 
-
+    /**
+     * @param Request $request
+     * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Stripe\Exception\ApiErrorException
+     */
     public function registerAction(Request $request)
     {
         /** @var $userManager UserManagerInterface */
@@ -111,7 +131,31 @@ class RegistrationController extends BaseController
 
                 //return $response;
 
-                return $this->redirectToRoute('payment', array('siteId' => $site->getId()));
+                // Enregistrement du compte dans Stripe
+                $stripe = new Stripe();
+                $customer = $stripe->createCustomer($user->getId().'-'.$user->getEmail(), $site->getProduct()->getName(), $user->getEmail());
+                $userRepo = $this->userRepository->get($user->getId());
+                if($userRepo){
+                    $userRepo->setStripeCustomerId($customer);
+                    $this->userRepository->save($userRepo);
+
+                    // Enregistrement de la facture
+                    $invoice = new Invoice($site);
+                    $invoice->setFirstName($userRepo->getFirstName());
+                    $invoice->setLastName($userRepo->getLastname());
+                    $invoice->setInvoiceNumber('F-'.$user->getId().'-'.time());
+                    $invoice->setTitle('Offre '.$site->getProduct()->getName());
+                    $invoice->setDescription('Abonnement du '.date("d/m/y").' au '. date('d/m/y', strtotime('+1 month')));
+                    $invoice->setQuantity('1');
+                    $invoice->setUnitPrice($site->getProduct()->getPrice());
+                    $invoice->setPrice($site->getProduct()->getPrice());
+                    $invoice->setVatRate('20');
+                    $invoice->setTotalAmount(($site->getProduct()->getPrice()) + ($site->getProduct()->getPrice()*20/100));
+                    $this->invoiceRepository->save($invoice);
+
+                    return $this->redirectToRoute('payment', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
+                }
+
             }
 
             $event = new FormEvent($formRegister, $request);

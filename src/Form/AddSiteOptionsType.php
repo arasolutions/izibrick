@@ -19,7 +19,7 @@ class AddSiteOptionsType extends AbstractType
                 'label' => 'Domaine',
                 'required' => true,
                 'choices' => [
-                    'Nouveau nom de domaine' => 1,
+                    'Nouveau nom de domaine (inclus dans l\'offre)' => 1,
                     'Transfert de nom de domaine (+99€)' => 2,
                     'Pointage sur nom de domaine (+99€)' => 3
                 ]

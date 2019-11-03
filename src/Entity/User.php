@@ -46,6 +46,11 @@ class User extends BaseUser
     private $phone;
 
     /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $stripeCustomerId;
+
+    /**
      * @param string $email
      */
     public function setEmail($email)
@@ -82,6 +87,14 @@ class User extends BaseUser
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|UserSite[]
+     */
+    public function getLastSite()
+    {
+        return $this->sites[0];
     }
 
     public function removeSite(UserSite $site): self
@@ -153,5 +166,21 @@ class User extends BaseUser
         $this->phone = $phone;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStripeCustomerId()
+    {
+        return $this->stripeCustomerId;
+    }
+
+    /**
+     * @param mixed $stripeCustomerId
+     */
+    public function setStripeCustomerId($stripeCustomerId)
+    {
+        $this->stripeCustomerId = $stripeCustomerId;
     }
 }

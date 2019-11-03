@@ -40,6 +40,12 @@ class Product
     private $codePromotion;
 
     /**
+     * @var ArrayCollection|CodePromotion[]
+     * @ORM\OneToMany(targetEntity="App\Entity\CodePromotion", mappedBy="product", cascade={"persist"}, fetch="LAZY")
+     */
+    private $codesPromotion;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Site", mappedBy="product")
      */
     private $sites;
@@ -47,6 +53,7 @@ class Product
     public function __construct()
     {
         $this->sites = new ArrayCollection();
+        $this->codesPromotion = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,5 +138,25 @@ class Product
         }
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|CodePromotion[]
+     */
+    public function getCodesPromotion()
+    {
+        return $this->codesPromotion;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCodesPromotion()
+    {
+        if (empty($this->codesPromotion) || is_null($this->codesPromotion)){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

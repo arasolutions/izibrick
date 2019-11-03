@@ -10,53 +10,64 @@
             <div class="row justify-content-center">
                 <div class="col-sm-12 col-lg-10">
                     <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
-                        {% include 'bo/order/wizard.html.twig' with {'step': 3} %}
+                        {% include 'bo/order/wizard.html.twig' with {'step': 4} %}
 
                         <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
-                            <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
-                                 role="tabpanel">
+                            <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1" role="tabpanel">
+
                                 <div id="wizard-tab1" class="tab-pane">
+
+                                    <div class="media mt20 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover g-bg-gray-light-v5 g-rounded-4 g-transition-0_3 g-pa-20">
+                                        <div class="media-body">
+                                            <blockquote class="lead g-mb-15">
+                                                Veuillez renseigner vos informations personnelles.<br/>
+                                                Votre email et votre mot de passe vous permettront de vous connecter à l'interface d'administration.
+                                            </blockquote>
+                                        </div>
+                                    </div>
+
                                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-group mt20'}}) }}
+
+                                    {% if error is defined %}
+                                        <div class="g-mt-10 alert alert-danger">
+                                            <strong>Aïe</strong> {{ error }} <a href="{{ path('fos_user_security_login') }}" class="alert-link">Connectez-vous</a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            {{ form_label(form.firstname, null, {'label_attr':{'class':'control-label'}}) }}
+                                            {{ form_widget(form.firstname, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            {{ form_label(form.lastname, null, {'label_attr':{'class':'control-label'}}) }}
+                                            {{ form_widget(form.lastname, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9 form-group">
+                                            {{ form_label(form.email, null, {'label_attr':{'class':'control-label'}}) }}
+                                            {{ form_widget(form.email, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                        </div>
+                                        <div class="col-sm-3 form-group">
+                                            {{ form_label(form.phone, null, {'label_attr':{'class':'control-label'}}) }}
+                                            {{ form_widget(form.phone, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            {{ form_label(form.plainPassword.first, null, {'label_attr':{'class':'control-label'}}) }}
+                                            {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            {{ form_label(form.plainPassword.second, null, {'label_attr':{'class':'control-label'}}) }}
+                                            {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group text-right mt50">
+                                        <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
+                                    </div>
+                                    {{ form_end(form) }}
                                 </div>
-                                {% if error is defined %}
-                                    <div class="g-mt-10 alert alert-danger">
-                                        <strong>Aïe</strong> {{ error }} <a href="{{ path('fos_user_security_login') }}" class="alert-link">Connectez-vous</a>
-                                    </div>
-                                {% endif %}
-                                <div class="row">
-                                    <div class="col-sm-6 form-group">
-                                        {{ form_label(form.firstname, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.firstname, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        {{ form_label(form.lastname, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.lastname, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-9 form-group">
-                                        {{ form_label(form.email, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.email, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        {{ form_label(form.phone, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.phone, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 form-group">
-                                        {{ form_label(form.plainPassword.first, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        {{ form_label(form.plainPassword.second, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 form-group text-right mt50">
-                                    <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
-                                </div>
-                                {{ form_end(form) }}
                             </div>
                         </div>
                     </div>

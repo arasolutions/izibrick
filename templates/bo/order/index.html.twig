@@ -20,118 +20,160 @@
                             <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
                                  role="tabpanel">
                                 <div id="wizard-tab1" class="tab-pane">
-                                    {{ form_start(form, {'attr':{'method':'post', 'action': path('order', {'product': product.id }),'class':'form-horizontal'}}) }}
-                                    <div class="row text-center mt20">
-                                        <div class="col-sm-6 text-bold bandeau-blue">Site {{ product.name }}</div>
-                                        {% if not product.codePromotion %}
-                                            <div class="col-sm-6 bandeau-white">A partir de
-                                                <span class="">{{ product.price }} €</span>/mois
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
-                                    {% if not product.codePromotion %}
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <div class="input-group mar-btm">
-                                                    {{ form_widget(form.codePromo, {'attr':{'class':'form-control', 'placeholder':'Code promotion'}}) }}
-                                                    <span class="input-group-btn ml20">
-                                                        <button id="codePromoBtn" type="submit" class="btn btn-blue btn-lg">OK !</button>
-                                                    </span>
-                                                </div>
-                                                <div class="form-errors">
-                                                    {{ form_errors(form.codePromo) }}
-                                                </div>
+
+                                        <div class="media mt20 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover g-bg-gray-light-v5 g-rounded-4 g-transition-0_3 g-pa-20">
+                                            <div class="media-body">
+                                                <blockquote class="lead g-mb-15">Veuillez sélectionnez l'offre de votre choix.</blockquote>
                                             </div>
                                         </div>
-                                    {% else %}
-                                        <div class="col-sm-6 bandeau-white">A partir de <br/>
-                                            <span class="price text-2x">{{ product.price }}€</span>/mois
-                                            {{ form_widget(form.codePromo, {'attr':{'class':'hidden'}}) }}
-                                        </div>
-                                    {% endif %}
-                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
-                                    <div class="col-sm-12 form-group">
-                                        {{ form_label(form.name, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                        {{ form_widget(form.name, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                    </div>
-                                    <div class="col-sm-12 form-errors">
-                                        {{ form_errors(form.name) }}
-                                    </div>
-                                    <div class="col-sm-12 form-group">
-                                        {{ form_label(form.logo, null, {'label_attr':{'class':'control-label'}}) }}
-                                        {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
-                                    </div>
-                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
 
-                                    <div class="col-sm-12 form-group">
-                                        {{ form_label(form.template, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                        <span class="form-errors">{{ form_errors(form.template) }}</span>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <!--
-                                        <ul id="filterControls" class="d-block list-inline text-center g-mb-50">
-                                            <li class="list-inline-item cbp-filter-item cbp-filter-item-active g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
-                                                role="button" data-filter="*">All
-                                            </li>
-                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
-                                                role="button" data-filter=".identity">Identity
-                                            </li>
-                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
-                                                role="button" data-filter=".design">Design
-                                            </li>
-                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
-                                                role="button" data-filter=".graphic">Graphic
-                                            </li>
-                                            <li class="list-inline-item cbp-filter-item g-brd-around g-brd-gray-light-v4 g-brd-primary--active g-color-gray-dark-v4 g-color-primary--hover g-color-primary--active g-font-size-12 rounded g-transition-0_3 g-px-20 g-py-7 mb-2"
-                                                role="button" data-filter=".graphic, .identity">Design &amp; Identity
-                                            </li>
-                                        </ul>-->
-                                        <div class="cbp text-center" data-controls="#filterControls" data-animation="quicksand"
-                                             data-x-gap="10" data-y-gap="10" data-media-queries='[
-                                                 {"width": 1500, "cols": 6},
-                                                 {"width": 1100, "cols": 6},
-                                                 {"width": 800, "cols": 4},
-                                                 {"width": 480, "cols": 3},
-                                                 {"width": 300, "cols": 2},
-                                                 {"width": 0, "cols": 1}
-                                               ]'>
-                                            <!-- Cube Portfolio Blocks - Item -->
-                                            {% for template in templates %}
-                                                <div class="cbp-item identity design" data-id="{{ template.id }}">
-                                                    <div class="u-block-hover g-parent">
-                                                        <img class="img-fluid g-transform-scale-1_1--parent-hover g-transition-0_5 g-transition--ease-in-out"
-                                                             src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
-                                                             alt="Image description">
-                                                        <div class="d-flex w-100 h-100 g-bg-black-opacity-0_6 opacity-0 g-opacity-1--parent-hover g-pos-abs g-top-0 g-left-0 g-transition-0_3 g-transition--ease-in u-block-hover__additional--fade u-block-hover__additional--fade-in g-pa-15">
-                                                            <ul class="align-items-end flex-column list-inline mt-auto ml-auto mb-0">
-                                                                <li class="list-inline-item">
-                                                                    <a class="u-icon-v2 u-icon-size--xs g-brd-white g-color-black g-bg-white rounded-circle"
-                                                                       href="#">
-                                                                        <i class="icon-communication-095 u-line-icon-pro"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                        <!-- Pricing Plans -->
+                                        <div class="row mt50 g-mb-70">
+                                            <div class="col-md-4 g-mb-30">
+                                                <!-- Article -->
+                                                <article
+                                                        class="u-shadow-v21 u-shadow-v21--hover g-bg-white text-center g-overflow-hidden g-rounded-4 g-pos-rel g-z-index-2 g-cursor-pointer g-transition-0_3">
+                                                    <!-- Article Header -->
+                                                    <header class="g-bg-firebrock g-pos-rel g-px-20 g-py-70">
+                                                        <svg class="g-pos-abs g-bottom-0 g-left-0 g-right-0" version="1.1"
+                                                             preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="70px"
+                                                             viewBox="0 0 300 70">
+                                                            <path d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z" opacity="0.6" fill="#ffffff"/>
+                                                            <path d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z" opacity="0.6" fill="#ffffff"/>
+                                                            <path d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                H42.401L43.415,98.342z" opacity="0.7" fill="#ffffff"/>
+                                                            <path d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z" fill="#ffffff"/>
+                                                        </svg>
+                                                        <strong class="d-block g-color-white g-font-size-50 g-line-height-0_7 g-mb-20">
+                                                            <span class="g-valign-top g-font-size-default">€ </span>79<span
+                                                                    class="g-font-size-default">/ mois</span>
+                                                        </strong>
+                                                        <h3 class="h6 text-uppercase g-color-white-opacity-0_7 g-letter-spacing-3 g-mb-20">
+                                                            Premium</h3>
+                                                    </header>
+                                                    <!-- End Article Header -->
+
+                                                    <!-- Article Content -->
+                                                    <div class="g-px-20 g-py-40">
+                                                        <ul class="list-unstyled g-mb-40">
+                                                            <li class="g-mb-20">Site <strong>responsive</strong></li>
+                                                            <li class="g-mb-20">Assistance à la création</li>
+                                                            <li class="g-mb-20">Accès à votre back-office</li>
+                                                            <li class="g-mb-20">Support par mail</li>
+                                                            <li class="g-mb-20">&nbsp;</li>
+                                                            <li class="g-mb-20">&nbsp;</li>
+                                                            <li class="g-mb-20">&nbsp;</li>
+                                                            <li class="g-mb-20">&nbsp;</li>
+                                                        </ul>
+                                                        <a class="btn text-uppercase u-btn-firebrock g-rounded-50 g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10"
+                                                           href="{{ path('order-product', {'product':2}) }}">Choisir</a>
                                                     </div>
-                                                    <div class="g-bg-white text-center g-pa-15">
-                                                        <h3 class="h6 g-color-black g-font-weight-700 mb-1">{{ template.name }}</h3>
-                                                        <p class="g-font-size-13 mb-0">{{ template.description }}</p>
+                                                    <!-- End Article Content -->
+                                                </article>
+                                                <!-- End Article -->
+                                            </div>
+
+                                            <div class="col-md-4 g-mb-30">
+                                                <!-- Article -->
+                                                <article
+                                                        class="u-shadow-v21 u-shadow-v21--hover g-bg-white text-center g-overflow-hidden g-rounded-4 g-pos-rel g-z-index-2 g-cursor-pointer g-transition-0_3">
+                                                    <!-- Article Header -->
+                                                    <header class="g-bg-firebrock g-pos-rel g-px-20 g-py-70">
+                                                        <svg class="g-pos-abs g-bottom-0 g-left-0 g-right-0" version="1.1"
+                                                             preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="70px"
+                                                             viewBox="0 0 300 70">
+                                                            <path d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z" opacity="0.6" fill="#ffffff"/>
+                                                            <path d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z" opacity="0.6" fill="#ffffff"/>
+                                                            <path d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                H42.401L43.415,98.342z" opacity="0.7" fill="#ffffff"/>
+                                                            <path d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z" fill="#ffffff"/>
+                                                        </svg>
+                                                        <strong class="d-block g-color-white g-font-size-50 g-line-height-0_7 g-mb-20">
+                                                            <span class="g-valign-top g-font-size-default">€ </span>149<span
+                                                                    class="g-font-size-default">/ mois</span>
+                                                        </strong>
+                                                        <h3 class="h6 text-uppercase g-color-white-opacity-0_7 g-letter-spacing-3 g-mb-20">
+                                                            Professionnel</h3>
+                                                    </header>
+                                                    <!-- End Article Header -->
+
+                                                    <!-- Article Content -->
+                                                    <div class="g-px-20 g-py-40">
+                                                        <ul class="list-unstyled g-mb-40">
+                                                            <li class="g-mb-20">Site <strong>responsive</strong></li>
+                                                            <li class="g-mb-20">Assistance à la création</li>
+                                                            <li class="g-mb-20">Accès à votre back-office</li>
+                                                            <li class="g-mb-20">Support par mail</li>
+                                                            <li class="g-mb-20">Suivi des visites</li>
+                                                            <li class="g-mb-20">Campagne publicitaire</li>
+                                                            <li class="g-mb-20">&nbsp;</li>
+                                                            <li class="g-mb-20">&nbsp;</li>
+                                                        </ul>
+                                                        <a class="btn text-uppercase u-btn-firebrock g-rounded-50 g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10" href="{{ path('order-product', {'product':3}) }}">Choisir</a>
                                                     </div>
-                                                </div>
-                                            {% endfor %}
+                                                    <!-- End Article Content -->
+                                                </article>
+                                                <!-- End Article -->
+                                            </div>
+
+                                            <div class="col-md-4 g-mb-30">
+                                                <!-- Article -->
+                                                <article
+                                                        class="u-shadow-v21 u-shadow-v21--hover g-bg-white text-center g-overflow-hidden g-rounded-4 g-pos-rel g-z-index-2 g-cursor-pointer g-transition-0_3">
+                                                    <!-- Article Header -->
+                                                    <header class="g-bg-firebrock g-pos-rel g-px-20 g-py-70">
+                                                        <svg class="g-pos-abs g-bottom-0 g-left-0 g-right-0" version="1.1"
+                                                             preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="70px"
+                                                             viewBox="0 0 300 70">
+                                                            <path d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729
+                c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z" opacity="0.6" fill="#ffffff"/>
+                                                            <path d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729
+                c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z" opacity="0.6" fill="#ffffff"/>
+                                                            <path d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716
+                H42.401L43.415,98.342z" opacity="0.7" fill="#ffffff"/>
+                                                            <path d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428
+                c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z" fill="#ffffff"/>
+                                                        </svg>
+                                                        <strong class="d-block g-color-white g-font-size-50 g-line-height-0_7 g-mb-20">
+                                                            sur devis
+                                                        </strong>
+                                                        <h3 class="h6 text-uppercase g-color-white-opacity-0_7 g-letter-spacing-3 g-mb-20">
+                                                            Personnalisé</h3>
+                                                    </header>
+                                                    <!-- End Article Header -->
+
+                                                    <!-- Article Content -->
+                                                    <div class="g-px-20 g-py-40">
+                                                        <ul class="list-unstyled g-mb-40">
+                                                            <li class="g-mb-20">Site <strong>responsive</strong></li>
+                                                            <li class="g-mb-20">Assistance à la création</li>
+                                                            <li class="g-mb-20">Accès à votre back-office</li>
+                                                            <li class="g-mb-20">Support par mail</li>
+                                                            <li class="g-mb-20">Suivi des visites</li>
+                                                            <li class="g-mb-20">Campagne publicitaire</li>
+                                                            <li class="g-mb-20">Design personnalisé</li>
+                                                            <li class="g-mb-20">Ajout de pages spécifiques</li>
+                                                        </ul>
+                                                        <a class="btn text-uppercase u-btn-firebrock g-rounded-50 g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10" href="{{ path('our-contact') }}">Choisir</a>
+                                                    </div>
+                                                    <!-- End Article Content -->
+                                                </article>
+                                                <!-- End Article -->
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 form-group">
-                                        {{ form_label(form.colorTheme, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                        {{ form_widget(form.colorTheme, {'attr':{'class':'form-control form-control-md rounded-0 colorpicker'}}) }}
-                                    </div>
 
-                                    <div class="col-sm-12 form-group text-right mt50">
-                                        <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
-                                    </div>
 
-                                    {{ form_end(form) }}
+
+
                                 </div>
                             </div>
                         </div>
