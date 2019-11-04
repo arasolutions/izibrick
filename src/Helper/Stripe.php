@@ -55,7 +55,7 @@ class Stripe
      */
     public function createCharge($amount, $source, $description, $eur = 'eur'){
         $charge = \Stripe\Charge::create([
-            'amount' => $amount,
+            'amount' => $amount*100,
             'currency' => $eur,
             'source' => $source,
             'description' => $description,

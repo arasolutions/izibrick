@@ -215,8 +215,9 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             $charge = $stripe->createCharge($invoice->getTotalAmount(), $token, $invoice->getTitle().' - '.$invoice->getDescription());
             if($charge){
                 // Paiement accepté
-
+                return $this->render('bo/order/payment-completed.html.twig');
             }
+            return $this->render('bo/order/payment-failure.html.twig');
         }
 
         return $this->render('bo/order/payment.html.twig', [
