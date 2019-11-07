@@ -4,7 +4,7 @@
 namespace App\Helper;
 
 
-class Stripe
+class StripeHelper
 {
 
     private $apiKey;

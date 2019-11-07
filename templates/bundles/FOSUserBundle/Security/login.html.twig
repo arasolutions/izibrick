@@ -5,10 +5,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block fos_user_content %}
-    <section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall" data-options="{direction: 'reverse', settings_mode_oneelement_max_offset: '150'}">
-
-        <div class="divimage dzsparallaxer--target w-100 u-bg-overlay g-bg-size-cover g-bg-bluegray-opacity-0_3--after" style="height: 140%; background-image: url({{ asset('templates/bo/img/bg6.jpg') }}); transform: translate3d(0px, -192.738px, 0px);"></div>
-
+    <section class="g-bg-firebrock-light-v5">
         <div class="container g-py-100">
             <div class="row justify-content-center">
                 <div class="col-sm-8 col-lg-5">
@@ -59,8 +56,10 @@
                             </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-                            <div class="mb-4 text-center">
-                                <input type="submit" class="btn btn-md u-btn-firebrock rounded g-py-13 g-px-25" value="Se connecter"/>
+                            <div class="mb-4">
+                                <input type="submit" class="btn btn-md u-btn-firebrock rounded g-py-13 g-px-25"
+                                       value="Se connecter"/>
+                                <a href="{{ path('order_index') }}" class="btn btn-md u-btn-primary rounded g-py-13 g-px-25 pull-right">Je crée mon site</a>
                             </div>
                         </form>
                         <!-- End Form -->

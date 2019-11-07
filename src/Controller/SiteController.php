@@ -154,7 +154,6 @@ class SiteController extends AbstractController
         }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/contact/index.html.twig', [
-            'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
             'form' => $form->createView(),
             'contact' => $site->getContact(),
@@ -184,7 +183,6 @@ class SiteController extends AbstractController
         }
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
-            'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site
         ]);
     }

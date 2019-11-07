@@ -1,24 +1,31 @@
 .pt20 {
     padding-top: 20px;
 }
+
 .ml20 {
     margin-left: 20px;
 }
+
 .mt20 {
     margin-top: 20px;
 }
+
 .mt50 {
     margin-top: 50px;
 }
+
 .mb20 {
     margin-bottom: 20px;
 }
+
 .mb50 {
     margin-bottom: 50px;
 }
+
 .w20 {
     width: 20%;
 }
+
 .text-bold {
     font-weight: bold;
 }
@@ -32,11 +39,9 @@
     color: #FFF;
     background-color: #25476a;
     padding: 10px;
-}.bandeau-blue {
-     color: #FFF;
-     background-color: #25476a;
-     padding: 10px;
- }
+    margin: auto;
+}
+
 .bandeau-white {
     color: #25476a;
     background-color: #FFF;
@@ -76,6 +81,7 @@
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
 }
+
 /* FIN STRIPE */
 
 /* ORDER */
@@ -83,15 +89,18 @@
     color: red;
     text-decoration: line-through;
 }
+
 .new-price {
     color: green;
 }
+
 .form-errors {
     color: red;
     font-weight: bold;
 }
-.form-errors ul{
-    list-style:none;
+
+.form-errors ul {
+    list-style: none;
 }
 
 .nav-link.active {
@@ -100,17 +109,21 @@
     font-weight: bold;
     border: none;
 }
-.nav-link.active i{
-    color: var(--color-firebrock)white;
+
+.nav-link.active i {
+    color: var(--color-firebrock) white;
     font-weight: bold;
 }
+
 .label-payment {
     font-weight: bold;
     font-size: 1.2em;
 }
+
 .logo-title {
     color: var(--color-firebrock);
     font-weight: bold;
     font-size: 1.5em;
 }
+
 /* FIN ORDER */

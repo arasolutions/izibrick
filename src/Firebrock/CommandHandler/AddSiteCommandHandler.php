@@ -13,6 +13,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Firebrock\Command\AddSiteCommand;
 use App\Repository\BlogRepository;
+use App\Repository\CodePromotionRepository;
 use App\Repository\ContactRepository;
 use App\Repository\HomeRepository;
 use App\Repository\PresentationRepository;
@@ -52,6 +53,9 @@ class AddSiteCommandHandler
     /** @var QuoteRepository */
     private $quoteRepository;
 
+    /** @var CodePromotionRepository */
+    private $codePromotionRepository;
+
     /**
      * AddSiteCommandHandler constructor.
      * @param SiteRepository $siteRepository
@@ -62,8 +66,9 @@ class AddSiteCommandHandler
      * @param BlogRepository $blogRepository
      * @param ContactRepository $contactRepository
      * @param QuoteRepository $quoteRepository
+     * @param CodePromotionRepository $codePromotionRepository
      */
-    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository)
+    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->productRepository = $productRepository;
@@ -73,6 +78,7 @@ class AddSiteCommandHandler
         $this->blogRepository = $blogRepository;
         $this->contactRepository = $contactRepository;
         $this->quoteRepository = $quoteRepository;
+        $this->codePromotionRepository = $codePromotionRepository;
     }
 
 
@@ -84,6 +90,12 @@ class AddSiteCommandHandler
         $site->setColorTheme($command->getColorTheme());
         $templateChosen = $this->templateRepository->findOneBy(array('id' => $command->getTemplate()));
         $site->setTemplate($templateChosen);
+        if ($command->getCodePromo()) {
+            $codePromo = $this->codePromotionRepository->getByName($command->getCodePromo(), $command->getProductId());
+            if($codePromo!=null){
+                $site->setCodePromotion($codePromo);
+            }
+        }
         if ($command->getLogo() != null) {
             $site->setLogoFile($command->getLogo());
         }
