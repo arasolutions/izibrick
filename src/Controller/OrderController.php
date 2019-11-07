@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CodePromotion;
 use App\Entity\Customer;
 use App\Entity\Product;
 use App\Entity\Site;
@@ -13,7 +14,7 @@ use App\Firebrock\CommandHandler\AddSiteCommandHandler;
 use App\Form\AddCustomerType;
 use App\Form\AddOrderType;
 use App\Form\AddSiteOptionsType;
-use App\Helper\Stripe;
+use App\Helper\StripeHelper;
 use App\Repository\CodePromotionRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\InvoiceRepository;
@@ -81,14 +82,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $this->invoiceRepository = $invoiceRepository;
     }
 
-
     /**
-     * @Route("/order", name="order", methods={"GET","POST"}, name="order")
-     * @param Request $request
-     * @param AddSiteCommandHandler $addSiteCommandHandler
+     * @Route("/order", name="order_index", methods={"GET"})
      * @return Response
      */
-    public function index(Request $request)
+    public function orderIndex()
     {
         return $this->render('bo/order/index.html.twig', [
             'step' => 1
@@ -96,13 +94,13 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     }
 
     /**
-     * @Route("/order/{product}", name="order", methods={"GET","POST"}, name="order-product")
+     * @Route("/order/{product}", name="order", methods={"GET","POST"}, name="order_product")
      * @param int $product
      * @param Request $request
      * @param AddSiteCommandHandler $addSiteCommandHandler
      * @return Response
      */
-    public function indexOrder($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
+    public function orderProduct($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
     {
         $productChosen = $this->productRepository->findOneBy(array('id' => $product));
 
@@ -118,10 +116,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         if ($form->isSubmitted()) {
             if ($request->get('checkCodePromotion') == '1' && $form->get('codePromo')->getData() != '') {
                 //Recherche si le code promo est OK
-                $newProduct = $this->codePromotionRepository->getByName($form->get('codePromo')->getData(), $productChosen);
-                if($newProduct){
+                /** @var CodePromotion $codePromo */
+                $codePromoFounded = $this->codePromotionRepository->getByName($form->get('codePromo')->getData(), $productChosen);
+                if($codePromoFounded){
                     $codePromo = $form->get('codePromo')->getData();
-                    $newPrice = $newProduct->getPrice();
+                    $newPrice = floatval($productChosen->getPrice()) + floatval($codePromoFounded->getPriceDecrease());
                 }else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
@@ -132,7 +131,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     } else {
                         // Nouveau site
                         $site = $addSiteCommandHandler->handle($order);
-                        return $this->redirectToRoute('options', array('siteId' => $site->getId()));
+                        return $this->redirectToRoute('order_options', array('siteId' => $site->getId()));
                     }
                 }
             }
@@ -152,14 +151,14 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
 
     /**
-     * @Route("/order/{siteId}/options", name="options")
+     * @Route("/order/{siteId}/options", name="order_options")
      * @param int $siteId
      * @param Request $request
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function options($siteId, Request $request)
+    public function orderOptions($siteId, Request $request)
     {
 
         $site = $this->siteRepository->getById($siteId);
@@ -181,25 +180,25 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     }
 
     /**
-     * @Route("/order/{siteId}/end", name="end")
+     * @Route("/order/{siteId}/end", name="order_end")
      * @param $siteId
      * @param Request $request
      */
-    public function end($siteId, Request $request)
+    public function orderEnd($siteId, Request $request)
     {
         $site = $this->siteRepository->getById($siteId);
 
     }
 
     /**
-     * @Route("/order/{siteId}/{userId}/payment", name="payment")
+     * @Route("/order/{siteId}/{userId}/payment", name="order_payment")
      * @param int $siteId
      * @param Request $request
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function payment($siteId, $userId, Request $request)
+    public function orderPayment($siteId, $userId, Request $request)
     {
         $site = $this->siteRepository->getById($siteId);
         $user = $this->userRepository->get($userId);
@@ -207,7 +206,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         if ($request->isMethod('POST')) {
             $token = $request->request->get('tokenId');
-            $stripe = new Stripe();
+            $stripe = new StripeHelper();
             // Enregistrement de la carte dans Stripe
             //$card = $stripe->createCard($user->getStripeCustomerId(), $token);
             //var_dump($card);die;

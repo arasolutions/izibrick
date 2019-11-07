@@ -155,6 +155,11 @@ class Site
     private $trackingContacts;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CodePromotion", inversedBy="sites")
+     */
+    private $codePromotion;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -524,5 +529,17 @@ class Site
     public function getTrackingContacts()
     {
         return $this->trackingContacts;
+    }
+
+    public function getCodePromotion(): ?CodePromotion
+    {
+        return $this->codePromotion;
+    }
+
+    public function setCodePromotion(?CodePromotion $codePromotion): self
+    {
+        $this->codePromotion = $codePromotion;
+
+        return $this;
     }
 }

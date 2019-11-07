@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,15 +36,38 @@ class CodePromotion
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2)
      */
-    private $price;
+    private $priceDecrease;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateBegin;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateEnd;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $code;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Site", mappedBy="codePromotion")
+     */
+    private $sites;
 
     /**
      * Presentation constructor.
      * @param $site
+     * @throws \Exception
      */
     public function __construct($site)
     {
         $this->site = $site;
+        $this->dateBegin = new \DateTime();
+        $this->sites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,17 +107,84 @@ class CodePromotion
     /**
      * @return mixed
      */
-    public function getPrice()
+    public function getPriceDecrease()
     {
-        return $this->price;
+        return $this->priceDecrease;
     }
 
     /**
-     * @param mixed $price
+     * @param mixed $priceDecrease
      */
-    public function setPrice($price)
+    public function setPriceDecrease($priceDecrease)
     {
-        $this->price = $price;
+        $this->priceDecrease = $priceDecrease;
+    }
+
+    public function getDateBegin(): ?\DateTimeInterface
+    {
+        return $this->dateBegin;
+    }
+
+    public function setDateBegin(\DateTimeInterface $dateBegin): self
+    {
+        $this->dateBegin = $dateBegin;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?\DateTimeInterface
+    {
+        return $this->dateEnd;
+    }
+
+    public function setDateEnd(?\DateTimeInterface $dateEnd): self
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Site[]
+     */
+    public function getSites(): Collection
+    {
+        return $this->sites;
+    }
+
+    public function addSite(Site $site): self
+    {
+        if (!$this->sites->contains($site)) {
+            $this->sites[] = $site;
+            $site->setCodePromotion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSite(Site $site): self
+    {
+        if ($this->sites->contains($site)) {
+            $this->sites->removeElement($site);
+            // set the owning side to null (unless already changed)
+            if ($site->getCodePromotion() === $this) {
+                $site->setCodePromotion(null);
+            }
+        }
+
+        return $this;
     }
 
 }

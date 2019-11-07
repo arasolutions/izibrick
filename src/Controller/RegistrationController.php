@@ -8,7 +8,7 @@ use App\Entity\UserSite;
 use App\Firebrock\Command\RegistrationCommand;
 use App\Firebrock\CommandHandler\CreateUserCommandHandler;
 use App\Form\RegistrationType;
-use App\Helper\Stripe;
+use App\Helper\StripeHelper;
 use App\Repository\InvoiceRepository;
 use App\Repository\SiteRepository;
 use App\Repository\UserSiteRepository;
@@ -132,7 +132,7 @@ class RegistrationController extends BaseController
                 //return $response;
 
                 // Enregistrement du compte dans Stripe
-                $stripe = new Stripe();
+                $stripe = new StripeHelper();
                 $customer = $stripe->createCustomer($user->getId().'-'.$user->getEmail(), $site->getProduct()->getName(), $user->getEmail());
                 $userRepo = $this->userRepository->get($user->getId());
                 if($userRepo){

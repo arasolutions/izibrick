@@ -14,7 +14,7 @@
             <div class="row justify-content-center">
                 <div class="col-sm-12 col-lg-10">
                     <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
-                        {% include 'bo/order/wizard.html.twig' with {'step': 1} %}
+                        {% include 'bo/order/wizard.html.twig' with {'step': step} %}
 
                         <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
                             <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
@@ -70,7 +70,7 @@
                                                             <li class="g-mb-20">&nbsp;</li>
                                                         </ul>
                                                         <a class="btn text-uppercase u-btn-firebrock g-rounded-50 g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10"
-                                                           href="{{ path('order-product', {'product':2}) }}">Choisir</a>
+                                                           href="{{ path('order_product', {'product':2}) }}">Choisir</a>
                                                     </div>
                                                     <!-- End Article Content -->
                                                 </article>
@@ -117,7 +117,7 @@
                                                             <li class="g-mb-20">&nbsp;</li>
                                                             <li class="g-mb-20">&nbsp;</li>
                                                         </ul>
-                                                        <a class="btn text-uppercase u-btn-firebrock g-rounded-50 g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10" href="{{ path('order-product', {'product':3}) }}">Choisir</a>
+                                                        <a class="btn text-uppercase u-btn-firebrock g-rounded-50 g-font-size-12 g-font-weight-700 g-pa-15-30 g-mb-10" href="{{ path('order_product', {'product':3}) }}">Choisir</a>
                                                     </div>
                                                     <!-- End Article Content -->
                                                 </article>

@@ -21,17 +21,23 @@ class CodePromotionRepository extends AbstractRepository
 
 
     /**
-     * @param $siteName
-     * @return mixed|null
+     * @param $codePromotion
+     * @param $product |null
+     * @return CodePromotion|null
+     * @throws \Exception
      */
     public function getByName($codePromotion, $product)
     {
         try {
             $q = $this->createQueryBuilder('c')
-                ->andWhere('LOWER(c.name) = :val')
+                ->andWhere('LOWER(c.code) = :val')
                 ->andWhere('c.product = :product')
-                ->setParameter('val', strtolower($codePromotion))
+                ->andWhere('c.dateBegin <= :now')
+                ->andWhere('c.dateEnd >= :now OR c.dateEnd IS NULL')
+                ->andWhere('c.product = :product OR c.product IS NULL')
                 ->setParameter('product', $product)
+                ->setParameter('val', strtolower($codePromotion))
+                ->setParameter('now', new \DateTime())
                 ->getQuery();
             return $q->getOneOrNullResult();
         } catch (NoResultException $e) {
