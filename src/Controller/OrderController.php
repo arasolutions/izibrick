@@ -6,14 +6,19 @@ use App\Entity\CodePromotion;
 use App\Entity\Customer;
 use App\Entity\Product;
 use App\Entity\Site;
+use App\Entity\User;
 use App\Firebrock\Command\AddCustomerCommand;
 use App\Firebrock\Command\AddSiteCommand;
+use App\Firebrock\Command\RegistrationCommand;
 use App\Firebrock\Command\SiteOptionsCommand;
 use App\Firebrock\CommandHandler\AddCustomerCommandHandler;
+use App\Firebrock\CommandHandler\AddInvoiceCommandHandler;
 use App\Firebrock\CommandHandler\AddSiteCommandHandler;
 use App\Form\AddCustomerType;
 use App\Form\AddOrderType;
 use App\Form\AddSiteOptionsType;
+use App\Form\OrderLoginType;
+use App\Form\RegistrationType;
 use App\Helper\StripeHelper;
 use App\Repository\CodePromotionRepository;
 use App\Repository\CustomerRepository;
@@ -37,6 +42,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 {
@@ -61,6 +67,15 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     /** @var InvoiceRepository */
     private $invoiceRepository;
 
+    /** @var UserManagerInterface */
+    private $userManager;
+
+    /** @var EncoderFactoryInterface */
+    private $encoderFactory;
+
+    /** @var AddInvoiceCommandHandler */
+    private $addInvoiceCommandHandler;
+
     /**
      * OrderController constructor.
      * @param ProductRepository $productRepository
@@ -70,8 +85,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      * @param UserRepository $userRepository
      * @param CodePromotionRepository $codePromotionRepository
      * @param InvoiceRepository $invoiceRepository
+     * @param UserManagerInterface $userManager
+     * @param EncoderFactoryInterface $encoderFactory
+     * @param AddInvoiceCommandHandler $addInvoiceCommandHandler
      */
-    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, CustomerRepository $customerRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository)
+    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, CustomerRepository $customerRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository, UserManagerInterface $userManager, EncoderFactoryInterface $encoderFactory, AddInvoiceCommandHandler $addInvoiceCommandHandler)
     {
         $this->productRepository = $productRepository;
         $this->templateRepository = $templateRepository;
@@ -80,7 +98,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $this->userRepository = $userRepository;
         $this->codePromotionRepository = $codePromotionRepository;
         $this->invoiceRepository = $invoiceRepository;
+        $this->userManager = $userManager;
+        $this->encoderFactory = $encoderFactory;
+        $this->addInvoiceCommandHandler = $addInvoiceCommandHandler;
     }
+
 
     /**
      * @Route("/order", name="order_index", methods={"GET"})
@@ -94,7 +116,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     }
 
     /**
-     * @Route("/order/{product}", name="order", methods={"GET","POST"}, name="order_product")
+     * @Route("/order/product/{product}", name="order", methods={"GET","POST"}, name="order_product")
      * @param int $product
      * @param Request $request
      * @param AddSiteCommandHandler $addSiteCommandHandler
@@ -118,10 +140,10 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 //Recherche si le code promo est OK
                 /** @var CodePromotion $codePromo */
                 $codePromoFounded = $this->codePromotionRepository->getByName($form->get('codePromo')->getData(), $productChosen);
-                if($codePromoFounded){
+                if ($codePromoFounded) {
                     $codePromo = $form->get('codePromo')->getData();
                     $newPrice = floatval($productChosen->getPrice()) + floatval($codePromoFounded->getPriceDecrease());
-                }else {
+                } else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
             } else {
@@ -211,8 +233,8 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             //$card = $stripe->createCard($user->getStripeCustomerId(), $token);
             //var_dump($card);die;
             // On exécute le paiement
-            $charge = $stripe->createCharge($invoice->getTotalAmount(), $token, $invoice->getTitle().' - '.$invoice->getDescription());
-            if($charge){
+            $charge = $stripe->createCharge($invoice->getTotalAmount(), $token, $invoice->getTitle() . ' - ' . $invoice->getDescription());
+            if ($charge) {
                 // Paiement accepté
                 return $this->render('bo/order/payment-completed.html.twig');
             }
@@ -225,5 +247,54 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'invoice' => $invoice,
             'step' => 5
         ]);
+    }
+
+    /**
+     * @Route("/order/login", name="order_login")
+     * @param Request $request
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function orderLogin(Request $request)
+    {
+        /** @var RegistrationCommand $command */
+        $command = new RegistrationCommand($request->get('siteId'));
+        $formLogin = $this->createForm(OrderLoginType::class, $command);
+
+        $formLogin->handleRequest($request);
+        $userFound = $this->userManager->findUserByEmail($command->getUsername());
+
+        $site = $this->siteRepository->getById($command->getSiteId());
+
+        if($userFound!= null){
+            $encoder = $this->encoderFactory->getEncoder($userFound);
+            $passwordValid = $encoder->isPasswordValid($userFound->getPassword(), $command->getPlainPassword(), $userFound->getSalt());
+            if(!$passwordValid){
+                // Mot de passe invalide
+                $formLogin->addError(new FormError('Mauvais mot de passe'));
+            }else{
+                if(!$userFound->isEnabled()){
+                    $formLogin->addError(new FormError('Veuillez activer votre compte.'));
+                }else{
+                    /** @var User $userRepo */
+                    $userRepo = $this->userRepository->get($userFound->getId());
+                    $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
+                    if ($invoice != null) {
+                        return $this->redirectToRoute('order_payment', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
+                    }
+                }
+            }
+        }else{
+            // User non trouvé
+            $formLogin->addError(new FormError('Compte inconnu'));
+        }
+
+        $formRegister = $this->createForm(RegistrationType::class, $command);
+
+        $formRegister->handleRequest($request);
+
+        return $this->render('@FOSUser/Registration/register.html.twig', array(
+            'form' => $formRegister->createView(),
+            'formLogin' => $formLogin->createView()
+        ));
     }
 }

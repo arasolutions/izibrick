@@ -13,67 +13,167 @@
                         {% include 'bo/order/wizard.html.twig' with {'step': 4} %}
 
                         <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
-                            <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1" role="tabpanel">
+                            <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
+                                 role="tabpanel">
 
                                 <div id="wizard-tab1" class="tab-pane">
 
-                                    <div class="media mt20 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover g-bg-gray-light-v5 g-rounded-4 g-transition-0_3 g-pa-20">
-                                        <div class="media-body">
-                                            <blockquote class="lead g-mb-15">
-                                                Veuillez renseigner vos informations personnelles.<br/>
-                                                Votre email et votre mot de passe vous permettront de vous connecter à l'interface d'administration.
-                                            </blockquote>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-center align-items-center no-gutters mt20">
+                                        <div class="col-lg-5 g-bg-teal g-rounded-left-5--lg-up">
+                                            <div class="g-pa-50">
+                                                <!-- Form -->
+                                                {{ form_start(formLogin, {'method': 'post', 'action': path('order_login'), 'attr': {'class': 'g-py-15'}}) }}
+                                                <form class="g-py-15" action="{{ path("order_login") }}"
+                                                      method="post">
+                                                    <h2 class="h3 g-color-white mb-4">J'ai un compte</h2>
+                                                    {% if formLogin.vars.errors|length %}
+                                                        <div class="alert-error">
+                                                            {{ form_errors(formLogin) }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="mb-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text g-width-45 g-brd-right-none g-brd-white g-color-white"><i
+                                                                            class="icon-finance-067 u-line-icon-pro"></i></span>
+                                                            </div>
+                                                            {{ form_widget(formLogin.username,
+                                                                {'attr':
+                                                                    {
+                                                                        'placeholder': 'Email',
+                                                                        'class':'form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13'
+                                                                    }
+                                                                }
+                                                            ) }}
+                                                        </div>
+                                                    </div>
 
-                                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-group mt20'}}) }}
+                                                    <div class="g-mb-40">
+                                                        <div class="input-group rounded">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text g-width-45 g-brd-right-none g-brd-white g-color-white"><i
+                                                                            class="icon-communication-062 u-line-icon-pro"></i></span>
+                                                            </div>
 
-                                    {% if error is defined %}
-                                        <div class="g-mt-10 alert alert-danger">
-                                            <strong>Aïe</strong> {{ error }} <a href="{{ path('fos_user_security_login') }}" class="alert-link">Connectez-vous</a>
+                                                            {{ form_widget(formLogin.plainPassword,
+                                                                {'attr':
+                                                                    {
+                                                                        'placeholder': 'Mot de passe',
+                                                                        'class':'form-control g-color-black g-brd-left-none g-brd-white g-bg-transparent g-color-white g-placeholder-white g-pl-0 g-pr-15 g-py-13'
+                                                                    }
+                                                                }
+                                                            ) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="g-mb-60">
+                                                        <button class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13"
+                                                                type="submit">Se connecter
+                                                        </button>
+                                                    </div>
+                                                    {{ form_end(formLogin) }}
+                                                    <!-- End Form -->
+                                            </div>
                                         </div>
-                                    {% endif %}
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            {{ form_label(form.firstname, null, {'label_attr':{'class':'control-label'}}) }}
-                                            {{ form_widget(form.firstname, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                        </div>
-                                        <div class="col-sm-6 form-group">
-                                            {{ form_label(form.lastname, null, {'label_attr':{'class':'control-label'}}) }}
-                                            {{ form_widget(form.lastname, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+
+                                        <div class="col-lg-7 g-bg-white g-rounded-right-5--lg-up">
+                                            <div class="g-pa-50">
+                                                <!-- Form -->
+                                                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'g-py-15'}}) }}
+                                                <h2 class="h3 g-color-black mb-4">Je crée mon compte</h2>
+                                                <div class="mb-4 row">
+                                                    <div class="col-6">
+                                                        <div class="input-group rounded">
+                                                            {{ form_widget(form.lastname, {
+                                                                'attr':{
+                                                                    'placeholder': 'Nom',
+                                                                    'class':'form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pr-15 g-py-13'
+                                                                }
+                                                            }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-group rounded">
+                                                            {{ form_widget(form.firstname, {
+                                                                'attr':{
+                                                                    'placeholder': 'Prénom',
+                                                                    'class':'form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pr-15 g-py-13'
+                                                                }
+                                                            }) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4 row">
+                                                    <div class="col-8">
+                                                        <div class="input-group rounded">
+                                                            {{ form_widget(form.email, {
+                                                                'attr':{
+                                                                    'placeholder': 'Email',
+                                                                    'class':'form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pr-15 g-py-13'
+                                                                }
+                                                            }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="input-group rounded">
+                                                            {{ form_widget(form.phone, {
+                                                                'attr':{
+                                                                    'placeholder': 'Téléphone',
+                                                                    'class':'form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pr-15 g-py-13'
+                                                                }
+                                                            }) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4 row">
+                                                    <div class="col-6">
+                                                        <div class="input-group rounded">
+                                                            {{ form_widget(form.plainPassword.first, {
+                                                                'attr':{
+                                                                    'placeholder': 'Mot de passe',
+                                                                    'class':'form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pr-15 g-py-13'
+                                                                }
+                                                            }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-group rounded">
+                                                            {{ form_widget(form.plainPassword.second, {
+                                                                'attr':{
+                                                                    'placeholder': 'Répêter mot de passe',
+                                                                    'class':'form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-pr-15 g-py-13'
+                                                                }
+                                                            }) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-1">
+                                                    <label class="form-check-inline u-check g-color-gray-dark-v5 g-font-size-12 g-pl-25 mb-2">
+                                                        <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"
+                                                               type="checkbox">
+                                                        <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                                                            <i class="fa" data-check-icon="&#xf00c"></i>
+                                                        </div>
+                                                        I accept the <a href="#">Terms and Conditions</a>
+                                                    </label>
+                                                </div>
+
+                                                <button class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13"
+                                                        type="submit">Créer mon compte
+                                                </button>
+                                                {{ form_end(form) }}
+                                                <!-- End Form -->
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-9 form-group">
-                                            {{ form_label(form.email, null, {'label_attr':{'class':'control-label'}}) }}
-                                            {{ form_widget(form.email, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                        </div>
-                                        <div class="col-sm-3 form-group">
-                                            {{ form_label(form.phone, null, {'label_attr':{'class':'control-label'}}) }}
-                                            {{ form_widget(form.phone, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            {{ form_label(form.plainPassword.first, null, {'label_attr':{'class':'control-label'}}) }}
-                                            {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                        </div>
-                                        <div class="col-sm-6 form-group">
-                                            {{ form_label(form.plainPassword.second, null, {'label_attr':{'class':'control-label'}}) }}
-                                            {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 form-group text-right mt50">
-                                        <button type="submit" class="btn btn-blue btn-lg">Suivant</button>
-                                    </div>
-                                    {{ form_end(form) }}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 {% endblock body %}

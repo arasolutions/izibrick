@@ -10,6 +10,7 @@ class RegistrationCommand
     private $plainPassword;
     private $firstname;
     private $lastname;
+    private $username;
     private $phone;
     private $siteId;
 
@@ -120,6 +121,23 @@ class RegistrationCommand
     {
         $this->lastname = $lastname;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
 
 
 }

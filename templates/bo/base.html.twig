@@ -62,12 +62,14 @@
 
                     <!-- Logo -->
                     <a href="{{ path('index') }}" class="navbar-brand">
-                        <img src="{{ asset('assets/img/logo/logo-firebrock-mini.png') }}" alt="firebrock.com" style="width:60px;">
+                        <img src="{{ asset('assets/img/logo/logo-firebrock-mini.png') }}" alt="firebrock.com"
+                             style="width:60px;">
                     </a>
                     <!-- End Logo -->
 
                     <!-- Navigation -->
-                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg" id="navBar">
+                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg"
+                         id="navBar">
                         <a href="{{ path('index') }}" class="navbar-brand">
                             <span class="logo-title">FireBrock</span>
                         </a>
@@ -89,10 +91,17 @@
                     </div>
                     <!-- End Navigation -->
 
-                    <div class="d-inline-block g-hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
-                        <a class="btn u-btn-outline-firebrock g-font-size-13 text-uppercase g-py-10 g-px-15"
-                           href="{{ path('fos_user_security_login') }}">Se connecter</a>
-                    </div>
+                    {% if app.user is defined %}
+                        <div class="d-inline-block g-hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
+                            <a class="btn u-btn-outline-lightred g-font-size-13 text-uppercase g-py-10 g-px-15"
+                               href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
+                        </div>
+                    {% else %}
+                        <div class="d-inline-block g-hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
+                            <a class="btn u-btn-outline-firebrock g-font-size-13 text-uppercase g-py-10 g-px-15"
+                               href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                        </div>
+                    {% endif %}
                 </div>
             </nav>
         </div>
@@ -101,13 +110,16 @@
         {% block body %}{% endblock %}
     </section>
 
-    <section class="g-bg-primary g-color-white g-pa-30" style="background-image: url({{ asset('templates/bo/img/pattern5.png') }});">
+    <section class="g-bg-primary g-color-white g-pa-30"
+             style="background-image: url({{ asset('templates/bo/img/pattern5.png') }});">
         <div class="d-md-flex justify-content-md-center text-center">
             <div class="align-self-md-center">
-                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">FireBrock - Votre site internet professionnel</p>
+                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">FireBrock - Votre site internet
+                    professionnel</p>
             </div>
             <div class="align-self-md-center">
-                <a class="btn btn-lg u-btn-teal text-uppercase g-font-weight-600 g-font-size-12" target="_blank" href="{{ path('order_index', {'product':2}) }}">Je crée mon site</a>
+                <a class="btn btn-lg u-btn-teal text-uppercase g-font-weight-600 g-font-size-12" target="_blank"
+                   href="{{ path('order_index', {'product':2}) }}">Je crée mon site</a>
             </div>
         </div>
     </section>
@@ -134,19 +146,22 @@
                         <ul class="list-unstyled g-mt-minus-10 mb-0">
                             <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                                 <h4 class="h6 g-pr-20 mb-0">
-                                    <a class="g-color-white-opacity-0_8 g-color-white--hover" href="{{ path('features') }}">Fonctionnalités</a>
+                                    <a class="g-color-white-opacity-0_8 g-color-white--hover"
+                                       href="{{ path('features') }}">Fonctionnalités</a>
                                     <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                                 </h4>
                             </li>
                             <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                                 <h4 class="h6 g-pr-20 mb-0">
-                                    <a class="g-color-white-opacity-0_8 g-color-white--hover" href="{{ path('price') }}">Tarifs</a>
+                                    <a class="g-color-white-opacity-0_8 g-color-white--hover"
+                                       href="{{ path('price') }}">Tarifs</a>
                                     <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                                 </h4>
                             </li>
                             <li class="g-pos-rel g-brd-bottom g-brd-white-opacity-0_1 g-py-10">
                                 <h4 class="h6 g-pr-20 mb-0">
-                                    <a class="g-color-white-opacity-0_8 g-color-white--hover" href="{{ path('our-contact') }}">Contact</a>
+                                    <a class="g-color-white-opacity-0_8 g-color-white--hover"
+                                       href="{{ path('our-contact') }}">Contact</a>
                                     <i class="fa fa-angle-right g-absolute-centered--y g-right-0"></i>
                                 </h4>
                             </li>
@@ -161,7 +176,8 @@
                         <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Nous contacter</h2>
                     </div>
 
-                    <address class="g-bg-no-repeat g-font-size-12 mb-0" style="background-image: url({{ asset('templates/bo/img/map2.png') }});">
+                    <address class="g-bg-no-repeat g-font-size-12 mb-0"
+                             style="background-image: url({{ asset('templates/bo/img/map2.png') }});">
                         <!-- Location -->
                         <div class="d-flex g-mb-20">
                             <div class="g-mr-10">
@@ -192,9 +208,11 @@
                               </span>
                             </div>
                             <p class="mb-0">
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="mailto:contact@firebrock.com">contact@firebrock.com</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover"
+                                   href="mailto:contact@firebrock.com">contact@firebrock.com</a>
                                 <br>
-                                <a class="g-color-white-opacity-0_8 g-color-white--hover" href="https://www.firebrock.com">www.firebrock.com</a>
+                                <a class="g-color-white-opacity-0_8 g-color-white--hover"
+                                   href="https://www.firebrock.com">www.firebrock.com</a>
                             </p>
                         </div>
                         <!-- End Email and Website -->
@@ -210,8 +228,10 @@
             <div class="row">
                 <div class="col-md-8 text-center text-md-left g-mb-10 g-mb-0--md">
                     <div class="d-lg-flex">
-                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">2019 &copy; Tous droits réservés.</small>
-                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">FireBrock - Développé par <a href="https://www.ara-solutions.com" target="_blank">ARA Solutions</a></small>
+                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">2019 &copy; Tous droits
+                            réservés.</small>
+                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">FireBrock - Développé par
+                            <a href="https://www.ara-solutions.com" target="_blank">ARA Solutions</a></small>
                     </div>
                 </div>
 
