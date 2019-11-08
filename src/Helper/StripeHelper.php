@@ -130,4 +130,38 @@ class StripeHelper
         return $plan;
     }
 
+    /**
+     * @param $planTarifaireId
+     * @return \Stripe\ApiResource
+     * @throws \Stripe\Exception\ApiErrorException
+     * Récupère un plan tarifaire
+     */
+    public function getPlan($planTarifaireId){
+        $plan = \Stripe\Plan::retrieve('$planTarifaireId');
+
+        return $plan;
+    }
+
+    /**
+     * @param $amount
+     * @param $product
+     * @param string $currency
+     * @param string $interval
+     * @return static
+     * @throws \Stripe\Exception\ApiErrorException
+     * Créer un abonnement pour un utilisateur
+     */
+    public function createSubscription($customerId, $planTarifaireId){
+        $subsription = \Stripe\Subscription::create([
+            "customer" => $customerId,
+            "items" => [
+                [
+                    "plan" => $planTarifaireId,
+                ],
+            ]
+        ]);
+
+        return $subsription;
+    }
+
 }

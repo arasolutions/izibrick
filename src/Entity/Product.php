@@ -50,6 +50,11 @@ class Product
      */
     private $sites;
 
+    /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $stripePlanTarifaireId;
+
     public function __construct()
     {
         $this->sites = new ArrayCollection();
@@ -158,5 +163,21 @@ class Product
         }else{
             return true;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStripePlanTarifaireId()
+    {
+        return $this->stripePlanTarifaireId;
+    }
+
+    /**
+     * @param mixed $stripePlanTarifaireId
+     */
+    public function setStripePlanTarifaireId($stripePlanTarifaireId)
+    {
+        $this->stripePlanTarifaireId = $stripePlanTarifaireId;
     }
 }

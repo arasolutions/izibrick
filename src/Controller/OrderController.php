@@ -230,15 +230,24 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             $token = $request->request->get('tokenId');
             $stripe = new StripeHelper();
             // Enregistrement de la carte dans Stripe
-            //$card = $stripe->createCard($user->getStripeCustomerId(), $token);
-            //var_dump($card);die;
-            // On exécute le paiement
-            $charge = $stripe->createCharge($invoice->getTotalAmount(), $token, $invoice->getTitle() . ' - ' . $invoice->getDescription());
-            if ($charge) {
-                // Paiement accepté
-                return $this->render('bo/order/payment-completed.html.twig');
+            $card = $stripe->createCard($user->getStripeCustomerId(), $token);
+            if($card){
+                // On récupère le plan tarifaire associé
+                $planTarifaireId = '';
+                if($user->getLastSite()->getSite()->getProduct()->getCodePromotion()){
+                    $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getCodePromotion()->getStripePlanTarifaireId();
+                }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
+                    $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
+                }
+                // Abonnement du user au plan tarifaire
+                $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
+                if ($subscription) {
+                    // Paiement accepté
+                    return $this->render('bo/order/payment-completed.html.twig');
+                }
+                return $this->render('bo/order/payment-failure.html.twig');
+
             }
-            return $this->render('bo/order/payment-failure.html.twig');
         }
 
         return $this->render('bo/order/payment.html.twig', [
