@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Firebrock\Command\PresentationCommand;
-use App\Firebrock\Command\RegistrationCommand;
+use App\Izibrick\Command\PresentationCommand;
+use App\Izibrick\Command\RegistrationCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

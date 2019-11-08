@@ -104,14 +104,14 @@
 }
 
 .nav-link.active {
-    background-color: var(--color-firebrock);
+    background-color: var(--color-izibrick);
     color: white;
     font-weight: bold;
     border: none;
 }
 
 .nav-link.active i {
-    color: var(--color-firebrock) white;
+    color: var(--color-izibrick) white;
     font-weight: bold;
 }
 
@@ -121,7 +121,7 @@
 }
 
 .logo-title {
-    color: var(--color-firebrock);
+    color: var(--color-izibrick);
     font-weight: bold;
     font-size: 1.5em;
 }

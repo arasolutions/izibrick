@@ -4,8 +4,8 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Site;
-use App\Firebrock\Command\AddSiteCommand;
-use App\Firebrock\Command\AddTrackingQuoteCommand;
+use App\Izibrick\Command\AddSiteCommand;
+use App\Izibrick\Command\AddTrackingQuoteCommand;
 use App\Repository\ProductRepository;
 use Liip\ImagineBundle\Form\Type\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,8 +35,7 @@ class AddTrackingQuoteType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false,
                 'label' => 'Votre message',
-                'attr' => array('rows' => '10'),
-                'required' => false
+                'attr' => array('rows' => '10')
             ]);
     }
 

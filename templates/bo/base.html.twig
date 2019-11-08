@@ -3,7 +3,7 @@
 
 <head>
     <!-- Title -->
-    <title>FireBrock | {% block title %}{% endblock %}</title>
+    <title>Izibrick.com | {% block title %}{% endblock %}</title>
 
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/img/firebrock.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/img/iziblock.png') }}">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-core.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-components.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-globals.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/bo/css/firebrock.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/izibrick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/blue.css') }}">
     {% block stylesheets %}{% endblock %}
@@ -62,7 +62,7 @@
 
                     <!-- Logo -->
                     <a href="{{ path('index') }}" class="navbar-brand">
-                        <img src="{{ asset('assets/img/logo/logo-firebrock-mini.png') }}" alt="firebrock.com"
+                        <img src="{{ asset('assets/img/logo/logo-izibrick-mini.png') }}" alt="iziblock.com"
                              style="width:60px;">
                     </a>
                     <!-- End Logo -->
@@ -71,7 +71,7 @@
                     <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg g-mr-40--lg"
                          id="navBar">
                         <a href="{{ path('index') }}" class="navbar-brand">
-                            <span class="logo-title">FireBrock</span>
+                            <span class="logo-title">Izibrick.com</span>
                         </a>
                         <ul class="navbar-nav text-uppercase g-pos-rel g-font-weight-600 ml-auto">
                             <li class="nav-item  g-mx-10--lg g-mx-15--xl">
@@ -91,14 +91,14 @@
                     </div>
                     <!-- End Navigation -->
 
-                    {% if app.user is defined %}
+                    {% if app.user %}
                         <div class="d-inline-block g-hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
                             <a class="btn u-btn-outline-lightred g-font-size-13 text-uppercase g-py-10 g-px-15"
                                href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
                         </div>
                     {% else %}
                         <div class="d-inline-block g-hidden-xs-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
-                            <a class="btn u-btn-outline-firebrock g-font-size-13 text-uppercase g-py-10 g-px-15"
+                            <a class="btn u-btn-outline-izibrick g-font-size-13 text-uppercase g-py-10 g-px-15"
                                href="{{ path('fos_user_security_login') }}">Se connecter</a>
                         </div>
                     {% endif %}
@@ -114,7 +114,7 @@
              style="background-image: url({{ asset('templates/bo/img/pattern5.png') }});">
         <div class="d-md-flex justify-content-md-center text-center">
             <div class="align-self-md-center">
-                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">FireBrock - Votre site internet
+                <p class="lead g-font-weight-400 g-mr-20--md g-mb-15 g-mb-0--md">Izibrick.com - Votre site internet
                     professionnel</p>
             </div>
             <div class="align-self-md-center">
@@ -130,7 +130,7 @@
                 <!-- Footer Content -->
                 <div class="col-lg-4 col-md-6 g-mb-40 g-mb-0--lg">
                     <div class="u-heading-v2-3--bottom g-brd-white-opacity-0_8 g-mb-20">
-                        <h2 class="u-heading-v2__title h6 text-uppercase mb-0">FireBrock</h2>
+                        <h2 class="u-heading-v2__title h6 text-uppercase mb-0">Izibrick.com</h2>
                     </div>
                     <p>Créer votre site internet professionnel en quelques minutes.</p>
                 </div>
@@ -209,10 +209,10 @@
                             </div>
                             <p class="mb-0">
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="mailto:contact@firebrock.com">contact@firebrock.com</a>
+                                   href="mailto:contact@iziblock.com">contact@iziblock.com</a>
                                 <br>
                                 <a class="g-color-white-opacity-0_8 g-color-white--hover"
-                                   href="https://www.firebrock.com">www.firebrock.com</a>
+                                   href="https://www.iziblock.com">www.izibrick.com</a>
                             </p>
                         </div>
                         <!-- End Email and Website -->
@@ -230,7 +230,7 @@
                     <div class="d-lg-flex">
                         <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">2019 &copy; Tous droits
                             réservés.</small>
-                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">FireBrock - Développé par
+                        <small class="d-block g-font-size-default g-mr-10 g-mb-10 g-mb-0--md">Izibrick.com - Développé par
                             <a href="https://www.ara-solutions.com" target="_blank">ARA Solutions</a></small>
                     </div>
                 </div>

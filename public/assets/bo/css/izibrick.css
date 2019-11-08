@@ -1,0 +1,82 @@
+:root {
+    --color-izibrick: #25476a;
+}
+
+::selection {
+    color: #fff;
+    background-color: var(--color-izibrick);
+}
+
+.g-bg-izibrick {
+    background-color: var(--color-izibrick);
+}
+
+.u-btn-izibrick {
+    background-color: var(--color-izibrick);
+    color: white;
+}
+
+.u-btn-izibrick:hover {
+    background-color: var(--color-izibrick);
+    color: white;
+}
+
+.u-btn-outline-izibrick {
+    color: var(--color-izibrick);
+    border-color: var(--color-izibrick);
+    background-color: transparent;
+}
+
+.u-btn-outline-izibrick:hover {
+    color: #fff !important;
+    background-color: var(--color-izibrick);
+}
+
+#navBar a:hover {
+    color: var(--color-izibrick) !important;
+}
+
+#banner {
+    background-color: var(--color-izibrick) !important;
+}
+
+.g-bg-izibrick-light-v5 {
+    background-color: #ecf0f5 !important;
+}
+
+.nav-link i {
+    line-height: 1.6 !important;
+}
+
+.nav-link.active {
+    background-color: var(--color-izibrick);
+    color: white;
+    border: none;
+}
+
+.cbp-item.selected > .cbp-item-wrapper > div:last-child {
+    background-color: var(--color-izibrick) !important;
+    color: white !important;
+}
+
+.progress-bar-izibrick {
+    background-color: var(--color-izibrick);
+}
+
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: .25rem;
+}
+
+.alert-error > ul {
+    margin-bottom: 0;
+}
+
+.alert-error > ul > li {
+    list-style: none;
+}

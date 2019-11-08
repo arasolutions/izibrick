@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Template;
-use App\Firebrock\Command\GlobalParametersCommand;
+use App\Izibrick\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;

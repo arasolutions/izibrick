@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Firebrock\Command\QuoteCommand;
+use App\Izibrick\Command\QuoteCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

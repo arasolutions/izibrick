@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Site;
-use App\Firebrock\Command\AddSiteCommand;
+use App\Izibrick\Command\AddSiteCommand;
 use App\Repository\ProductRepository;
 use KunicMarko\ColorPickerBundle\Form\Type\ColorPickerType;
 use Liip\ImagineBundle\Form\Type\ImageType;

@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Firebrock\Command\SiteOptionsCommand;
+use App\Izibrick\Command\SiteOptionsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;

@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Invoice;
-use App\Firebrock\Command\AddInvoiceCommand;
-use App\Firebrock\CommandHandler\AddInvoiceCommandHandler;
+use App\Izibrick\Command\AddInvoiceCommand;
+use App\Izibrick\CommandHandler\AddInvoiceCommandHandler;
 use App\Form\AddInvoiceType;
 use App\Repository\SiteRepository;
 use App\Repository\UserRepository;
