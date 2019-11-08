@@ -1,0 +1,54 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Présentation{% endblock %}
+
+{% block quiSommesNousActive %}active{% endblock %}
+
+{% block body %}
+
+    <div class="top-title-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="page-info">
+                        <h1 class="h1-page-title">{{ site.presentation.seoTitle }}</h1>
+
+                        <h2 class="h2-page-desc">
+                            {{ site.presentation.seoDescription }}
+
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+        <div class="v-bg-stylish pb-0">
+            <div class="container">
+                <div class="content-wrapper hide-until-loading">
+                    <div class="body-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 animated" data-animtype="fadeInUp"
+                                     data-animrepeat="0"
+                                     data-speed="1s"
+                                     data-delay="0.4s">
+                                    <h2 class="h2-section-title">{{ site.presentation.seoTitle }}</h2>
+                                    <div class="i-section-title">
+                                        <i class="icon-feather">
+
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-sep20"></div>
+                            {{ site.presentation.content|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Accueil{% endblock %}
+
+{% block indexActive %}active{% endblock %}
+
+{% block body %}
+    <div class="rev-slider-full">
+        <div class="rev-slider-banner-full rev-slider-full">
+            <ul>
+                <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
+                    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}" alt="rev-full1" data-fullwidthcentering="on">
+                    {% else %}
+                        <img src="{{ asset('templates/template-3/assets/images/sample.jpg') }}" alt="rev-full1" data-fullwidthcentering="on">
+                    {% endif %}
+
+                    <div class="tp-caption slider-text-title sft str"
+                         data-x="20"
+                         data-y="150"
+                         data-speed="300"
+                         data-start="800"
+                         data-easing="easeOutCubic">
+                        {{ site.name }}
+                    </div>
+
+                    <div class="tp-caption slider-text-title sft str"
+                         data-x="20"
+                         data-y="200"
+                         data-speed="300"
+                         data-start="1000"
+                         data-easing="easeOutCubic">
+                        {{ site.home.textPicture }}
+                    </div>
+
+                </li>
+            </ul>
+            <div class="tp-bannertimer tp-bottom"></div>
+        </div>
+    </div><!--.top wrapper end -->
+    <div class="content-wrapper hide-until-loading">
+        <div class="v-bg-stylish pb-0">
+            <div class="container">
+                {{ site.home.content|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

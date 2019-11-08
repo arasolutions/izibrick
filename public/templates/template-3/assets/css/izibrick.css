@@ -1,0 +1,23 @@
+.navigation > li:hover > a,
+.navigation > li > a:hover,
+.navigation > li > .activelink {
+    color: var(--colorTheme) !important;
+}
+
+footer {
+    background: var(--colorTheme) !important;
+}
+
+footer, footer p {
+    color: white !important;
+    padding: 20px 0px 0px 0px;
+}
+
+.button, .body-wrapper input[type="submit"], .body-wrapper input[type="button"], .section-content.section-color-bg, .content-box.content-style4 h4 i, button.button-main, .body-wrapper .tags a:hover, .callout-box.callout-box2, .blog-search .blog-search-button, .top-title-wrapper, .testimonial-big,
+.content-style3:hover .content-style3-icon, table.table thead tr, .price-table .price-label-badge, .price-table .price-table-header, .section-subscribe .subscribe-button.icon-envelope-alt {
+    background-color: var(--colorTheme) !important;
+}
+
+.blog-post .blog-post-type {
+    background-color: var(--colorTheme) !important;
+}

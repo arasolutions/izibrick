@@ -1,0 +1,152 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Contact - {{ contact.seoTitle }}{% endblock %}
+{% block description %}{{ contact.seoDescription }}{% endblock %}
+
+{% block contactActive %}active{% endblock %}
+
+{% block body %}
+
+    <div class="top-title-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="page-info">
+                        <h1 class="h1-page-title">{{ site.contact.seoTitle }}</h1>
+
+                        <h2 class="h2-page-desc">
+                            {{ site.contact.seoDescription }}
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper hide-until-loading">
+        <div class="body-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 animated" data-animtype="fadeInUp"
+                         data-animrepeat="0"
+                         data-speed="1s"
+                         data-delay="0.4s">
+                        <h2 class="h2-section-title">{{ site.contact.seoTitle }}</h2>
+                        <div class="i-section-title">
+                            <i class="icon-feather">
+
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                {% if success %}
+                    <div class="alert alert-success-icon alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <strong>Merci!</strong> Votre demande de prise de contact a bien été envoyée.
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="v-comment-form">
+
+                            <div class="v-heading-v2">
+                                <h3>Demande d'informations</h3>
+                            </div>
+
+                            <p class="pull-bottom-small">
+                                {{ contact.presentation }}
+                            </p>
+
+                            {{ form_start(form) }}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        {{ form_label(form.name) }} <span class="required">*</span>
+                                        {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                    <div class="col-sm-4">
+                                        {{ form_label(form.email) }} <span class="required">*</span>
+                                        {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{ form_label(form.content) }} <span class="required">*</span>
+                                        {{ form_widget(form.content, {'attr':{'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button name="submit" type="submit" id="Button1"
+                                            class="btn v-btn v-btn-default v-small-button"><i class="fa fa-send-o"></i>
+                                        Envoyer le message
+                                    </button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+
+
+                        {% if contact.city is defined and contact.city is not null %}
+                            <div class="v-heading-v2">
+                                <h3>Adresse</h3>
+                            </div>
+
+                            <p>
+                                {{ contact.name }}<br/>
+                                {{ contact.postCode }} {{ contact.city }} {{ contact.country }}
+                            </p>
+                        {% endif %}
+
+                        {% if (contact.email is defined and contact.email is not null) or (contact.phone is defined and contact.phone is not null) %}
+                            <div class="v-heading-v2">
+                                <h3>Téléphone & Email</h3>
+                            </div>
+                            <p>
+                                Email: <a href="#" target="_blank">{{ contact.email }}</a><br/>
+                                Phone: {{ contact.phone }}<br/>
+                            </p>
+                        {% endif %}
+
+                        {% if contact.openingTime is defined and contact.openingTime is not null %}
+                            <div class="v-heading-v2">
+                                <h3>Horaires</h3>
+                            </div>
+                            <p>
+                                {{ contact.openingTime }}
+                            </p>
+                        {% endif %}
+
+                        {% if (site.twitter is defined and site.twitter is not null) or
+                            (site.facebook is defined and site.facebook is not null) or
+                            (site.instagram is defined and site.instagram is not null) %}
+                            <div class="v-heading-v2">
+                                <h3>Réseaux sociaux</h3>
+                            </div>
+                            <ul class="social-icons standard circle">
+                                {% if site.twitter %}
+                                    <li class="twitter"><a href="{{ site.twitter }}" target="_blank"><i
+                                                    class="fa fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if site.facebook %}
+                                    <li class="facebook"><a href="{{ site.facebook }}" target="_blank"><i
+                                                    class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                                {% if site.instagram %}
+                                    <li class="instagram"><a href="{{ site.instagram }}" target="_blank"><i
+                                                    class="fa fa-instagram"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Blog{% endblock %}
+
+{% block blogActive %}active{% endblock %}
+
+{% block body %}
+    <div class="top-title-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="page-info">
+                        <h1 class="h1-page-title">{{ site.blog.seoTitle }}</h1>
+
+                        <h2 class="h2-page-desc">
+                            {{ site.blog.seoDescription ~ ' / ' ~ post.title }}
+                        </h2>
+
+                        <div class="breadcrumb-container">
+                            <ol class="breadcrumbs">
+                                <li>
+                                    <a href="{{ path('blog') }}">Retour</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper hide-until-loading">
+        <div class="body-wrapper">
+            <div class="container">
+                <div class="blog-post">
+
+                    <div class="blog-post-type">
+                        <i class="icon-pen"> </i>
+                    </div>
+
+                    <div class="blog-span">
+                        <div class="blog-post-featured-img img-overlay">
+                            {% if post.image is defined and post.image is not null %}
+                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"
+                                     class="img-responsive"/>
+                            {% endif %}
+
+                        </div>
+                        <h2>
+                           {{ post.title }}
+                        </h2>
+
+                        <div class="blog-post-body">
+                            {{ post.content }}
+                        </div>
+
+                        <div class="blog-post-details">
+
+                            <!-- Date -->
+                            <div class="blog-post-details-item blog-post-details-item-left icon-calendar">
+                                {{ post.creationDate | date('d/m/Y') }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

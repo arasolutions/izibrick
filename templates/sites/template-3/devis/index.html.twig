@@ -1,0 +1,86 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Devis{% endblock %}
+
+{% block devisActive %}active{% endblock %}
+
+{% block body %}
+    <div class="top-title-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="page-info">
+                        <h1 class="h1-page-title">{{ site.quote.seoTitle }}</h1>
+
+                        <h2 class="h2-page-desc">
+                            {{ site.quote.seoDescription }}
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper hide-until-loading">
+        <div class="body-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 animated" data-animtype="fadeInUp"
+                         data-animrepeat="0"
+                         data-speed="1s"
+                         data-delay="0.4s">
+                        <h2 class="h2-section-title">{{ site.quote.seoTitle }}</h2>
+                        <div class="i-section-title">
+                            <i class="icon-feather">
+
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                {% if success %}
+                    <div class="alert alert-success">
+                        <div class="msg">
+                            <strong>Merci!</strong> Votre demande de devis a bien été envoyée.
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="post-block-wrap" id="comment-area">
+                    <h3 class="v-heading"><span>Demander un devis</span></h3>
+                    <p>{{ quote.presentation }}</p>
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                {{ form_label(form.name) }} <span class="required">*</span>
+                                {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_label(form.email) }} <span class="required">*</span>
+                                {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{ form_label(form.content) }} <span class="required">*</span>
+                                {{ form_widget(form.content, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button name="submit" type="submit" id="Button1" class="btn v-btn v-btn-default no-three-d">
+                                <i
+                                        class="fa fa-send-o" aria-hidden="true"></i> Envoyer
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
