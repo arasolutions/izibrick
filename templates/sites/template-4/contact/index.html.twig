@@ -1,0 +1,139 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Contact - {{ contact.seoTitle }}{% endblock %}
+{% block description %}{{ contact.seoDescription }}{% endblock %}
+
+{% block contactActive %}active{% endblock %}
+
+{% block body %}
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+        <div class="heads"
+        style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}) center center;">
+    {% else %}
+        <div class="heads"
+        style="background: url({{ asset('templates/template-3/assets/images/sample.jpg') }}) center center;">
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ site.contact.seoTitle }}</h2>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="page-content">
+        <div class="container">
+            {% if success %}
+                <div class="alert alert-success">
+                    <div class="msg">
+                        <strong>Merci!</strong> Votre demande de prise de contact a bien été envoyée.
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="v-comment-form">
+
+                        <div class="v-heading-v2">
+                            <h3>Demande d'informations</h3>
+                        </div>
+
+                        <p class="pull-bottom-small">
+                            {{ contact.presentation }}
+                        </p>
+
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {{ form_label(form.name) }} <span class="required">*</span>
+                                    {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_label(form.email) }} <span class="required">*</span>
+                                    {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ form_label(form.content) }} <span class="required">*</span>
+                                    {{ form_widget(form.content, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button name="submit" type="submit" id="Button1"
+                                        class="btn v-btn v-btn-default v-small-button"><i class="fa fa-send-o"></i>
+                                    Envoyer le message
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+
+
+                    {% if contact.city is defined and contact.city is not null %}
+                        <div class="v-heading-v2">
+                            <h3>Adresse</h3>
+                        </div>
+
+                        <p>
+                            {{ contact.name }}<br/>
+                            {{ contact.postCode }} {{ contact.city }} {{ contact.country }}
+                        </p>
+                    {% endif %}
+
+                    {% if (contact.email is defined and contact.email is not null) or (contact.phone is defined and contact.phone is not null) %}
+                        <div class="v-heading-v2">
+                            <h3>Téléphone & Email</h3>
+                        </div>
+                        <p>
+                            Email: <a href="#" target="_blank">{{ contact.email }}</a><br/>
+                            Phone: {{ contact.phone }}<br/>
+                        </p>
+                    {% endif %}
+
+                    {% if contact.openingTime is defined and contact.openingTime is not null %}
+                        <div class="v-heading-v2">
+                            <h3>Horaires</h3>
+                        </div>
+                        <p>
+                            {{ contact.openingTime }}
+                        </p>
+                    {% endif %}
+
+                    {% if site.hasOneSocialLink %}
+                        <div class="v-heading-v2">
+                            <h3>Réseaux sociaux</h3>
+                        </div>
+                        <div class="contact social-icons">
+                            <ul class="list-unstyled social-icon">
+                                {% if site.facebook %}
+                                    <li><a href="{{ site.facebook }}" rel="tooltip" title="Facebook"
+                                           class="icon-facebook"><span><i
+                                                        class="fa fa-facebook-square"></i></span></a></li>
+                                {% endif %}
+                                {% if site.twitter %}
+                                    <li><a href="{{ site.twitter }}" rel="tooltip" title="Twitter" class="icon-twitter"><span><i
+                                                        class="fa fa-twitter"></i></span></a></li>
+                                {% endif %}
+                                {% if site.instagram %}
+                                    <li><a href="{{ site.instagram }}" rel="tooltip" title="Instagram"
+                                           class="icon-instagram"><span><i
+                                                        class="fa fa-instagram"></i></span></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: var(--colorTheme) !important;
+}
+
+a:hover {
+    color: var(--colorTheme) !important;
+}
+
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+    color: var(--colorTheme) !important;
+}
+
+.navbar {
+    border-bottom: 5px solid var(--colorTheme);
+}
+
+.navbar #brand, .navbar-default #brand {
+    border-bottom: 5px solid var(--colorTheme);
+}
+
+#footer {
+    background: var(--colorTheme);
+}
+
+#copyright {
+    background: var(--colorTheme);
+}
+
+#footer .social-icon > li > a {
+    background-color: var(--colorTheme);
+}
+
+.contact.social-icons > ul > li{
+    float: left;
+}
+
+.contact.social-icons > ul > li > a {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    margin: 10px 5px;
+}
+
+.contact.social-icons > ul > li > a > span{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 32px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -13px;
+    margin-top: -15px;
+    color: #222222;
+    -o-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.blog .the-calendar {
+    background: var(--colorTheme);
+}
+
+.blog .the-calendar:before {
+    border-right: 10px solid var(--colorTheme);
+}
+
+.btn-izibrick, .btn-izibrick:hover {
+    background-color: var(--colorTheme);
+    border-color: var(--colorTheme);
+    color: #ffffff !important;
+}
+
+::selection {
+    background: var(--colorTheme);
+}
+
+textarea:focus, input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    color: var(--colorTheme);
+}

@@ -1,0 +1,29 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Présentation{% endblock %}
+
+{% block presentationActive %}active{% endblock %}
+
+{% block body %}
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+        <div class="heads"
+        style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}) center center;">
+    {% else %}
+        <div class="heads"
+        style="background: url({{ asset('templates/template-3/assets/images/sample.jpg') }}) center center;">
+    {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ site.presentation.seoTitle }}</h2>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="page-content">
+            <div class="container">
+                {{ site.presentation.content|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

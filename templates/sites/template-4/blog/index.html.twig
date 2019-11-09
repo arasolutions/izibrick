@@ -1,0 +1,62 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Blog{% endblock %}
+
+{% block blogActive %}active{% endblock %}
+
+{% block body %}
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+<div class="heads"
+     style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}) center center;">
+    {% else %}
+    <div class="heads"
+         style="background: url({{ asset('templates/template-3/assets/images/sample.jpg') }}) center center;">
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ site.blog.seoTitle }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="container">
+            <div class="row blog">
+                <div class="col-sm-12">
+                    {% if posts|length > 0 %}
+                        {% for post in posts %}
+                            <div class="row blog-post">
+                                <div class="col-md-12">
+                                    <h2>
+								<span class="the-calendar">
+									<span class="the-date">
+                                        <i class="fa fa-calendar"></i>
+                                        <br/>
+                                        {{ post.creationDate | date('d/m') }}
+                                        <br/>
+                                        {{ post.creationDate | date('Y') }}
+                                    </span>
+								</span>
+                                        <a href="{{ path('blog_detail', {'post':post.id}) }}">
+                                            {{ post.title }}
+                                        </a>
+                                    </h2>
+                                    <hr>
+                                    <p>{{ post.introduction }}</p>
+                                    <p>
+                                        <a class="btn btn-izibrick" href="{{ path('blog_detail', {'post':post.id}) }}">
+                                            Voir plus &raquo;
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        Aucun article n'a été publié.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

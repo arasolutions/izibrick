@@ -1,0 +1,39 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Accueil{% endblock %}
+
+{% block indexActive %}active{% endblock %}
+
+{% block body %}
+    <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#home-slider" data-slide-to="0" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+            {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+                <div class="item active"
+                 style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }});">
+                {% else %}
+                <div class="item active"
+                     style="background: url({{ asset('templates/template-3/assets/images/sample.jpg') }});">
+                    {% endif %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="carousel-content">
+                                    <h2 class="animated fadeInUpBig text-center text-black">{{ site.name }}</h2>
+                                    <p class="animated rollIn text-black text-center">{{ site.home.textPicture }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="featured">
+        <div class="container">
+            {{ site.home.content|raw }}
+        </div>
+    </div>
+{% endblock %}
