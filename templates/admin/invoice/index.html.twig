@@ -1,7 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Facture{% endblock %}
+{% block title %}Mes factures{% endblock %}
 
 {% block description %}Retrouvez toutes vos factures{% endblock %}
 
@@ -11,12 +11,6 @@
 
 
 {% block body %}
-    {% if success is defined and success == true %}
-        <div class="alert alert-success">
-            <strong>Parfait !</strong> Votre page blog à bien été mise à jour.
-        </div>
-    {% endif %}
-
     <div class="panel">
         <div class="panel-body">
             <div class="panel panel-mint">
@@ -32,8 +26,9 @@
                                     <tr>
                                         <th style="text-align: center;">Numéro facture</th>
                                         <th style="text-align: center;">Date de création</th>
+                                        <th style="text-align: center;">Description</th>
                                         <th style="text-align: center;">Montant € TTC</th>
-                                        <th style="text-align: center;">Actions</th>
+                                        <th style="text-align: center;">Télécharger</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -41,11 +36,14 @@
                                     {% if invoices|length > 0 %}
                                         {% for invoice in invoices %}
                                             <tr>
-                                                <td>{{ invoice.invoiceNumber }}</td>
-                                                <td>{{ invoice.creationDate|date('d/m/Y') }}</td>
-                                                <td>{{ invoice.totalAmount*invoice.vatRate/100+invoice.totalAmount }}</td>
+                                                <td>{{ invoice.number }}</td>
+                                                <td>{{ invoice.created|date('d/m/Y - H:h') }}</td>
+                                                <td>{{ invoice.description }}</td>
+                                                <td>{{ invoice.total/100 }}</td>
                                                 <td width="300px">
-                                                    <a href="{{ path('bo-invoice-display', {id: invoice.id}) }}" target="_blank"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-toggle-right"></i> Afficher</button></a>
+                                                    <a href="{{ invoice.invoice_pdf }}">
+                                                        <i class="fa fa-download icon-lg icon-fw"></i> Télécharger
+                                                    </a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

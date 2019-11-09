@@ -59,6 +59,11 @@ class CodePromotion
     private $sites;
 
     /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $stripePlanTarifaireId;
+
+    /**
      * Presentation constructor.
      * @param $site
      * @throws \Exception
@@ -185,6 +190,22 @@ class CodePromotion
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStripePlanTarifaireId()
+    {
+        return $this->stripePlanTarifaireId;
+    }
+
+    /**
+     * @param mixed $stripePlanTarifaireId
+     */
+    public function setStripePlanTarifaireId($stripePlanTarifaireId)
+    {
+        $this->stripePlanTarifaireId = $stripePlanTarifaireId;
     }
 
 }
