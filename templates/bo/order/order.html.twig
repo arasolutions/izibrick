@@ -32,7 +32,7 @@
 
                                 <div id="wizard-tab1" class="tab-pane">
                                     {{ form_start(form, {'attr':{'method':'post', 'action': path('order_product', {'product': product.id }),'class':'form-horizontal'}}) }}
-                                    <div class="row text-center mt20">
+                                    <div class="row col-sm-12 text-center mt20">
                                         <div class="col-sm-6 text-bold bandeau-blue">Offre {{ product.name }}</div>
                                         {% if newPrice == 0 %}
                                             <div class="col-sm-6 bandeau-white">

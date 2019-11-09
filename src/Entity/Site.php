@@ -160,6 +160,11 @@ class Site
     private $codePromotion;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -539,6 +544,29 @@ class Site
     public function setCodePromotion(?CodePromotion $codePromotion): self
     {
         $this->codePromotion = $codePromotion;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOneSocialLink()
+    {
+        return $this->getFacebook() != null ||
+            $this->getTwitter() != null ||
+            $this->getInstagram() != null;
+
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

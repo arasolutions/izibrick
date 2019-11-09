@@ -6,7 +6,7 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <!--[if IE]>
@@ -162,14 +162,15 @@
 
 
                         <!-- Footer Col. -->
-                        <div class="col-md-6 col-sm-6 footer-col">
+                        <div class="col-md-4 col-sm-4 footer-col">
                             <div class="footer-content">
                                 <div class="footer-content-logo">
                                     <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
                                          alt="Logo {{ site.name }}"/>
                                 </div>
                                 <div class="footer-content-text">
-                                    <p>{{ site.name }}</p>
+                                    <p><strong>{{ site.name }}</strong></p>
+                                    <p>{{ site.description | raw | nl2br }}</p>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +178,7 @@
 
 
                         <!-- Footer Col. -->
-                        <div class="col-md-3 col-sm-3 footer-col">
+                        <div class="col-md-4 col-sm-4 footer-col">
                             <div class="footer-title">
                                 Links
                             </div>
@@ -203,6 +204,39 @@
                         </div>
                         <!-- //Footer Col.// -->
 
+                        <div class="col-md-4 col-sm-4 footer-col">
+                            {% if site.hasOneSocialLink %}
+                                <div class="footer-content">
+                                    <div class="footer-title align-right">
+                                        Réseaux sociaux
+                                    </div>
+                                    <div class="footer-content-text">
+                                        <div class="social-icons">
+                                            <ul>
+                                                {% if site.facebook %}
+                                                    <li>
+                                                        <a href="{{ site.facebook }}" title="facebook" target="_blank"
+                                                           class="social-media-icon facebook-icon">facebook</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if site.twitter %}
+                                                    <li>
+                                                        <a href="{{ site.twitter }}" title="twitter" target="_blank"
+                                                           class="social-media-icon twitter-icon">twitter</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if site.instagram %}
+                                                    <li>
+                                                        <a href="{{ site.instagram }}" title="instagram" target="_blank"
+                                                           class="social-media-icon instagram-icon">instagram</a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
 

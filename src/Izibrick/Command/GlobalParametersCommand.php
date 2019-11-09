@@ -9,6 +9,7 @@ use App\Entity\Site;
 class GlobalParametersCommand
 {
     private $name;
+    private $description;
     private $domain;
     private $logo;
     private $keys;
@@ -26,14 +27,15 @@ class GlobalParametersCommand
     public function __construct(Site $site)
     {
         $this->name = $site->getName();
+        $this->description = $site->getDescription();
         $this->domain = $site->getDomain();
         $this->instagram = $site->getInstagram();
-        $this->facebook=$site->getFacebook();
-        $this->keys=$site->getKeyWords();
-        $this->twitter=$site->getTwitter();
-        $this->logo=$site->getLogo();
-        $this->template=$site->getTemplate();
-        $this->colorTheme=$site->getColorTheme();
+        $this->facebook = $site->getFacebook();
+        $this->keys = $site->getKeyWords();
+        $this->twitter = $site->getTwitter();
+        $this->logo = $site->getLogo();
+        $this->template = $site->getTemplate();
+        $this->colorTheme = $site->getColorTheme();
     }
 
     /**
@@ -196,5 +198,23 @@ class GlobalParametersCommand
     {
         $this->colorTheme = $colorTheme;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
+    }
+
+
 
 }

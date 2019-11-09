@@ -21,3 +21,11 @@ footer, footer p {
 .blog-post .blog-post-type {
     background-color: var(--colorTheme) !important;
 }
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-left {
+    text-align: left !important;
+}
