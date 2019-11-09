@@ -4,6 +4,16 @@
     color: var(--colorTheme) !important;
 }
 
+.body-wrapper a:hover,
+.top-body a:hover,
+.top-footer a:hover {
+    color: var(--colorTheme) !important;
+}
+
+.blog-post-details-item.blog-post-details-item-right a:hover i{
+    color: var(--colorTheme) !important;
+}
+
 footer {
     background: var(--colorTheme) !important;
 }
