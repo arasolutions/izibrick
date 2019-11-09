@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Invoice;
+use App\Helper\StripeHelper;
 use App\Izibrick\Command\AddInvoiceCommand;
 use App\Izibrick\CommandHandler\AddInvoiceCommandHandler;
 use App\Form\AddInvoiceType;
@@ -46,31 +47,16 @@ class InvoiceController extends AbstractController
     public function boInvoice(Request $request, $success = false)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $user = $this->userRepository->get($this->getUser()->getId());
+
+        $stripe = new StripeHelper();
+        // Récupération des factures pour le user
+        $invoices = $stripe->getListInvoices($user->getStripeCustomerId());
 
         return $this->render('admin/invoice/index.html.twig', [
             'controller_name' => 'InvoiceController',
             'site' => $site,
-            'invoices' => $site->getInvoices(),
-            'success' => $success
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/display", name="bo-invoice-display")
-     * @param Invoice $invoice
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boDisplayInvoice(Invoice $invoice, Request $request)
-    {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
-
-        return $this->render('admin/invoice/display.html.twig', [
-            'controller_name' => 'TrackingContactController',
-            'site' => $site,
-            'invoice' => $invoice
+            'invoices' => $invoices
         ]);
     }
 

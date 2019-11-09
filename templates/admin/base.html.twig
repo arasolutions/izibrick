@@ -111,7 +111,7 @@
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <li id="dropdown-user" class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                            <div class="username hidden-xs">{{ app.user.username }}</div>
+                            <div class="username hidden-xs ml10">{{ app.user.username }}</div>
                             <span class="ic-user pull-right">
                                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                                 <!--You can use an image instead of an icon.-->
@@ -131,16 +131,22 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                             <ul class="head-list">
                                 <li>
-                                    <a href="{{ path('bo-account') }}"><i class="demo-pli-male icon-lg icon-fw"></i> Mon profil</a>
+                                    <a href="{{ path('bo-account') }}"><i class="fa fa-user-o icon-lg icon-fw"></i> Mon profil</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('bo-invoice') }}">
+                                        <i class="fa fa-shopping-cart icon-lg icon-fw"></i> Facturation
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ path('bo-support') }}">
-                                        <i class="demo-pli-information icon-lg icon-fw"></i> Assistance</a>
+                                        <i class="fa fa-info icon-lg icon-fw"></i> Assistance
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('fos_user_security_logout') }}"><i
-                                                class="demo-pli-unlock icon-lg icon-fw"></i>
-                                        Déconnexion</a>
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        <i class="fa fa-unlock-alt icon-lg icon-fw"></i> Déconnexion
+                                    </a>
                                 </li>
                             </ul>
                         </div>

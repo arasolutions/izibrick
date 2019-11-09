@@ -143,10 +143,8 @@ class StripeHelper
     }
 
     /**
-     * @param $amount
-     * @param $product
-     * @param string $currency
-     * @param string $interval
+     * @param $customerId
+     * @param $planTarifaireId
      * @return static
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un abonnement pour un utilisateur
@@ -162,6 +160,18 @@ class StripeHelper
         ]);
 
         return $subsription;
+    }
+
+    /**
+     * @param $customerId
+     * @return \Stripe\ApiResource
+     * @throws \Stripe\Exception\ApiErrorException
+     * Récupère un plan tarifaire
+     */
+    public function getListInvoices($customerId){
+        $invoices = \Stripe\Invoice::all(['customer' => $customerId]);
+
+        return $invoices;
     }
 
 }
