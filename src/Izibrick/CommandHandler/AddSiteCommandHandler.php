@@ -11,6 +11,7 @@ use App\Entity\Presentation;
 use App\Entity\Quote;
 use App\Entity\Site;
 use App\Entity\User;
+use App\Helper\ColorHelper;
 use App\Izibrick\Command\AddSiteCommand;
 use App\Repository\BlogRepository;
 use App\Repository\CodePromotionRepository;
@@ -88,11 +89,20 @@ class AddSiteCommandHandler
         $site->setProduct($this->productRepository->findOneBy(array('id' => $command->getProductId())));
         $site->setName($command->getName());
         $site->setColorTheme($command->getColorTheme());
+
+        // détection de la couleur du texte en fonction du fond choisi
+        $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));
+        if ($luminance > 0.5) {
+            $site->setTextColor("#222222");
+        } else {
+            $site->setTextColor("#FFFFFF");
+        }
+
         $templateChosen = $this->templateRepository->findOneBy(array('id' => $command->getTemplate()));
         $site->setTemplate($templateChosen);
         if ($command->getCodePromo()) {
             $codePromo = $this->codePromotionRepository->getByName($command->getCodePromo(), $command->getProductId());
-            if($codePromo!=null){
+            if ($codePromo != null) {
                 $site->setCodePromotion($codePromo);
             }
         }

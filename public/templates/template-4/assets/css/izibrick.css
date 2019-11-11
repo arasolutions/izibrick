@@ -2,6 +2,7 @@
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     background-color: var(--colorTheme) !important;
+    color: var(--textColor) !important;
 }
 
 a:hover {
@@ -23,17 +24,24 @@ a:hover {
 
 #footer {
     background: var(--colorTheme);
+    color: var(--textColor) !important;
 }
 
 #copyright {
     background: var(--colorTheme);
+    color: var(--textColor) !important;
 }
 
 #footer .social-icon > li > a {
     background-color: var(--colorTheme);
+    color: var(--textColor) !important;
 }
 
-.contact.social-icons > ul > li{
+#footer .sitemap > ul > li > a {
+    color: var(--textColor) !important;
+}
+
+.contact.social-icons > ul > li {
     float: left;
 }
 
@@ -52,7 +60,7 @@ a:hover {
     margin: 10px 5px;
 }
 
-.contact.social-icons > ul > li > a > span{
+.contact.social-icons > ul > li > a > span {
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -71,6 +79,7 @@ a:hover {
 
 .blog .the-calendar {
     background: var(--colorTheme);
+    color: var(--textColor) !important;
 }
 
 .blog .the-calendar:before {
@@ -79,12 +88,13 @@ a:hover {
 
 .btn-izibrick, .btn-izibrick:hover {
     background-color: var(--colorTheme);
+    color: var(--textColor) !important;
     border-color: var(--colorTheme);
-    color: #ffffff !important;
 }
 
 ::selection {
     background: var(--colorTheme);
+    color: var(--textColor) !important;
 }
 
 textarea:focus, input[type="text"]:focus,

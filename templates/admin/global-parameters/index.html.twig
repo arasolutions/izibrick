@@ -48,7 +48,7 @@
                 <div class="panel-body">
                     <div class="col-sm-2">
                         {% if site.logo is defined and site.logo is not null and site.logo != '' %}
-                            <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}" />
+                            <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
                         {% endif %}
                     </div>
                     <div class="col-sm-10">
@@ -109,6 +109,8 @@
     <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
     <script type="text/javascript">
-        $('.colorpicker').colorPicker();
+        $('.colorpicker').colorPicker({
+            opacity: false
+        });
     </script>
 {% endblock %}

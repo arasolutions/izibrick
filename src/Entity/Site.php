@@ -165,6 +165,11 @@ class Site
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $textColor;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -567,6 +572,18 @@ class Site
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->textColor;
+    }
+
+    public function setTextColor(string $textColor): self
+    {
+        $this->textColor = $textColor;
 
         return $this;
     }

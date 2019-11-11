@@ -210,7 +210,9 @@
                     $('#add_order_template').val($(this).data('id'));
                 });
 
-                $('.colorpicker').colorPicker();
+                $('.colorpicker').colorPicker({
+                    opacity: false
+                });
             });
         </script>
     {% endblock %}

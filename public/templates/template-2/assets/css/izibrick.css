@@ -4,6 +4,7 @@ a.active{
 
 footer{
     background: var(--colorTheme) !important;
+    color: var(--textColor) !important;
 }
 
 footer, footer p{
@@ -41,8 +42,10 @@ ul.page-numbers li > span.current,
 .slideout-filter ul li.selected a,
 .btn.v-btn.v-btn-default{
     background: var(--colorTheme);
+    color: var(--textColor) !important;
 }
 
 .v-blog-item-info .v-btn.sf-icon-stroke i, .mini-v-blog-item-wrap .v-btn.sf-icon-stroke i, .post-inner .v-btn.sf-icon-stroke i {
     background: var(--colorTheme);
+    color: var(--textColor) !important;
 }
