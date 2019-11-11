@@ -80,3 +80,11 @@
 .alert-error > ul > li {
     list-style: none;
 }
+
+.width-100{
+    width: 100% !important;
+}
+
+.ml-10{
+    margin-left: 10px;
+}

@@ -29,7 +29,7 @@
     <link href="{{ asset('assets/css/demo/nifty-demo-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/themify-icons/themify-icons.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('assets/css/iziblock.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/bo/css/izibrick.css') }}" rel="stylesheet">
 
 
     <!--=================================================-->
@@ -90,7 +90,7 @@
             <!--Brand logo & name-->
             <!--================================-->
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand">
+                <a href="{{ path('dashboard') }}" class="navbar-brand">
                     <img src="{{ asset('assets/img/logo.png') }}" alt="Nifty Logo" class="brand-icon">
                     <div class="brand-title">
                         <span class="brand-text">Izibrick.com</span>
@@ -111,7 +111,7 @@
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <li id="dropdown-user" class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
-                            <div class="username hidden-xs ml10">{{ app.user.username }}</div>
+                            <div class="username hidden-xs ml-10">{{ app.user.firstname }}</div>
                             <span class="ic-user pull-right">
                                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                                 <!--You can use an image instead of an icon.-->
@@ -131,7 +131,8 @@
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
                             <ul class="head-list">
                                 <li>
-                                    <a href="{{ path('bo-account') }}"><i class="fa fa-user-o icon-lg icon-fw"></i> Mon profil</a>
+                                    <a href="{{ path('bo-account') }}"><i class="fa fa-user-o icon-lg icon-fw"></i> Mon
+                                        profil</a>
                                 </li>
                                 <li>
                                     <a href="{{ path('bo-invoice') }}">
@@ -175,7 +176,8 @@
                 <!--End page title-->
 
                 <ol class="breadcrumb">
-                    <li class="header-description"><i class="ti-arrow-right"></i>&nbsp;{% block description %}{% endblock %}</li>
+                    <li class="header-description"><i
+                                class="ti-arrow-right"></i>&nbsp;{% block description %}{% endblock %}</li>
                 </ol>
             </div>
             <div id="page-content">
@@ -212,9 +214,9 @@
                                 <div class="profile-wrap text-center">
                                     <div class="pad-btm">
                                         {% if site.logo is defined and site.logo is not null and site.logo != '' %}
-                                        <img class="img-circle img-md"
-                                             src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
-                                             alt="{{ site.name }} logo">
+                                            <img class="width-100"
+                                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
+                                                 alt="{{ site.name }} logo">
                                         {% endif %}
                                     </div>
                                     <p class="mnp-name">{{ site.name }}</p>
@@ -350,7 +352,7 @@
                                 <li class="list-header">Paramètres globaux</li>
                                 {% if app.request.get('_route') == 'bo-global-parameters' %}
                                 <li class="active-link">
-                                    {% else %}
+                            {% else %}
                                 <li>
                                     {% endif %}
                                     <a href="{{ path('bo-global-parameters') }}">
