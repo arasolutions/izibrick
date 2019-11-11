@@ -10,6 +10,9 @@ class StripeHelper
     private $apiKey;
 
     public  function __construct($apiKey='sk_test_RXvfmDOXdTDWwTuLB5eSFEQo00kWMqsuGe') {
+        if($_ENV['STRIPE_SECRET_KEY']){
+            $apiKey = $_ENV['STRIPE_SECRET_KEY'];
+        }
         $this->$apiKey = $apiKey;
         \Stripe\Stripe::setApiKey($apiKey);
     }
@@ -137,7 +140,7 @@ class StripeHelper
      * Récupère un plan tarifaire
      */
     public function getPlan($planTarifaireId){
-        $plan = \Stripe\Plan::retrieve('$planTarifaireId');
+        $plan = \Stripe\Plan::retrieve($planTarifaireId);
 
         return $plan;
     }
@@ -152,6 +155,7 @@ class StripeHelper
     public function createSubscription($customerId, $planTarifaireId){
         $subsription = \Stripe\Subscription::create([
             "customer" => $customerId,
+            "default_tax_rates" => [$_ENV['STRIPE_TVA_KEY']],
             "items" => [
                 [
                     "plan" => $planTarifaireId,

@@ -142,7 +142,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 $codePromoFounded = $this->codePromotionRepository->getByName($form->get('codePromo')->getData(), $productChosen);
                 if ($codePromoFounded) {
                     $codePromo = $form->get('codePromo')->getData();
-                    $newPrice = floatval($productChosen->getPrice()) + floatval($codePromoFounded->getPriceDecrease());
+                    $newPrice = floatval($codePromoFounded->getPriceDecrease());
                 } else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
@@ -224,21 +224,21 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     {
         $site = $this->siteRepository->getById($siteId);
         $user = $this->userRepository->get($userId);
-        $invoice = $this->invoiceRepository->getBySiteId($siteId);
+
+        // On récupère le plan tarifaire associé
+        $planTarifaireId = '';
+        if($user->getLastSite()->getSite()->getCodePromotion()){
+            $planTarifaireId = $user->getLastSite()->getSite()->getCodePromotion()->getStripePlanTarifaireId();
+        }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
+            $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
+        }
+        $stripe = new StripeHelper();
 
         if ($request->isMethod('POST')) {
             $token = $request->request->get('tokenId');
-            $stripe = new StripeHelper();
             // Enregistrement de la carte dans Stripe
             $card = $stripe->createCard($user->getStripeCustomerId(), $token);
             if($card){
-                // On récupère le plan tarifaire associé
-                $planTarifaireId = '';
-                if($user->getLastSite()->getSite()->getProduct()->getCodePromotion()){
-                    $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getCodePromotion()->getStripePlanTarifaireId();
-                }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
-                    $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
-                }
                 // Abonnement du user au plan tarifaire
                 $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
                 if ($subscription) {
@@ -250,10 +250,20 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             }
         }
 
+        // On récupère les informations de la commande
+        $plan = $stripe->getPlan($planTarifaireId);
+        $invoiceTitle= 'Offre '.$user->getLastSite()->getSite()->getProduct()->getName();
+        $invoiceDescription= 'Abonnement du ' . date("d/m/y") . ' au ' . date('d/m/y', strtotime('+1 month'));
+        $invoiceTotalAmount= ($plan->amount/100) + ($plan->amount/100*20/100);
+        $invoice = ['title' => $invoiceTitle,
+            'description' => $invoiceDescription,
+            'totalAmount' => $invoiceTotalAmount];
+
         return $this->render('bo/order/payment.html.twig', [
             'site' => $site,
             'user' => $user,
             'invoice' => $invoice,
+            'stripeKey' => $_ENV['STRIPE_PUBLIC_KEY'],
             'step' => 5
         ]);
     }

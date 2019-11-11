@@ -28,6 +28,10 @@
                                 </div>
 
                                 <div class="mt50">
+                                    <div class="form-group g-mb-20 text-right">
+                                        {{ invoice.title }} - {{ invoice.description }}<br/>
+                                        <span class="label-payment">Total à payer : {{ invoice.totalAmount | number_format(2,',',' ') }} € TTC</span>
+                                    </div>
 
                                     <form action="/order/{{ site.id }}/{{ user.id }}/payment" method="post" id="payment-form">
                                         <div class="outcome">
@@ -50,10 +54,6 @@
                                                 <div class="input-group g-brd-primary--focus">
                                                     <div id="card-element" class="field"></div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group g-mb-20 text-right">
-                                                {{ invoice.title }} - {{ invoice.description }}<br/>
-                                                <span class="label-payment">Total à payer : {{ invoice.totalAmount | number_format(2,',',' ') }} € TTC</span>
                                             </div>
                                             <input id="token" name="tokenId" type="hidden" value="">
                                             <div class="col-sm-12 form-group text-right mt20">
@@ -90,7 +90,7 @@
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        var stripe = Stripe('pk_test_cBePCeSZiSCdTdlZHEW1OeE800WfFsYi7i');
+        var stripe = Stripe('{{ stripeKey }}');
         var elements = stripe.elements({
             fonts: [
                 {
