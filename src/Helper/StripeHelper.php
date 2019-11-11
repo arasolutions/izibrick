@@ -43,6 +43,32 @@ class StripeHelper
     }
 
     /**
+     * @param $name
+     * @param $description
+     * @param $email
+     * @return string
+     * @throws \Stripe\Exception\ApiErrorException
+     * Créer un client
+     */
+    public function updateCustomer($customerId, $name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = 'FRANCE'){
+        $customer = \Stripe\Customer::update(
+            $customerId,[
+            'name' => $name,
+            'description' => $description,
+            'email' => $email,
+            'address' => [
+                'line1' => $addressLine1,
+                'line2' => $addressLine2,
+                'city' => $addressCity,
+                'postal_code' => $addressPostalCode,
+                'country' => $addressCountry,
+            ]]
+        );
+
+        return $customer->id;
+    }
+
+    /**
      * @param $customerId
      * @return static
      * @throws \Stripe\Exception\ApiErrorException
