@@ -103,7 +103,6 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $this->addInvoiceCommandHandler = $addInvoiceCommandHandler;
     }
 
-
     /**
      * @Route("/order", name="order_index", methods={"GET"})
      * @return Response
@@ -134,6 +133,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $form->handleRequest($request);
         $newPrice = 0;
         $codePromo = '';
+        $free = false;
 
         if ($form->isSubmitted()) {
             if ($request->get('checkCodePromotion') == '1' && $form->get('codePromo')->getData() != '') {
@@ -143,6 +143,9 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 if ($codePromoFounded) {
                     $codePromo = $form->get('codePromo')->getData();
                     $newPrice = floatval($codePromoFounded->getPriceDecrease());
+                    if($newPrice == 0){
+                        $free = true;
+                    }
                 } else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
@@ -167,6 +170,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'templates' => $templates,
             'newPrice' => $newPrice,
             'codePromo' => $codePromo,
+            'free' => $free,
             'step' => 2
         ]);
     }
@@ -227,8 +231,12 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         // On récupère le plan tarifaire associé
         $planTarifaireId = '';
+        $free = false;
         if($user->getLastSite()->getSite()->getCodePromotion()){
             $planTarifaireId = $user->getLastSite()->getSite()->getCodePromotion()->getStripePlanTarifaireId();
+            if($user->getLastSite()->getSite()->getCodePromotion()->getPriceDecrease() == 0){
+                $free = true;
+            }
         }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
             $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
         }
@@ -246,15 +254,17 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     return $this->render('bo/order/payment-completed.html.twig');
                 }
                 return $this->render('bo/order/payment-failure.html.twig');
-
             }
         }
 
         // On récupère les informations de la commande
-        $plan = $stripe->getPlan($planTarifaireId);
+        $invoiceTotalAmount = '0';
+        if($planTarifaireId != '' && $planTarifaireId != null){
+            $plan = $stripe->getPlan($planTarifaireId);
+            $invoiceTotalAmount= ($plan->amount/100) + ($plan->amount/100*20/100);
+        }
         $invoiceTitle= 'Offre '.$user->getLastSite()->getSite()->getProduct()->getName();
         $invoiceDescription= 'Abonnement du ' . date("d/m/y") . ' au ' . date('d/m/y', strtotime('+1 month'));
-        $invoiceTotalAmount= ($plan->amount/100) + ($plan->amount/100*20/100);
         $invoice = ['title' => $invoiceTitle,
             'description' => $invoiceDescription,
             'totalAmount' => $invoiceTotalAmount];
@@ -264,6 +274,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'user' => $user,
             'invoice' => $invoice,
             'stripeKey' => $_ENV['STRIPE_PUBLIC_KEY'],
+            'free' => $free,
             'step' => 5
         ]);
     }
@@ -315,5 +326,13 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'form' => $formRegister->createView(),
             'formLogin' => $formLogin->createView()
         ));
+    }
+    /**
+     * @Route("/order-valid", name="order_valid")
+     * @return Response
+     */
+    public function orderValid()
+    {
+        return $this->render('bo/order/payment-completed.html.twig');
     }
 }

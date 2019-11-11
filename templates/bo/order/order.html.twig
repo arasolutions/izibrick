@@ -34,17 +34,25 @@
                                     {{ form_start(form, {'attr':{'method':'post', 'action': path('order_product', {'product': product.id }),'class':'form-horizontal'}}) }}
                                     <div class="row col-sm-12 text-center mt20">
                                         <div class="col-sm-6 text-bold bandeau-blue">Offre {{ product.name }}</div>
-                                        {% if newPrice == 0 %}
+                                        {% if newPrice == 0 and free == false %}
                                             <div class="col-sm-6 bandeau-white">
                                                 A partir de {{ product.price | number_format(2,',', ' ') }} €/mois
                                             </div>
-                                        {% else %}
+                                        {% elseif free == false%}
                                             <div class="col-sm-6 bandeau-white">
                                                 A partir de <span
                                                         class="old-price">{{ product.price | number_format(2,',', ' ') }}</span>
                                                 <span
                                                         class="new-price">{{ newPrice | number_format(2,',', ' ') }}</span>
                                                 €/mois<br/>
+                                                <span class="new-price">Code promotion activé : {{ codePromo }} </span>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-sm-6 bandeau-white">
+                                                A partir de <span
+                                                        class="old-price">{{ product.price | number_format(2,',', ' ') }}</span>
+                                                <span
+                                                        class="new-price">GRATUIT</span><br/>
                                                 <span class="new-price">Code promotion activé : {{ codePromo }} </span>
                                             </div>
                                         {% endif %}
