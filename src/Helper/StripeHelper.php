@@ -10,6 +10,9 @@ class StripeHelper
     private $apiKey;
 
     public  function __construct($apiKey='sk_test_RXvfmDOXdTDWwTuLB5eSFEQo00kWMqsuGe') {
+        if($_ENV['STRIPE_SECRET_KEY']){
+            $apiKey = $_ENV['STRIPE_SECRET_KEY'];
+        }
         $this->$apiKey = $apiKey;
         \Stripe\Stripe::setApiKey($apiKey);
     }
@@ -22,11 +25,18 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un client
      */
-    public function createCustomer($name, $description, $email){
+    public function createCustomer($name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = 'FRANCE'){
         $customer = \Stripe\Customer::create([
             'name' => $name,
             'description' => $description,
             'email' => $email,
+            'address' => [
+                'line1' => $addressLine1,
+                'line2' => $addressLine2,
+                'city' => $addressCity,
+                'postal_code' => $addressPostalCode,
+                'country' => $addressCountry,
+            ],
         ]);
 
         return $customer->id;
@@ -137,7 +147,7 @@ class StripeHelper
      * Récupère un plan tarifaire
      */
     public function getPlan($planTarifaireId){
-        $plan = \Stripe\Plan::retrieve('$planTarifaireId');
+        $plan = \Stripe\Plan::retrieve($planTarifaireId);
 
         return $plan;
     }
@@ -152,6 +162,7 @@ class StripeHelper
     public function createSubscription($customerId, $planTarifaireId){
         $subsription = \Stripe\Subscription::create([
             "customer" => $customerId,
+            "default_tax_rates" => [$_ENV['STRIPE_TVA_KEY']],
             "items" => [
                 [
                     "plan" => $planTarifaireId,

@@ -94,7 +94,7 @@ class User extends BaseUser
      */
     public function getLastSite()
     {
-        return $this->sites[0];
+        return $this->sites[sizeof($this->sites)-1];
     }
 
     public function removeSite(UserSite $site): self
