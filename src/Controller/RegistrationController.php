@@ -104,10 +104,7 @@ class RegistrationController extends BaseController
             /** @var User $userRepo */
             $userRepo = $this->userRepository->get($this->getUser()->getId());
             $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
-            if ($invoice != null) {
-                return $this->redirectToRoute('order_payment', array('siteId' => $site->getId(), 'userId' => $this->getUser()->getId()));
-            }
-            return $this->redirectToRoute('order_payment', array('siteId' => $site->getId(), 'userId' => $this->getUser()->getId()));
+            return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $this->getUser()->getId()));
         }
 
         $user = $userManager->createUser();
@@ -135,6 +132,7 @@ class RegistrationController extends BaseController
                 if ($find != null) {
                     return $this->render('@FOSUser/Registration/register.html.twig', array(
                         'form' => $formRegister->createView(),
+                        'formLogin' => $formLogin->createView(),
                         'error' => 'Ce compte existe déjà.'
                     ));
                 }
@@ -169,7 +167,7 @@ class RegistrationController extends BaseController
                 $userRepo = $this->userRepository->get($user->getId());
                 $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
                 if ($invoice != null) {
-                    return $this->redirectToRoute('order_payment', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
+                    return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
                 }
             }
 

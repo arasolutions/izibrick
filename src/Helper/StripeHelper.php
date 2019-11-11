@@ -9,8 +9,9 @@ class StripeHelper
 
     private $apiKey;
 
-    public  function __construct($apiKey='sk_test_RXvfmDOXdTDWwTuLB5eSFEQo00kWMqsuGe') {
-        if($_ENV['STRIPE_SECRET_KEY']){
+    public function __construct($apiKey = 'sk_test_RXvfmDOXdTDWwTuLB5eSFEQo00kWMqsuGe')
+    {
+        if ($_ENV['STRIPE_SECRET_KEY']) {
             $apiKey = $_ENV['STRIPE_SECRET_KEY'];
         }
         $this->$apiKey = $apiKey;
@@ -22,49 +23,49 @@ class StripeHelper
      * @param $description
      * @param $email
      * @return string
-     * @throws \Stripe\Exception\ApiErrorException
-     * Créer un client
+     * @throws \Stripe\Exception\ApiErrorException Créer un client
      */
-    public function createCustomer($name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = 'FRANCE'){
+    public function createCustomer($name, $description, $email)
+    {
+
         $customer = \Stripe\Customer::create([
             'name' => $name,
             'description' => $description,
-            'email' => $email,
-            'address' => [
-                'line1' => $addressLine1,
-                'line2' => $addressLine2,
-                'city' => $addressCity,
-                'postal_code' => $addressPostalCode,
-                'country' => $addressCountry,
-            ],
+            'email' => $email
+
         ]);
 
         return $customer->id;
     }
 
     /**
+     * @param $customerId
      * @param $name
      * @param $description
      * @param $email
+     * @param $addressLine1
+     * @param null $addressLine2
+     * @param null $addressCity
+     * @param null $addressPostalCode
+     * @param string $addressCountry
      * @return string
-     * @throws \Stripe\Exception\ApiErrorException
-     * Créer un client
+     * @throws \Stripe\Exception\ApiErrorException Créer un client
      */
-    public function updateCustomer($customerId, $name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = 'FRANCE'){
+    public function updateCustomer($customerId, $name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = 'FRANCE')
+    {
         $customer = \Stripe\Customer::update(
-            $customerId,[
-            'name' => $name,
-            'description' => $description,
-            'email' => $email,
-            'address' => [
-                'line1' => $addressLine1,
-                'line2' => $addressLine2,
-                'city' => $addressCity,
-                'postal_code' => $addressPostalCode,
-                'country' => $addressCountry,
-            ]]
+            $customerId, [
+                'name' => $name,
+                'description' => $description,
+                'email' => $email,
+                'address' => [
+                    'line1' => $addressLine1,
+                    'line2' => $addressLine2,
+                    'city' => $addressCity,
+                    'postal_code' => $addressPostalCode,
+                    'country' => $addressCountry,
+                ]]
         );
-
         return $customer->id;
     }
 
@@ -74,7 +75,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Retrouver un client
      */
-    public function getCustomer($customerId){
+    public function getCustomer($customerId)
+    {
         $customer = \Stripe\Customer::retrieve($customerId);
 
         return $customer;
@@ -89,9 +91,10 @@ class StripeHelper
      * Lancer le paiement
      * @throws \Stripe\Exception\ApiErrorException
      */
-    public function createCharge($amount, $source, $description, $eur = 'eur'){
+    public function createCharge($amount, $source, $description, $eur = 'eur')
+    {
         $charge = \Stripe\Charge::create([
-            'amount' => $amount*100,
+            'amount' => $amount * 100,
             'currency' => $eur,
             'source' => $source,
             'description' => $description,
@@ -107,7 +110,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer une carte
      */
-    public function createCard($customerId, $source){
+    public function createCard($customerId, $source)
+    {
         $card = \Stripe\Customer::createSource(
             $customerId,
             [
@@ -125,7 +129,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un produit
      */
-    public function createProduct($name, $type = 'service'){
+    public function createProduct($name, $type = 'service')
+    {
         $product = \Stripe\Product::create([
             'name' => $name,
             'type' => $type,
@@ -140,7 +145,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Retrouver un produit
      */
-    public function getProduct($productId){
+    public function getProduct($productId)
+    {
         $product = \Stripe\Product::retrieve($productId);
 
         return $product;
@@ -155,7 +161,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un plan tarifaire (une offre)
      */
-    public function createPlan($amount, $product, $currency = 'eur', $interval = 'month'){
+    public function createPlan($amount, $product, $currency = 'eur', $interval = 'month')
+    {
         $plan = \Stripe\Plan::create([
             'amount' => $amount,
             'currency' => $currency,
@@ -172,7 +179,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Récupère un plan tarifaire
      */
-    public function getPlan($planTarifaireId){
+    public function getPlan($planTarifaireId)
+    {
         $plan = \Stripe\Plan::retrieve($planTarifaireId);
 
         return $plan;
@@ -185,7 +193,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un abonnement pour un utilisateur
      */
-    public function createSubscription($customerId, $planTarifaireId){
+    public function createSubscription($customerId, $planTarifaireId)
+    {
         $subsription = \Stripe\Subscription::create([
             "customer" => $customerId,
             "default_tax_rates" => [$_ENV['STRIPE_TVA_KEY']],
@@ -205,7 +214,8 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Récupère un plan tarifaire
      */
-    public function getListInvoices($customerId){
+    public function getListInvoices($customerId)
+    {
         $invoices = \Stripe\Invoice::all(['customer' => $customerId]);
 
         return $invoices;

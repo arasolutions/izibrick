@@ -47,7 +47,11 @@ class AddInvoiceCommandHandler
     {
         $stripe = new StripeHelper();
         if ($user->getStripeCustomerId() == null) {
-            $customer = $stripe->createCustomer($user->getId() . '-' . $user->getEmail(), $site->getProduct()->getName(), $user->getEmail());
+            $customer = $stripe->createCustomer(
+                $user->getId() . '-' . $user->getEmail(),
+                $user->getSocietyName(),
+                $user->getEmail()
+            );
             $user->setStripeCustomerId($customer);
             $this->userRepository->save($user);
         }

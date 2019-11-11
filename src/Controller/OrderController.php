@@ -3,25 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\CodePromotion;
-use App\Entity\Customer;
 use App\Entity\Product;
 use App\Entity\Site;
 use App\Entity\User;
-use App\Izibrick\Command\AddCustomerCommand;
+use App\Form\AddSiteBillingType;
 use App\Izibrick\Command\AddSiteCommand;
 use App\Izibrick\Command\RegistrationCommand;
+use App\Izibrick\Command\SiteBillingCommand;
 use App\Izibrick\Command\SiteOptionsCommand;
-use App\Izibrick\CommandHandler\AddCustomerCommandHandler;
 use App\Izibrick\CommandHandler\AddInvoiceCommandHandler;
 use App\Izibrick\CommandHandler\AddSiteCommandHandler;
-use App\Form\AddCustomerType;
 use App\Form\AddOrderType;
 use App\Form\AddSiteOptionsType;
 use App\Form\OrderLoginType;
 use App\Form\RegistrationType;
 use App\Helper\StripeHelper;
+use App\Izibrick\CommandHandler\EditSiteBillingCommandHandler;
 use App\Repository\CodePromotionRepository;
-use App\Repository\CustomerRepository;
 use App\Repository\InvoiceRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
@@ -55,9 +53,6 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     /** @var SiteRepository */
     private $siteRepository;
 
-    /** @var CustomerRepository */
-    private $customerRepository;
-
     /** @var UserRepository */
     private $userRepository;
 
@@ -81,7 +76,6 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      * @param ProductRepository $productRepository
      * @param TemplateRepository $templateRepository
      * @param SiteRepository $siteRepository
-     * @param CustomerRepository $customerRepository
      * @param UserRepository $userRepository
      * @param CodePromotionRepository $codePromotionRepository
      * @param InvoiceRepository $invoiceRepository
@@ -89,12 +83,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      * @param EncoderFactoryInterface $encoderFactory
      * @param AddInvoiceCommandHandler $addInvoiceCommandHandler
      */
-    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, CustomerRepository $customerRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository, UserManagerInterface $userManager, EncoderFactoryInterface $encoderFactory, AddInvoiceCommandHandler $addInvoiceCommandHandler)
+    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository, UserManagerInterface $userManager, EncoderFactoryInterface $encoderFactory, AddInvoiceCommandHandler $addInvoiceCommandHandler)
     {
         $this->productRepository = $productRepository;
         $this->templateRepository = $templateRepository;
         $this->siteRepository = $siteRepository;
-        $this->customerRepository = $customerRepository;
         $this->userRepository = $userRepository;
         $this->codePromotionRepository = $codePromotionRepository;
         $this->invoiceRepository = $invoiceRepository;
@@ -206,14 +199,37 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     }
 
     /**
-     * @Route("/order/{siteId}/end", name="order_end")
-     * @param $siteId
+     * @Route("/order/{siteId}/{userId}/billing", name="order_billing")
+     * @param int $siteId
+     * @param $userId
      * @param Request $request
+     * @param EditSiteBillingCommandHandler $billingCommandHandler
+     * @return Response
      */
-    public function orderEnd($siteId, Request $request)
+    public function orderBilling($siteId, $userId, Request $request, EditSiteBillingCommandHandler $billingCommandHandler)
     {
         $site = $this->siteRepository->getById($siteId);
 
+        $billingCommand = new SiteBillingCommand();
+
+        $form = $this->createForm(AddSiteBillingType::class, $billingCommand);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Mis à jour du user
+            $billingCommandHandler->handle($billingCommand, $userId);
+
+            return $this->redirectToRoute('order_payment', array(
+                'siteId' => $siteId,
+                'userId' => $userId
+            ));
+        }
+
+        return $this->render('bo/order/billing.html.twig', [
+            'form' => $form->createView(),
+            'site' => $site,
+            'step' => 5
+        ]);
     }
 
     /**
@@ -223,6 +239,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      * @return Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Stripe\Exception\ApiErrorException
      */
     public function orderPayment($siteId, $userId, Request $request)
     {
@@ -275,7 +292,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'invoice' => $invoice,
             'stripeKey' => $_ENV['STRIPE_PUBLIC_KEY'],
             'free' => $free,
-            'step' => 5
+            'step' => 6
         ]);
     }
 
@@ -295,25 +312,25 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         $site = $this->siteRepository->getById($command->getSiteId());
 
-        if($userFound!= null){
+        if ($userFound != null) {
             $encoder = $this->encoderFactory->getEncoder($userFound);
             $passwordValid = $encoder->isPasswordValid($userFound->getPassword(), $command->getPlainPassword(), $userFound->getSalt());
-            if(!$passwordValid){
+            if (!$passwordValid) {
                 // Mot de passe invalide
                 $formLogin->addError(new FormError('Mauvais mot de passe'));
-            }else{
-                if(!$userFound->isEnabled()){
+            } else {
+                if (!$userFound->isEnabled()) {
                     $formLogin->addError(new FormError('Veuillez activer votre compte.'));
-                }else{
+                } else {
                     /** @var User $userRepo */
                     $userRepo = $this->userRepository->get($userFound->getId());
                     $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
                     if ($invoice != null) {
-                        return $this->redirectToRoute('order_payment', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
+                        return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
                     }
                 }
             }
-        }else{
+        } else {
             // User non trouvé
             $formLogin->addError(new FormError('Compte inconnu'));
         }

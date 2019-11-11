@@ -25,11 +25,6 @@ class Site
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", inversedBy="sites")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $customer;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -182,6 +177,7 @@ class Site
         $this->createdAt = new \DateTime();
         $this->status = SiteStatus::A_CREER['name'];
         $this->users = new ArrayCollection();
+        $this->nameInLogo = false;
     }
 
     /**
@@ -219,18 +215,6 @@ class Site
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCustomer(): ?Customer
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?Customer $customer): self
-    {
-        $this->customer = $customer;
-
-        return $this;
     }
 
     public function getName(): ?string

@@ -5,56 +5,54 @@
 {% block description %}Bienvenue dans votre espace personnel.{% endblock %}
 
 {% block body %}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="fixed-fluid">
+                <div class="fixed-md-200 pull-sm-left fixed-right-border">
 
-
-
-
-            <div class="panel">
-                <div class="panel-body">
-                    <div class="fixed-fluid">
-                        <div class="fixed-md-200 pull-sm-left fixed-right-border">
-
-                            <!-- Simple profile -->
-                            <div class="text-center">
-                                <!--<div class="pad-ver">
-                                    <img src="/assets/img/profile-photos/1.png" class="img-lg img-circle" alt="Profile Picture">
-                                </div>-->
-                                <h4 class="text-lg text-overflow mar-no">{{ user.fullname }}</h4>
-                            </div>
-                            <hr>
-                            <p class="pad-ver text-main text-sm text-uppercase text-bold">Mon offre</p>
-                            <div class="panel panel-info panel-colorful media middle pad-all">
-                                <div class="media-left">
-                                    <div class="pad-hor">
-                                        <i class="ti-layout-grid2 icon-2x"></i>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <p class="mar-no text-semibold">{{ site.product.name }}</p>
-                                </div>
-                            </div>
-                            <hr>
-
-                            <!-- Profile Details -->
-                            <p class="pad-ver text-main text-sm text-uppercase text-bold">A propos de moi</p>
-                            <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> San Jose, CA</p>
-                            <p><a href="#" class="btn-link"><i class="demo-pli-internet icon-lg icon-fw"></i> http://www.themeon.net</a></p>
-                            <p><i class="demo-pli-old-telephone icon-lg icon-fw"></i>(123) 456 1234</p>
-
-
+                    <!-- Simple profile -->
+                    <div class="text-center">
+                        <div class="pad-ver">
+                            {%  %}
+                            <img src="{{ asset('/assets/img/profile-photos/1.png') }}" class="img-lg img-circle" alt="Profile Picture">
                         </div>
-                        <div class="fluid">
-                            <div class="text-right">
-                                <button class="btn btn-sm btn-primary">Editer mon profil</button>
+                        <h4 class="text-lg text-overflow mar-no">{{ user.firstname | capitalize }} {{ user.lastname | upper }}</h4>
+                    </div>
+                    <hr>
+                    <p class="pad-ver text-main text-sm text-uppercase text-bold">Mon offre</p>
+                    <div class="panel panel-info panel-colorful media middle pad-all">
+                        <div class="media-left">
+                            <div class="pad-hor">
+                                <i class="ti-layout-grid2 icon-2x"></i>
                             </div>
-
-                            <hr class="new-section-md bord-no">
-
-
+                        </div>
+                        <div class="media-body">
+                            <p class="mar-no text-semibold">{{ site.product.name }}</p>
                         </div>
                     </div>
+                    <hr>
+
+                    <!-- Profile Details -->
+                    <p class="pad-ver text-main text-sm text-uppercase text-bold">A propos de moi</p>
+                    <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> San Jose, CA</p>
+                    <p><a href="#" class="btn-link"><i class="demo-pli-internet icon-lg icon-fw"></i>
+                            http://www.themeon.net</a></p>
+                    <p><i class="demo-pli-old-telephone icon-lg icon-fw"></i>(123) 456 1234</p>
+
+
+                </div>
+                <div class="fluid">
+                    <div class="text-right">
+                        <button class="btn btn-sm btn-primary">Editer mon profil</button>
+                    </div>
+
+                    <hr class="new-section-md bord-no">
+
+
                 </div>
             </div>
+        </div>
+    </div>
 
 
 

@@ -19,7 +19,7 @@
         <a class="nav-link  {% if step == 3 %}active{% else %}disabled{% endif %}" data-toggle="tab"
            href="#nav-1-2-default-hor-left-big-icons--3" role="tab">
             <i class="icon-travel-037 icon-2x d-block g-font-size-25 u-tab-line-icon-pro"></i>
-            Nom de domaine
+            Domaine
         </a>
     </li>
     <li class="nav-item">
@@ -30,7 +30,14 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link  {% if step == 5 %}active{% else %}disabled{% endif %}" data-toggle="tab"
+        <a class="nav-link {% if step == 5 %}active{% else %}disabled{% endif %}" data-toggle="tab"
+           href="#nav-1-2-default-hor-left-big-icons--4" role="tab">
+            <i class="icon-user u-line-icon-pro d-block g-font-size-25 icon-hotel-restaurant-145"></i>
+            Facturation
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  {% if step == 6 %}active{% else %}disabled{% endif %}" data-toggle="tab"
            href="#nav-1-2-default-hor-left-big-icons--5" role="tab">
             <i class="icon-finance-100 u-line-icon-pro d-block g-font-size-25 u-tab-line-icon-pro"></i>
             Récapitulatif
@@ -39,5 +46,5 @@
 </ul>
 <!--progress bar-->
 <div class="progress progress-sm">
-    <div class="progress-bar progress-bar-izibrick progress-bar-striped progress-bar-animated" style="width:{{ 20 * step }}%"></div>
+    <div class="progress-bar progress-bar-izibrick progress-bar-striped progress-bar-animated" style="width:{{ step * 100 / 6 }}%"></div>
 </div>
