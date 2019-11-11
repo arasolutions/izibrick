@@ -95,7 +95,7 @@
                                                 <div class="error"></div>
                                                 <div class="success">
                                                     <!--Success! Your Stripe token is <span class="token"></span>-->
-                                                    Chargement en cours ...
+                                                    <span class="token">Chargement en cours ...</span>
                                                 </div>
                                             </div>
                                                 <div class="form-group g-mb-20">
@@ -190,7 +190,7 @@
             if (result.token) {
                 // Use the token to create a charge or a customer
                 // https://stripe.com/docs/charges
-                successElement.querySelector('.token').textContent = result.token.id;
+                //successElement.querySelector('.token').textContent = result.token.id;
                 successElement.classList.add('visible');
                 $('input[name="tokenId"]').val(result.token.id);
                 document.querySelector('form').submit();
