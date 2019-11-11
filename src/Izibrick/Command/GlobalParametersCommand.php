@@ -12,6 +12,7 @@ class GlobalParametersCommand
     private $description;
     private $domain;
     private $logo;
+    private $nameInLogo;
     private $keys;
     private $favicon;
     private $facebook;
@@ -34,6 +35,7 @@ class GlobalParametersCommand
         $this->keys = $site->getKeyWords();
         $this->twitter = $site->getTwitter();
         $this->logo = $site->getLogo();
+        $this->nameInLogo = $site->getNameInLogo();
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
     }
@@ -215,6 +217,21 @@ class GlobalParametersCommand
         $this->description = $description;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNameInLogo()
+    {
+        return $this->nameInLogo;
+    }
+
+    /**
+     * @param mixed $nameInLogo
+     */
+    public function setNameInLogo($nameInLogo): void
+    {
+        $this->nameInLogo = $nameInLogo;
+    }
 
 
 }

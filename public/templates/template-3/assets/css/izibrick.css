@@ -1,4 +1,4 @@
-::selection{
+::selection {
     background: var(--colorTheme) !important;
 }
 
@@ -48,5 +48,10 @@ footer, footer p {
 }
 
 .h1-page-title, .h2-page-desc {
+    color: var(--textColor) !important;
+}
+
+.btn, input[type="submit"], input[type="button"], button.btn, .btn-izibrick {
+    background-color: var(--colorTheme) !important;
     color: var(--textColor) !important;
 }

@@ -56,7 +56,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="v-blog-item-info clearfix">
-                                                <h4><a href="blog-standard-post.html">{{ post.title }}</a></h4>
+                                                <h4><a href="{{ path('blog_detail', {post: post.id}) }}">{{ post.title }}</a></h4>
                                                 <div class="v-blog-item-details">Le {{ post.creationDate|date('d/m/Y') }}</div>
                                                 <div class="excerpt">
                                                     <p>

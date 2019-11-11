@@ -66,7 +66,9 @@
                             <img alt="Vertex" height="35"
                                  src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
                         </a>
-                        <span class="logo-title">{{ site.name }}</span>
+                        {% if not site.nameInLogo %}
+                            <span class="logo-title">{{ site.name }}</span>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="header-column justify-content-end">

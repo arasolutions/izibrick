@@ -170,6 +170,11 @@ class Site
     private $textColor;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $nameInLogo;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -584,6 +589,18 @@ class Site
     public function setTextColor(string $textColor): self
     {
         $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    public function getNameInLogo(): ?bool
+    {
+        return $this->nameInLogo;
+    }
+
+    public function setNameInLogo(bool $nameInLogo): self
+    {
+        $this->nameInLogo = $nameInLogo;
 
         return $this;
     }

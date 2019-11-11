@@ -170,7 +170,9 @@
                                          alt="Logo {{ site.name }}"/>
                                 </div>
                                 <div class="footer-content-text">
-                                    <p><strong>{{ site.name }}</strong></p>
+                                    {% if not site.nameInLogo %}
+                                        <p><strong>{{ site.name }}</strong></p>
+                                    {% endif %}
                                     <p>{{ site.description | raw | nl2br }}</p>
                                 </div>
                             </div>

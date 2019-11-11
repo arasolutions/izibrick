@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="boxed">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="HTML5 Template"/>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+
+    <!-- Libs CSS -->
+    <link href="{{ asset('templates/template-5/assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/streamline-icon.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/header.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/portfolio.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/blog.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/v-animation.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/v-bg-stylish.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/font-icons.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/shortcodes.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/utilities.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/css/theme-responsive.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/plugins/aos/aos.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/plugins/owl-carousel/owl.theme.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-5/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet"/>
+
+    <!-- Current Page CSS -->
+    <link href="{{ asset('templates/template-5/assets/plugins/rs-plugin/css/settings.css') }}"
+          rel="stylesheet"/>
+
+    <!-- Skin -->
+    <link rel="stylesheet"
+          href="{{ asset('templates/template-5/assets/css/skin/default.css') }}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('templates/template-5/assets/css/custom.css') }}">
+    <style type="text/css">
+        :root {
+            --colorTheme: {{ site.colorTheme }};
+            --textColor: {{ site.textColor }};
+        }
+    </style>
+
+    <!-- Firebrick LESS -->
+    <link rel="stylesheet" href="{{ asset('templates/template-5/assets/css/izibrick.css') }}">
+</head>
+
+<body class="body">
+
+<!--Header-->
+<header id="header" class="header-effect-reveal"
+        data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyHeaderContainerHeight': 70, 'stickyStartAt': 120}">
+    <div class="header-body no-shadow">
+        <div class="header-container container">
+            <div class="header-row">
+                <div class="header-column justify-content-start">
+                    <div class="header-logo">
+                        <a href="{{ path('home') }}">
+                            <img alt="Vertex" height="35"
+                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                        </a>
+                        {% if not site.nameInLogo %}
+                            <span class="logo-title">{{ site.name }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="header-column justify-content-end">
+                    <div class="header-nav">
+                        <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                            <nav class="collapse">
+                                <ul class="nav flex-column flex-lg-row" id="mainNav">
+                                    <li class="dropdown dropdown-mega">
+                                        <a class="dropdown-item {% block indexActive %}{% endblock %}"
+                                           href="{{ path('home') }}">
+                                            Accueil
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                        <a class="dropdown-item {% block presentationActive %}{% endblock %}"
+                                           href="{{ path('presentation') }}">
+                                            Présentation
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                        <a class="dropdown-item {% block blogActive %}{% endblock %}"
+                                           href="{{ path('blog') }}">
+                                            Blog
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                        <a class="dropdown-item {% block devisActive %}{% endblock %}"
+                                           href="{{ path('devis') }}">
+                                            Devis
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                        <a class="dropdown-item {% block contactActive %}{% endblock %}"
+                                           href="{{ path('contact') }}">
+                                            Contact
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <button class="header-btn-collapse-nav ml-3" data-toggle="collapse"
+                                data-target=".header-nav-main nav">
+                                <span class="hamburguer">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            <span class="close">
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--End Header-->
+
+<div role="main" class="main">
+
+
+    {% block body %}    {% endblock %}
+
+    <!--<div class="footer-wrap">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 offset-sm-3 text-center">
+                        <section class="widget v-recent-entry-widget">
+                            <div class="widget-heading">
+                                <img alt="Vertex" src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}" style="height: 40px; margin-bottom: 20px;">
+                            </div>
+                            <span class="footer-title">{{ site.name }}</span>
+                        </section>
+                    </div>
+                    <div class="col-sm-3">
+                        <section class="widget v-recent-entry-widget">
+                            <div class="widget-heading">
+                                <h4>Pages</h4>
+                                <div class="horizontal-break"></div>
+                            </div>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('presentation') }}">Présentation</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('blog') }}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('devis') }}">Devis</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('contact') }}">Contact</a>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </footer>-->
+
+    <div class="copyright">
+        <div class="container">
+            <p>© Copyright 2019 by <a href="https://www.izibrick.com">Izibrick.com</a>. Tous droits réservés.</p>
+
+            <div class="clearfix pull-right">
+                {% if site.facebook %}
+                    <a href="{{ site.facebook }}" class="social-icon si-borderless si-facebook mb-0"
+                       title="Facebook" target="_blank">
+                        <i class="si-icon-facebook"></i>
+                        <i class="si-icon-facebook"></i>
+                    </a>
+                {% endif %}
+                {% if site.twitter %}
+                    <a href="{{ site.twitter }}" class="social-icon si-borderless si-twitter mb-0" title="Twitter"
+                       target="_blank">
+                        <i class="si-icon-twitter"></i>
+                        <i class="si-icon-twitter"></i>
+                    </a>
+                {% endif %}
+                {% if site.instagram %}
+                    <a href="{{ site.instagram }}" class="social-icon si-borderless si-instagram mb-0"
+                       title="Instagram" target="_blank">
+                        <i class="si-icon-instagram"></i>
+                        <i class="si-icon-instagram"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Footer-Wrap-->
+</div>
+
+<!-- Libs -->
+<script src="{{ asset('templates/template-5/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/popper.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/jquery.flexslider-min.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/jquery.easing.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/jquery.fitvids.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/jquery.carouFredSel.min.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/jquery.validate.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/theme-plugins.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/jquery.isotope.min.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/imagesloaded.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/view.min.js?auto') }}"></script>
+<script src="{{ asset('templates/template-5/assets/plugins/aos/aos.js') }}"></script>
+
+<script src="{{ asset('templates/template-5/assets/plugins/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+
+<script src="{{ asset('templates/template-5/assets/js/theme-core.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/theme.js') }}"></script>
+<script src="{{ asset('templates/template-5/assets/js/theme.init.js') }}"></script>
+</body>
+</html>

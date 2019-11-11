@@ -6,6 +6,7 @@ use App\Entity\Template;
 use App\Izibrick\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -63,6 +64,10 @@ class EditGlobalParametersType extends AbstractType
                 'required' => true,
                 'class' => Template::class,
                 'choice_label' => 'name'
+            ])
+            ->add('nameInLogo', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Afficher le nom du site à côté du logo'
             ])
             ->add('colorTheme', ColorPickerType::class, [
                 'constraints' => array(

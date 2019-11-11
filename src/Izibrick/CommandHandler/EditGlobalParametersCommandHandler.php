@@ -43,7 +43,7 @@ class EditGlobalParametersCommandHandler
 
         // détection de la couleur du texte en fonction du fond choisi
         $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));
-        if ($luminance > .22) {
+        if ($luminance > .30) {
             $site->setTextColor("#222222");
         } else {
             $site->setTextColor("#FFFFFF");
@@ -53,6 +53,7 @@ class EditGlobalParametersCommandHandler
             $site->setLogo('');
             $site->setLogoFile($command->getLogo());
         }
+        $site->setNameInLogo($command->getNameInLogo());
         $this->siteRepository->save($site);
     }
 
