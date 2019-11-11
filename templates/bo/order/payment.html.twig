@@ -34,7 +34,8 @@
                                 <div class="mt50">
 
 
-                                    <section class="container g-pb-70">
+                                    <section class="container">
+                                        <h3>Votre commande :</h3>
                                         <div class="table-responsive">
                                             <table class="table table-striped">
                                                 <thead class="g-color-white g-bg-primary text-center text-uppercase">
@@ -58,78 +59,67 @@
                                                         <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15">0 €</td>
                                                         <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15">0 €</td>
                                                     {% else %}
-                                                    <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15">{{ invoice.totalAmount | number_format(2,',',' ') }} €</td>
-                                                    <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15">{{ invoice.totalAmount | number_format(2,',',' ') }} €</td>
+                                                        <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15 text-right">{{ invoice.totalAmount | number_format(2,',',' ') }} €</td>
+                                                        <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15 text-right">{{ invoice.totalAmount | number_format(2,',',' ') }} €</td>
                                                     {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        &nbsp;
+                                                    </td>
+                                                    <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15 text-right">TVA 20% :<br/>Total :</td>
+                                                    <td class="g-color-gray-dark-v4 g-font-weight-600 g-py-15 text-right">
+                                                        {% if free == true %}
+                                                            <span class="d-inline-block g-min-width-65">0 €<br/>0 €</span>
+                                                        {% else %}
+                                                            <span class="d-inline-block g-min-width-65">{{ (invoice.totalAmount * 20 / 100)  | number_format(2,',',' ')}} €<br/>{{ (invoice.totalAmount  + (invoice.totalAmount * 20 / 100)) | number_format(2,',',' ') }} € TTC</span>
+                                                        {% endif %}
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-
-                                        <!-- Subtotal -->
-                                        <div class="g-bg-gray-light-v5 mb-2">
-                                            <div class="row justify-content-end">
-                                                <div class="col-lg-5">
-                                                    <ul class="list-unstyled g-font-weight-600 text-uppercase py-4 g-pr-50 mb-0">
-                                                        <li class="text-right my-1">
-                                                            <h4 class="d-inline-block h6 text-left g-font-weight-600 g-min-width-110 mb-0">TVA 20%</h4>
-                                                            <span class="text-left mx-5">:</span>
-                                                            {% if free == true %}
-                                                            <span class="d-inline-block g-min-width-65">0 €</span>
-                                                            {% else %}
-                                                            <span class="d-inline-block g-min-width-65">{{ invoice.totalAmount  * 20 / 100 | number_format(2,',',' ')}} €</span>
-                                                            {% endif %}
-                                                        </li>
-                                                        <li class="text-right my-1">
-                                                            <h4 class="d-inline-block h6 text-left g-font-weight-600 g-min-width-110 mb-0">Total</h4>
-                                                            <span class="text-left mx-5">:</span>
-                                                            {% if free == true %}
-                                                            <span class="d-inline-block g-min-width-65">0 € TTC</span>
-                                                            {% else %}
-                                                            <span class="d-inline-block g-min-width-65">{{ (invoice.totalAmount | number_format(2,',',' ')) + (invoice.totalAmount | number_format(2,',',' ') * 20 / 100) }} € TTC</span>
-                                                            {% endif %}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End Subtotal -->
                                     </section>
 
-                                    <form action="/order/{{ site.id }}/{{ user.id }}/payment" method="post" id="payment-form">
-                                        <div class="outcome">
-                                            <div class="error"></div>
-                                            <div class="success">
-                                                <!--Success! Your Stripe token is <span class="token"></span>-->
-                                                Chargement en cours ...
-                                            </div>
-                                        </div>
+                                    <hr/>
+
+                                    <section class="container">
+                                        <h3>Votre paiement :</h3>
                                         {% if free == true %}
                                             <div class="col-sm-12 form-group text-right mt20">
                                                 <a href="{{ path('order_valid') }}" class="btn btn-blue btn-lg">Valider</a>
                                             </div>
                                         {% else %}
-                                            <div class="form-group g-mb-20">
-                                                <label class="g-mb-10">Titulaire du compte</label>
-                                                <div class="input-group g-brd-primary--focus">
-                                                    <input id="inputGroup1_3" class="form-control form-control-md g-brd-right-none rounded-0" required name="name" type="text" placeholder="Titulaire du compte">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text rounded-0 g-color-gray-dark-v5"><i class="icon-user"></i></span>
+                                        <form action="/order/{{ site.id }}/{{ user.id }}/payment" method="post" id="payment-form">
+                                            <div class="outcome">
+                                                <div class="error"></div>
+                                                <div class="success">
+                                                    <!--Success! Your Stripe token is <span class="token"></span>-->
+                                                    Chargement en cours ...
+                                                </div>
+                                            </div>
+                                                <div class="form-group g-mb-20">
+                                                    <label class="g-mb-10">Titulaire du compte</label>
+                                                    <div class="input-group g-brd-primary--focus">
+                                                        <input id="inputGroup1_3" class="form-control form-control-md g-brd-right-none rounded-0" required name="name" type="text" placeholder="Titulaire du compte">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text rounded-0 g-color-gray-dark-v5"><i class="icon-user"></i></span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group g-mb-20">
-                                                <label class="g-mb-10">Carte bancaire</label>
-                                                <div class="input-group g-brd-primary--focus">
-                                                    <div id="card-element" class="field"></div>
+                                                <div class="form-group g-mb-20">
+                                                    <label class="g-mb-10">Carte bancaire</label>
+                                                    <div class="input-group g-brd-primary--focus">
+                                                        <div id="card-element" class="field"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <input id="token" name="tokenId" type="hidden" value="">
-                                            <div class="col-sm-12 form-group text-right mt20">
-                                                <button type="submit" class="btn btn-blue btn-lg">Payer</button>
-                                            </div>
+                                                <input id="token" name="tokenId" type="hidden" value="">
+                                                <div class="col-sm-12 form-group text-right mt20">
+                                                    <button type="submit" class="btn btn-blue btn-lg">Payer</button>
+                                                </div>
+                                            </form>
                                         {% endif %}
-                                    </form>
+                                    </section>
                                 </div>
                             </div>
                         </div>

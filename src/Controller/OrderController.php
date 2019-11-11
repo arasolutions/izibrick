@@ -258,16 +258,16 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         }
 
         // On récupère les informations de la commande
-        $invoiceTotalAmount = '0';
+        $invoiceTotalAmount = 0;
         if($planTarifaireId != '' && $planTarifaireId != null){
             $plan = $stripe->getPlan($planTarifaireId);
-            $invoiceTotalAmount= ($plan->amount/100) + ($plan->amount/100*20/100);
+            $invoiceTotalAmount= $plan->amount/100;
         }
         $invoiceTitle= 'Offre '.$user->getLastSite()->getSite()->getProduct()->getName();
         $invoiceDescription= 'Abonnement du ' . date("d/m/y") . ' au ' . date('d/m/y', strtotime('+1 month'));
         $invoice = ['title' => $invoiceTitle,
             'description' => $invoiceDescription,
-            'totalAmount' => $invoiceTotalAmount];
+            'totalAmount' => $invoiceTotalAmount];//var_dump($invoiceTotalAmount);die;
 
         return $this->render('bo/order/payment.html.twig', [
             'site' => $site,
