@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use KunicMarko\ColorPickerBundle\Form\Type\ColorPickerType;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EditGlobalParametersType extends AbstractType
 {
@@ -63,7 +64,15 @@ class EditGlobalParametersType extends AbstractType
                 'class' => Template::class,
                 'choice_label' => 'name'
             ])
-            ->add('colorTheme', ColorPickerType::class);
+            ->add('colorTheme', ColorPickerType::class, [
+                'constraints' => array(
+                    new Regex([
+                            'pattern' => '/\#(([1-9A-F]){6})/i',
+                            'htmlPattern' => '\#(([1-9A-F]){6})',
+                        ]
+                    )
+                )
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

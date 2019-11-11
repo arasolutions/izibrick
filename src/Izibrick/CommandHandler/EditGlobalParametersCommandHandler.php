@@ -5,6 +5,7 @@ namespace App\Izibrick\CommandHandler;
 
 
 use App\Entity\Site;
+use App\Helper\ColorHelper;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Repository\SiteRepository;
 
@@ -39,6 +40,15 @@ class EditGlobalParametersCommandHandler
         $site->setInstagram($command->getInstagram());
         $site->setTemplate($command->getTemplate());
         $site->setColorTheme($command->getColorTheme());
+
+        // détection de la couleur du texte en fonction du fond choisi
+        $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));
+        if ($luminance > .22) {
+            $site->setTextColor("#222222");
+        } else {
+            $site->setTextColor("#FFFFFF");
+        }
+
         if ($command->getLogo() != null) {
             $site->setLogo('');
             $site->setLogoFile($command->getLogo());

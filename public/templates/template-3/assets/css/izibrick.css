@@ -1,3 +1,7 @@
+::selection{
+    background: var(--colorTheme) !important;
+}
+
 .navigation > li:hover > a,
 .navigation > li > a:hover,
 .navigation > li > .activelink {
@@ -10,12 +14,13 @@
     color: var(--colorTheme) !important;
 }
 
-.blog-post-details-item.blog-post-details-item-right a:hover i{
+.blog-post-details-item.blog-post-details-item-right a:hover i {
     color: var(--colorTheme) !important;
 }
 
 footer {
     background: var(--colorTheme) !important;
+    color: var(--textColor) !important;
 }
 
 footer, footer p {
@@ -26,10 +31,12 @@ footer, footer p {
 .button, .body-wrapper input[type="submit"], .body-wrapper input[type="button"], .section-content.section-color-bg, .content-box.content-style4 h4 i, button.button-main, .body-wrapper .tags a:hover, .callout-box.callout-box2, .blog-search .blog-search-button, .top-title-wrapper, .testimonial-big,
 .content-style3:hover .content-style3-icon, table.table thead tr, .price-table .price-label-badge, .price-table .price-table-header, .section-subscribe .subscribe-button.icon-envelope-alt {
     background-color: var(--colorTheme) !important;
+    color: var(--textColor) !important;
 }
 
 .blog-post .blog-post-type {
     background-color: var(--colorTheme) !important;
+    color: var(--textColor) !important;
 }
 
 .align-right {
@@ -38,4 +45,8 @@ footer, footer p {
 
 .align-left {
     text-align: left !important;
+}
+
+.h1-page-title, .h2-page-desc {
+    color: var(--textColor) !important;
 }
