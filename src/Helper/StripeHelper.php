@@ -25,7 +25,7 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un client
      */
-    public function createCustomer($name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = null){
+    public function createCustomer($name, $description, $email, $addressLine1, $addressLine2 = null, $addressCity = null, $addressPostalCode = null, $addressCountry = 'FRANCE'){
         $customer = \Stripe\Customer::create([
             'name' => $name,
             'description' => $description,
