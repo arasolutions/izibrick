@@ -47,4 +47,5 @@ ul.page-numbers li > span.current,
 
 .v-blog-item-info .v-btn.sf-icon-stroke i, .mini-v-blog-item-wrap .v-btn.sf-icon-stroke i, .post-inner .v-btn.sf-icon-stroke i {
     background: var(--colorTheme);
+    color: var(--textColor);
 }
