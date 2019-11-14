@@ -33,7 +33,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class SupportController
- * @Route("/bo-support")
+ * @Route("/admin/bo-support")
  * @package App\Controller\Admin
  */
 class SupportController extends AbstractController

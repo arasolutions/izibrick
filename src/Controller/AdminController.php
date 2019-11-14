@@ -41,6 +41,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class AdminController
+ * @Route("/admin")
  * @package App\Controller
  */
 class AdminController extends AbstractController

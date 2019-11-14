@@ -36,7 +36,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class TrackingQuoteController
- * @Route("/bo-tracking-quote")
+ * @Route("/admin/bo-tracking-quote")
  * @package App\Controller\Admin
  */
 class TrackingQuoteController extends AbstractController

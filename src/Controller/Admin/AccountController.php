@@ -32,7 +32,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class AccountController
- * @Route("/bo-account")
+ * @Route("/admin/bo-account")
  * @package App\Controller\Admin
  */
 class AccountController extends AbstractController
