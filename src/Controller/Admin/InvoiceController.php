@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class InvoiceController
- * @Route("/bo-invoice")
+ * @Route("/admin/bo-invoice")
  * @package App\Controller\Admin
  */
 class InvoiceController extends AbstractController

@@ -35,7 +35,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class BlogController
- * @Route("/bo-blog")
+ * @Route("/admin/bo-blog")
  * @package App\Controller\Admin
  */
 class BlogController extends AbstractController

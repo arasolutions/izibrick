@@ -36,7 +36,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class TrackingContactController
- * @Route("/bo-tracking-contact")
+ * @Route("/admin/bo-tracking-contact")
  * @package App\Controller\Admin
  */
 class TrackingContactController extends AbstractController
