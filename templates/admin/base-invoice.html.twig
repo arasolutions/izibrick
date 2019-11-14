@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Izibrick.com | Administration | {% block title %}{% endblock %}</title>
+    <title>izibrick | Administration | {% block title %}{% endblock %}</title>
 
 
     <!--STYLESHEET-->
@@ -90,10 +90,10 @@
             <!--Brand logo & name-->
             <!--================================-->
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand">
-                    <img src="{{ asset('assets/img/logo.png') }}" alt="Nifty Logo" class="brand-icon">
+                <a href="{{ path('dashboard') }}" class="navbar-brand">
+                    <img src="{{ asset('assets/img/logo/logo-izibrick.png') }}" alt="Nifty Logo" class="brand-icon dashboard-logo">
                     <div class="brand-title">
-                        <span class="brand-text">Izibrick.com</span>
+                        <span class="brand-text">izibrick</span>
                     </div>
                 </a>
             </div>

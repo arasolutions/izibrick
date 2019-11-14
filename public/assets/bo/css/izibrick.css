@@ -92,3 +92,9 @@
 .mb-20{
     margin-bottom: 20px;
 }
+
+.dashboard-logo {
+    width: 40px;
+    height: 40px;
+    margin: 10px 10px 10px 20px;
+}

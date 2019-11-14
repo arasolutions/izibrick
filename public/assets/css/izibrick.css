@@ -1,13 +1,16 @@
-.mt10{
+.mt10 {
     margin-top: 10px;
 }
-.mb20{
+
+.mb20 {
     margin-bottom: 20px;
 }
-.ml10{
+
+.ml10 {
     margin-left: 10px;
- }
-.bold{
+}
+
+.bold {
     font-weight: bold;
 }
 
@@ -37,28 +40,28 @@
     color: #29b2a6;
 }
 
-.ug-thumb-wrapper.ug-tile.selected .ug-textpanel-bg.ug-trans-enabled{
+.ug-thumb-wrapper.ug-tile.selected .ug-textpanel-bg.ug-trans-enabled {
     background-color: #0b141e !important;
 }
 
-.ug-textpanel .ug-trans-enabled{
+.ug-textpanel .ug-trans-enabled {
     cursor: pointer;
 }
 
-.margin-right-10{
+.margin-right-10 {
     margin-right: 10px !important;
 }
 
-.navbar-content .username{
+.navbar-content .username {
     padding-left: 10px;
 }
 
-.header-description{
+.header-description {
     margin-left: 10px;
     font-style: italic;
 }
 
-#wizard ul.wz-step{
+#wizard ul.wz-step {
     padding-inline-start: 0;
 }
 
@@ -68,24 +71,24 @@
     padding-bottom: 10px;
 }
 
-#wizard ul.wz-step > li:not(.active) h5{
+#wizard ul.wz-step > li:not(.active) h5 {
     font-weight: normal;
 }
 
-#wizard ul.wz-step > li i.icon-2x{
+#wizard ul.wz-step > li i.icon-2x {
     padding-bottom: 5px;
 }
 
-#summernote-edit{
+#summernote-edit {
     border-left: solid 2px #CCC;
     padding: 5px;
 }
 
-#footer{
+#footer {
     position: unset;
 }
 
-#wizard-tab4 .panel-body{
+#wizard-tab4 .panel-body {
     text-align: center;
     padding-top: 25px;
 }
