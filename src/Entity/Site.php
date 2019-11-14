@@ -170,6 +170,11 @@ class Site
     private $nameInLogo;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $domainActif;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -585,6 +590,18 @@ class Site
     public function setNameInLogo(bool $nameInLogo): self
     {
         $this->nameInLogo = $nameInLogo;
+
+        return $this;
+    }
+
+    public function getDomainActif(): ?bool
+    {
+        return $this->domainActif;
+    }
+
+    public function setDomainActif(bool $domainActif): self
+    {
+        $this->domainActif = $domainActif;
 
         return $this;
     }
