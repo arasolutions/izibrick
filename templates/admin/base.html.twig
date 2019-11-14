@@ -91,7 +91,8 @@
             <!--================================-->
             <div class="navbar-header">
                 <a href="{{ path('dashboard') }}" class="navbar-brand">
-                    <img src="{{ asset('assets/img/logo/logo-izibrick.png') }}" alt="Nifty Logo" class="brand-icon dashboard-logo">
+                    <img src="{{ asset('assets/img/logo/logo-izibrick.png') }}" alt="Nifty Logo"
+                         class="brand-icon dashboard-logo">
                     <div class="brand-title">
                         <span class="brand-text">izibrick</span>
                     </div>
@@ -106,6 +107,21 @@
             <div class="navbar-content">
                 <ul class="nav navbar-top-links">
 
+                    {% if site.domainActif and site.domain %}
+                        <li>
+                            <a href="{{ site.domain }}" target="_blank">
+                                <button class="btn btn-md btn-mint"><i class="ti-world"></i>&nbsp;Accéder à mon site
+                                </button>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('site_home', {'siteName':site.name}) }}" target="_blank">
+                                <button class="btn btn-md btn-mint"><i class="ti-world"></i>&nbsp;Accéder à mon site
+                                </button>
+                            </a>
+                        </li>
+                    {% endif %}
 
                     <!--Mega dropdown-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
