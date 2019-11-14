@@ -5,6 +5,11 @@
 {% block description %}Bienvenue dans votre espace personnel.{% endblock %}
 
 {% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Vos paramètres ont bien été mis à jour.
+        </div>
+    {% endif %}
     <div class="panel">
         <div class="panel-body">
             <div class="fixed-fluid">
@@ -13,8 +18,8 @@
                     <!-- Simple profile -->
                     <div class="text-center">
                         <div class="pad-ver">
-                            {%  %}
-                            <img src="{{ asset('/assets/img/profile-photos/1.png') }}" class="img-lg img-circle" alt="Profile Picture">
+                            <img src="{{ asset('/assets/img/profile-photos/1.png') }}" class="img-lg img-circle"
+                                 alt="Profile Picture">
                         </div>
                         <h4 class="text-lg text-overflow mar-no">{{ user.firstname | capitalize }} {{ user.lastname | upper }}</h4>
                     </div>
@@ -42,12 +47,51 @@
 
                 </div>
                 <div class="fluid">
-                    <div class="text-right">
+                    <div class="text-right mb-20">
                         <button class="btn btn-sm btn-primary">Editer mon profil</button>
                     </div>
-
-                    <hr class="new-section-md bord-no">
-
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Informations postales</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ form_start(form) }}
+                            <div class="row">
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.societyName, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                    {{ form_widget(form.societyName, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 form-group pull-left">
+                                    {{ form_label(form.address1, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                    {{ form_widget(form.address1, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                </div>
+                                <div class="col-sm-6 form-group pull-right">
+                                    {{ form_label(form.address2, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                    {{ form_widget(form.address2, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group pull-left">
+                                    {{ form_label(form.postalCode, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                    {{ form_widget(form.postalCode, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                </div>
+                                <div class="col-sm-8 form-group pull-right">
+                                    {{ form_label(form.city, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                    {{ form_widget(form.city, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group text-right mt50">
+                                    <button class="btn btn-success pull-right" type="submit">
+                                        Enregistrer
+                                    </button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
 
                 </div>
             </div>

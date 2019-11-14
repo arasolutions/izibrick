@@ -4,6 +4,8 @@
 namespace App\Izibrick\Command;
 
 
+use App\Entity\Site;
+
 class SiteBillingCommand
 {
     private $address1;

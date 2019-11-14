@@ -7,7 +7,7 @@ use App\Entity\Product;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Enum\SiteStatus;
-use App\Form\AddSiteBillingType;
+use App\Form\EditSiteBillingType;
 use App\Izibrick\Command\AddSiteCommand;
 use App\Izibrick\Command\RegistrationCommand;
 use App\Izibrick\Command\SiteBillingCommand;
@@ -213,7 +213,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         $billingCommand = new SiteBillingCommand();
 
-        $form = $this->createForm(AddSiteBillingType::class, $billingCommand);
+        $form = $this->createForm(EditSiteBillingType::class, $billingCommand);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
