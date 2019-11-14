@@ -32,9 +32,11 @@ class EditGlobalParametersType extends AbstractType
                 )
             ])
             ->add('description', TextareaType::class, [
+                'required' => false,
                 'label' => 'Description'
             ])
             ->add('domain', TextType::class, [
+                'required' => false,
                 'label' => 'Nom de domaine (exemple : www.monsite.com)',
                 'constraints' => array(
                     new Length(array(
