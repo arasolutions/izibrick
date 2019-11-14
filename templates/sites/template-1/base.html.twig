@@ -14,22 +14,31 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
 
     <!-- Libs CSS -->
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.min.css') }}"
+          rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/streamline-icon.css') }}"
+          rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/header.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/portfolio.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/blog.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-animation.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/v-bg-stylish.css') }}"
+          rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-icons.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/shortcodes.css') }}" rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/utilities.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/theme-responsive.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}"
+          rel="stylesheet"/>
 
     <!-- Current Page CSS -->
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/rs-plugin/css/settings.css') }}"
@@ -76,33 +85,34 @@
                         <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
                             <nav class="collapse">
                                 <ul class="nav flex-column flex-lg-row" id="mainNav">
+                                    {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                                     <li class="dropdown dropdown-mega">
                                         <a class="dropdown-item {% block indexActive %}{% endblock %}"
-                                           href="{{ path('home') }}">
+                                           href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Accueil
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                         <a class="dropdown-item {% block presentationActive %}{% endblock %}"
-                                           href="{{ path('presentation') }}">
+                                           href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Présentation
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                         <a class="dropdown-item {% block blogActive %}{% endblock %}"
-                                           href="{{ path('blog') }}">
+                                           href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Blog
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                         <a class="dropdown-item {% block devisActive %}{% endblock %}"
-                                           href="{{ path('devis') }}">
+                                           href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Devis
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                         <a class="dropdown-item {% block contactActive %}{% endblock %}"
-                                           href="{{ path('contact') }}">
+                                           href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Contact
                                         </a>
                                     </li>
@@ -154,16 +164,16 @@
                             </div>
                             <ul>
                                 <li>
-                                    <a href="{{ path('presentation') }}">Présentation</a>
+                                    <a href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Présentation</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('blog') }}">Blog</a>
+                                    <a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Blog</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('devis') }}">Devis</a>
+                                    <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Devis</a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('contact') }}">Contact</a>
+                                    <a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Contact</a>
                                 </li>
                             </ul>
                         </section>
@@ -172,37 +182,37 @@
             </div>
         </footer>-->
 
-        <div class="copyright">
-            <div class="container">
-                <p>© Copyright 2019 by <a href="https://www.izibrick.com">Izibrick.com</a>. Tous droits réservés.</p>
+    <div class="copyright">
+        <div class="container">
+            <p>© Copyright 2019 by <a href="https://www.izibrick.com">Izibrick.com</a>. Tous droits réservés.</p>
 
-                <div class="clearfix pull-right">
-                    {% if site.facebook %}
-                        <a href="{{ site.facebook }}" class="social-icon si-borderless si-facebook mb-0"
-                           title="Facebook" target="_blank">
-                            <i class="si-icon-facebook"></i>
-                            <i class="si-icon-facebook"></i>
-                        </a>
-                    {% endif %}
-                    {% if site.twitter %}
-                        <a href="{{ site.twitter }}" class="social-icon si-borderless si-twitter mb-0" title="Twitter"
-                           target="_blank">
-                            <i class="si-icon-twitter"></i>
-                            <i class="si-icon-twitter"></i>
-                        </a>
-                    {% endif %}
-                    {% if site.instagram %}
-                        <a href="{{ site.instagram }}" class="social-icon si-borderless si-instagram mb-0"
-                           title="Instagram" target="_blank">
-                            <i class="si-icon-instagram"></i>
-                            <i class="si-icon-instagram"></i>
-                        </a>
-                    {% endif %}
-                </div>
+            <div class="clearfix pull-right">
+                {% if site.facebook %}
+                    <a href="{{ site.facebook }}" class="social-icon si-borderless si-facebook mb-0"
+                       title="Facebook" target="_blank">
+                        <i class="si-icon-facebook"></i>
+                        <i class="si-icon-facebook"></i>
+                    </a>
+                {% endif %}
+                {% if site.twitter %}
+                    <a href="{{ site.twitter }}" class="social-icon si-borderless si-twitter mb-0" title="Twitter"
+                       target="_blank">
+                        <i class="si-icon-twitter"></i>
+                        <i class="si-icon-twitter"></i>
+                    </a>
+                {% endif %}
+                {% if site.instagram %}
+                    <a href="{{ site.instagram }}" class="social-icon si-borderless si-instagram mb-0"
+                       title="Instagram" target="_blank">
+                        <i class="si-icon-instagram"></i>
+                        <i class="si-icon-instagram"></i>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
-    <!--End Footer-Wrap-->
+</div>
+<!--End Footer-Wrap-->
 </div>
 
 <!-- Libs -->

@@ -18,8 +18,9 @@
 
                         <div class="breadcrumb-container">
                             <ol class="breadcrumbs">
+                                {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                                 <li>
-                                    <a href="{{ path('blog') }}">Retour</a>
+                                    <a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Retour</a>
                                 </li>
                             </ol>
                         </div>

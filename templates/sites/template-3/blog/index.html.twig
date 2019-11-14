@@ -43,7 +43,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         {% if posts|length > 0 %}
+                            {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                             {% for post in posts %}
+                                {% set siteName = siteName|merge({'post':post.id}) %}
                                 <div class="blog-post">
                                     <div class="blog-post-type">
                                         <i class="icon-photo"> </i>
@@ -88,7 +90,7 @@
                                             </div>
                                         </div>
                                         <div class="blog-post-details-item blog-post-details-item-right">
-                                            <a href="{{ path('blog_detail', {'post':post.id}) }}">
+                                            <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                                 Voir plus <i class="fa fa-chevron-right"></i>
                                             </a>
                                         </div>

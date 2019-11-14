@@ -123,12 +123,13 @@
                 {% endif %}
 
                 <div class="sitemap">
+                    {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                     <ul>
-                        <li><a href="{{ path('home') }}">ACCUEIL</a></li>
-                        <li><a href="{{ path('presentation') }}">PRESENTATION</a></li>
-                        <li><a href="{{ path('blog') }}">BLOG</a></li>
-                        <li><a href="{{ path('devis') }}">DEVIS</a></li>
-                        <li><a href="{{ path('contact') }}">CONTACT</a></li>
+                        <li><a href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">ACCUEIL</a></li>
+                        <li><a href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">PRESENTATION</a></li>
+                        <li><a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">BLOG</a></li>
+                        <li><a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">DEVIS</a></li>
+                        <li><a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">CONTACT</a></li>
                     </ul>
                 </div>
             </div>

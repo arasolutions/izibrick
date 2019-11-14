@@ -89,10 +89,11 @@
                         <!-- //Mobile Button Menu// -->
 
                         <nav>
+                            {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                             <ul class="navigation">
                                 <li>
                                     <a class="{% block indexActive %}{% endblock %}"
-                                       href="{{ path('home') }}">
+                                       href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
                                         Accueil
                                                 </span>
@@ -100,7 +101,7 @@
                                 </li>
                                 <li>
                                     <a class="{% block presentationActive %}{% endblock %}"
-                                       href="{{ path('presentation') }}">
+                                       href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
                                         Présentation
                                                 </span>
@@ -108,7 +109,7 @@
                                 </li>
                                 <li>
                                     <a class="{% block blogActive %}{% endblock %}"
-                                       href="{{ path('blog') }}">
+                                       href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
                                         Blog
                                                 </span>
@@ -116,7 +117,7 @@
                                 </li>
                                 <li>
                                     <a class="{% block devisActive %}{% endblock %}"
-                                       href="{{ path('devis') }}">
+                                       href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
                                         Devis
                                                 </span>
@@ -124,7 +125,7 @@
                                 </li>
                                 <li>
                                     <a class="{% block contactActive %}{% endblock %}"
-                                       href="{{ path('contact') }}">
+                                       href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
                                         Contact
                                                 </span>
@@ -188,19 +189,19 @@
                             <div class="footer-content">
                                 <ul class="footer-category-list">
                                     <li>
-                                        <a href="{{ path('home') }}">Accueil</a>
+                                        <a href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Accueil</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('presentation') }}">Présentation</a>
+                                        <a href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Présentation</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('blog') }}">Blog</a>
+                                        <a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Blog</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('devis') }}">Devis</a>
+                                        <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Devis</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('contact') }}">Contact</a>
+                                        <a href="{{ path('conact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Contact</a>
                                     </li>
                                 </ul>
                             </div>

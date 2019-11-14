@@ -36,7 +36,14 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/presentation", name="presentation")
+     * @Route("/presentation",
+     *     name="presentation",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/presentation", name="site_presentation",
+     *     host="%base_host%")
      */
     public function presentation($siteName = null)
     {
@@ -54,7 +61,14 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/blog", name="blog")
+     * @Route("/blog",
+     *     name="blog",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/blog", name="site_blog",
+     *     host="%base_host%")
      */
     public function blog($siteName = null)
     {
@@ -76,8 +90,17 @@ class SiteController extends AbstractController
     }
 
     /**
+     * @Route("/blog/{post}",
+     *     name="blog_detail",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/blog/{post}", name="site_blog_detail",
+     *     host="%base_host%")
      * @param Post $post
-     * @Route("/blog/{post}", name="blog_detail")
+     * @param null $siteName
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function blogDetail(Post $post, $siteName = null)
     {
@@ -97,10 +120,20 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/devis", name="devis")
+     * @Route("/devis",
+     *     name="devis",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/devis", name="site_devis",
+     *     host="%base_host%")
      * @param Request $request
      * @param $siteName
      * @param AddTrackingQuoteCommandHandler $addTrackingQuoteCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function devis(Request $request, $siteName = null, AddTrackingQuoteCommandHandler $addTrackingQuoteCommandHandler)
     {
@@ -130,12 +163,24 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact",
+     *     name="contact",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/contact", name="site_contact",
+     *     host="%base_host%")
      * @param Request $request
      * @param $siteName
      * @param AddTrackingContactCommandHandler $addTrackingContactCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function contact(Request $request, $siteName = null, AddTrackingContactCommandHandler $addTrackingContactCommandHandler)
+    public function contact(Request $request,
+                            $siteName = null,
+                            AddTrackingContactCommandHandler $addTrackingContactCommandHandler)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -168,7 +213,7 @@ class SiteController extends AbstractController
      *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
      *     defaults={"nobackoffice"=""}
      *     )
-     * @Route("/site/{siteName<.*>}/", name="site_homepage_by_id",
+     * @Route("/site/{siteName<.*>}", name="site_home",
      *     host="%base_host%")
      * @param string $siteName
      * @return \Symfony\Component\HttpFoundation\Response

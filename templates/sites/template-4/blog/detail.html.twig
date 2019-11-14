@@ -36,10 +36,11 @@
                                         {{ post.creationDate | date('Y') }}
                                     </span>
 								</span>
-                                <a href="{{ path('blog_detail', {'post':post.id}) }}">
+                                <a href="#">
                                     {{ post.title }}
                                 </a>
-                                <a class="btn btn-izibrick pull-right" href="{{ path('blog') }}">
+                                {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
+                                <a class="btn btn-izibrick pull-right" href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                     Retour
                                 </a>
                             </h2>

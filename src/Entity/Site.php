@@ -175,7 +175,7 @@ class Site
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->status = SiteStatus::A_CREER['name'];
+        $this->status = SiteStatus::INITIALISE['name'];
         $this->users = new ArrayCollection();
         $this->nameInLogo = false;
     }

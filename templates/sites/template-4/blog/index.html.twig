@@ -25,7 +25,9 @@
             <div class="row blog">
                 <div class="col-sm-12">
                     {% if posts|length > 0 %}
+                        {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                         {% for post in posts %}
+                            {% set siteName = siteName|merge({'post':post.id}) %}
                             <div class="row blog-post">
                                 <div class="col-md-12">
                                     <h2>
@@ -38,14 +40,14 @@
                                         {{ post.creationDate | date('Y') }}
                                     </span>
 								</span>
-                                        <a href="{{ path('blog_detail', {'post':post.id}) }}">
+                                        <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             {{ post.title }}
                                         </a>
                                     </h2>
                                     <hr>
                                     <p>{{ post.introduction }}</p>
                                     <p>
-                                        <a class="btn btn-izibrick" href="{{ path('blog_detail', {'post':post.id}) }}">
+                                        <a class="btn btn-izibrick" href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Voir plus &raquo;
                                         </a>
                                     </p>

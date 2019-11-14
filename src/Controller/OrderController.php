@@ -6,6 +6,7 @@ use App\Entity\CodePromotion;
 use App\Entity\Product;
 use App\Entity\Site;
 use App\Entity\User;
+use App\Enum\SiteStatus;
 use App\Form\AddSiteBillingType;
 use App\Izibrick\Command\AddSiteCommand;
 use App\Izibrick\Command\RegistrationCommand;
@@ -268,6 +269,10 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
                 if ($subscription) {
                     // Paiement accepté
+
+                    // Le site devient actif
+                    $site->setStatus(SiteStatus::ACTIF['name']);
+                    $this->siteRepository->save($site);
                     return $this->render('bo/order/payment-completed.html.twig');
                 }
                 return $this->render('bo/order/payment-failure.html.twig');

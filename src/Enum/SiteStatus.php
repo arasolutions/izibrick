@@ -6,8 +6,8 @@ namespace App\Enum;
 
 class SiteStatus
 {
-    const A_CREER = array('name' => 'A_CRE');
     const INITIALISE = array('name' => 'INIT');
+    const ACTIF = array('name' => 'ACTIF');
 
     public static function getByName($type)
     {
@@ -17,8 +17,8 @@ class SiteStatus
     private static function toArray()
     {
         return array(
-            self::A_CREER['name'] => self::A_CREER,
-            self::INITIALISE['name'] => self::INITIALISE
+            self::INITIALISE['name'] => self::INITIALISE,
+            self::ACTIF['name'] => self::ACTIF
         );
     }
 }
