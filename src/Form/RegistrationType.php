@@ -27,6 +27,7 @@ class RegistrationType extends AbstractType
         $builder->add('lastname', TextType::class, ['label' => 'Nom']);
         $builder->add('phone', TelType::class, ['label' => 'Numéro de téléphone']);
         $builder->add('siteId', HiddenType::class);
+        $builder->add('cgu', CheckboxType::class);
     }
 
     public function getParent()

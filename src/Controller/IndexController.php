@@ -57,7 +57,17 @@ class IndexController extends AbstractController
      */
     public function ourContact()
     {
-        return $this->render('bo/contact/index.html.twig', [
+        return $this->render('bo/contact/index.html.twig', []);
+    }
+
+    /**
+     * @Route("/cgu",
+     *     name="cgu"
+     * )
+     */
+    public function cguAction()
+    {
+        return $this->render('bo/cgu/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }

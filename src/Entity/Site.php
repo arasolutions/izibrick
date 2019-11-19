@@ -183,6 +183,7 @@ class Site
         $this->status = SiteStatus::INITIALISE['name'];
         $this->users = new ArrayCollection();
         $this->nameInLogo = false;
+        $this->domainActif = false;
     }
 
     /**

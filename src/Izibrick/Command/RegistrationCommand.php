@@ -13,6 +13,7 @@ class RegistrationCommand
     private $username;
     private $phone;
     private $siteId;
+    private $cgu;
 
     /**
      * RegistrationCommand constructor.
@@ -39,7 +40,6 @@ class RegistrationCommand
     {
         $this->siteId = $siteId;
     }
-
 
 
     /**
@@ -138,6 +138,19 @@ class RegistrationCommand
         $this->username = $username;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCgu()
+    {
+        return $this->cgu;
+    }
 
-
+    /**
+     * @param mixed $cgu
+     */
+    public function setCgu($cgu): void
+    {
+        $this->cgu = $cgu;
+    }
 }
