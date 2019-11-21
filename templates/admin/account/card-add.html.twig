@@ -1,0 +1,230 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block description %}Bienvenue dans votre espace personnel.{% endblock %}
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Vos paramètres ont bien été mis à jour.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="fixed-fluid">
+                <div class="fixed-md-200 pull-sm-left fixed-right-border">
+
+                    <!-- Simple profile -->
+                    <div class="text-center">
+                        <div class="pad-ver">
+                            <img src="{{ asset('/assets/img/profile-photos/1.png') }}" class="img-lg img-circle"
+                                 alt="Profile Picture">
+                        </div>
+                        <h4 class="text-lg text-overflow mar-no">{{ user.firstname | capitalize }} {{ user.lastname | upper }}</h4>
+                    </div>
+                    <hr>
+                    <p class="pad-ver text-main text-sm text-uppercase text-bold">Mon offre</p>
+                    <div class="panel panel-info panel-colorful media middle pad-all">
+                        <div class="media-left">
+                            <div class="pad-hor">
+                                <i class="ti-layout-grid2 icon-2x"></i>
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <p class="mar-no text-semibold">{{ site.product.name }}</p>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <!-- Profile Details -->
+                    <p class="pad-ver text-main text-sm text-uppercase text-bold">A propos de moi</p>
+                    <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> San Jose, CA</p>
+                    <p><a href="#" class="btn-link"><i class="demo-pli-internet icon-lg icon-fw"></i>
+                            http://www.themeon.net</a></p>
+                    <p><i class="demo-pli-old-telephone icon-lg icon-fw"></i>(123) 456 1234</p>
+
+
+                </div>
+                <div class="fluid">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Ajouter un moyen de paiement</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/admin/bo-account/card/add" method="post" id="payment-form">
+                                <div class="outcome">
+                                    <div class="error"></div>
+                                    <div class="success">
+                                        <!--Success! Your Stripe token is <span class="token"></span>-->
+                                        <span class="token">Chargement en cours ...</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mb10">
+                                    <label class="control-label"  style="text-align:left;">Titulaire du compte</label>
+                                    <div>
+                                        <input id="inputGroup1_3" class="form-control form-control-md g-brd-right-none rounded-0" required name="name" type="text" placeholder="Titulaire du compte">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mb10">
+                                    <label class="g-mb-10">Carte bancaire</label>
+                                        <div id="card-element" class="field"></div>
+                                </div>
+                                <input id="token" name="tokenId" type="hidden" value="">
+
+                                <div class="col-sm-12">
+                                    <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                                        Enregistrer
+                                    </button>
+                                    <a href="{{ path('bo-account') }}">
+                                        <button class="btn btn-danger mr10 pull-right" type="button">
+                                            Annuler
+                                        </button>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <!-- JS Implementing Plugins -->
+    <script  src="{{ asset('assets/bo/js/components/jquery.maskedinput/src/jquery.maskedinput.js') }}"></script>
+
+    <!-- JS Unify -->
+    <script  src="{{ asset('assets/bo/js/components/hs.masked-input.js') }}"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ stripeKey }}');
+        var elements = stripe.elements({
+            fonts: [
+                {
+                    family: 'Open Sans',
+                    weight: 400,
+                    src: 'local("Open Sans"), local("OpenSans"), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format("woff2")',
+                    unicodeRange: 'U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215',
+                },
+            ]
+        });
+
+        var card = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    iconColor: '#F99A52',
+                    color: '#32315E',
+                    lineHeight: '48px',
+                    fontWeight: 400,
+                    fontFamily: '"Open Sans", "Helvetica Neue", "Helvetica", sans-serif',
+                    fontSize: '15px',
+
+                    '::placeholder': {
+                        color: '#25476a',
+                    }
+                },
+            }
+        });
+        card.mount('#card-element');
+
+        function setOutcome(result) {
+            var successElement = document.querySelector('.success');
+            var errorElement = document.querySelector('.error');
+            successElement.classList.remove('visible');
+            errorElement.classList.remove('visible');
+
+            if (result.token) {
+                // Use the token to create a charge or a customer
+                // https://stripe.com/docs/charges
+                //successElement.querySelector('.token').textContent = result.token.id;
+                successElement.classList.add('visible');
+                $('input[name="tokenId"]').val(result.token.id);
+                document.querySelector('form').submit();
+            } else if (result.error) {
+                errorElement.textContent = result.error.message;
+                errorElement.classList.add('visible');
+            }
+        }
+
+        card.on('change', function(event) {
+            setOutcome(event);
+        });
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var form = document.querySelector('form');
+            var extraDetails = {
+                name: form.querySelector('input[name=name]').value,
+                //address_zip: form.querySelector('input[name=address-zip]').value
+            };
+            stripe.createToken(card, extraDetails).then(setOutcome);
+        });
+
+    </script>
+
+    <style type="text/css">
+
+        .field {
+            background: white;
+            box-sizing: border-box;
+            font-weight: 400;
+            border: 1px solid #ccc;
+            color: #ccc;
+            outline: none;
+            flex: 1;
+            height: 48px;
+            line-height: 48px;
+            padding: 0 20px;
+            cursor: text;
+            border-radius: 0px;
+        }
+
+        .field::-webkit-input-placeholder { color: #25476a; }
+        .field::-moz-placeholder { color: #25476a; }
+
+        .field:focus,
+        .field.StripeElement--focus {
+            border-color: #ccc;
+        }
+
+
+        .outcome {
+            float: left;
+            width: 100%;
+            padding-top: 8px;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        .success, .error {
+            display: none;
+            font-size: 13px;
+        }
+
+        .success.visible, .error.visible {
+            display: inline;
+        }
+
+        .error {
+            color: #E4584C;
+        }
+
+        .success {
+            color: #F8B563;
+        }
+
+        .success .token {
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+    </style>
+
+{% endblock %}
