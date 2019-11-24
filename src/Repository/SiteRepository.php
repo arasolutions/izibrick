@@ -57,15 +57,15 @@ class SiteRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $siteName
+     * @param $internalName
      * @return mixed|null
      */
-    public function getByName($siteName)
+    public function getByInternalName($internalName)
     {
         try {
             $q = $this->createQueryBuilder('s')
-                ->andWhere('LOWER(s.name) = :val')
-                ->setParameter('val', strtolower($siteName))
+                ->andWhere('LOWER(s.internalName) = :val')
+                ->setParameter('val', strtolower($internalName))
                 ->getQuery();
 
             //var_dump($q->getSQL());die();

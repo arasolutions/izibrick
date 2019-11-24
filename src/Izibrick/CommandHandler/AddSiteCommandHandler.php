@@ -12,6 +12,7 @@ use App\Entity\Quote;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Helper\ColorHelper;
+use App\Helper\SiteHelper;
 use App\Izibrick\Command\AddSiteCommand;
 use App\Repository\BlogRepository;
 use App\Repository\CodePromotionRepository;
@@ -109,6 +110,11 @@ class AddSiteCommandHandler
         if ($command->getLogo() != null) {
             $site->setLogoFile($command->getLogo());
         }
+        $site = $this->siteRepository->save($site);
+
+        // Gestion du nom interne
+        $internalName = SiteHelper::generateInternalName($site);
+        $site->setInternalName($site->getId() . '-' . $internalName);
         $site = $this->siteRepository->save($site);
 
         // Création du home

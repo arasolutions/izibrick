@@ -11,14 +11,16 @@ class UserHelper
      * @param $lastName
      * @return string
      */
-    public  static function generateUsername($firstName, $lastName){
-        return $firstName.$lastName;
+    public static function generateUsername($firstName, $lastName)
+    {
+        return $firstName . $lastName;
     }
 
     /**
      * @return string
      */
-    public static function generatePassword(){
+    public static function generatePassword()
+    {
         return "admin";
     }
 }

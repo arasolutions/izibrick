@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SiteRepository")
  * @ORM\Table(name="fir_site", indexes={
- *     @ORM\Index(name="site_domain_idx", columns="domain", options={"where": "(domain IS NOT NULL)"})
+ *     @ORM\Index(name="site_internal_name_idx", columns="internal_name", options={"where": "(domain IS NOT NULL)"})
  *     })
  * @Vich\Uploadable
  */
@@ -27,7 +27,7 @@ class Site
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=127)
      */
     private $name;
 
@@ -173,6 +173,11 @@ class Site
      * @ORM\Column(type="boolean")
      */
     private $domainActif;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $internalName;
 
     /**
      * Site constructor.
@@ -603,6 +608,18 @@ class Site
     public function setDomainActif(bool $domainActif): self
     {
         $this->domainActif = $domainActif;
+
+        return $this;
+    }
+
+    public function getInternalName(): ?string
+    {
+        return $this->internalName;
+    }
+
+    public function setInternalName(string $internalName): self
+    {
+        $this->internalName = $internalName;
 
         return $this;
     }

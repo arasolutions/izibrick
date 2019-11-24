@@ -6,6 +6,7 @@ namespace App\Izibrick\CommandHandler;
 
 use App\Entity\Site;
 use App\Helper\ColorHelper;
+use App\Helper\SiteHelper;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Repository\SiteRepository;
 
@@ -32,6 +33,12 @@ class EditGlobalParametersCommandHandler
     public function handle(GlobalParametersCommand $command, Site $site)
     {
         $site->setName($command->getName());
+
+        // Gestion du nom interne
+        $internalName = SiteHelper::generateInternalName($site);
+        $site->setInternalName($site->getId() . '-' . $internalName);
+        $site = $this->siteRepository->save($site);
+
         $site->setDescription($command->getDescription());
         $site->setDomain($command->getDomain());
         $site->setKeyWords($command->getKeys());

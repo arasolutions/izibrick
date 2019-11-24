@@ -49,7 +49,7 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
@@ -74,7 +74,7 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
@@ -106,7 +106,7 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
@@ -139,7 +139,7 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
@@ -184,7 +184,7 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
@@ -222,7 +222,7 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByName($siteName);
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
