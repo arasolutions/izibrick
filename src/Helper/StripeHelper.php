@@ -100,6 +100,19 @@ class StripeHelper
     }
 
     /**
+     * @param $customerId
+     * @return static
+     * @throws \Stripe\Exception\ApiErrorException
+     * Retrouver la prochaine facture
+     */
+    public function getInvoiceUpcoming($customerId)
+    {
+        $invoice = \Stripe\Invoice::upcoming(["customer" => $customerId]);
+
+        return $invoice;
+    }
+
+    /**
      * @param $amount
      * @param $source
      * @param $description

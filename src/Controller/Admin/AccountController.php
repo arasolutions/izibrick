@@ -85,6 +85,7 @@ class AccountController extends AbstractController
         $stripe = new StripeHelper();
         $customer = $stripe->getCustomer($userBDD->getStripeCustomerId());
         $cards = $stripe->getAllCards($userBDD->getStripeCustomerId());
+        $invoiceUpcoming = $stripe->getInvoiceUpcoming($userBDD->getStripeCustomerId());
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Mis à jour du user
@@ -96,7 +97,8 @@ class AccountController extends AbstractController
                 'success' => true,
                 'form' => $form->createView(),
                 'customer' => $customer,
-                'cards' => $cards
+                'cards' => $cards,
+                'invoiceUpcoming' => $invoiceUpcoming
             ]);
         }
 
@@ -106,7 +108,8 @@ class AccountController extends AbstractController
             'success' => $success,
             'form' => $form->createView(),
             'customer' => $customer,
-            'cards' => $cards
+            'cards' => $cards,
+            'invoiceUpcoming' => $invoiceUpcoming
         ]);
     }
 

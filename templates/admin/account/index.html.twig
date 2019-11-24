@@ -91,9 +91,20 @@
                     </div>
                     <div class="panel panel-mint">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><label class="control-label">Mes cartes de paiement</label></h3>
+                            <h3 class="panel-title"><label class="control-label">Mon offre</label></h3>
                         </div>
 
+                        <h4 class="mt20">
+                            Mon avis de prochain prélèvement : Le {{ invoiceUpcoming.next_payment_attempt|date("d/m/Y") }}.
+                        </h4>
+                        <div>
+                            Offre : {{ site.product.name }} pour la période du {{ invoiceUpcoming.period_start|date("d/m/Y") }} au {{ invoiceUpcoming.period_end|date("d/m/Y") }}.<br/>
+                            Montant : {{ (invoiceUpcoming.amount_due / 100) | number_format(2,',',' ') }} € TTC.
+                        </div>
+
+                        <h5 class="mt50">
+                            Mes moyens de paiements (cartes bancaires) :
+                        </h5>
                         <div class="panel-body">
 
                             <a href="{{ path('bo-account-card-add') }}">
