@@ -101,33 +101,51 @@
                                     Ajouter une carte
                                 </button>
                             </a>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Type</th>
-                                    <th>Carte</th>
-                                    <th>Expiration</th>
-                                    <th>Action</th>
+                                    <th width="100px" class="text-center">Type</th>
+                                    <th width="100px" class="text-center">Défaut</th>
+                                    <th class="text-center">Titulaire</th>
+                                    <th class="text-center">Carte</th>
+                                    <th class="text-center">Expiration</th>
+                                    <th width="250px" class="text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% if cards|length > 0 %}
                                     {% for card in cards %}
                                         <tr>
-                                            <td class="text-center">{{ loop.index }}</td>
-                                            <td>{{ card.brand }}</td>
-                                            <td>**** {{ card.last4 }}
-                                                {% if customer.default_source.id == card.id %}
-                                                <span class="label label-primary">Par défaut</span>
+                                            <td>
+                                                {% if card.brand == 'Visa' %}
+                                                    <img src="{{ asset('/assets/img/payment/visa.png') }}" class="img-xs img-circle" alt="VISA">
+                                                {% else %}
+                                                    {{ card.brand }}
                                                 {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if customer.default_source.id == card.id %}
+                                                    <span class="label label-primary">Par défaut</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ card.name }}
+                                            </td>
+                                            <td>**** {{ card.last4 }}
                                             </td>
                                             <td>{{ card.exp_month }}/{{ card.exp_year }}</td>
                                             <td>
                                                 {% if customer.default_source.id != card.id %}
-                                                    <button class="btn btn-sm btn-rounded btn-primary">Définir par défaut</button>
+                                                    <a href="{{ path('bo-account-card-default', {'id':card.id}) }}">
+                                                        <button class="btn btn-sm btn-primary">
+                                                            Définir par défaut
+                                                        </button>
+                                                    </a>
                                                 {% endif %}
-                                                <button class="btn btn-sm btn-rounded btn-danger">Supprimer</button>
+                                                <a href="{{ path('bo-account-card-delete', {'id':card.id}) }}">
+                                                    <button class="btn btn-sm btn-danger">
+                                                        Supprimer
+                                                    </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     {% endfor %}
