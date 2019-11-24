@@ -77,7 +77,7 @@ class StripeHelper
      */
     public function getCustomer($customerId)
     {
-        $customer = \Stripe\Customer::retrieve($customerId);
+        $customer = \Stripe\Customer::retrieve(["id" => $customerId, "expand" => ["default_source"]]);
 
         return $customer;
     }
@@ -120,6 +120,22 @@ class StripeHelper
         );
 
         return $card;
+    }
+
+    /**
+     * @param $customerId
+     * @return \Stripe\ApiResource
+     * @throws \Stripe\Exception\ApiErrorException
+     * Créer une carte
+     */
+    public function getAllCards($customerId)
+    {
+        $cards = \Stripe\Customer::allSources(
+            $customerId,
+            ['object' => 'card', 'limit' => 20]
+        );
+
+        return $cards->data;
     }
 
     /**

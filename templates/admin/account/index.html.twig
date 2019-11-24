@@ -47,9 +47,6 @@
 
                 </div>
                 <div class="fluid">
-                    <div class="text-right mb-20">
-                        <button class="btn btn-sm btn-primary">Editer mon profil</button>
-                    </div>
                     <div class="panel panel-mint">
                         <div class="panel-heading">
                             <h3 class="panel-title"><label class="control-label">Informations postales</label></h3>
@@ -90,6 +87,57 @@
                                 </div>
                             </div>
                             {{ form_end(form) }}
+                        </div>
+                    </div>
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Mes cartes de paiement</label></h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <a href="{{ path('bo-account-card-add') }}">
+                                <button class="btn btn-success pull-right mb10">
+                                    Ajouter une carte
+                                </button>
+                            </a>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Type</th>
+                                    <th>Carte</th>
+                                    <th>Expiration</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% if cards|length > 0 %}
+                                    {% for card in cards %}
+                                        <tr>
+                                            <td class="text-center">{{ loop.index }}</td>
+                                            <td>{{ card.brand }}</td>
+                                            <td>**** {{ card.last4 }}
+                                                {% if customer.default_source.id == card.id %}
+                                                <span class="label label-primary">Par défaut</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ card.exp_month }}/{{ card.exp_year }}</td>
+                                            <td>
+                                                {% if customer.default_source.id != card.id %}
+                                                    <button class="btn btn-sm btn-rounded btn-primary">Définir par défaut</button>
+                                                {% endif %}
+                                                <button class="btn btn-sm btn-rounded btn-danger">Supprimer</button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">Aucun carte recensée</td>
+                                    </tr>
+                                {% endif %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
