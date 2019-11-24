@@ -72,8 +72,13 @@
                     <!-- Logo -->
                     <div class="col-xs-2 logo">
                         <a href="{{ path('home') }}">
-                            <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
-                                 alt="Logo {{ site.name }}"/>
+                            {% if site.logo %}
+                                <img alt="Vertex" height="35"
+                                     src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                            {% else %}
+                                <img alt="Vertex" height="35"
+                                     src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                            {% endif %}
                         </a>
                     </div>
                     <!-- //Logo// -->
@@ -167,8 +172,13 @@
                         <div class="col-md-4 col-sm-4 footer-col">
                             <div class="footer-content">
                                 <div class="footer-content-logo">
-                                    <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
-                                         alt="Logo {{ site.name }}"/>
+                                    {% if site.logo %}
+                                        <img alt="Vertex" height="35"
+                                             src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                                    {% else %}
+                                        <img alt="Vertex" height="35"
+                                             src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                                    {% endif %}
                                 </div>
                                 <div class="footer-content-text">
                                     {% if not site.nameInLogo %}

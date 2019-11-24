@@ -229,10 +229,12 @@
                             <div id="mainnav-profile" class="mainnav-profile">
                                 <div class="profile-wrap text-center">
                                     <div class="pad-btm">
-                                        {% if site.logo is defined and site.logo is not null and site.logo != '' %}
-                                            <img class="width-100"
-                                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
-                                                 alt="{{ site.name }} logo">
+                                        {% if site.logo %}
+                                            <img alt="Vertex" class="width-100"
+                                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                                        {% else %}
+                                            <img alt="Vertex" class="width-100"
+                                                 src="{{ asset('assets/img/logo_site_default.png') }}"/>
                                         {% endif %}
                                     </div>
                                     <p class="mnp-name">{{ site.name }}</p>

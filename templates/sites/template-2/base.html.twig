@@ -62,8 +62,13 @@
                 <div class="header-column justify-content-start">
                     <div class="header-logo">
                         <a href="{{ path('home') }}">
-                            <img alt="Vertex" height="35"
-                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}">
+                            {% if site.logo %}
+                                <img alt="Vertex" height="35"
+                                     src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                            {% else %}
+                                <img alt="Vertex" height="35"
+                                     src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                            {% endif %}
                         </a>
                         {% if not site.nameInLogo %}
                             <span class="logo-title">{{ site.name }}</span>

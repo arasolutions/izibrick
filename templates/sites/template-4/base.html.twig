@@ -70,8 +70,13 @@
                 </li>
             </ul>
             <a href="#" class="logo visible-lg visible-md">
-                <img src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
-                     alt="Logo {{ site.name }}"/>
+                {% if site.logo %}
+                    <img alt="Vertex" height="35"
+                         src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                {% else %}
+                    <img alt="Vertex" height="35"
+                         src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                {% endif %}
             </a>
             <div id="brand" class="visible-lg visible-md">&nbsp;</div>
             <ul class="nav navbar-nav nav-right">
