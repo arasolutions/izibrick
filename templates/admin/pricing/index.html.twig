@@ -1,0 +1,108 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Tarifs{% endblock %}
+
+{% block description %}Représente les tarifs à afficher sur votre site de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+    <div class="alert alert-success">
+        <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
+    </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Catégories et produits</label></h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="col-md-2">
+
+                        <div class="fixed-sm-250 pull-sm-right fixed-left-border">
+
+
+                            <!-- Tips Widget -->
+                            <!--===================================================-->
+                            <h4>Catégories</h4>
+                            <div class="list-group bg-trans">
+                                {% if categories|length > 0 %}
+                                {% for category in categories %}
+                                    <a class="list-group-item list-item-sm" href="#">{{ category.name }}</a>
+                                {% endfor %}
+                                    <a class="list-group-item list-item-sm" href="#">Toutes les catégories</a>
+                                {% else %}
+                                    Aucune catégorie
+                                {% endif %}
+                            </div>
+                            <!--===================================================-->
+
+
+                            <div class="pad-top">
+                                <a href="#" class="btn btn-primary">Ajouter une catégorie</a>
+                            </div>
+                            <!--===================================================-->
+                        </div>
+
+                    </div>
+                    <div class="col-md-10">
+                        <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered table-vcenter" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;width:80px;"></th>
+                                <th style="text-align: center;">Titre</th>
+                                <th style="text-align: center;">Introduction</th>
+                                <th style="text-align: center;">Date de création</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% if posts is defined and posts|length > 0 %}
+                                {% for post in posts %}
+                                    <tr>
+                                        <td>
+                                            aa
+                                        </td>
+                                        <td>aa</td>
+                                        <td>aa</td>
+                                        <td>aa</td>
+                                        <td width="300px">
+                                            <a href=""><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-edit"></i> Modifier</button></a>
+                                            <a href=""><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">Aucun produit</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <!--DataTables [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/datatables/media/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/media/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <!--DataTables Sample [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/tables-datatables.js') }}"></script>
+{% endblock %}

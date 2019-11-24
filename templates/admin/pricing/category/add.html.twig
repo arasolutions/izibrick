@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Tarifs{% endblock %}
+
+{% block description %}Représente les tarifs à afficher sur votre site de votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+    <div class="alert alert-success">
+        <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
+    </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Catégories et produits</label></h3>
+                </div>
+                <div class="panel-body">
+
+                    COUCOU
+
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <hr/>
+            </div>
+            <div class="col-sm-12">
+                COUCOU
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <!--DataTables [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/datatables/media/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/media/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <!--DataTables Sample [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/tables-datatables.js') }}"></script>
+{% endblock %}

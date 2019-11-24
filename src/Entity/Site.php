@@ -25,7 +25,6 @@ class Site
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -52,6 +51,18 @@ class Site
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    /**
+     * @var ArrayCollection|PricingCategory[]
+     * @ORM\OneToMany(targetEntity="App\Entity\PricingCategory", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $pricingCategories;
+
+    /**
+     * @var ArrayCollection|PricingProduct[]
+     * @ORM\OneToMany(targetEntity="App\Entity\PricingProduct", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $pricingProducts;
 
     /**
      * @ORM\Column(type="string", length=5)
@@ -281,6 +292,22 @@ class Site
         $this->product = $product;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|PricingCategory[]
+     */
+    public function getPricingCategories()
+    {
+        return $this->pricingCategories;
+    }
+
+    /**
+     * @return ArrayCollection|PricingProduct[]
+     */
+    public function getPricingProducts()
+    {
+        return $this->pricingProducts;
     }
 
     public function getStatus(): ?string
