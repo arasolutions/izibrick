@@ -67,25 +67,30 @@
         <header id="header">
             <div class="container">
 
+                {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
+
                 <div class="row header">
 
                     <!-- Logo -->
-                    <div class="col-xs-2 logo">
-                        <a href="{{ path('home') }}">
+                    <div class="col-xs-4 logo">
+                        <a href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                             {% if site.logo %}
-                                <img alt="Vertex" height="35"
+                                <img alt="Logo {{ site.name }}" height="35"
                                      src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
                             {% else %}
-                                <img alt="Vertex" height="35"
+                                <img alt="Logo {{ site.name }}" height="35"
                                      src="{{ asset('assets/img/logo_site_default.png') }}"/>
                             {% endif %}
                         </a>
+                        {% if not site.nameInLogo %}
+                            <span class="logo-title">{{ site.name }}</span>
+                        {% endif %}
                     </div>
                     <!-- //Logo// -->
 
 
                     <!-- Navigation File -->
-                    <div class="col-md-10">
+                    <div class="col-md-8">
 
                         <!-- Mobile Button Menu -->
                         <div class="mobile-menu-button">
@@ -94,7 +99,6 @@
                         <!-- //Mobile Button Menu// -->
 
                         <nav>
-                            {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
                             <ul class="navigation">
                                 <li>
                                     <a class="{% block indexActive %}{% endblock %}"
@@ -211,7 +215,7 @@
                                         <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Devis</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('conact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Contact</a>
+                                        <a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Contact</a>
                                     </li>
                                 </ul>
                             </div>

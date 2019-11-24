@@ -55,3 +55,7 @@ footer, footer p {
     background-color: var(--colorTheme) !important;
     color: var(--textColor) !important;
 }
+.logo-title {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
