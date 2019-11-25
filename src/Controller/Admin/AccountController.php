@@ -56,7 +56,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/", name="bo-account")
+     * @Route("/{success}", name="bo-account")
      * @param Request $request
      * @param bool $success
      * @param EditSiteBillingCommandHandler $editSiteBillingCommandHandler
@@ -85,6 +85,7 @@ class AccountController extends AbstractController
         $stripe = new StripeHelper();
         $customer = $stripe->getCustomer($userBDD->getStripeCustomerId());
         $cards = $stripe->getAllCards($userBDD->getStripeCustomerId());
+        $invoiceUpcoming = $stripe->getInvoiceUpcoming($userBDD->getStripeCustomerId());
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Mis à jour du user
@@ -96,7 +97,8 @@ class AccountController extends AbstractController
                 'success' => true,
                 'form' => $form->createView(),
                 'customer' => $customer,
-                'cards' => $cards
+                'cards' => $cards,
+                'invoiceUpcoming' => $invoiceUpcoming
             ]);
         }
 
@@ -106,7 +108,8 @@ class AccountController extends AbstractController
             'success' => $success,
             'form' => $form->createView(),
             'customer' => $customer,
-            'cards' => $cards
+            'cards' => $cards,
+            'invoiceUpcoming' => $invoiceUpcoming
         ]);
     }
 
@@ -146,4 +149,61 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/card/delete/{id}", name="bo-account-card-delete")
+     * @param Request $request
+     * @param bool $success
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function boCardDeleteAccount(Request $request, $id = null, $success = false)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $userBDD = $this->userRepository->get($this->getUser()->getId());
+
+        // Afficher le moyen de paiement
+        $stripe = new StripeHelper();
+        $customer = $stripe->getCustomer($userBDD->getStripeCustomerId());//var_dump($customer);die;
+
+        if ($request->isMethod('GET')) {
+            $cardId = $request->get('id');
+            // Suppression de la carte dans Stripe
+            $card = $stripe->deleteCard($user->getStripeCustomerId(), $cardId);
+            if($card){
+                return $this->redirectToRoute('bo-account', array('success' => true));
+            }
+        }
+
+        return $this->redirectToRoute('bo-account');
+    }
+
+    /**
+     * @Route("/card/default/{id}", name="bo-account-card-default")
+     * @param Request $request
+     * @param bool $success
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function boCardDefaultAccount(Request $request, $id = null, $success = false)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $userBDD = $this->userRepository->get($this->getUser()->getId());
+
+        // Afficher le moyen de paiement
+        $stripe = new StripeHelper();
+        $customer = $stripe->getCustomer($userBDD->getStripeCustomerId());//var_dump($customer);die;
+
+        if ($request->isMethod('GET')) {
+            $cardId = $request->get('id');
+            // Suppression de la carte dans Stripe
+            $customer = $stripe->updateCustomerDefaultSource($user->getStripeCustomerId(), $cardId);
+            if($customer){
+                return $this->redirectToRoute('bo-account', array('success' => true));
+            }
+        }
+
+        return $this->redirectToRoute('bo-account');
+    }
 }

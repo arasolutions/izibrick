@@ -40,6 +40,16 @@ class SeoCommand
     /**
      * @var string
      */
+    public $seoTitlePricing;
+
+    /**
+     * @var string
+     */
+    public $seoDescriptionPricing;
+
+    /**
+     * @var string
+     */
     public $seoTitleQuote;
 
     /**

@@ -85,7 +85,6 @@ class RegistrationController extends BaseController
     public function registerAction(Request $request)
     {
 
-
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
         /** @var $dispatcher EventDispatcherInterface */

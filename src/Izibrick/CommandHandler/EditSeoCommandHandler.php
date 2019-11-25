@@ -9,6 +9,7 @@ use App\Entity\Contact;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\HomeCommand;
 use App\Izibrick\Command\SeoCommand;
+use App\Repository\PricingRepository;
 use App\Repository\SiteRepository;
 use App\Repository\HomeRepository;
 use App\Repository\PresentationRepository;
@@ -31,6 +32,9 @@ class EditSeoCommandHandler
     /** @var BlogRepository $blogRepository */
     private $blogRepository;
 
+    /** @var PricingRepository $pricingRepository */
+    private $pricingRepository;
+
     /** @var QuoteRepository $quoteRepository */
     private $quoteRepository;
 
@@ -47,6 +51,7 @@ class EditSeoCommandHandler
     public function __construct(HomeRepository $homeRepository,
                                 PresentationRepository $presentationRepository,
                                 BlogRepository $blogRepository,
+                                PricingRepository $pricingRepository,
                                 QuoteRepository $quoteRepository,
                                 ContactRepository $contactRepository,
                                 SiteRepository $siteRepository)
@@ -54,6 +59,7 @@ class EditSeoCommandHandler
         $this->homeRepository = $homeRepository;
         $this->presentationRepository = $presentationRepository;
         $this->blogRepository = $blogRepository;
+        $this->pricingRepository = $pricingRepository;
         $this->quoteRepository = $quoteRepository;
         $this->contactRepository = $contactRepository;
         $this->siteRepository = $siteRepository;
@@ -85,6 +91,12 @@ class EditSeoCommandHandler
             $blog->setSeoTitle($command->seoTitleBlog);
             $blog->setSeoDescription($command->seoDescriptionBlog);
             $this->blogRepository->save($blog);
+        }
+        $pricing = $this->pricingRepository->getBySiteId($id);
+        if ($pricing) {
+            $pricing->setSeoTitle($command->seoTitleQuote);
+            $pricing->setSeoDescription($command->seoDescriptionQuote);
+            $this->pricingRepository->save($pricing);
         }
         $quote = $this->quoteRepository->getBySiteId($id);
         if ($quote) {

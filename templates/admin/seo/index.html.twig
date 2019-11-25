@@ -82,6 +82,26 @@
 
             <div class="panel panel-mint">
                 <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Tarifs</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoTitlePricing) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitlePricing, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescriptionPricing) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescriptionPricing, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
                     <h3 class="panel-title"><label class="control-label">Devis</label></h3>
                 </div>
                 <div class="panel-body">

@@ -69,6 +69,23 @@ class StripeHelper
         return $customer->id;
     }
 
+
+    /**
+     * @param $customerId
+     * @param $defaultSource
+     * @return string
+     * @throws \Stripe\Exception\ApiErrorException Créer un client
+     */
+    public function updateCustomerDefaultSource($customerId, $defaultSource)
+    {
+        $customer = \Stripe\Customer::update(
+            $customerId, [
+                'default_source' => $defaultSource
+            ]
+        );
+        return $customer->id;
+    }
+
     /**
      * @param $customerId
      * @return static
@@ -80,6 +97,19 @@ class StripeHelper
         $customer = \Stripe\Customer::retrieve(["id" => $customerId, "expand" => ["default_source"]]);
 
         return $customer;
+    }
+
+    /**
+     * @param $customerId
+     * @return static
+     * @throws \Stripe\Exception\ApiErrorException
+     * Retrouver la prochaine facture
+     */
+    public function getInvoiceUpcoming($customerId)
+    {
+        $invoice = \Stripe\Invoice::upcoming(["customer" => $customerId]);
+
+        return $invoice;
     }
 
     /**
@@ -117,6 +147,23 @@ class StripeHelper
             [
                 'source' => $source,
             ]
+        );
+
+        return $card;
+    }
+
+    /**
+     * @param $customerId
+     * @param $card
+     * @return \Stripe\ApiResource
+     * @throws \Stripe\Exception\ApiErrorException
+     * Créer une carte
+     */
+    public function deleteCard($customerId, $card)
+    {
+        $card = \Stripe\Customer::deleteSource(
+            $customerId,
+            $card
         );
 
         return $card;

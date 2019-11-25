@@ -41,6 +41,15 @@ class EditSeoType extends AbstractType
                 'attr' => array('rows' => '5'),
                 'required' => false
             ])
+            ->add('seoTitlePricing', TextType::class, [
+                'label' => 'Titre (70 caractères maximum)',
+                'required' => false
+            ])
+            ->add('seoDescriptionPricing', TextareaType::class, [
+                'label' => 'Description (155 caractères maximum)',
+                'attr' => array('rows' => '5'),
+                'required' => false
+            ])
             ->add('seoTitleQuote', TextType::class, [
                 'label' => 'Titre (70 caractères maximum)',
                 'required' => false

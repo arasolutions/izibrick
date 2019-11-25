@@ -5,10 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\QuoteRepository")
- * @ORM\Table(name="fir_quote")
+ * @ORM\Entity(repositoryClass="App\Repository\PricingRepository")
+ * @ORM\Table(name="fir_pricing")
  */
-class Quote
+class Pricing
 {
     /**
      * @ORM\Id()
@@ -21,16 +21,6 @@ class Quote
      * @ORM\OneToOne(targetEntity="App\Entity\Site", inversedBy="quote", cascade={"persist", "remove"})
      */
     private $site;
-
-    /**
-     * @ORM\Column(type="string", length=512, nullable=true)
-     */
-    private $presentation;
-
-    /**
-     * @ORM\Column(type="string", length=512, nullable=true)
-     */
-    private $email;
 
     /**
      * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
@@ -48,7 +38,7 @@ class Quote
     private $display;
 
     /**
-     * Quote constructor.
+     * Pricing constructor.
      * @param $site
      */
     public function __construct($site)
@@ -70,30 +60,6 @@ class Quote
     public function setSite(?Site $site): self
     {
         $this->site = $site;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPresentation(): ?string
-    {
-        return $this->presentation;
-    }
-
-    public function setPresentation(?string $presentation): self
-    {
-        $this->presentation = $presentation;
 
         return $this;
     }

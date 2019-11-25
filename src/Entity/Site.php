@@ -25,7 +25,6 @@ class Site
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="string", length=127)
      */
@@ -52,6 +51,18 @@ class Site
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    /**
+     * @var ArrayCollection|PricingCategory[]
+     * @ORM\OneToMany(targetEntity="App\Entity\PricingCategory", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $pricingCategories;
+
+    /**
+     * @var ArrayCollection|PricingProduct[]
+     * @ORM\OneToMany(targetEntity="App\Entity\PricingProduct", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $pricingProducts;
 
     /**
      * @ORM\Column(type="string", length=5)
@@ -86,6 +97,11 @@ class Site
      * @ORM\OneToOne(targetEntity="App\Entity\Blog", mappedBy="site", cascade={"persist", "remove"})
      */
     private $blog;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Pricing", mappedBy="site", cascade={"persist", "remove"})
+     */
+    private $pricing;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Quote", mappedBy="site", cascade={"persist", "remove"})
@@ -293,6 +309,22 @@ class Site
         return $this;
     }
 
+    /**
+     * @return ArrayCollection|PricingCategory[]
+     */
+    public function getPricingCategories()
+    {
+        return $this->pricingCategories;
+    }
+
+    /**
+     * @return ArrayCollection|PricingProduct[]
+     */
+    public function getPricingProducts()
+    {
+        return $this->pricingProducts;
+    }
+
     public function getStatus(): ?string
     {
         return $this->status;
@@ -354,6 +386,24 @@ class Site
         $newSite = $blog === null ? null : $this;
         if ($newSite !== $blog->getSite()) {
             $blog->setSite($newSite);
+        }
+
+        return $this;
+    }
+
+    public function getPricing(): ?Pricing
+    {
+        return $this->pricing;
+    }
+
+    public function setPricing(?Pricing $pricing): self
+    {
+        $this->pricing = $pricing;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSite = $pricing === null ? null : $this;
+        if ($newSite !== $pricing->getSite()) {
+            $pricing->setSite($newSite);
         }
 
         return $this;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Blog;
+use App\Entity\PricingCategory;
 use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
@@ -29,6 +30,8 @@ use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
+use App\Repository\PricingCategoryRepository;
+use App\Repository\PricingProductRepository;
 use App\Repository\SiteRepository;
 use App\Repository\HomeRepository;
 use App\Repository\PresentationRepository;
@@ -64,6 +67,12 @@ class AdminController extends AbstractController
     /** @var ContactRepository */
     private $contactRepository;
 
+    /** @var PricingCategoryRepository */
+    private $pricingCategoryRepository;
+
+    /** @var PricingProductRepository */
+    private $pricingProductRepository;
+
     /**
      * AdminController constructor.
      * @param SiteRepository $siteRepository
@@ -73,7 +82,9 @@ class AdminController extends AbstractController
                                 PresentationRepository $presentationRepository,
                                 BlogRepository $blogRepository,
                                 QuoteRepository $quoteRepository,
-                                ContactRepository $contactRepository)
+                                ContactRepository $contactRepository,
+                                PricingCategoryRepository $pricingCategoryRepository,
+                                PricingProductRepository $pricingProductRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->homeRepository = $homeRepository;
@@ -81,6 +92,8 @@ class AdminController extends AbstractController
         $this->blogRepository = $blogRepository;
         $this->quoteRepository = $quoteRepository;
         $this->contactRepository = $contactRepository;
+        $this->pricingCategoryRepository = $pricingCategoryRepository;
+        $this->pricingProductRepository = $pricingProductRepository;
     }
 
     /**
