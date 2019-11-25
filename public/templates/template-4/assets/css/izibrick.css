@@ -114,3 +114,20 @@ input[type="color"]:focus,
 .uneditable-input:focus {
     color: var(--colorTheme);
 }
+
+#footer .social-icon > li > a > span{
+    color: var(--textColor) !important;
+}
+
+.navbar.navbar-default{
+    background-color: white !important;
+    color: #333333 !important;
+}
+
+#brand{
+    background-color: white !important;
+}
+
+.navbar-default .navbar-nav > li > a{
+    color: #333333 !important;
+}

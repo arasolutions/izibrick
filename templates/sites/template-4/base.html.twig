@@ -12,23 +12,26 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/template-4/assets/css/bootstrap.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/template-4/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/template-4/assets/css/responsive.css') }}" rel="stylesheet">
     <style type="text/css">
         :root {
             --colorTheme: {{ site.colorTheme }};
             --textColor: {{ site.textColor }};
         }
     </style>
-    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/izibrick.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/template-4/assets/css/izibrick.css') }}" rel="stylesheet">
+    {% if not site.lightTheme == 1 %}
+        <link href="{{ asset('templates/template-4/assets/css/izibrick-dark.css') }}" rel="stylesheet">
+    {% endif %}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/html5shiv.js') }}"></script>
-    <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/respond.min.js') }}"></script>
+    <script src="{{ asset('templates/template-4/assets/js/html5shiv.js') }}"></script>
+    <script src="{{ asset('templates/template-4/assets/js/respond.min.js') }}"></script>
     <![endif]-->
 </head>
 
@@ -131,11 +134,18 @@
                 <div class="sitemap">
                     {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                     <ul>
-                        <li><a href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">ACCUEIL</a></li>
-                        <li><a href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">PRESENTATION</a></li>
-                        <li><a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">BLOG</a></li>
-                        <li><a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">DEVIS</a></li>
-                        <li><a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">CONTACT</a></li>
+                        <li>
+                            <a href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">ACCUEIL</a>
+                        </li>
+                        <li><a href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">PRESENTATION</a>
+                        </li>
+                        <li><a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">BLOG</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">DEVIS</a>
+                        </li>
+                        <li><a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">CONTACT</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -160,11 +170,11 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.js') }}"></script>
-<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/bootstrap.js') }}"></script>
+<script src="{{ asset('templates/template-4/assets/js/jquery.js') }}"></script>
+<script src="{{ asset('templates/template-4/assets/js/bootstrap.js') }}"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/gmap3.js') }}"></script>
-<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/script.js') }}"></script>
+<script src="{{ asset('templates/template-4/assets/js/gmap3.js') }}"></script>
+<script src="{{ asset('templates/template-4/assets/js/script.js') }}"></script>
 
 </body>
 </html>

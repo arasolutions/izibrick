@@ -1,0 +1,26 @@
+
+#footer .social-icon > li > a > span {
+  color: var(--textColor) !important;
+}
+
+.navbar.navbar-default {
+  background-color: #333333 !important;
+  color: white !important;
+}
+
+#footer {
+  background-color: #333333 !important;;
+}
+
+#brand {
+  background-color: #333333 !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: var(--textColor) !important;
+}
+
+#footer .social-icon > li > a {
+  background-color: #333333;
+  color: var(--textColor) !important;
+}

@@ -5,7 +5,11 @@
 .navigation > li:hover > a,
 .navigation > li > a:hover,
 .navigation > li > .activelink {
-    color: var(--colorTheme) !important;
+    color: var(--textColor) !important;
+}
+
+.navigation > li > a{
+    color: var(--headerTextColor) !important;
 }
 
 .body-wrapper a:hover,
@@ -18,9 +22,14 @@
     color: var(--colorTheme) !important;
 }
 
-footer {
-    background: var(--colorTheme) !important;
-    color: var(--textColor) !important;
+#header {
+    background-color: var(--headerBackgroundColor);
+    color: var(--headerTextColor);
+}
+
+#footer {
+    background: var(--footerBackgroundColor);
+    color: var(--footerTextColor) !important;
 }
 
 footer, footer p {
@@ -55,7 +64,12 @@ footer, footer p {
     background-color: var(--colorTheme) !important;
     color: var(--textColor) !important;
 }
+
 .logo-title {
     font-size: 1.5em;
     padding-left: 10px;
+}
+
+.copyright{
+    background-color: var(--colorTheme) !important;
 }
