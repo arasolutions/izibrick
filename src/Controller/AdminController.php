@@ -226,41 +226,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/bo-pricing", name="bo-pricing")
-     * @param Request $request
-     * @param EditQuoteCommandHandler $editQuoteCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boPricing(Request $request, EditQuoteCommandHandler $editQuoteCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
-        $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION['SITE_ID']);
-
-        $command = new QuoteCommand();
-        $command->presentation = $site->getQuote()->getPresentation();
-        $command->email = $site->getQuote()->getEmail();
-
-        $success = false;
-
-        $form = $this->createForm(EditQuoteType::class, $command);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $editQuoteCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/pricing/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
-            'success' => $success,
-            'categories' => $categories
-        ]);
-    }
-
-    /**
      * @Route("/bo-quote", name="bo-quote")
      * @param Request $request
      * @param EditQuoteCommandHandler $editQuoteCommandHandler

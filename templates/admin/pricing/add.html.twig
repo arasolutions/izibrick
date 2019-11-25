@@ -12,9 +12,9 @@
 
 {% block body %}
     {% if success %}
-        <div class="alert alert-success">
-            <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
-        </div>
+    <div class="alert alert-success">
+        <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
+    </div>
     {% endif %}
     <div class="panel">
         <div class="panel-body">
@@ -41,6 +41,24 @@
                         </div>
                     </div>
                     <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.content) }}</label>
+                        <div>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.category) }}</label>
+                        <div>
+                            {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.price) }}</label>
+                        <div>
+                            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
                         <label class="control-label">{{ form_label(form.active) }}</label>
                         <div>
                             {{ form_widget(form.active, {'attr': {'class': 'form-control'}}) }}
@@ -63,4 +81,12 @@
 
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <!--DataTables [ OPTIONAL ]-->
+    <script src="{{ asset('assets/plugins/datatables/media/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/media/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
+    <!--DataTables Sample [ SAMPLE ]-->
+    <script src="{{ asset('assets/js/demo/tables-datatables.js') }}"></script>
 {% endblock %}
