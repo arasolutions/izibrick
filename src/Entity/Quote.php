@@ -43,6 +43,11 @@ class Quote
     private $seoDescription;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $display;
+
+    /**
      * Quote constructor.
      * @param $site
      */
@@ -123,5 +128,21 @@ class Quote
     public function getSeoDescription()
     {
         return $this->seoDescription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * @param mixed $display
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
     }
 }

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PricingRepository")
- * @ORM\Table(name="fir_quote")
+ * @ORM\Table(name="fir_pricing")
  */
 class Pricing
 {
@@ -31,6 +31,11 @@ class Pricing
      * @ORM\Column(name="seo_description", type="string", length=256, nullable=true)
      */
     private $seoDescription;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $display;
 
     /**
      * Pricing constructor.
@@ -89,5 +94,21 @@ class Pricing
     public function getSeoDescription()
     {
         return $this->seoDescription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * @param mixed $display
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
     }
 }
