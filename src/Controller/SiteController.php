@@ -12,6 +12,7 @@ use App\Izibrick\CommandHandler\AddTrackingQuoteCommandHandler;
 use App\Form\AddTrackingContactType;
 use App\Form\AddTrackingQuoteType;
 use App\Repository\BlogRepository;
+use App\Repository\PricingRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,16 +24,20 @@ class SiteController extends AbstractController
     private $siteRepository;
     /** @var BlogRepository */
     private $blogRepository;
+    /** @var PricingRepository */
+    private $pricingRepository;
 
     /**
      * SiteController constructor.
      * @param SiteRepository $siteRepository
      * @param BlogRepository $blogRepository
+     * @param PricingRepository $pricingRepository
      */
-    public function __construct(SiteRepository $siteRepository, BlogRepository $blogRepository)
+    public function __construct(SiteRepository $siteRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->blogRepository = $blogRepository;
+        $this->pricingRepository = $pricingRepository;
     }
 
     /**
@@ -116,6 +121,34 @@ class SiteController extends AbstractController
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
             'post' => $post
+        ]);
+    }
+
+    /**
+     * @Route("/tarif",
+     *     name="tarif",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/tarif", name="site_tarif",
+     *     host="%base_host%")
+     */
+    public function pricing($siteName = null)
+    {
+        /** @var Site $site */
+        if ($siteName != null) {
+            $site = $this->siteRepository->getByInternalName($siteName);
+        } else {
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
+        }
+
+        $pricing = $this->pricingRepository->getBySiteId($site->getId());
+
+        return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pricing/index.html.twig', [
+            'controller_name' => 'SiteController' . $site->getName(),
+            'site' => $site,
+            'pricing' => $pricing
         ]);
     }
 

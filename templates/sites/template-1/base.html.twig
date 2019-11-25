@@ -110,6 +110,12 @@
                                         </a>
                                     </li>
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                        <a class="dropdown-item {% block tarifActive %}{% endblock %}"
+                                           href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                                            Tarif
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                         <a class="dropdown-item {% block devisActive %}{% endblock %}"
                                            href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                             Devis
