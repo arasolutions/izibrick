@@ -99,6 +99,11 @@ class Site
     private $blog;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Pricing", mappedBy="site", cascade={"persist", "remove"})
+     */
+    private $pricing;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Quote", mappedBy="site", cascade={"persist", "remove"})
      */
     private $quote;
@@ -371,6 +376,24 @@ class Site
         $newSite = $blog === null ? null : $this;
         if ($newSite !== $blog->getSite()) {
             $blog->setSite($newSite);
+        }
+
+        return $this;
+    }
+
+    public function getPricing(): ?Pricing
+    {
+        return $this->pricing;
+    }
+
+    public function setPricing(?Pricing $pricing): self
+    {
+        $this->pricing = $pricing;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSite = $pricing === null ? null : $this;
+        if ($newSite !== $pricing->getSite()) {
+            $pricing->setSite($newSite);
         }
 
         return $this;
