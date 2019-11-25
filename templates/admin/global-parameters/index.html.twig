@@ -94,14 +94,24 @@
                     <h3 class="panel-title"><label class="control-label">Structure</label></h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.template) }}
-                        {{ form_widget(form.template, {'attr':{'class':'form-control'}}) }}
+                    <div class="col-sm-6">
+                        <div class="col-sm-12 form-group">
+                            {{ form_label(form.template) }}
+                            {{ form_widget(form.template, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            {{ form_label(form.colorTheme) }}
+                            {{ form_widget(form.colorTheme) }}
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            {{ form_label(form.lightTheme) }}
+                            {{ form_widget(form.lightTheme, {'attr':{'class':'form-control'}}) }}
+                        </div>
                     </div>
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.colorTheme) }}
-                        {{ form_widget(form.colorTheme) }}
+                    <div class="col-sm-6">
+                        <img id="dynamic-theme" src="" width="100%"/>
                     </div>
+
                 </div>
             </div>
 
@@ -117,10 +127,27 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
+    <script src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
     <script type="text/javascript">
-        $('.colorpicker').colorPicker({
+        $('.colorpicker:not(.expert)').colorPicker({
             opacity: false
         });
+
+        function changeSrc(){
+            var light = $('#edit_global_parameters_lightTheme').val() === "1" ? 'light' : 'dark';
+            $('#dynamic-theme').attr('src',"/templates/template-" + $('#edit_global_parameters_template').val() + "/options/" + light + ".png");
+            $('#dynamic-theme').css('backgroundColor', $('#edit_global_parameters_colorTheme').val());
+        }
+
+        $(document).ready(function () {
+            $('#edit_global_parameters_template, #edit_global_parameters_lightTheme').on('change', function(){
+                changeSrc();
+            });
+
+            $('#edit_global_parameters_colorTheme').on('blur', function(){
+                changeSrc();
+            })
+        });
     </script>
+
 {% endblock %}

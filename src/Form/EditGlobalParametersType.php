@@ -7,6 +7,7 @@ use App\Izibrick\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -72,6 +73,7 @@ class EditGlobalParametersType extends AbstractType
                 'label' => 'Afficher le nom du site à côté du logo'
             ])
             ->add('colorTheme', ColorPickerType::class, [
+                'label' => 'Couleur principale du thème',
                 'constraints' => array(
                     new Regex([
                             'pattern' => '/\#(([1-9A-F]){6})/i',
@@ -79,6 +81,14 @@ class EditGlobalParametersType extends AbstractType
                         ]
                     )
                 )
+            ])
+            ->add('lightTheme', ChoiceType::class, [
+                'label' => 'Version claire ou sombre',
+                'choices' => [
+                    'Clair' => true,
+                    'Sombre' => false,
+                ]
+
             ]);
     }
 

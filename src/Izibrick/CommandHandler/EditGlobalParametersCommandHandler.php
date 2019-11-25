@@ -47,6 +47,12 @@ class EditGlobalParametersCommandHandler
         $site->setInstagram($command->getInstagram());
         $site->setTemplate($command->getTemplate());
         $site->setColorTheme($command->getColorTheme());
+        $site->setHeaderTextColor($command->getHeaderTextColor());
+        $site->setFooterTextColor($command->getFooterTextColor());
+        $site->setContentTextColor($command->getContentTextColor());
+        $site->setHeaderBackgroundColor($command->getHeaderBackgroundColor());
+        $site->setFooterBackgroundColor($command->getFooterBackgroundColor());
+        $site->setContentBackgroundColor($command->getContentBackgroundColor());
 
         // détection de la couleur du texte en fonction du fond choisi
         $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));

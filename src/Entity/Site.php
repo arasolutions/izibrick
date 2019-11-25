@@ -180,6 +180,41 @@ class Site
     private $internalName;
 
     /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $headerBackgroundColor;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $headerTextColor;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $contentBackgroundColor;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $contentTextColor;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $footerBackgroundColor;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
+    private $footerTextColor;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $lightTheme;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -620,6 +655,90 @@ class Site
     public function setInternalName(string $internalName): self
     {
         $this->internalName = $internalName;
+
+        return $this;
+    }
+
+    public function getHeaderBackgroundColor(): ?string
+    {
+        return $this->headerBackgroundColor;
+    }
+
+    public function setHeaderBackgroundColor(string $headerBackgroundColor): self
+    {
+        $this->headerBackgroundColor = $headerBackgroundColor;
+
+        return $this;
+    }
+
+    public function getHeaderTextColor(): ?string
+    {
+        return $this->headerTextColor;
+    }
+
+    public function setHeaderTextColor(string $headerTextColor): self
+    {
+        $this->headerTextColor = $headerTextColor;
+
+        return $this;
+    }
+
+    public function getContentBackgroundColor(): ?string
+    {
+        return $this->contentBackgroundColor;
+    }
+
+    public function setContentBackgroundColor(string $contentBackgroundColor): self
+    {
+        $this->contentBackgroundColor = $contentBackgroundColor;
+
+        return $this;
+    }
+
+    public function getContentTextColor(): ?string
+    {
+        return $this->contentTextColor;
+    }
+
+    public function setContentTextColor(string $contentTextColor): self
+    {
+        $this->contentTextColor = $contentTextColor;
+
+        return $this;
+    }
+
+    public function getFooterBackgroundColor(): ?string
+    {
+        return $this->footerBackgroundColor;
+    }
+
+    public function setFooterBackgroundColor(string $footerBackgroundColor): self
+    {
+        $this->footerBackgroundColor = $footerBackgroundColor;
+
+        return $this;
+    }
+
+    public function getFooterTextColor(): ?string
+    {
+        return $this->footerTextColor;
+    }
+
+    public function setFooterTextColor(string $footerTextColor): self
+    {
+        $this->footerTextColor = $footerTextColor;
+
+        return $this;
+    }
+
+    public function getLightTheme(): ?bool
+    {
+        return $this->lightTheme;
+    }
+
+    public function setLightTheme(bool $lightTheme): self
+    {
+        $this->lightTheme = $lightTheme;
 
         return $this;
     }

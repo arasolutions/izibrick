@@ -20,6 +20,7 @@ class GlobalParametersCommand
     private $instagram;
     private $template;
     private $colorTheme;
+    private $lightTheme;
 
     /**
      * GlobalParametersCommand constructor.
@@ -38,6 +39,7 @@ class GlobalParametersCommand
         $this->nameInLogo = $site->getNameInLogo();
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
+        $this->lightTheme = $site->getLightTheme();
     }
 
     /**
@@ -231,6 +233,22 @@ class GlobalParametersCommand
     public function setNameInLogo($nameInLogo): void
     {
         $this->nameInLogo = $nameInLogo;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getLightTheme(): ?bool
+    {
+        return $this->lightTheme;
+    }
+
+    /**
+     * @param bool|null $lightTheme
+     */
+    public function setLightTheme(?bool $lightTheme): void
+    {
+        $this->lightTheme = $lightTheme;
     }
 
 
