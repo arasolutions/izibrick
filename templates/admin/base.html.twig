@@ -347,6 +347,7 @@
                                     </a>
                                 </li>
 
+                                {% if site.pricing is defined and site.pricing.display == true %}
                                 <li>
                                     <a href="{{ path('bo-pricing') }}">
                                         <i class="ti-money"></i>
@@ -355,7 +356,9 @@
                                             </span>
                                     </a>
                                 </li>
+                                {% endif %}
 
+                                {% if site.quote is defined and site.quote.display == true %}
                                 <li>
                                     <a href="{{ path('bo-quote') }}">
                                         <i class="ti-shopping-cart"></i>
@@ -364,6 +367,7 @@
                                             </span>
                                     </a>
                                 </li>
+                                {% endif %}
 
                                 <li>
                                     <a href="{{ path('bo-contact') }}">

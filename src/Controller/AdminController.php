@@ -32,6 +32,7 @@ use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
 use App\Repository\PricingCategoryRepository;
 use App\Repository\PricingProductRepository;
+use App\Repository\PricingRepository;
 use App\Repository\SiteRepository;
 use App\Repository\HomeRepository;
 use App\Repository\PresentationRepository;
@@ -61,6 +62,9 @@ class AdminController extends AbstractController
     /** @var BlogRepository $blogRepository */
     private $blogRepository;
 
+    /** @var PricingRepository $pricingRepository */
+    private $pricingRepository;
+
     /** @var QuoteRepository $quoteRepository */
     private $quoteRepository;
 
@@ -81,6 +85,7 @@ class AdminController extends AbstractController
                                 HomeRepository $homeRepository,
                                 PresentationRepository $presentationRepository,
                                 BlogRepository $blogRepository,
+                                PricingRepository $pricingRepository,
                                 QuoteRepository $quoteRepository,
                                 ContactRepository $contactRepository,
                                 PricingCategoryRepository $pricingCategoryRepository,
@@ -90,6 +95,7 @@ class AdminController extends AbstractController
         $this->homeRepository = $homeRepository;
         $this->presentationRepository = $presentationRepository;
         $this->blogRepository = $blogRepository;
+        $this->pricingRepository = $pricingRepository;
         $this->quoteRepository = $quoteRepository;
         $this->contactRepository = $contactRepository;
         $this->pricingCategoryRepository = $pricingCategoryRepository;
@@ -343,6 +349,7 @@ class AdminController extends AbstractController
         $home = $this->homeRepository->getBySiteId($_SESSION['SITE_ID']);
         $presentation = $this->presentationRepository->getBySiteId($_SESSION['SITE_ID']);
         $blog = $this->blogRepository->getBySiteId($_SESSION['SITE_ID']);
+        $pricing = $this->pricingRepository->getBySiteId($_SESSION['SITE_ID']);
         $quote = $this->quoteRepository->getBySiteId($_SESSION['SITE_ID']);
         $contact = $this->contactRepository->getBySiteId($_SESSION['SITE_ID']);
 
@@ -353,6 +360,8 @@ class AdminController extends AbstractController
         $command->seoDescriptionPresentation = $presentation->getSeoDescription();
         $command->seoTitleBlog = $blog->getSeoTitle();
         $command->seoDescriptionBlog = $blog->getSeoDescription();
+        $command->seoTitlePricing = $pricing->getSeoTitle();
+        $command->seoDescriptionPricing = $pricing->getSeoDescription();
         $command->seoTitleQuote = $quote->getSeoTitle();
         $command->seoDescriptionQuote = $quote->getSeoDescription();
         $command->seoTitleContact = $contact->getSeoTitle();

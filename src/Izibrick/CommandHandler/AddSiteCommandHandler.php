@@ -8,6 +8,7 @@ use App\Entity\Blog;
 use App\Entity\Contact;
 use App\Entity\Home;
 use App\Entity\Presentation;
+use App\Entity\Pricing;
 use App\Entity\Quote;
 use App\Entity\Site;
 use App\Entity\User;
@@ -19,6 +20,7 @@ use App\Repository\CodePromotionRepository;
 use App\Repository\ContactRepository;
 use App\Repository\HomeRepository;
 use App\Repository\PresentationRepository;
+use App\Repository\PricingRepository;
 use App\Repository\ProductRepository;
 use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
@@ -52,6 +54,9 @@ class AddSiteCommandHandler
     /** @var ContactRepository */
     private $contactRepository;
 
+    /** @var PricingRepository */
+    private $pricingRepository;
+
     /** @var QuoteRepository */
     private $quoteRepository;
 
@@ -67,10 +72,11 @@ class AddSiteCommandHandler
      * @param PresentationRepository $presentationRepository
      * @param BlogRepository $blogRepository
      * @param ContactRepository $contactRepository
+     * @param PricingRepository $pricingRepository
      * @param QuoteRepository $quoteRepository
      * @param CodePromotionRepository $codePromotionRepository
      */
-    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository)
+    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository, PricingRepository $pricingRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->productRepository = $productRepository;
@@ -79,6 +85,7 @@ class AddSiteCommandHandler
         $this->presentationRepository = $presentationRepository;
         $this->blogRepository = $blogRepository;
         $this->contactRepository = $contactRepository;
+        $this->pricingRepository = $pricingRepository;
         $this->quoteRepository = $quoteRepository;
         $this->codePromotionRepository = $codePromotionRepository;
     }
@@ -117,23 +124,29 @@ class AddSiteCommandHandler
         $site->setInternalName($site->getId() . '-' . $internalName);
         $site = $this->siteRepository->save($site);
 
-        // Création du home
+        // Création de la page Home
         $home = new Home($site);
         $this->homeRepository->save($home);
 
-        // Création de la presentation
+        // Création de la page Presentation
         $presentation = new Presentation($site);
         $this->presentationRepository->save($presentation);
 
-        // Création du blog
+        // Création de la page Blog
         $blog = new Blog($site);
         $this->blogRepository->save($blog);
 
-        // Création du devis
+        // Création de la page Tarif
+        $pricing = new Pricing($site);
+        $pricing->setDisplay(true);
+        $this->pricingRepository->save($pricing);
+
+        // Création de la page Devis
         $quote = new Quote($site);
+        $quote->setDisplay(true);
         $this->quoteRepository->save($quote);
 
-        // Création du contact
+        // Création de la page Contact
         $contact = new Contact($site);
         $this->contactRepository->save($contact);
 

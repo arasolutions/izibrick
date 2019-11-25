@@ -89,6 +89,14 @@ class EditGlobalParametersType extends AbstractType
                     'Sombre' => false,
                 ]
 
+            ])
+            ->add('displayPricing', CheckboxType::class, [
+                'label'    => 'Afficher la page Tarif',
+                'required' => false,
+            ])
+            ->add('displayQuote', CheckboxType::class, [
+                'label'    => 'Afficher la page Devis',
+                'required' => false,
             ]);
     }
 

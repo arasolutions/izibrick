@@ -115,6 +115,22 @@
                 </div>
             </div>
 
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Pages</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.displayPricing) }}
+                        {{ form_widget(form.displayPricing, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.displayQuote) }}
+                        {{ form_widget(form.displayQuote, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+
             <div class="col-sm-12 form-group">
                 <button class="btn btn-success pull-right" type="submit">
                     Enregistrer

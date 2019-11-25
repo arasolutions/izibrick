@@ -21,6 +21,8 @@ class GlobalParametersCommand
     private $template;
     private $colorTheme;
     private $lightTheme;
+    private $displayPricing;
+    private $displayQuote;
 
     /**
      * GlobalParametersCommand constructor.
@@ -40,6 +42,8 @@ class GlobalParametersCommand
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
         $this->lightTheme = $site->getLightTheme();
+        $this->displayPricing = $site->getPricing()->getDisplay();
+        $this->displayQuote = $site->getQuote()->getDisplay();
     }
 
     /**
@@ -251,5 +255,35 @@ class GlobalParametersCommand
         $this->lightTheme = $lightTheme;
     }
 
+    /**
+     * @return bool|null
+     */
+    public function getDisplayPricing(): ?bool
+    {
+        return $this->displayPricing;
+    }
 
+    /**
+     * @param bool|null $displayPricing
+     */
+    public function setDisplayPricing(?bool $displayPricing): void
+    {
+        $this->displayPricing = $displayPricing;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getDisplayQuote(): ?bool
+    {
+        return $this->displayQuote;
+    }
+
+    /**
+     * @param bool|null $displayQuote
+     */
+    public function setDisplayQuote(?bool $displayQuote): void
+    {
+        $this->displayQuote = $displayQuote;
+    }
 }

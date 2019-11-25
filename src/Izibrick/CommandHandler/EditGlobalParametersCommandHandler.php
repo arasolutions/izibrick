@@ -4,10 +4,13 @@
 namespace App\Izibrick\CommandHandler;
 
 
+use App\Entity\Pricing;
 use App\Entity\Site;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\GlobalParametersCommand;
+use App\Repository\PricingRepository;
+use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
 
 class EditGlobalParametersCommandHandler
@@ -15,13 +18,21 @@ class EditGlobalParametersCommandHandler
     /** @var SiteRepository */
     private $siteRepository;
 
+    /** @var PricingRepository */
+    private $pricingRepository;
+
+    /** @var QuoteRepository */
+    private $quoteRepository;
+
     /**
      * EditGlobalParametersCommandHandler constructor.
      * @param SiteRepository $siteRepository
      */
-    public function __construct(SiteRepository $siteRepository)
+    public function __construct(SiteRepository $siteRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository)
     {
         $this->siteRepository = $siteRepository;
+        $this->pricingRepository = $pricingRepository;
+        $this->quoteRepository = $quoteRepository;
     }
 
     /**
@@ -32,6 +43,15 @@ class EditGlobalParametersCommandHandler
      */
     public function handle(GlobalParametersCommand $command, Site $site)
     {
+        $pricing = $this->pricingRepository->getBySiteId($site->getId());
+        $quote = $this->quoteRepository->getBySiteId($site->getId());
+
+        $pricing->setDisplay($command->getDisplayPricing());
+        $this->pricingRepository->save($pricing);
+
+        $quote->setDisplay($command->getDisplayQuote());
+        $this->quoteRepository->save($quote);
+
         $site->setName($command->getName());
 
         // Gestion du nom interne
