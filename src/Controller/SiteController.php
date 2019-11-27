@@ -148,7 +148,9 @@ class SiteController extends AbstractController
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pricing/index.html.twig', [
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
-            'pricing' => $pricing
+            'pricing' => $pricing,
+            'categories' => $site->getPricingCategories(),
+            'products' => $site->getPricingProducts()
         ]);
     }
 

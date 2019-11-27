@@ -24,9 +24,9 @@
                     <h3 class="panel-title">
                         <label class="control-label">
                             {% if pricingProduct.id is defined %}
-                                Modifer un produit
+                                Modifer une catégorie
                             {% else %}
-                                Ajouter un produit
+                                Ajouter une catégorie
                             {% endif %}
                             {{ form_start(form) }}
                         </label>
@@ -38,6 +38,18 @@
                         <label class="control-label"  style="text-align:left;">{{ form_label(form.name) }}</label>
                         <div>
                             {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.description) }}</label>
+                        <div>
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.displayOrder) }}</label>
+                        <div>
+                            {{ form_widget(form.displayOrder, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
                     <div class="col-sm-12">

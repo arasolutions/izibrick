@@ -22,4 +22,14 @@ class PricingCategoryCommand
      * @var boolean
      */
     public $active;
+
+    /**
+     * @var string
+     */
+    public $description;
+
+    /**
+     * @var int
+     */
+    public $displayOrder;
 }

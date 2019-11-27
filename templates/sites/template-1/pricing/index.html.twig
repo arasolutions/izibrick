@@ -24,16 +24,28 @@
     <div class="v-page-wrap no-top-spacing no-bottom-spacing">
         <div class="container">
             <div class="col-md-12">
-                <h3 class="v-heading v-text-heading"><span>Aliquam erat volutpat vivamus?</span></h3>
-                <p>
-                    Fusce enim sapien, porttitor eget auctor ac, mollis vel augue. Aliquam erat volutpat. Vivamus at sapien
-                    a justo consequat egestas. Suspendisse hendrerit mauris at sapien sodales sit amet eleifend dolor.
-                </p>
-                <ul>
-                    <li>
-                        ssss
-                    </li>
-                </ul>
+                {% if categories|length > 0 and products|length > 0 %}
+                    {% for category in categories %}
+                        <h3 class="v-heading v-text-heading"><span>{{ category.name }}</span></h3>
+                        <p>
+                            {{ category.description }}
+                        </p>
+                        <ul>
+                            {% for product in products %}
+                            {% if product.category.id is defined and product.category.id == category.id %}
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-10 text-left">{{ product.name }}</div>
+                                        <div class="col-md-2 text-right">{{ product.price }}</div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                {% else %}
+                    Aucune catégorie.
+                {% endif %}
             </div>
         </div>
     </div>

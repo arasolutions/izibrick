@@ -54,6 +54,8 @@ class EditPricingCategoryCommandHandler
         }
         $pricingCategory->setName($command->name);
         $pricingCategory->setActive($command->active);
+        $pricingCategory->setDescription($command->description);
+        $pricingCategory->setDisplayOrder($command->displayOrder);
         $this->pricingCategoryRepository->save($pricingCategory);
     }
 

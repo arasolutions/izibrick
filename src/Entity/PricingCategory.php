@@ -42,6 +42,17 @@ class PricingCategory
      */
     private $products;
 
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="string", length=1023, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(name="display_order", type="integer", length=16, nullable=true)
+     */
+    private $displayOrder;
+
     public function __construct(Site $site)
     {
         $this->site = $site;
@@ -157,5 +168,37 @@ class PricingCategory
         }else{
             return true;
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayOrder()
+    {
+        return $this->displayOrder;
+    }
+
+    /**
+     * @param mixed $displayOrder
+     */
+    public function setDisplayOrder($displayOrder)
+    {
+        $this->displayOrder = $displayOrder;
     }
 }
