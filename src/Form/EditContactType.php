@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Izibrick\Command\ContactCommand;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -14,7 +15,7 @@ class EditContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('presentation', TextareaType::class, [
+            ->add('presentation', CKEditorType::class, [
                 'label' => 'Présentation',
                 'attr' => array('rows' => '5'),
                 'required' => false
