@@ -59,6 +59,12 @@
                         </div>
                     </div>
                     <div class="col-sm-12">
+                        <label class="control-label">{{ form_label(form.currency) }}</label>
+                        <div>
+                            {{ form_widget(form.currency, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
                         <label class="control-label">{{ form_label(form.active) }}</label>
                         <div>
                             {{ form_widget(form.active, {'attr': {'class': 'form-control'}}) }}

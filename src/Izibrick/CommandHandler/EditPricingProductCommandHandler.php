@@ -57,6 +57,7 @@ class EditPricingProductCommandHandler
         $pricingProduct->setCategory($command->category);
         $pricingProduct->setPrice($command->price);
         $pricingProduct->setActive($command->active);
+        $pricingProduct->setCurrency($command->currency);
         $this->pricingProductRepository->save($pricingProduct);
     }
 

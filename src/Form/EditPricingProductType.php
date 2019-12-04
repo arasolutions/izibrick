@@ -49,6 +49,15 @@ class EditPricingProductType extends AbstractType
                 'required' => false,
                 'scale' => 2,
             ])
+            ->add('currency', TextType::class, [
+                'label' => 'Devise',
+                'constraints' => array (
+                    new Length(array (
+                        'min' => '2',
+                        'max' => '255'
+                    ))
+                )
+            ])
             ->add('active', CheckboxType::class, [
                 'label'    => 'Actif',
                 'required' => false,

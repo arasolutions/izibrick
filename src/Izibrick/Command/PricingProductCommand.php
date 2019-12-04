@@ -37,4 +37,9 @@ class PricingProductCommand
      * @var double
      */
     public $price;
+
+    /**
+     * @var string
+     */
+    public $currency;
 }

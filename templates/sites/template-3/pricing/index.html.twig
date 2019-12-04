@@ -1,0 +1,74 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Tarif{% endblock %}
+
+{% block devisActive %}active{% endblock %}
+
+{% block body %}
+    <div class="top-title-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="page-info">
+                        <h1 class="h1-page-title">{{ site.pricing.seoTitle }}</h1>
+
+                        <h2 class="h2-page-desc">
+                            {{ site.pricing.seoDescription }}
+                        </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper hide-until-loading">
+        <div class="body-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 animated" data-animtype="fadeInUp"
+                         data-animrepeat="0"
+                         data-speed="1s"
+                         data-delay="0.4s">
+                        <h2 class="h2-section-title">{{ site.pricing.seoTitle }}</h2>
+                        <div class="i-section-title">
+                            <i class="icon-feather">
+
+                            </i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    {% if categories|length > 0 and products|length > 0 %}
+                        {% for category in categories %}
+                            <div class="title-block clearfix mt10">
+                                <h3 class="h3-body-title">{{ category.name }}</h3>
+                                <div class="title-seperator"></div>
+                                <div class="col-md-12 mb20">
+                                    {{ category.description }}
+                                </div>
+                                <ul style="list-style-type: none;">
+                                    {% for product in products %}
+                                        {% if product.category.id is defined and product.category.id == category.id %}
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-10 text-left">{{ product.name }}</div>
+                                                    <div class="col-md-2 text-right">{{ product.price }} {{ product.currency }}</div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        Aucune catégorie.
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

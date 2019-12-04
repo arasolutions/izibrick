@@ -94,8 +94,8 @@ class EditSeoCommandHandler
         }
         $pricing = $this->pricingRepository->getBySiteId($id);
         if ($pricing) {
-            $pricing->setSeoTitle($command->seoTitleQuote);
-            $pricing->setSeoDescription($command->seoDescriptionQuote);
+            $pricing->setSeoTitle($command->seoTitlePricing);
+            $pricing->setSeoDescription($command->seoDescriptionPricing);
             $this->pricingRepository->save($pricing);
         }
         $quote = $this->quoteRepository->getBySiteId($id);

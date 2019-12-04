@@ -1,0 +1,57 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }} | Tarif{% endblock %}
+
+{% block devisActive %}active{% endblock %}
+
+{% block body %}
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+<div class="heads"
+     style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}) center center;">
+    {% else %}
+    <div class="heads"
+         style="background: url({{ asset('templates/template-3/assets/images/sample.jpg') }}) center center;">
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ site.pricing.seoTitle }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="container">
+            <div class="col-md-12">
+                {% if categories|length > 0 and products|length > 0 %}
+                    {% for category in categories %}
+                        <div class="title-block clearfix mt10">
+                            <h3 class="h3-body-title">{{ category.name }}</h3>
+                            <div class="title-seperator"></div>
+                            <div class="col-md-12 mb20">
+                                {{ category.description }}
+                            </div>
+                            <ul style="list-style-type: none;">
+                                {% for product in products %}
+                                    {% if product.category.id is defined and product.category.id == category.id %}
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-10 text-left">{{ product.name }}</div>
+                                                <div class="col-md-2 text-right">{{ product.price }} {{ product.currency }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    Aucune catégorie.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

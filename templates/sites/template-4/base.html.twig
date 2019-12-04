@@ -86,11 +86,20 @@
             </a>
             <div id="brand" class="visible-lg visible-md">&nbsp;</div>
             <ul class="nav navbar-nav nav-right">
-                <li class="{% block devisActive %}{% endblock %}">
-                    <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
-                        <span class="label-nav">Devis</span>
-                    </a>
-                </li>
+                {% if site.pricing.display == true %}
+                    <li class="{% block tarifActive %}{% endblock %}">
+                        <a href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                            <span class="label-nav">Tarif</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if site.quote.display == true %}
+                    <li class="{% block devisActive %}{% endblock %}">
+                        <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                            <span class="label-nav">Devis</span>
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="{% block contactActive %}{% endblock %}">
                     <a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                         <span class="label-nav">Contact</span>

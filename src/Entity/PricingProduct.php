@@ -53,6 +53,10 @@ class PricingProduct
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $currency;
 
     public function __construct(Site $site)
     {
@@ -139,6 +143,22 @@ class PricingProduct
         $this->category = $category;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param mixed $currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
 }
