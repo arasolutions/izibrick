@@ -46,22 +46,40 @@
                     <h3 class="panel-title"><label class="control-label">{{ form_label(form.logo) }}</label></h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-2">
-                        {% if site.logo %}
-                            <img alt="Vertex" height="35"
-                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
-                        {% else %}
-                            <img alt="Vertex" height="35"
-                                 src="{{ asset('assets/img/logo_site_default.png') }}"/>
-                        {% endif %}
+                    <div class="row">
+                        <div class="col-sm-2 text-center">
+                            {% if site.logo %}
+                                <img alt="" height="35"
+                                     src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                            {% else %}
+                                <img alt="" height="35"
+                                     src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
+                        </div>
                     </div>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                {{ form_widget(form.nameInLogo, {'attr':{'class':'form-control magic-checkbox'}}) }}
+                                {{ form_label(form.nameInLogo) }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="offset-sm-2 col-sm-10">
-                        <div class="checkbox">
-                            {{ form_widget(form.nameInLogo, {'attr':{'class':'form-control magic-checkbox'}}) }}
-                            {{ form_label(form.nameInLogo) }}
+                    <div class="row">
+                        <div class="col-sm-2 text-center">
+                            {% if site.favicon %}
+                                <img alt="" height="32"
+                                     src="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
+                            {% else %}
+                                <img alt="" height="32"
+                                     src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_widget(form.favicon, {'attr':{'class':'form-control input-lg'}}) }}
                         </div>
                     </div>
                 </div>
@@ -149,18 +167,18 @@
             opacity: false
         });
 
-        function changeSrc(){
+        function changeSrc() {
             var light = $('#edit_global_parameters_lightTheme').val() === "1" ? 'light' : 'dark';
-            $('#dynamic-theme').attr('src',"/templates/template-" + $('#edit_global_parameters_template').val() + "/options/" + light + ".png");
+            $('#dynamic-theme').attr('src', "/templates/template-" + $('#edit_global_parameters_template').val() + "/options/" + light + ".png");
             $('#dynamic-theme').css('backgroundColor', $('#edit_global_parameters_colorTheme').val());
         }
 
         $(document).ready(function () {
-            $('#edit_global_parameters_template, #edit_global_parameters_lightTheme').on('change', function(){
+            $('#edit_global_parameters_template, #edit_global_parameters_lightTheme').on('change', function () {
                 changeSrc();
             });
 
-            $('#edit_global_parameters_colorTheme').on('blur', function(){
+            $('#edit_global_parameters_colorTheme').on('blur', function () {
                 changeSrc();
             })
         });

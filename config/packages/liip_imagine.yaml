@@ -22,3 +22,9 @@ liip_imagine:
             filters:
                 relative_resize:
                     widen: 500
+        favicon:
+            quality: 100
+            filters:
+                thumbnail:
+                    size: [32, 32]
+                    mode: outbound

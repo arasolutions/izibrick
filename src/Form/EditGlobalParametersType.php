@@ -51,6 +51,11 @@ class EditGlobalParametersType extends AbstractType
                 'label' => 'Logo',
                 'data_class' => null
             ])
+            ->add('favicon', FileType::class, [
+                'required' => false,
+                'label' => 'Favicon',
+                'data_class' => null
+            ])
             ->add('facebook', UrlType::class, [
                 'label' => 'Lien page Facebook',
                 'required' => false
@@ -91,11 +96,11 @@ class EditGlobalParametersType extends AbstractType
 
             ])
             ->add('displayPricing', CheckboxType::class, [
-                'label'    => 'Afficher la page Tarif',
+                'label' => 'Afficher la page Tarif',
                 'required' => false,
             ])
             ->add('displayQuote', CheckboxType::class, [
-                'label'    => 'Afficher la page Devis',
+                'label' => 'Afficher la page Devis',
                 'required' => false,
             ]);
     }

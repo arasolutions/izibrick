@@ -139,6 +139,13 @@ class Site
     private $favicon;
 
     /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="favicon_site", fileNameProperty="favicon")
+     */
+    private $faviconFile;
+
+    /**
      * @ORM\Column(type="string", length=1023, nullable=true)
      */
     private $facebook;
@@ -690,4 +697,21 @@ class Site
 
         return $this;
     }
+
+    /**
+     * @return File
+     */
+    public function getFaviconFile(): File
+    {
+        return $this->faviconFile;
+    }
+
+    /**
+     * @param File $faviconFile
+     */
+    public function setFaviconFile(File $faviconFile): void
+    {
+        $this->faviconFile = $faviconFile;
+    }
+
 }

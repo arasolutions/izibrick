@@ -83,6 +83,11 @@ class EditGlobalParametersCommandHandler
             $site->setLogoFile($command->getLogo());
         }
         $site->setNameInLogo($command->getNameInLogo());
+
+        if ($command->getFavicon() != null) {
+            $site->setFavicon('');
+            $site->setFaviconFile($command->getFavicon());
+        }
         $this->siteRepository->save($site);
     }
 

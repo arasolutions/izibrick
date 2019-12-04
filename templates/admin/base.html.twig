@@ -327,7 +327,11 @@
                                     </a>
                                 </li>
 
+                                {% if app.request.get('_route') == 'bo-presentation' %}
+                                <li class="active-link">
+                            {% else %}
                                 <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-presentation') }}">
                                         <i class="ti-pencil-alt"></i>
                                         <span class="menu-title">
@@ -337,7 +341,11 @@
                                     </a>
                                 </li>
 
+                                {% if app.request.get('_route') == 'bo-blog' %}
+                                <li class="active-link">
+                            {% else %}
                                 <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-blog') }}">
                                         <i class="ti-comment"></i>
                                         <span class="menu-title">
@@ -348,7 +356,11 @@
                                 </li>
 
                                 {% if site.pricing is defined and site.pricing.display == true %}
-                                <li>
+                                    {% if app.request.get('_route') == 'bo-pricing' %}
+                                        <li class="active-link">
+                                    {% else %}
+                                        <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-pricing') }}">
                                         <i class="ti-money"></i>
                                         <span class="menu-title">
@@ -359,7 +371,11 @@
                                 {% endif %}
 
                                 {% if site.quote is defined and site.quote.display == true %}
-                                <li>
+                                    {% if app.request.get('_route') == 'bo-quote' %}
+                                        <li class="active-link">
+                                    {% else %}
+                                        <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-quote') }}">
                                         <i class="ti-shopping-cart"></i>
                                         <span class="menu-title">
@@ -369,7 +385,11 @@
                                 </li>
                                 {% endif %}
 
+                                {% if app.request.get('_route') == 'bo-contact' %}
+                                <li class="active-link">
+                                {% else %}
                                 <li>
+                                    {% endif %}
                                     <a href="{{ path('bo-contact') }}">
                                         <i class="ti-email"></i>
                                         <span class="menu-title">

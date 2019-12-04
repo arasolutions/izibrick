@@ -8,6 +8,13 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer: namer.md5
+        favicon_site:
+            uri_prefix:         /uploads/site/favicon
+            upload_destination: '%kernel.root_dir%/../public/uploads/site/favicon'
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer: namer.md5
         main_picture_site:
             uri_prefix:         /uploads/site/main_picture
             upload_destination: '%kernel.root_dir%/../public/uploads/site/main_picture'

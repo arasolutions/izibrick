@@ -7,7 +7,9 @@
     <meta name="keywords" content="HTML5 Template"/>
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+    {% if site.favicon %}
+        <link rel="icon" type="image/png" href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}" />
+    {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Web Fonts  -->
