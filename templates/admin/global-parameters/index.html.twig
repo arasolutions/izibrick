@@ -49,37 +49,43 @@
                     <div class="row">
                         <div class="col-sm-2 text-center">
                             {% if site.logo %}
-                                <img alt="" height="35"
+                                <img alt="" height="100%"
                                      src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
                             {% else %}
-                                <img alt="" height="35"
+                                <img alt="" height="100%"
                                      src="{{ asset('assets/img/logo_site_default.png') }}"/>
                             {% endif %}
                         </div>
                         <div class="col-sm-10">
-                            {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                {{ form_widget(form.nameInLogo, {'attr':{'class':'form-control magic-checkbox'}}) }}
-                                {{ form_label(form.nameInLogo) }}
+                            <div class="row">{{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}</div>
+                            <div class="row">
+                                <div class="checkbox">
+                                    {{ form_widget(form.nameInLogo, {'attr':{'class':'form-control magic-checkbox'}}) }}
+                                    {{ form_label(form.nameInLogo) }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2 text-center">
-                            {% if site.favicon %}
-                                <img alt="" height="32"
-                                     src="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
-                            {% else %}
-                                <img alt="" height="32"
-                                     src="{{ asset('assets/img/logo_site_default.png') }}"/>
-                            {% endif %}
-                        </div>
-                        <div class="col-sm-10">
-                            {{ form_widget(form.favicon, {'attr':{'class':'form-control input-lg'}}) }}
+
+                </div>
+                <div class="panel panel-mint">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><label class="control-label">{{ form_label(form.favicon) }}</label></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-2 text-center">
+                                {% if site.favicon %}
+                                    <img alt="" height="32"
+                                         src="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
+                                {% else %}
+                                    <img alt="" height="32"
+                                         src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-10">
+                                {{ form_widget(form.favicon, {'attr':{'class':'form-control input-lg'}}) }}
+                            </div>
                         </div>
                     </div>
                 </div>
