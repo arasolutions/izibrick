@@ -340,7 +340,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
 
                     // Affectation du site au user
-                    $userSite = new UserSite($this->getUser(), $site);
+                    $userSite = new UserSite($userFound, $site);
                     $userSite = $this->userSiteRepository->save($userSite);
                     $site->getUsers()->add($userSite);
                     $this->siteRepository->save($site);
