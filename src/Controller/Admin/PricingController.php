@@ -154,6 +154,7 @@ class PricingController extends AbstractController
         $command->category = $pricingProduct->getCategory();
         $command->price = $pricingProduct->getPrice();
         $command->active = $pricingProduct->getActive();
+        $command->currency = $pricingProduct->getCurrency();
 
         $success = false;
 

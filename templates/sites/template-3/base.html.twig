@@ -126,14 +126,26 @@
                                                 </span>
                                     </a>
                                 </li>
+                                {% if site.pricing.display == true %}
                                 <li>
-                                    <a class="{% block devisActive %}{% endblock %}"
-                                       href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                                    <a class="{% block tarifActive %}{% endblock %}"
+                                       href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
-                                        Devis
+                                        Tarif
                                                 </span>
                                     </a>
                                 </li>
+                                {% endif %}
+                                {% if site.quote.display == true %}
+                                    <li>
+                                        <a class="{% block devisActive %}{% endblock %}"
+                                           href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                                            <span class="label-nav">
+                                            Devis
+                                                    </span>
+                                        </a>
+                                    </li>
+                                {% endif %}
                                 <li>
                                     <a class="{% block contactActive %}{% endblock %}"
                                        href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">

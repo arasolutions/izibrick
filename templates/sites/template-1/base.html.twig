@@ -111,18 +111,22 @@
                                             Blog
                                         </a>
                                     </li>
-                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                        <a class="dropdown-item {% block tarifActive %}{% endblock %}"
-                                           href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
-                                            Tarif
-                                        </a>
-                                    </li>
-                                    <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                        <a class="dropdown-item {% block devisActive %}{% endblock %}"
-                                           href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
-                                            Devis
-                                        </a>
-                                    </li>
+                                    {% if site.pricing.display == true %}
+                                        <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                            <a class="dropdown-item {% block tarifActive %}{% endblock %}"
+                                               href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                                                Tarif
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if site.quote.display == true %}
+                                        <li class="dropdown dropdown-mega dropdown-mega-style-2">
+                                            <a class="dropdown-item {% block devisActive %}{% endblock %}"
+                                               href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                                                Devis
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                     <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                         <a class="dropdown-item {% block contactActive %}{% endblock %}"
                                            href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
