@@ -258,15 +258,22 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         // On récupère le plan tarifaire associé
         $planTarifaireId = '';
         $free = false;
+        $stripe = new StripeHelper();
         if($user->getLastSite()->getSite()->getCodePromotion()){
             $planTarifaireId = $user->getLastSite()->getSite()->getCodePromotion()->getStripePlanTarifaireId();
             if($user->getLastSite()->getSite()->getCodePromotion()->getPriceDecrease() == 0){
                 $free = true;
+                // Abonnement du user au plan tarifaire
+                $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
+                if ($subscription) {
+                    // Le site devient actif
+                    $site->setStatus(SiteStatus::ACTIF['name']);
+                    $this->siteRepository->save($site);
+                }
             }
         }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
             $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
         }
-        $stripe = new StripeHelper();
 
         if ($request->isMethod('POST')) {
             $token = $request->request->get('tokenId');
