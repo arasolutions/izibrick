@@ -100,9 +100,6 @@ class RegistrationController extends BaseController
             $site->getUsers()->add($userSite);
             $this->siteRepository->save($site);
 
-            /** @var User $userRepo */
-            $userRepo = $this->userRepository->get($this->getUser()->getId());
-            $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
             return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $this->getUser()->getId()));
         }
 

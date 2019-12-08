@@ -217,6 +217,7 @@ class Site
         $this->users = new ArrayCollection();
         $this->nameInLogo = false;
         $this->domainActif = false;
+        $this->lightTheme = true;
     }
 
     /**
@@ -701,7 +702,7 @@ class Site
     /**
      * @return File
      */
-    public function getFaviconFile(): File
+    public function getFaviconFile(): ?File
     {
         return $this->faviconFile;
     }
