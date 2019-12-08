@@ -26,10 +26,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-sm-12">
-                        <div id="summernote">
-                            {% if site.presentation.content is defined %}
-                                {{ site.presentation.content | raw }}
-                            {% endif %}
+                        <div>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
                 </div>
@@ -46,12 +44,4 @@
 
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
-    <script type="text/javascript">
-        const originalContent = $('#edit_presentation_content');
-        const itemContent = $('#edit_presentation_content');
-    </script>
-    <script src="{{ asset('assets/js/demo/form-text-editor.js') }}"></script>
 {% endblock %}

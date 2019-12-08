@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Izibrick\Command\PostCommand;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -18,7 +19,7 @@ class EditPostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Title',
+                'label' => 'Titre',
                 'constraints' => array (
                     new Length(array (
                         'min' => '2',
@@ -40,7 +41,7 @@ class EditPostType extends AbstractType
                 'label' => 'Image',
                 'data_class' => null
             ])
-            ->add('content', HiddenType::class)
+            ->add('content', CKEditorType::class)
         ;
     }
 
