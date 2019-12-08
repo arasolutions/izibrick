@@ -6,6 +6,7 @@ use App\Entity\CodePromotion;
 use App\Entity\Product;
 use App\Entity\Site;
 use App\Entity\User;
+use App\Entity\UserSite;
 use App\Enum\SiteStatus;
 use App\Form\EditSiteBillingType;
 use App\Izibrick\Command\AddSiteCommand;
@@ -26,6 +27,7 @@ use App\Repository\ProductRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
 use App\Repository\UserRepository;
+use App\Repository\UserSiteRepository;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -72,6 +74,9 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     /** @var AddInvoiceCommandHandler */
     private $addInvoiceCommandHandler;
 
+    /** @var UserSiteRepository */
+    private $userSiteRepository;
+
     /**
      * OrderController constructor.
      * @param ProductRepository $productRepository
@@ -83,8 +88,9 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      * @param UserManagerInterface $userManager
      * @param EncoderFactoryInterface $encoderFactory
      * @param AddInvoiceCommandHandler $addInvoiceCommandHandler
+     * @param UserSiteRepository $userSiteRepository
      */
-    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository, UserManagerInterface $userManager, EncoderFactoryInterface $encoderFactory, AddInvoiceCommandHandler $addInvoiceCommandHandler)
+    public function __construct(ProductRepository $productRepository, TemplateRepository $templateRepository, SiteRepository $siteRepository, UserRepository $userRepository, CodePromotionRepository $codePromotionRepository, InvoiceRepository $invoiceRepository, UserManagerInterface $userManager, EncoderFactoryInterface $encoderFactory, AddInvoiceCommandHandler $addInvoiceCommandHandler, UserSiteRepository $userSiteRepository)
     {
         $this->productRepository = $productRepository;
         $this->templateRepository = $templateRepository;
@@ -95,7 +101,9 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $this->userManager = $userManager;
         $this->encoderFactory = $encoderFactory;
         $this->addInvoiceCommandHandler = $addInvoiceCommandHandler;
+        $this->userSiteRepository = $userSiteRepository;
     }
+
 
     /**
      * @Route("/order", name="order_index", methods={"GET"})
@@ -330,6 +338,13 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     /** @var User $userRepo */
                     $userRepo = $this->userRepository->get($userFound->getId());
                     $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
+
+                    // Affectation du site au user
+                    $userSite = new UserSite($this->getUser(), $site);
+                    $userSite = $this->userSiteRepository->save($userSite);
+                    $site->getUsers()->add($userSite);
+                    $this->siteRepository->save($site);
+
                     if ($invoice != null) {
                         return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
                     }
