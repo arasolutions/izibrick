@@ -2,30 +2,34 @@ vich_uploader:
     db_driver: orm
     mappings:
         logo_site:
-            uri_prefix:         /uploads/site/logo
-            upload_destination: '%kernel.root_dir%/../public/uploads/site/logo'
+            uri_prefix:         /uploads/site
+            upload_destination: '%kernel.root_dir%/../public/uploads/site'
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+            directory_namer: namer.logo.md5
             namer: namer.md5
         favicon_site:
-            uri_prefix:         /uploads/site/favicon
-            upload_destination: '%kernel.root_dir%/../public/uploads/site/favicon'
+            uri_prefix:         /uploads/site
+            upload_destination: '%kernel.root_dir%/../public/uploads/site'
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+            directory_namer: namer.favicon.md5
             namer: namer.md5
         main_picture_site:
-            uri_prefix:         /uploads/site/main_picture
-            upload_destination: '%kernel.root_dir%/../public/uploads/site/main_picture'
+            uri_prefix:         /uploads/site
+            upload_destination: '%kernel.root_dir%/../public/uploads/site'
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+            directory_namer: namer.mainPicture.md5
             namer: namer.md5
         post_picture_site:
-            uri_prefix:         /uploads/blog/post_picture
-            upload_destination: '%kernel.root_dir%/../public/uploads/blog/post_picture'
+            uri_prefix:         /uploads/site
+            upload_destination: '%kernel.root_dir%/../public/uploads/site'
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+            directory_namer: namer.blogPostPicture.md5
             namer: namer.md5
