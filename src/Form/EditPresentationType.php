@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Izibrick\Command\PresentationCommand;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,8 +14,7 @@ class EditPresentationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', HiddenType::class)
-            ->add('originalContent', HiddenType::class)
+            ->add('content', CKEditorType::class)
         ;
     }
 

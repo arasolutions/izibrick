@@ -33,6 +33,30 @@ services:
     tags:
       - { name: namer }
 
+  namer.logo.md5:
+    class: App\Namer\DirectoryLogoMd5
+    public: true
+    tags:
+      - { name: namer }
+
+  namer.favicon.md5:
+    class: App\Namer\DirectoryFaviconMd5
+    public: true
+    tags:
+      - { name: namer }
+
+  namer.mainPicture.md5:
+    class: App\Namer\DirectoryMainPictureMd5
+    public: true
+    tags:
+      - { name: namer }
+
+  namer.blogPostPicture.md5:
+    class: App\Namer\DirectoryBlogPostPictureMd5
+    public: true
+    tags:
+      - { name: namer }
+
   App\Controller\RegistrationController:
     public: true
     arguments:

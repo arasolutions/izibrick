@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Izibrick\Command\HomeCommand;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -30,10 +31,9 @@ class EditHomeType extends AbstractType
                 'required' => false,
                 'label' => 'Image principale'
             ])
-            ->add('content', HiddenType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'Contenu'
-            ])
-            ->add('originalContent', HiddenType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

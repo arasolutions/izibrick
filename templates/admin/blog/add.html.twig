@@ -44,30 +44,24 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 form-group">
                         <label class="control-label"  style="text-align:left;">{{ form_label(form.title) }}</label>
                         <div>
                             {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 form-group">
                         <label class="control-label">{{ form_label(form.introduction) }}</label>
                         <div>
                             {{ form_widget(form.introduction, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
-                </div>
-            </div>
-
-
-            <!--Summernote-->
-            <!--===================================================-->
-            <div class="col-sm-12">
-                <label class="control-label" for="demo-hor-inputemail">Contenu</label>
-                <div id="summernote">
-                    {% if post.content is defined %}
-                        {{ post.content | raw }}
-                    {% endif %}
+                    <div class="col-sm-12 form-group">
+                        <label class="control-label" for="demo-hor-inputemail">Contenu</label>
+                        <div>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -86,12 +80,4 @@
 
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('assets/plugins/summernote/summernote.min.js') }}"></script>
-    <script type="text/javascript">
-        const originalContent = $('#edit_post_content');
-        const itemContent = $('#edit_post_content');
-    </script>
-    <script src="{{ asset('assets/js/demo/form-text-editor.js') }}"></script>
 {% endblock %}

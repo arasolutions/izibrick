@@ -232,10 +232,10 @@
                                 <div class="profile-wrap text-center">
                                     <div class="pad-btm">
                                         {% if site.logo %}
-                                            <img alt="Vertex" class="width-100"
+                                            <img alt="" class="width-100"
                                                  src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
                                         {% else %}
-                                            <img alt="Vertex" class="width-100"
+                                            <img alt="" class="width-100"
                                                  src="{{ asset('assets/img/logo_site_default.png') }}"/>
                                         {% endif %}
                                     </div>
@@ -343,7 +343,7 @@
                                     </a>
                                 </li>
 
-                                {% if app.request.get('_route') == 'bo-blog' %}
+                                {% if app.request.get('_route') == 'bo-blog' or app.request.get('_route') == 'bo-post-add' %}
                                 <li class="active-link">
                             {% else %}
                                 <li>
