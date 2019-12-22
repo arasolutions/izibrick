@@ -37,6 +37,10 @@
                                         {% if newPrice == 0 and free == false %}
                                             <div class="col-sm-6 bandeau-white">
                                                 A partir de {{ product.price | number_format(2,',', ' ') }} €/mois
+                                                {% if product.trialDays > 0 %}
+                                                    <br/>
+                                                    {{ product.trialDays }} jours d'essai gratuit
+                                                {% endif %}
                                             </div>
                                         {% elseif free == false%}
                                             <div class="col-sm-6 bandeau-white">
@@ -46,6 +50,10 @@
                                                         class="new-price">{{ newPrice | number_format(2,',', ' ') }}</span>
                                                 €/mois<br/>
                                                 <span class="new-price">Code promotion activé : {{ codePromo }} </span>
+                                                {% if trialDays > 0 %}
+                                                    <br/>
+                                                    <span class="new-price">{{ trialDays }} jours d'essai gratuit</span>
+                                                {% endif %}
                                             </div>
                                         {% else %}
                                             <div class="col-sm-6 bandeau-white">

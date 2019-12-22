@@ -135,6 +135,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $form->handleRequest($request);
         $newPrice = 0;
         $codePromo = '';
+        $trialDays = '';
         $free = false;
 
         if ($form->isSubmitted()) {
@@ -145,6 +146,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 if ($codePromoFounded) {
                     $codePromo = $form->get('codePromo')->getData();
                     $newPrice = floatval($codePromoFounded->getPriceDecrease());
+                    $trialDays = (int) ($codePromoFounded->getTrialDays());
                     if($newPrice == 0){
                         $free = true;
                     }
@@ -172,6 +174,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'templates' => $templates,
             'newPrice' => $newPrice,
             'codePromo' => $codePromo,
+            'trialDays' => $trialDays,
             'free' => $free,
             'step' => 2
         ]);
@@ -258,9 +261,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         // On récupère le plan tarifaire associé
         $planTarifaireId = '';
         $free = false;
+        $trialDays = 0;
         $stripe = new StripeHelper();
         if($user->getLastSite()->getSite()->getCodePromotion()){
             $planTarifaireId = $user->getLastSite()->getSite()->getCodePromotion()->getStripePlanTarifaireId();
+            $trialDays = $user->getLastSite()->getSite()->getCodePromotion()->getTrialDays();
             if($user->getLastSite()->getSite()->getCodePromotion()->getPriceDecrease() == 0){
                 $free = true;
                 // Abonnement du user au plan tarifaire
@@ -273,6 +278,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             }
         }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
             $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
+            $trialDays = $user->getLastSite()->getSite()->getProduct()->getTrialDays();
         }
 
         if ($request->isMethod('POST')) {
@@ -312,6 +318,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'invoice' => $invoice,
             'stripeKey' => $_ENV['STRIPE_PUBLIC_KEY'],
             'free' => $free,
+            'trialDays' => $trialDays,
             'step' => 6
         ]);
     }

@@ -64,6 +64,11 @@ class CodePromotion
     private $stripePlanTarifaireId;
 
     /**
+     * @ORM\Column(type="integer", length=8,)
+     */
+    private $trialDays;
+
+    /**
      * Presentation constructor.
      * @param $site
      * @throws \Exception
@@ -206,6 +211,22 @@ class CodePromotion
     public function setStripePlanTarifaireId($stripePlanTarifaireId)
     {
         $this->stripePlanTarifaireId = $stripePlanTarifaireId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTrialDays()
+    {
+        return $this->trialDays;
+    }
+
+    /**
+     * @param mixed $trialDays
+     */
+    public function setTrialDays($trialDays)
+    {
+        $this->trialDays = $trialDays;
     }
 
 }
