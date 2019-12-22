@@ -14,7 +14,15 @@ class EditPresentationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', CKEditorType::class)
+            ->add('content', CKEditorType::class, [
+                'label' => 'Présentation',
+                'attr' => array('rows' => '5'),
+                'required' => false,
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
+            ])
         ;
     }
 
@@ -22,6 +30,8 @@ class EditPresentationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PresentationCommand::class,
+            'idSite' => null,
         ]);
+        $resolver->setAllowedTypes('idSite', 'string');
     }
 }

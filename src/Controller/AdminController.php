@@ -8,6 +8,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Contact;
+use App\Helper\SiteHelper;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\BlogCommand;
@@ -141,7 +142,7 @@ class AdminController extends AbstractController
         if ($contact->getSeoDescription() != '') $referencementDescription++;
         if ($referencementTitle != 0) $referencementTitleTaux = $referencementTitle / 5 * 100;
         if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementTitle / 5 * 100;
-        if ($referencementTitle != 0 || $referencementDescription != 0 ) $referencementTaux = ($referencementTitleTaux + $referencementDescriptionTaux) / 2;
+        if ($referencementTitle != 0 || $referencementDescription != 0) $referencementTaux = ($referencementTitleTaux + $referencementDescriptionTaux) / 2;
         $referencement = array(
             'referencementTitleTaux' => $referencementTitleTaux,
             'referencementDescriptionTaux' => $referencementDescriptionTaux,
@@ -184,7 +185,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditHomeType::class, $command);
+        $form = $this->createForm(EditHomeType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $editHomeCommandHandler->handle($command, $site);
@@ -216,7 +217,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditPresentationType::class, $command);
+        $form = $this->createForm(EditPresentationType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editPresentationCommandHandler->handle($command, $site);
@@ -288,7 +289,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditContactType::class, $command);
+        $form = $this->createForm(EditContactType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editContactCommandHandler->handle($command, $site);

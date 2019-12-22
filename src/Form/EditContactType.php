@@ -18,7 +18,11 @@ class EditContactType extends AbstractType
             ->add('presentation', CKEditorType::class, [
                 'label' => 'Présentation',
                 'attr' => array('rows' => '5'),
-                'required' => false
+                'required' => false,
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
             ])
             ->add('phone', TextType::class, [
                 'label' => 'Téléphone',
@@ -55,6 +59,8 @@ class EditContactType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ContactCommand::class,
+            'idSite' => null,
         ]);
+        $resolver->setAllowedTypes('idSite', 'string');
     }
 }
