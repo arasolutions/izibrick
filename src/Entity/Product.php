@@ -51,6 +51,11 @@ class Product
     private $sites;
 
     /**
+     * @ORM\Column(type="integer", length=8,)
+     */
+    private $trialDays;
+
+    /**
      * @ORM\Column(type="string", length=256, nullable=true)
      */
     private $stripePlanTarifaireId;
@@ -179,5 +184,21 @@ class Product
     public function setStripePlanTarifaireId($stripePlanTarifaireId)
     {
         $this->stripePlanTarifaireId = $stripePlanTarifaireId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTrialDays()
+    {
+        return $this->trialDays;
+    }
+
+    /**
+     * @param mixed $trialDays
+     */
+    public function setTrialDays($trialDays)
+    {
+        $this->trialDays = $trialDays;
     }
 }
