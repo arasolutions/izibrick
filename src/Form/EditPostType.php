@@ -41,7 +41,15 @@ class EditPostType extends AbstractType
                 'label' => 'Image',
                 'data_class' => null
             ])
-            ->add('content', CKEditorType::class)
+            ->add('content', CKEditorType::class, [
+                'label' => 'Contenu',
+                'attr' => array('rows' => '5'),
+                'required' => false,
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
+            ])
         ;
     }
 
@@ -49,6 +57,8 @@ class EditPostType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PostCommand::class,
+            'idSite' => null,
         ]);
+        $resolver->setAllowedTypes('idSite', 'string');
     }
 }

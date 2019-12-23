@@ -19,4 +19,14 @@ class SiteHelper
 
         return strtolower($siteNameChanged);
     }
+
+    /**
+     * Crée la clé unique du site
+     * @param Site $site
+     * @return string
+     */
+    public static function getuniqueKeySite(Site $site)
+    {
+        return $site->getId() . '-' . $site->getCreatedAt()->getTimestamp();
+    }
 }

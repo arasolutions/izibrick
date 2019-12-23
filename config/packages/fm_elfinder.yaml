@@ -16,7 +16,8 @@ fm_elfinder:
                         uploads:
                             #show_hidden: true|false # defaults to false, hides dotfiles
                             driver: LocalFileSystem
-                            path: uploads
+                            path: uploads/site
+                            alias: Mes images
                             upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
                             upload_deny: ['all']
                             upload_max_size: 2M # also file upload sizes restricted in php.ini

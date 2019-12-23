@@ -7,6 +7,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Post;
+use App\Helper\SiteHelper;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\BlogCommand;
@@ -89,7 +90,7 @@ class BlogController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditPostType::class, $command);
+        $form = $this->createForm(EditPostType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)   ]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editPostCommandHandler->handle($command, $site);
@@ -132,7 +133,7 @@ class BlogController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditPostType::class, $command);
+        $form = $this->createForm(EditPostType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editPostCommandHandler->handle($command, $site);

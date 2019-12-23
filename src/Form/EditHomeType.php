@@ -20,8 +20,8 @@ class EditHomeType extends AbstractType
         $builder
             ->add('textPicture', TextType::class, [
                 'label' => 'Texte sur l\'image',
-                'constraints' => array (
-                    new Length(array (
+                'constraints' => array(
+                    new Length(array(
                         'min' => '2',
                         'max' => '255'
                     ))
@@ -32,7 +32,11 @@ class EditHomeType extends AbstractType
                 'label' => 'Image principale'
             ])
             ->add('content', CKEditorType::class, [
-                'label' => 'Contenu'
+                'label' => 'Contenu',
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
             ]);
     }
 
@@ -40,6 +44,8 @@ class EditHomeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => HomeCommand::class,
+            'idSite' => null,
         ]);
+        $resolver->setAllowedTypes('idSite', 'string');
     }
 }

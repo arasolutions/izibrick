@@ -3,6 +3,7 @@
 namespace App\Namer;
 
 use App\Entity\Site;
+use App\Helper\SiteHelper;
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 use Vich\UploaderBundle\Naming\DirectoryNamerInterface;
 use Vich\UploaderBundle\Naming\NamerInterface;
@@ -19,7 +20,7 @@ class DirectoryLogoMd5 implements DirectoryNamerInterface
      */
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        return '/' . $object->getId(). '/logo';
+        return '/' . SiteHelper::getuniqueKeySite($object). '/.logo';
     }
 
 }
