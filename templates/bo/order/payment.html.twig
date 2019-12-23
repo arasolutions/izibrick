@@ -86,7 +86,9 @@
 
                                         <section class="container">
                                             {% if free == true or trialDays > 0 %}
-                                                <h5>Profitez dès maintenant de votre offre d'essai ({{ trialDays }} jours).</h5>
+                                                {% if trialDays > 0 %}
+                                                    <h5>Profitez dès maintenant de votre offre d'essai ({{ trialDays }} jours).</h5>
+                                                {% endif %}
                                                 <div class="col-sm-12 form-group text-right mt20">
                                                     <a href="{{ path('order_valid') }}" class="btn btn-blue btn-lg">Continuer</a>
                                                 </div>
