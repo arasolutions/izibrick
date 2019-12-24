@@ -93,7 +93,7 @@
             <!--================================-->
             <div class="navbar-header">
                 <a href="{{ path('dashboard') }}" class="navbar-brand">
-                    <img src="{{ asset('assets/img/logo/logo-izibrick.png') }}" alt="Nifty Logo"
+                    <img src="{{ asset('assets/img/logo/logo-izibrick.png') }}" alt="izibrick"
                          class="brand-icon dashboard-logo">
                     <div class="brand-title">
                         <span class="brand-text">izibrick</span>
@@ -232,7 +232,7 @@
                                 <div class="profile-wrap text-center">
                                     <div class="pad-btm">
                                         {% if site.logo %}
-                                            <img alt="" class="width-100"
+                                            <img alt="{{ site.name }}"
                                                  src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
                                         {% else %}
                                             <img alt="" class="width-100"
