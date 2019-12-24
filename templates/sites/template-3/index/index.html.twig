@@ -10,7 +10,7 @@
             <ul>
                 <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
                     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
-                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}" alt="rev-full1" data-fullwidthcentering="on">
+                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" alt="rev-full1" data-fullwidthcentering="on">
                     {% else %}
                         <img src="{{ asset('templates/template-3/assets/images/sample.jpg') }}" alt="rev-full1" data-fullwidthcentering="on">
                     {% endif %}

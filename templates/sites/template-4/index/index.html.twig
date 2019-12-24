@@ -12,7 +12,7 @@
         <div class="carousel-inner">
             {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
                 <div class="item active"
-                 style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }});">
+                 style="background: url({{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }});">
                 {% else %}
                 <div class="item active"
                      style="background: url({{ asset('templates/template-3/assets/images/sample.jpg') }});">

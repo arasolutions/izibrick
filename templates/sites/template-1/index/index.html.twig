@@ -12,7 +12,7 @@
                 <li data-transition="fade" data-title="Welcome to Vertex">
 
                     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
-                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('post_picture') }}" alt=""
+                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" alt=""
                              data-bgposition="center center"
                              data-bgfit="cover"
                              data-bgrepeat="no-repeat"
@@ -57,7 +57,7 @@
             </ul>
         </div>
     </div>
-    <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+    <div class="v-page-wrap no-top-spacing">
         <div class="v-bg-stylish pb-0">
             <div class="container">
                 {{ site.home.content|raw }}

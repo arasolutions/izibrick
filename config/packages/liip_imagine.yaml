@@ -12,6 +12,11 @@ liip_imagine:
             filters:
                 relative_resize:
                     heighten: 100
+        logo_template:
+            quality: 100
+            filters:
+                relative_resize:
+                    heighten: 60
         main_picture:
             quality: 100
             filters:

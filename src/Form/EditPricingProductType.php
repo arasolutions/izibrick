@@ -31,7 +31,8 @@ class EditPricingProductType extends AbstractType
                 )
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Content',
+                'required' => false,
+                'label' => 'Description',
                 'constraints' => array (
                     new Length(array (
                         'min' => '2',

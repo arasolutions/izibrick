@@ -80,7 +80,7 @@
             <a href="#" class="logo visible-lg visible-md">
                 {% if site.logo %}
                     <img alt="Logo {{ site.name }}" height="35"
-                         src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
+                         src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo_template') }}"/>
                 {% else %}
                     <img alt="Logo {{ site.name }}" height="35"
                          src="{{ asset('assets/img/logo_site_default.png') }}"/>
