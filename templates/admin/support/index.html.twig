@@ -19,13 +19,13 @@
             <div class="row">
                 <div class="col-sm-6">
                     {{ form_start(form) }}
-                        <div class="form-group select">
-                            {{ form_widget(form.type) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">Envoyer</button>
+                    <div class="form-group select">
+                        {{ form_widget(form.type) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Envoyer</button>
 
                     {{ form_end(form) }}
                 </div>
@@ -49,7 +49,47 @@
                             <span>contact@ara-solutions.com</span>
                         </div>
                         <div>
-                            <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJe_A2WkUvVQ0RKAGN5XmUzLg&key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 200px;"></iframe>
+                            <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJe_A2WkUvVQ0RKAGN5XmUzLg&key=AIzaSyBSFRN6WWGYwmFi498qXXsD2UwkbmD74v4"
+                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                                    style="width: 100%; height: 200px;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h2 class="panel-title">FAQ</h2>
+                </div>
+                <div class="panel-body">
+                    <div id="page-content">
+                        <div class="panel-group accordion" id="demo-acc-purple">
+                            <div class="panel panel-blue">
+
+                                <!-- Accordion title -->
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-parent="#demo-acc-primary" data-toggle="collapse"
+                                           href="#demo-acd-purple-1">Je souhaite supprimer mon compte</a>
+                                    </h4>
+                                </div>
+
+                                <!-- Accordion content -->
+                                <div class="panel-collapse collapse in" id="demo-acd-purple-1">
+                                    <div class="panel-body">
+                                        Vous ne voulez plus profiter de votre site. La suppression va entrainer :
+                                        <ul>
+                                            <li>la suppression de voter nom de domaine</li>
+                                            <li>la suppression de l'ensemble des données</li>
+                                            <li>l'arrêt de l'abonnement de voter formule</li>
+                                        </ul>
+                                        <button id="modal-delete-site" class="btn btn-primary">Je souhaite supprimer mon
+                                            site
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,4 +110,32 @@
 
     <!--Specify page [ SAMPLE ]-->
     <script src="{{ asset('assets/js/demo/dashboard.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/bootbox/bootbox.min.js') }}"></script>
+
+    <script type="text/javascript">
+
+        $('#modal-delete-site').on('click', function () {
+            bootbox.confirm({
+                message: "<p class='text-semibold text-main'>Suppression du site</p>" +
+                    "<p>Souhaitez-vous réellement supprimer voter site.</p>" +
+                    "<p class='text-bold text-danger'>La suppression de votre site entrainera directement votre déconnexion</p>",
+                buttons: {
+                    confirm: {
+                        label: "Confirmer"
+                    },
+                    cancel: {
+                        label: "Annuler"
+                    }
+                },
+                callback: function (result) {
+                    if(result){
+                        window.location = '/admin/bo-site/' + {{ site.id }} + '/remove';
+                    }
+                },
+                animateIn: 'flipInX',
+                animateOut: 'flipOutX'
+            });
+        });
+    </script>
 {% endblock %}

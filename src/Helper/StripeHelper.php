@@ -272,6 +272,24 @@ class StripeHelper
     }
 
     /**
+     * Annuler un abonnement pour un utilisateur
+     * @param $substriptionId
+     * @return \Stripe\Subscription
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function cancelSubscription($substriptionId)
+    {
+
+        $subscription = \Stripe\Subscription::retrieve($substriptionId);
+
+        if ($subscription != null) {
+            $subscription = $subscription->cancel();
+        }
+
+        return $subscription;
+    }
+
+    /**
      * @param $customerId
      * @return \Stripe\ApiResource
      * @throws \Stripe\Exception\ApiErrorException

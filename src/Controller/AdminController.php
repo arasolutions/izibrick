@@ -31,6 +31,7 @@ use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
+use App\Izibrick\CommandHandler\RemoveSiteCommandHandler;
 use App\Repository\PricingCategoryRepository;
 use App\Repository\PricingProductRepository;
 use App\Repository\PricingRepository;
@@ -81,6 +82,14 @@ class AdminController extends AbstractController
     /**
      * AdminController constructor.
      * @param SiteRepository $siteRepository
+     * @param HomeRepository $homeRepository
+     * @param PresentationRepository $presentationRepository
+     * @param BlogRepository $blogRepository
+     * @param PricingRepository $pricingRepository
+     * @param QuoteRepository $quoteRepository
+     * @param ContactRepository $contactRepository
+     * @param PricingCategoryRepository $pricingCategoryRepository
+     * @param PricingProductRepository $pricingProductRepository
      */
     public function __construct(SiteRepository $siteRepository,
                                 HomeRepository $homeRepository,
@@ -111,10 +120,11 @@ class AdminController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
-            if (sizeof($user->getSites()) >= 1) {
-                /** @var UserSite $userSite */
-                $userSite = $user->getSites()[0];
-                $_SESSION['SITE_ID'] = $userSite->getSite()->getId();
+            $sites = $this->siteRepository->findAllActiveSiteByUser($user);
+            if (sizeof($sites) >= 1) {
+                /** @var Site $site */
+                $site = $sites[0];
+                $_SESSION['SITE_ID'] = $site->getId();
             }
         }
 
@@ -384,4 +394,43 @@ class AdminController extends AbstractController
             'success' => $success
         ]);
     }
+
+    /**
+     * @Route("/bo-site/{id}/remove", name="site-remove")
+     * @param Request $request
+     * @param int $id
+     * @param RemoveSiteCommandHandler $commandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function siteRemove(Request $request, $id = null, RemoveSiteCommandHandler $commandHandler)
+    {
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $site = $this->siteRepository->getById($id);
+        //Suppression du site
+        $commandHandler->handle($user, $site);
+
+        // Déconnexion
+        $this->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
+
+        return $this->redirectToRoute('site-removed');
+    }
+
+    /**
+     * @Route("/siteRemoved", name="site-removed")
+     * @param Request $request
+     * @param int $id
+     * @param RemoveSiteCommandHandler $commandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function siteRemoved(Request $request)
+    {
+        return $this->render('bo/cross/site_removed.html.twig', []);
+    }
+
 }

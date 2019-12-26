@@ -273,6 +273,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 if ($subscription) {
                     // Le site devient actif
                     $site->setStatus(SiteStatus::ACTIF['name']);
+                    $site->setStripeSubscriptionId($subscription['id']);
                     $this->siteRepository->save($site);
                 }
             }
@@ -288,6 +289,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             if($card){
                 // Abonnement du user au plan tarifaire
                 $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
+                $site->setStripeSubscriptionId($subscription['id']);
                 if ($subscription) {
                     // Paiement accepté
 

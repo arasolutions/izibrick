@@ -13,26 +13,13 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method UserSite[]    findAll()
  * @method UserSite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserSiteRepository extends ServiceEntityRepository
+class UserSiteRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserSite::class);
     }
 
-
-    /**
-     * @param UserSite $userSite
-     * @return UserSite
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function save(UserSite $userSite)
-    {
-        $this->getEntityManager()->persist($userSite);
-        $this->getEntityManager()->flush();
-        return $userSite;
-    }
 
     // /**
     //  * @return UserSite[] Returns an array of UserSite objects

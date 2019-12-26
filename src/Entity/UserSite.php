@@ -30,6 +30,16 @@ class UserSite
     private $site;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $active;
+
+    /**
      * UserSite constructor.
      * @param $user
      * @param $site
@@ -38,6 +48,8 @@ class UserSite
     {
         $this->user = $user;
         $this->site = $site;
+        $this->createdAt = new \DateTime();
+        $this->active = true;
     }
 
     public function getId(): ?int
@@ -65,6 +77,30 @@ class UserSite
     public function setSite(?Site $site): self
     {
         $this->site = $site;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

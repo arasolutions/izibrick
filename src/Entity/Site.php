@@ -208,6 +208,11 @@ class Site
     private $lightTheme;
 
     /**
+     * @ORM\Column(type="string", length=65, nullable=true)
+     */
+    private $stripeSubscriptionId;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -713,6 +718,18 @@ class Site
     public function setFaviconFile(File $faviconFile): void
     {
         $this->faviconFile = $faviconFile;
+    }
+
+    public function getStripeSubscriptionId(): ?string
+    {
+        return $this->stripeSubscriptionId;
+    }
+
+    public function setStripeSubscriptionId(string $stripeSubscriptionId): self
+    {
+        $this->stripeSubscriptionId = $stripeSubscriptionId;
+
+        return $this;
     }
 
 }

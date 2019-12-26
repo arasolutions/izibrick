@@ -6,6 +6,7 @@ namespace App\Izibrick\CommandHandler;
 use App\Entity\Blog;
 use App\Izibrick\Command\RemoveBlogCommand;
 use App\Repository\BlogRepository;
+use App\Repository\PostRepository;
 
 /**
  * Class RemoveBlogCommandHandler
@@ -16,18 +17,22 @@ class RemoveBlogCommandHandler
     /** @var BlogRepository $blogRepository */
     private $blogRepository;
 
+    /** @var PostRepository $postRepository */
+    private $postRepository;
+
     /**
-     * EditGlobalParametersCommandHandler constructor.
+     * RemoveBlogCommandHandler constructor.
      * @param BlogRepository $blogRepository
+     * @param PostRepository $postRepository
      */
-    public function __construct(BlogRepository $blogRepository)
+    public function __construct(BlogRepository $blogRepository, PostRepository $postRepository)
     {
         $this->blogRepository = $blogRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
-     * @param BlogCommand $command
-     * @param Site $site
+     * @param RemoveBlogCommand $command
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -36,14 +41,15 @@ class RemoveBlogCommandHandler
         $id = $command->id;
 
         /** @var Blog $blog */
-        $blog = $this->blogRepository->get($id);
+        $post = $this->postRepository->get($id);
 
-        if (!$blog) {
-            $message = sprintf("Error removing blog : ID (%d) doesn't exist", $id);
+
+        if (!$post) {
+            $message = sprintf("Error removing post : ID (%d) doesn't exist", $id);
             throw new \InvalidArgumentException($message);
         }
 
-        $this->blogRepository->remove($blog);
+        $this->postRepository->remove($post);
     }
 
 }

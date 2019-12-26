@@ -8,6 +8,7 @@ class SiteStatus
 {
     const INITIALISE = array('name' => 'INIT');
     const ACTIF = array('name' => 'ACTIF');
+    const DESACTIVE = array('name' => 'DESAC');
 
     public static function getByName($type)
     {
@@ -18,7 +19,8 @@ class SiteStatus
     {
         return array(
             self::INITIALISE['name'] => self::INITIALISE,
-            self::ACTIF['name'] => self::ACTIF
+            self::ACTIF['name'] => self::ACTIF,
+            self::DESACTIVE['name'] => self::DESACTIVE
         );
     }
 }

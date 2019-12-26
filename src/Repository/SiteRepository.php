@@ -3,9 +3,15 @@
 namespace App\Repository;
 
 use App\Entity\Link;
+use App\Entity\PricingProduct;
 use App\Entity\Product;
 use App\Entity\Site;
+use App\Entity\User;
+use App\Entity\UserSite;
+use App\Enum\SiteStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -100,5 +106,22 @@ class SiteRepository extends ServiceEntityRepository
         } catch (NonUniqueResultException $e) {
             return null;
         }
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function findAllActiveSiteByUser(User $user)
+    {
+        $q = $this->createQueryBuilder('s')
+            ->join(UserSite::class, 'us', Expr\Join::WITH, 'us.site = s')
+            ->andWhere('us.user = :user')
+            ->andWhere('s.status in (:status)')
+            ->setParameter('user', $user)
+            ->setParameter('status', array(SiteStatus::ACTIF['name'], SiteStatus::INITIALISE['name']))
+            ->getQuery();
+
+        return $q->getResult();
     }
 }

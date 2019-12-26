@@ -81,6 +81,11 @@ class User extends BaseUser
     private $societyName;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $active;
+
+    /**
      * @param string $email
      */
     public function setEmail($email)
@@ -124,7 +129,7 @@ class User extends BaseUser
      */
     public function getLastSite()
     {
-        return $this->sites[sizeof($this->sites)-1];
+        return $this->sites[sizeof($this->sites) - 1];
     }
 
     public function removeSite(UserSite $site): self
@@ -178,9 +183,9 @@ class User extends BaseUser
     public function getFullName()
     {
         $fullname = '';
-        if($this->firstname == '' && $this->lastname == '' ){
+        if ($this->firstname == '' && $this->lastname == '') {
             $fullname = $this->username;
-        }else{
+        } else {
             $this->firstname . ' ' . $this->lastname;
         }
         return $fullname;
@@ -282,6 +287,18 @@ class User extends BaseUser
     public function setSocietyName(?string $societyName): self
     {
         $this->societyName = $societyName;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

@@ -66,7 +66,6 @@ class BlogController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
 
         return $this->render('admin/blog/index.html.twig', [
-            'controller_name' => 'BlogController',
             'site' => $site,
             'blog' => $site->getBlog(),
             'posts' => $site->getBlog()->getPosts(),
@@ -90,13 +89,12 @@ class BlogController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditPostType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)   ]);
+        $form = $this->createForm(EditPostType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editPostCommandHandler->handle($command, $site);
             $success = true;
             return $this->render('admin/blog/index.html.twig', [
-                'controller_name' => 'BlogController',
                 'site' => $site,
                 'posts' => $site->getBlog()->getPosts(),
                 'success' => $success
@@ -104,7 +102,6 @@ class BlogController extends AbstractController
         }
 
         return $this->render('admin/blog/add.html.twig', [
-            'controller_name' => 'BlogController',
             'site' => $site,
             'form' => $form->createView(),
             'success' => $success
@@ -139,7 +136,6 @@ class BlogController extends AbstractController
             $editPostCommandHandler->handle($command, $site);
             $success = true;
             return $this->render('admin/blog/index.html.twig', [
-                'controller_name' => 'BlogController',
                 'site' => $site,
                 'posts' => $site->getBlog()->getPosts(),
                 'success' => $success
@@ -147,7 +143,6 @@ class BlogController extends AbstractController
         }
 
         return $this->render('admin/blog/add.html.twig', [
-            'controller_name' => 'BlogController',
             'site' => $site,
             'post' => $post,
             'form' => $form->createView(),
@@ -158,10 +153,12 @@ class BlogController extends AbstractController
     /**
      * @param Blog $blog
      * @param RemoveBlogCommandHandler $handler
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/post/{id}/remove", name="bo-post-remove")
-     * @method ({"GET"})
+     * @Route("/    post/{id}/remove", name="bo-post-remove")
+     * @method ({
+    * "GET"
+    * })
      */
     public function remove(Blog $blog, RemoveBlogCommandHandler $handler)
     {
@@ -172,15 +169,10 @@ class BlogController extends AbstractController
         try {
             $handler->handle($command);
             $success = true;
-        } catch ( \Exception $e ) {
+        } catch (\Exception $e) {
             $success = false;
         }
 
-        return $this->render('admin/blog/index.html.twig', [
-            'controller_name' => 'BlogController',
-            'site' => $site,
-            'posts' => $site->getBlog()->getPosts(),
-            'success' => $success
-        ]);
+        return $this->redirectToRoute('bo-blog', array('success' => $success));
     }
 }
