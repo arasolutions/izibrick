@@ -120,15 +120,18 @@ class AdminController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
-            $sites = $this->siteRepository->findAllActiveSiteByUser($user);
+            $sites = $user->getSites();
+            if (sizeof($sites) == 0) {
+                return $this->redirectToRoute('fos_user_security_logout');
+            }
             if (sizeof($sites) > 1) {
                 // Retour au choix d'un site
                 return $this->redirectToRoute('choose-site');
             }
             if (sizeof($sites) == 1) {
-                /** @var Site $site */
+                /** @var UserSite $site */
                 $site = $sites[0];
-                $_SESSION['SITE_ID'] = $site->getId();
+                $_SESSION['SITE_ID'] = $site->getSite()->getId();
             }
         }
 

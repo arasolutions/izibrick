@@ -115,7 +115,7 @@ class User extends BaseUser
         $result = new ArrayCollection();
         /** @var UserSite $site */
         foreach ($this->sites as $site){
-            if($site->getSite()->getStatus() == SiteStatus::INITIALISE['name'] || $site->getSite()->getStatus() == SiteStatus::ACTIF['name']) {
+            if($site->getSite()->getStatus() == SiteStatus::ACTIF['name']) {
                 $result->add($site);
             }
         }

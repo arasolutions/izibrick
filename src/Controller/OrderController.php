@@ -225,8 +225,15 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     public function orderBilling($siteId, $userId, Request $request, EditSiteBillingCommandHandler $billingCommandHandler)
     {
         $site = $this->siteRepository->getById($siteId);
+        /** @var User $user */
+        $user = $this->userRepository->get($userId);
 
         $billingCommand = new SiteBillingCommand();
+        $billingCommand->setAddress1($user->getAddress1());
+        $billingCommand->setAddress2($user->getAddress2());
+        $billingCommand->setCity($user->getCity());
+        $billingCommand->setPostalCode($user->getPostalCode());
+        $billingCommand->setSocietyName($user->getSocietyName());
 
         $form = $this->createForm(EditSiteBillingType::class, $billingCommand);
         $form->handleRequest($request);
