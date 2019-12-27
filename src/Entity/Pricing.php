@@ -23,6 +23,11 @@ class Pricing
     private $site;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
+    /**
      * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
      */
     private $seoTitle;
@@ -60,6 +65,18 @@ class Pricing
     public function setSite(?Site $site): self
     {
         $this->site = $site;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

@@ -58,10 +58,11 @@
                             {% endif %}
                         {% endfor %}
                     </ul>
-                {% else %}
-                    Aucune tarif renseigné.
                 {% endif %}
             </div>
+        </div>
+        <div class="container">
+            {{ site.pricing.content|raw }}
         </div>
     </div>
 {% endblock %}

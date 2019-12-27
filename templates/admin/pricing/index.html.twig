@@ -70,7 +70,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             {% if products is defined and products|length > 0 %}
                                 {% for product in products %}
                                     <tr>
@@ -99,12 +98,40 @@
                             {% endif %}
                             </tbody>
                         </table>
-
                     </div>
-
-
                 </div>
             </div>
+
+        </div>
+    </div>
+    <div class="text-center mb10" style="font-size: 1.2em;color:#000;font-weight:bold;">
+        ET/OU
+    </div>
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Plan tarifaire</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                    Annuler
+                </button>
+            </div>
+            {{ form_end(form) }}
 
         </div>
     </div>
