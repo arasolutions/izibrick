@@ -21,6 +21,7 @@ use App\Form\OrderLoginType;
 use App\Form\RegistrationType;
 use App\Helper\StripeHelper;
 use App\Izibrick\CommandHandler\EditSiteBillingCommandHandler;
+use App\Izibrick\CommandHandler\EditSiteOptionsCommandHandler;
 use App\Repository\CodePromotionRepository;
 use App\Repository\InvoiceRepository;
 use App\Repository\ProductRepository;
@@ -189,17 +190,20 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function orderOptions($siteId, Request $request)
+    public function orderOptions($siteId, Request $request, EditSiteOptionsCommandHandler $editSiteOptionsCommandHandler)
     {
 
         $site = $this->siteRepository->getById($siteId);
 
-        $customer = new SiteOptionsCommand();
+        $options = new SiteOptionsCommand();
 
-        $form = $this->createForm(AddSiteOptionsType::class, $customer);
+        $form = $this->createForm(AddSiteOptionsType::class, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $editSiteOptionsCommandHandler->handle($options, $site);
+
             return $this->redirect('/register?siteId=' . $siteId);
         }
 

@@ -213,6 +213,16 @@ class Site
     private $stripeSubscriptionId;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $commandDomain;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $commandOption;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -728,6 +738,30 @@ class Site
     public function setStripeSubscriptionId(string $stripeSubscriptionId): self
     {
         $this->stripeSubscriptionId = $stripeSubscriptionId;
+
+        return $this;
+    }
+
+    public function getCommandDomain(): ?string
+    {
+        return $this->commandDomain;
+    }
+
+    public function setCommandDomain(?string $commandDomain): self
+    {
+        $this->commandDomain = $commandDomain;
+
+        return $this;
+    }
+
+    public function getCommandOption(): ?int
+    {
+        return $this->commandOption;
+    }
+
+    public function setCommandOption(int $commandOption): self
+    {
+        $this->commandOption = $commandOption;
 
         return $this;
     }

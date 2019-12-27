@@ -1,6 +1,6 @@
 
 #footer .social-icon > li > a > span {
-  color: var(--textColor) !important;
+  color: #FFFFFF !important;
 }
 
 .navbar.navbar-default {
@@ -10,6 +10,7 @@
 
 #footer {
   background-color: #333333 !important;;
+  color: #FFFFFF !important;
 }
 
 #brand {
@@ -17,10 +18,14 @@
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: var(--textColor) !important;
+  color: #FFFFFF !important;
 }
 
 #footer .social-icon > li > a {
   background-color: #333333;
-  color: var(--textColor) !important;
+  color: #FFFFFF !important;
+}
+
+#footer .sitemap > ul > li > a {
+  color: #FFFFFF !important;
 }

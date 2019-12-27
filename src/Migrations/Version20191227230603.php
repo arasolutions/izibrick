@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191223112128 extends AbstractMigration
+final class Version20191227230603 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,8 @@ final class Version20191223112128 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fir_site ADD stripe_subscription_id VARCHAR(65) NOT NULL');
+        $this->addSql('DROP INDEX site_internal_name_idx ON fir_site');
+        $this->addSql('ALTER TABLE fir_site ADD command_option INT DEFAULT 1 NOT NULL');
         $this->addSql('CREATE INDEX site_internal_name_idx ON fir_site (internal_name)');
     }
 
@@ -31,7 +32,8 @@ final class Version20191223112128 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fir_site DROP stripe_subscription_id');
+        $this->addSql('DROP INDEX site_internal_name_idx ON fir_site');
+        $this->addSql('ALTER TABLE fir_site DROP command_option');
         $this->addSql('CREATE INDEX site_internal_name_idx ON fir_site (internal_name)');
     }
 }

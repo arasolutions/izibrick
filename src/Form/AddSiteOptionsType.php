@@ -18,11 +18,20 @@ class AddSiteOptionsType extends AbstractType
             ->add('domain', ChoiceType::class, array(
                 'label' => 'Domaine',
                 'required' => true,
+                'expanded' => true,
                 'choices' => [
-                    'Nouveau nom de domaine (inclus dans l\'offre)' => 1,
-                    'Transfert de nom de domaine (+99€)' => 2,
-                    'Pointage sur nom de domaine (+99€)' => 3
+                    'Nouveau nom de domaine' => 1,
+                    'Transfert de nom de domaine' => 2,
+                    'Pointage sur nom de domaine' => 3
                 ]
+            ))
+            ->add('newDomain', TextType::class, array(
+                'label' => 'Quel nom souhaitez-vous ?',
+                'required' => false,
+            ))
+            ->add('existingDomain', TextType::class, array(
+                'label' => 'Quel nom avez-vous ?',
+                'required' => false,
             ));
     }
 

@@ -1,9 +1,9 @@
 
-.mt20{
+.mt20 {
     margin-top: 20px;
 }
 
-.mt50{
+.mt50 {
     margin-top: 50px;
 }
 
@@ -102,15 +102,15 @@
     list-style: none;
 }
 
-.width-100{
+.width-100 {
     width: 100% !important;
 }
 
-.ml-10{
+.ml-10 {
     margin-left: 10px;
 }
 
-.mb-20{
+.mb-20 {
     margin-bottom: 20px;
 }
 
@@ -118,4 +118,55 @@
     width: 40px;
     height: 40px;
     margin: 10px 10px 10px 20px;
+}
+
+.option-block {
+    border: solid 1px #F7F7F7;
+    cursor: pointer;
+    border-radius: .25rem;
+}
+
+.option-block:hover {
+    border: solid 1px #25476a !important;
+}
+
+.option-block.selected {
+    border: solid 1px #25476a !important;
+    background-color: #25476a;
+    color: white;
+}
+
+.option-radio {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 20%;
+}
+
+.option-price {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.option-domain {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: small;
+}
+
+.option-domain input{
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
