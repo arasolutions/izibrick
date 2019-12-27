@@ -152,6 +152,13 @@
                                     <a href="{{ path('bo-account') }}"><i class="fa fa-user-o icon-lg icon-fw"></i> Mon
                                         profil</a>
                                 </li>
+                                {% if app.user.sites|length > 1 %}
+                                    <li>
+                                        <a href="{{ path('choose-site') }}">
+                                            <i class="ti-world icon-lg icon-fw"></i> Changer de site
+                                        </a>
+                                    </li>
+                                {% endif %}
                                 <li>
                                     <a href="{{ path('bo-invoice') }}">
                                         <i class="fa fa-shopping-cart icon-lg icon-fw"></i> Facturation
@@ -343,7 +350,7 @@
                                     </a>
                                 </li>
 
-                                {% if app.request.get('_route') == 'bo-blog' or app.request.get('_route') == 'bo-post-add' or app.request.get('_route') == 'bo-post-edit'%}
+                                {% if app.request.get('_route') == 'bo-blog' or app.request.get('_route') == 'bo-post-add' or app.request.get('_route') == 'bo-post-edit' %}
                                 <li class="active-link">
                             {% else %}
                                 <li>

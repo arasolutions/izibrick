@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\SiteStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -111,7 +112,14 @@ class User extends BaseUser
      */
     public function getSites(): Collection
     {
-        return $this->sites;
+        $result = new ArrayCollection();
+        /** @var UserSite $site */
+        foreach ($this->sites as $site){
+            if($site->getSite()->getStatus() == SiteStatus::INITIALISE['name'] || $site->getSite()->getStatus() == SiteStatus::ACTIF['name']) {
+                $result->add($site);
+            }
+        }
+        return $result;
     }
 
     public function addSite(UserSite $site): self

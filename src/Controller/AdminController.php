@@ -186,10 +186,11 @@ class AdminController extends AbstractController
      */
     public function chooseSite($id = null)
     {
-
         if ($id != null) {
             $_SESSION['SITE_ID'] = $id;
             return $this->redirectToRoute('dashboard');
+        }else{
+            unset($_SESSION['SITE_ID']);
         }
 
         /** @var User $user */
