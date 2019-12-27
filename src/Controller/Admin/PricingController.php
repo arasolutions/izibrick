@@ -9,6 +9,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Post;
+use App\Helper\SiteHelper;
 use App\Form\EditPricingCategoryType;
 use App\Form\EditPricingProductType;
 use App\Izibrick\Command\ContactCommand;
@@ -79,19 +80,30 @@ class PricingController extends AbstractController
     /**
      * @Route("/", name="bo-pricing")
      * @param Request $request
+     * @param EditPricingCommandHandler $editPricingCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function boPricing(Request $request)
+    public function boPricing(Request $request, EditPricingCommandHandler $editPricingCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
         $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION['SITE_ID']);
         $products = $this->pricingProductRepository->getAllBySiteId($_SESSION['SITE_ID']);
         $success = false;
 
+        $command = new PricingCommand();
+
+        $form = $this->createForm(EditPricingType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editPricingCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
         return $this->render('admin/pricing/index.html.twig', [
             'site' => $site,
+            'form' => $form->createView(),
             'success' => $success,
             'categories' => $categories,
             'products' => $products
