@@ -117,6 +117,7 @@ class SiteRepository extends ServiceEntityRepository
         $q = $this->createQueryBuilder('s')
             ->join(UserSite::class, 'us', Expr\Join::WITH, 'us.site = s')
             ->andWhere('us.user = :user')
+            ->andWhere('us.active = 1')
             ->andWhere('s.status in (:status)')
             ->setParameter('user', $user)
             ->setParameter('status', array(SiteStatus::ACTIF['name'], SiteStatus::INITIALISE['name']))

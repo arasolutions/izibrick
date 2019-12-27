@@ -358,8 +358,6 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     // Affectation du site au user
                     $userSite = new UserSite($userFound, $site);
                     $userSite = $this->userSiteRepository->save($userSite);
-                    $site->getUsers()->add($userSite);
-                    $this->siteRepository->save($site);
 
                     if ($invoice != null) {
                         return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));

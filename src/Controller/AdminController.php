@@ -121,7 +121,11 @@ class AdminController extends AbstractController
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
             $sites = $this->siteRepository->findAllActiveSiteByUser($user);
-            if (sizeof($sites) >= 1) {
+            if (sizeof($sites) > 1) {
+                // Retour au choix d'un site
+                return $this->redirectToRoute('choose-site');
+            }
+            if (sizeof($sites) == 1) {
                 /** @var Site $site */
                 $site = $sites[0];
                 $_SESSION['SITE_ID'] = $site->getId();
@@ -167,13 +171,32 @@ class AdminController extends AbstractController
         // Fin Réseaux sociaux
 
         return $this->render('admin/dashboard/index.html.twig', [
-            'controller_name' => 'AdminController',
             'site' => $userSite,
             'referencement' => $referencement,
             'nbrReseauxSociaux' => $nbrReseauxSociaux,
             'quotes' => $userSite->getTrackingQuotes(),
             'contacts' => $userSite->getTrackingContacts(),
             'posts' => $blog->getPosts()
+        ]);
+    }
+
+    /**
+     * @Route("/choose-site", name="choose-site")
+     * @Route("/choose-site/{id}", name="choose-site-id")
+     */
+    public function chooseSite($id = null)
+    {
+
+        if ($id != null) {
+            $_SESSION['SITE_ID'] = $id;
+            return $this->redirectToRoute('dashboard');
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->render('bo/cross/choose_site.html.twig', [
+            'sites' => $this->siteRepository->findAllActiveSiteByUser($user)
         ]);
     }
 

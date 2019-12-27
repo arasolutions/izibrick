@@ -15,6 +15,8 @@ use App\Entity\User;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\AddSiteCommand;
+use App\Namer\DirectoryLogoMd5;
+use App\Namer\Md5;
 use App\Repository\BlogRepository;
 use App\Repository\CodePromotionRepository;
 use App\Repository\ContactRepository;
@@ -25,7 +27,13 @@ use App\Repository\ProductRepository;
 use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Mime\MimeTypes;
+use Symfony\Component\Mime\MimeTypesInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Vich\UploaderBundle\Mapping\PropertyMapping;
+use Vich\UploaderBundle\VichUploaderBundle;
 
 /**
  * Class AddSiteCommandHandler
@@ -62,6 +70,9 @@ class AddSiteCommandHandler
 
     /** @var CodePromotionRepository */
     private $codePromotionRepository;
+
+    /** @var VichUploaderBundle $vich */
+    private $vich;
 
     /**
      * AddSiteCommandHandler constructor.
@@ -119,6 +130,20 @@ class AddSiteCommandHandler
         // Gestion du logo
         if ($command->getLogo() != null) {
             $site->setLogoFile($command->getLogo());
+        } else {
+            // Logo par défaut
+            $default = \dirname(__DIR__) . '/../../public/assets/img/logo_site_default.png';
+            $destDir = \dirname(__DIR__) . '/../../public/uploads/site/';
+
+            $directoryMd5 = new DirectoryLogoMd5();
+            $directory = $directoryMd5->directoryName($site, new PropertyMapping($default, $default));
+            mkdir($destDir . $directory, 0777, true);
+
+            $md5 = new Md5();
+            $name = $md5->name($site, new PropertyMapping($default, $default));
+            copy($default, $destDir . $directory . '/' . $name);
+
+            $site->setLogo($name);
         }
         $site = $this->siteRepository->save($site);
 

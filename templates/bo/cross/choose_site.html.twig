@@ -1,0 +1,51 @@
+{% extends 'bo/base.html.twig' %}
+
+{% block title %}Choisissez votre site{% endblock %}
+
+{% block body %}
+    <section class="g-bg-izibrick-light-v5"
+             style="height: 130%; background-image: url({{ asset('templates/bo/img/bg6.jpg') }});">
+        <div class="container g-py-100">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-lg-10">
+                    <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+                        <header class="text-center mb-4">
+                            <h2 class="h2 g-color-black g-font-weight-600">Choix du site</h2>
+                        </header>
+                        <div class="col-xs-12 row">
+                            {% for site in sites %}
+                                <div class="col-md-3 g-mb-30">
+                                    <!-- Listing - Agents -->
+                                    <div class="u-shadow-v11 text-center">
+                                        <div class="g-bg-white g-pa-20">
+                                            <div class="g-width-130 g-height-130 mx-auto mb-4">
+                                                {% if site.logo %}
+                                                    <img class="img-fluid g-brd-around g-brd-3 rounded-circle"
+                                                         src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"
+                                                         alt="{{ site.name }}">
+                                                {% else %}
+                                                    <img alt="" class="img-fluid g-brd-around g-brd-3 rounded-circle"
+                                                         src="{{ asset('assets/img/logo_site_default.png') }}"/>
+                                                {% endif %}
+                                            </div>
+                                            <div class="mb-3">
+                                                <h3 class="h5">{{ site.name }}</h3>
+                                                <span class="d-block g-color-gray-dark-v5 g-font-size-13 mb-1">{{ site.description }}</span>
+                                            </div>
+                                        </div>
+                                        <a class="btn btn-block u-btn-primary g-color-white--hover g-bg-secondary-dark-light-v1--hover g-font-weight-600 g-font-size-12 text-uppercase rounded-0 g-px-25 g-py-15"
+                                           href="{{ path('choose-site-id', {'id':site.id}) }}">
+                                            Accéder
+                                        </a>
+                                    </div>
+                                    <!-- End Listing - Agents -->
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- End Users -->
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
