@@ -85,6 +85,8 @@ class IndexController extends AbstractController
                 );
             $mailer->send($message);
             $success = true;
+            $command = new OurContactCommand();
+            $form = $this->createForm(ContactType::class, $command);
         }
         return $this->render('bo/contact/index.html.twig', [
             'form' => $form->createView(),

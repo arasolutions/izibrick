@@ -32,18 +32,18 @@ class ContactSubject
     public static function toArray()
     {
         return array(
-            self::AUTHENTICATION['id'] => self::AUTHENTICATION,
             self::DEMANDE_DEVIS['id'] => self::DEMANDE_DEVIS,
             self::DEMANDE_INFORMATIONS['id'] => self::DEMANDE_INFORMATIONS,
+            self::AUTHENTICATION['id'] => self::AUTHENTICATION,
         );
     }
 
     public static function toIdArray()
     {
         return array(
-            self::AUTHENTICATION['id'],
             self::DEMANDE_DEVIS['id'],
-            self::DEMANDE_INFORMATIONS['id']
+            self::DEMANDE_INFORMATIONS['id'],
+            self::AUTHENTICATION['id'],
         );
     }
 }
