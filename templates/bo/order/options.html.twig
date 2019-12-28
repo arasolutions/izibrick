@@ -36,53 +36,55 @@
                                         </div>
                                     </div>-->
                                     {% endif %}
+                                    {% set option = site_option.getById(1) %}
                                     <div class="col-sm-12 form-group option-block">
                                         <div class="row g-height-125 g-transition-0_2">
                                             <div class="col-sm-1 g-bg-gray-light-v5 g-pa-0">
                                                 {{ form_widget(form.domain[0], {'attr':{'class':'form-control input-lg option-radio'}}) }}
                                             </div>
                                             <div class="col-sm-11 g-pa-10">
-                                                {{ form_label(form.domain[0], null, {'label_attr':{'class':'control-label text-bold'}}) }}
-                                                <p>C'est votre premier site, ou bien vous souhaitez avoir un nouveau nom
-                                                    de domaine</p>
+                                                <label class="control-label text-bold required">{{ option.label }}</label>
+                                                <p>{{ option.description }}</p>
                                                 <div class="option-domain">
                                                     {{ form_label(form.newDomain, null, {'label_attr':{'class':'control-label text-bold mb-0'}}) }}
                                                     {{ form_widget(form.newDomain, {'attr':{'class':'input-sm'}}) }}
                                                 </div>
                                                 <div class="option-price">
-                                                    <span class="u-label g-bg-bluegray g-rounded-3">Inclus dans l'offre</span>
+                                                    <span class="u-label g-bg-bluegray g-rounded-3">{{ option.price.label }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    {% set option = site_option.getById(2) %}
                                     <div class="col-sm-12 form-group option-block">
                                         <div class="row g-height-125 g-transition-0_2">
                                             <div class="col-sm-1 g-bg-gray-light-v5 g-pa-0">
                                                 {{ form_widget(form.domain[1], {'attr':{'class':'form-control input-lg option-radio'}}) }}
                                             </div>
                                             <div class="col-sm-11 g-pa-10">
-                                                {{ form_label(form.domain[1], null, {'label_attr':{'class':'control-label text-bold'}}) }}
-                                                <p>Vous avez déjà votre site, vous souhaitez le conserver et nous en donner l'administration.</p>
+                                                <label class="control-label text-bold required">{{ option.label }}</label>
+                                                <p>{{ option.description }}</p>
                                                 <div class="option-domain">
                                                     {{ form_label(form.existingDomain, null, {'label_attr':{'class':'control-label text-bold mb-0'}}) }}
                                                     {{ form_widget(form.existingDomain, {'attr':{'class':'input-sm'}}) }}
                                                 </div>
                                                 <div class="option-price">
-                                                    <span class="u-label g-bg-bluegray g-rounded-3">99€</span>
+                                                    <span class="u-label g-bg-bluegray g-rounded-3">{{ option.price.label }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    {% set option = site_option.getById(3) %}
                                     <div class="col-sm-12 form-group option-block">
                                         <div class="row g-height-125 g-transition-0_2">
                                             <div class="col-sm-1 g-bg-gray-light-v5 g-pa-0">
                                                 {{ form_widget(form.domain[2], {'attr':{'class':'form-control input-lg option-radio'}}) }}
                                             </div>
                                             <div class="col-sm-11 g-pa-10">
-                                                {{ form_label(form.domain[2], null, {'label_attr':{'class':'control-label text-bold'}}) }}
-                                                <p>Vous avez déjà votre site, vous souhaitez le conserver et en garder l'administration.</p>
+                                                <label class="control-label text-bold required">{{ option.label }}</label>
+                                                <p>{{ option.description }}</p>
                                                 <div class="option-price">
-                                                    <span class="u-label g-bg-bluegray g-rounded-3">99€</span>
+                                                    <span class="u-label g-bg-bluegray g-rounded-3">{{ option.price.label }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +109,7 @@
         $(document).ready(function () {
             $('.option-block').on('click', function (e) {
                 $('.option-block').removeClass('selected');
-                $(this).find('input').prop('checked',true);
+                $(this).find('input').prop('checked', true);
                 $(this).addClass('selected');
             });
         });

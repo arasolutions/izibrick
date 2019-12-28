@@ -27,6 +27,10 @@ services:
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
+  app.enum.siteoptions:
+    class: App\Enum\SiteOption
+    public: true
+
   namer.md5:
     class: App\Namer\Md5
     public: true

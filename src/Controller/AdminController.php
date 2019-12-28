@@ -44,6 +44,8 @@ use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class AdminController
@@ -115,14 +117,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/dashboard", name="dashboard")
      */
-    public function index()
+    public function index(Request $request)
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!isset($_SESSION["SITE_ID"])) {
             $sites = $user->getSites();
             if (sizeof($sites) == 0) {
-                return $this->redirectToRoute('fos_user_security_logout');
+                $request->getSession()->set(Security::AUTHENTICATION_ERROR, new AuthenticationException('Vous n\'avez aucun site actif.'));
+                return $this->redirectToRoute('fos_user_security_login');
             }
             if (sizeof($sites) > 1) {
                 // Retour au choix d'un site
@@ -192,7 +195,7 @@ class AdminController extends AbstractController
         if ($id != null) {
             $_SESSION['SITE_ID'] = $id;
             return $this->redirectToRoute('dashboard');
-        }else{
+        } else {
             unset($_SESSION['SITE_ID']);
         }
 

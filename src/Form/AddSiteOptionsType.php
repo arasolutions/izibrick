@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Enum\SiteOption;
 use App\Izibrick\Command\SiteOptionsCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,14 +17,10 @@ class AddSiteOptionsType extends AbstractType
     {
         $builder
             ->add('domain', ChoiceType::class, array(
-                'label' => 'Domaine',
+                'label' => false,
                 'required' => true,
                 'expanded' => true,
-                'choices' => [
-                    'Nouveau nom de domaine' => 1,
-                    'Transfert de nom de domaine' => 2,
-                    'Pointage sur nom de domaine' => 3
-                ]
+                'choices' => SiteOption::toIdArray()
             ))
             ->add('newDomain', TextType::class, array(
                 'label' => 'Quel nom souhaitez-vous ?',

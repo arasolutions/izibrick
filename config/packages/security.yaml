@@ -12,6 +12,7 @@ security:
             security: false
         main:
             pattern: ^/
+            user_checker: App\Security\UserChecker
             form_login:
                 login_path: /login
                 default_target_path: /admin/dashboard
