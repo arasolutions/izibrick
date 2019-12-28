@@ -46,7 +46,7 @@ class InvoiceController extends AbstractController
      */
     public function boInvoice(Request $request, $success = false)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $user = $this->userRepository->get($this->getUser()->getId());
 
         $stripe = new StripeHelper();

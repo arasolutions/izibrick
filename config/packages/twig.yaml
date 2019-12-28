@@ -1,6 +1,7 @@
 twig:
   globals:
     site_option: '@app.enum.siteoptions'
+    contact: '@app.enum.contact'
   default_path: '%kernel.project_dir%/templates'
   debug: '%kernel.debug%'
   strict_variables: '%kernel.debug%'

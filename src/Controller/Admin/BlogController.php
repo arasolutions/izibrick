@@ -63,7 +63,7 @@ class BlogController extends AbstractController
      */
     public function boBlog(Request $request, $success = false)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         return $this->render('admin/blog/index.html.twig', [
             'site' => $site,
@@ -83,7 +83,7 @@ class BlogController extends AbstractController
      */
     public function boAddBlog(Request $request, EditPostCommandHandler $editPostCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PostCommand();
 
@@ -119,7 +119,7 @@ class BlogController extends AbstractController
      */
     public function boEditBlog(Post $post, Request $request, EditPostCommandHandler $editPostCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PostCommand();
         $command->id = $post->getId();
@@ -162,7 +162,7 @@ class BlogController extends AbstractController
      */
     public function remove(Blog $blog, RemoveBlogCommandHandler $handler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $command = new RemoveBlogCommand();
         $command->id = $blog->getId();
 

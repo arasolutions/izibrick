@@ -8,6 +8,7 @@ use App\Entity\Site;
 use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Contact;
+use App\Enum\Constants;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
@@ -134,16 +135,16 @@ class AdminController extends AbstractController
             if (sizeof($sites) == 1) {
                 /** @var UserSite $site */
                 $site = $sites[0];
-                $_SESSION['SITE_ID'] = $site->getSite()->getId();
+                $_SESSION[Constants::SESSION_SITE_ID] = $site->getSite()->getId();
             }
         }
 
-        $userSite = $this->siteRepository->getById($_SESSION['SITE_ID']);
-        $home = $this->homeRepository->getBySiteId($_SESSION['SITE_ID']);
-        $presentation = $this->presentationRepository->getBySiteId($_SESSION['SITE_ID']);
-        $blog = $this->blogRepository->getBySiteId($_SESSION['SITE_ID']);
-        $quote = $this->quoteRepository->getBySiteId($_SESSION['SITE_ID']);
-        $contact = $this->contactRepository->getBySiteId($_SESSION['SITE_ID']);
+        $userSite = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $home = $this->homeRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $presentation = $this->presentationRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $blog = $this->blogRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $quote = $this->quoteRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $contact = $this->contactRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         // Début Référencement
         $referencementTitle = 0;
         $referencementDescription = 0;
@@ -193,10 +194,10 @@ class AdminController extends AbstractController
     public function chooseSite($id = null)
     {
         if ($id != null) {
-            $_SESSION['SITE_ID'] = $id;
+            $_SESSION[Constants::SESSION_SITE_ID] = $id;
             return $this->redirectToRoute('dashboard');
         } else {
-            unset($_SESSION['SITE_ID']);
+            unset($_SESSION[Constants::SESSION_SITE_ID]);
         }
 
         /** @var User $user */
@@ -217,7 +218,7 @@ class AdminController extends AbstractController
      */
     public function boHome(Request $request, EditHomeCommandHandler $editHomeCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new HomeCommand();
         $command->setOriginalContent($site->getHome()->getContent());
@@ -250,7 +251,7 @@ class AdminController extends AbstractController
      */
     public function boPresentation(Request $request, EditPresentationCommandHandler $editPresentationCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PresentationCommand();
         //$command->setContent($site->getPresentation()->getContent());
@@ -282,7 +283,7 @@ class AdminController extends AbstractController
      */
     public function boQuote(Request $request, EditQuoteCommandHandler $editQuoteCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new QuoteCommand();
         $command->presentation = $site->getQuote()->getPresentation();
@@ -315,7 +316,7 @@ class AdminController extends AbstractController
      */
     public function boContact(Request $request, EditContactCommandHandler $editContactCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new ContactCommand();
         $command->presentation = $site->getContact()->getPresentation();
@@ -354,7 +355,7 @@ class AdminController extends AbstractController
      */
     public function globalParams(Request $request, EditGlobalParametersCommandHandler $editGlobalParametersCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new GlobalParametersCommand($site);
 
@@ -386,13 +387,13 @@ class AdminController extends AbstractController
      */
     public function boSeo(Request $request, EditSeoCommandHandler $editSeoCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
-        $home = $this->homeRepository->getBySiteId($_SESSION['SITE_ID']);
-        $presentation = $this->presentationRepository->getBySiteId($_SESSION['SITE_ID']);
-        $blog = $this->blogRepository->getBySiteId($_SESSION['SITE_ID']);
-        $pricing = $this->pricingRepository->getBySiteId($_SESSION['SITE_ID']);
-        $quote = $this->quoteRepository->getBySiteId($_SESSION['SITE_ID']);
-        $contact = $this->contactRepository->getBySiteId($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $home = $this->homeRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $presentation = $this->presentationRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $blog = $this->blogRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $pricing = $this->pricingRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $quote = $this->quoteRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $contact = $this->contactRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new SeoCommand();//var_dump($contact);die;
         $command->seoTitleHome = $home->getSeoTitle();

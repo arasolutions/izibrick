@@ -65,7 +65,7 @@ class SupportController extends AbstractController
      */
     public function boSupport(Request $request, $success = false, AddSupportCommandHandler $addSupportCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $user = $this->userRepository->get($this->getUser()->getId());
         $command = new AddSupportCommand();
 

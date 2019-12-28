@@ -65,7 +65,7 @@ class AccountController extends AbstractController
      */
     public function boAccount(Request $request, $success = false, EditSiteBillingCommandHandler $editSiteBillingCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         /** @var User $user */
         $user = $this->getUser();
         $userBDD = $this->userRepository->get($this->getUser()->getId());
@@ -122,7 +122,7 @@ class AccountController extends AbstractController
      */
     public function boCardAddAccount(Request $request, $success = false)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         /** @var User $user */
         $user = $this->getUser();
         $userBDD = $this->userRepository->get($this->getUser()->getId());

@@ -4,9 +4,11 @@
 
 {% block body %}
 
-    <section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall " data-options='{direction: "fromtop", animation_duration: 25, direction: "reverse"}'>
+    <section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall "
+             data-options='{direction: "fromtop", animation_duration: 25, direction: "reverse"}'>
         <!-- Parallax Image -->
-        <div class="divimage dzsparallaxer--target w-100 u-bg-overlay g-bg-black-opacity-0_3--after" style="height: 140%; background-image: url({{ asset('templates/bo/img/bg6.jpg') }});"></div>
+        <div class="divimage dzsparallaxer--target w-100 u-bg-overlay g-bg-black-opacity-0_3--after"
+             style="height: 140%; background-image: url({{ asset('templates/bo/img/bg6.jpg') }});"></div>
         <!-- End Parallax Image -->
 
         <!-- Promo Block Content -->
@@ -20,33 +22,51 @@
     <section class="container g-pt-100 g-pb-40">
         <div class="row justify-content-between">
             <div class="col-lg-7 g-mb-60">
+                {% if success %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="h5"><strong>Mail envoyé!</strong></h4>
+                        Nous vous contacterons dés le traitement de votre demande.
+                    </div>
+                {% endif %}
                 <h2 class="h3">Contactez-nous</h2>
-                <p class="g-color-gray-dark-v3 g-font-size-16">Vous avez un projet, une idée ou tout simplement besoin d'informations, envoyez-nous un message.</p>
+                <p class="g-color-gray-dark-v3 g-font-size-16">Vous avez un projet, une idée ou tout simplement besoin
+                    d'informations, envoyez-nous un message.</p>
 
                 <hr class="g-my-40">
 
                 <!-- Contact Form -->
-                <form>
-                    <div class="g-mb-20">
-                        <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Votre nom : <span class="g-color-red">*</span>
-                        </label>
-                        <input class="form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 rounded-3 g-py-13 g-px-15" type="text">
-                    </div>
+                {{ form_start(form) }}
+                <div class="g-mb-20">
+                    {{ form_label(form.subject, null, {'label_attr':{'class':'g-color-gray-dark-v2 g-font-weight-600 g-font-size-13'}}) }}
+                    <span class="g-color-red">*</span>
+                    {{ form_widget(form.subject, {'attr':{'class':'form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 rounded-3 g-py-13 g-px-15', 'size':''}}) }}
+                </div>
 
-                    <div class="g-mb-20">
-                        <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Votre email : <span class="g-color-red">*</span>
-                        </label>
-                        <input class="form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 rounded-3 g-py-13 g-px-15" type="email">
-                    </div>
+                <div class="g-mb-20">
+                    {{ form_label(form.name, null, {'label_attr':{'class':'g-color-gray-dark-v2 g-font-weight-600 g-font-size-13'}}) }}
+                    <span class="g-color-red">*</span>
+                    {{ form_widget(form.name, {'attr':{'class':'form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 rounded-3 g-py-13 g-px-15'}}) }}
+                </div>
 
-                    <div class="g-mb-40">
-                        <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Votre message: <span class="g-color-red">*</span>
-                        </label>
-                        <textarea class="form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 g-resize-none rounded-3 g-py-13 g-px-15" rows="7"></textarea>
-                    </div>
+                <div class="g-mb-20">
+                    {{ form_label(form.email, null, {'label_attr':{'class':'g-color-gray-dark-v2 g-font-weight-600 g-font-size-13'}}) }}
+                    <span class="g-color-red">*</span>
+                    {{ form_widget(form.email, {'attr':{'class':'form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 rounded-3 g-py-13 g-px-15'}}) }}
+                </div>
 
-                    <button class="btn btn-lg u-btn-primary g-font-weight-600 g-font-size-default rounded-3 text-uppercase g-py-15 g-px-30" type="submit" role="button">Envoyer</button>
-                </form>
+                <div class="g-mb-40">
+                    {{ form_label(form.message, null, {'label_attr':{'class':'g-color-gray-dark-v2 g-font-weight-600 g-font-size-13'}}) }}
+                    <span class="g-color-red">*</span>
+                    {{ form_widget(form.message, {'attr':{'class':'form-control g-color-gray-dark-v5 g-bg-white g-bg-white--focus g-brd-primary--focus g-brd-gray-light-v4 g-resize-none rounded-3 g-py-13 g-px-15', 'rows':'7'}}) }}
+                </div>
+
+                <button class="btn btn-lg btn-block u-btn-primary g-font-weight-600 g-font-size-default rounded-3 text-uppercase g-py-15 g-px-30"
+                        type="submit" role="button">Envoyer
+                </button>
+                {{ form_end(form) }}
                 <!-- End Contact Form -->
             </div>
 

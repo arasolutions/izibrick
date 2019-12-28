@@ -31,6 +31,10 @@ services:
     class: App\Enum\SiteOption
     public: true
 
+  app.enum.contact:
+    class: App\Enum\ContactSubject
+    public: true
+
   namer.md5:
     class: App\Namer\Md5
     public: true

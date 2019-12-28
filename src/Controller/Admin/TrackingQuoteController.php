@@ -65,7 +65,7 @@ class TrackingQuoteController extends AbstractController
      */
     public function boTrackingQuote(Request $request, $success = false)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         return $this->render('admin/tracking/quote/index.html.twig', [
             'controller_name' => 'TrackingQuoteController',
@@ -85,7 +85,7 @@ class TrackingQuoteController extends AbstractController
      */
     public function boDisplayTrackingQuote(TrackingQuote $trackingQuote, Request $request, EditPostCommandHandler $editPostCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         return $this->render('admin/tracking/quote/display.html.twig', [
             'controller_name' => 'TrackingQuoteController',
@@ -104,7 +104,7 @@ class TrackingQuoteController extends AbstractController
      */
     public function boRemoveTrackingQuote(TrackingQuote $trackingQuote, RemoveTrackingQuoteCommandHandler $handler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $command = new RemoveTrackingQuoteCommand();
         $command->id = $trackingQuote->getId();
 

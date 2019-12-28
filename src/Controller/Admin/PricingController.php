@@ -87,9 +87,9 @@ class PricingController extends AbstractController
      */
     public function boPricing(Request $request, EditPricingCommandHandler $editPricingCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
-        $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION['SITE_ID']);
-        $products = $this->pricingProductRepository->getAllBySiteId($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $products = $this->pricingProductRepository->getAllBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $success = false;
 
         $command = new PricingCommand();
@@ -120,7 +120,7 @@ class PricingController extends AbstractController
      */
     public function boAddPricing(Request $request, EditPricingProductCommandHandler $editPricingProductCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PricingProductCommand();
 
@@ -157,7 +157,7 @@ class PricingController extends AbstractController
      */
     public function boEditPricing(PricingProduct $pricingProduct, Request $request, EditPricingProductCommandHandler $editPricingProductCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PricingProductCommand();
         $command->id = $pricingProduct->getId();
@@ -200,7 +200,7 @@ class PricingController extends AbstractController
      */
     public function removePricing(PricingProduct $pricingProduct, RemovePricingProductCommandHandler $handler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $command = new RemovePricingProductCommand();
         $command->id = $pricingProduct->getId();
 
@@ -228,8 +228,8 @@ class PricingController extends AbstractController
      */
     public function boCategoryPricing(Request $request)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
-        $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $success = false;
 
         return $this->render('admin/pricing/category/index.html.twig', [
@@ -249,7 +249,7 @@ class PricingController extends AbstractController
      */
     public function boAddCategoryPricing(Request $request, EditPricingCategoryCommandHandler $editPricingCategoryCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PricingCategoryCommand();
 
@@ -285,7 +285,7 @@ class PricingController extends AbstractController
      */
     public function boEditCategoryPricing(PricingCategory $pricingCategory, Request $request, EditPricingCategoryCommandHandler $editPricingCategoryCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PricingCategoryCommand();
         $command->id = $pricingCategory->getId();
@@ -323,7 +323,7 @@ class PricingController extends AbstractController
      */
     public function removeCategoryPricing(PricingCategory $pricingCategory, RemovePricingCategoryCommandHandler $handler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $command = new RemovePricingCategoryCommand();
         $command->id = $pricingCategory->getId();
 

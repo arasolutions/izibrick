@@ -65,7 +65,7 @@ class TrackingContactController extends AbstractController
      */
     public function boTrackingContact(Request $request, $success = false)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         return $this->render('admin/tracking/contact/index.html.twig', [
             'controller_name' => 'TrackingContactController',
@@ -85,7 +85,7 @@ class TrackingContactController extends AbstractController
      */
     public function boDisplayTrackingContact(TrackingContact $trackingContact, Request $request, EditPostCommandHandler $editPostCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         return $this->render('admin/tracking/contact/display.html.twig', [
             'controller_name' => 'TrackingContactController',
@@ -104,7 +104,7 @@ class TrackingContactController extends AbstractController
      */
     public function boRemoveTrackingContact(TrackingContact $trackingContact, RemoveTrackingContactCommandHandler $handler)
     {
-        $site = $this->siteRepository->getById($_SESSION['SITE_ID']);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $command = new RemoveTrackingContactCommand();
         $command->id = $trackingContact->getId();
 
