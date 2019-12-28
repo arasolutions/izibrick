@@ -12,6 +12,16 @@ class OurContactCommand
     private $message;
 
     /**
+     * OurContactCommand constructor.
+     * @param $subject
+     */
+    public function __construct($subject)
+    {
+        $this->subject = $subject;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getSubject()

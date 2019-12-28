@@ -22,7 +22,8 @@
                         <form class="g-py-15" action="{{ path("fos_user_security_check") }}" method="post">
                             {% if error is defined and error is not null %}
                                 <div class="alert alert-danger">
-                                    {{ error.message }}
+                                    {{ error.message }}<br/>
+                                    En cas de problème, <a href="{{ path('our-contact', {'subject':1}) }}" class="alert-link">contactez-nous</a>
                                 </div>
                             {% endif %}
                             <div class="mb-4">

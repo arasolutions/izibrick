@@ -7,9 +7,11 @@ use App\Form\ContactType;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\OurContactCommand;
 use App\Izibrick\CommandHandler\OurContactCommandHandler;
+use FOS\UserBundle\Mailer\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -62,19 +64,17 @@ class IndexController extends AbstractController
      *     name="our-contact"
      * )
      * @param Request $request
-     * @param OurContactCommandHandler $handler
-     * @param Mailer $mailer
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @param \Swift_Mailer $mailer
+     * @return Response
      */
     public function ourContact(Request $request, \Swift_Mailer $mailer)
     {
-        $command = new OurContactCommand();
+        $subject = $request->query->get('subject');
+        $command = new OurContactCommand($subject);
         $form = $this->createForm(ContactType::class, $command);
         $form->handleRequest($request);
         $success = false;
         if ($form->isSubmitted() && $form->isValid()) {
-
             $message = (new \Swift_Message('Demande de contact - ' . ContactSubject::getById($command->getSubject())['label']))
                 ->setFrom($_ENV['MAILER_USER'])
                 ->setTo($_ENV['CONTACT_RECEIVER'])
