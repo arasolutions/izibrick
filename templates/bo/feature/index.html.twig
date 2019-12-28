@@ -32,9 +32,11 @@
                 <!-- End Heading -->
             </div>
         </div>
+    </section>
 
+    <section class="container">
         <div class="row">
-            <div class="col-lg-6 g-mb-50">
+            <div class="col-lg-6 align-self-center g-mb-60">
                 <div class="js-carousel text-center g-pb-30" data-infinite="true"
                      data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-35 g-height-40 g-font-size-18 g-color-gray g-bg-white g-mt-minus-10"
                      data-arrow-left-classes="fa fa-angle-left g-left-0"
@@ -44,7 +46,8 @@
                            data-src="{{ asset('templates/template-4/sticker.png') }}" data-caption="Exemples"
                            data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
                            data-overlay-blur-bg="true">
-                            <img class="img-fluid" src="{{ asset('templates/template-4/sticker.png') }}" alt="Exemple">
+                            <img class="img-fluid" src="{{ asset('templates/template-4/sticker.png') }}"
+                                 alt="Exemple">
                         </a>
                     </div>
 
@@ -53,7 +56,8 @@
                            data-src="{{ asset('templates/template-5/sticker.png') }}" data-caption="Exemples"
                            data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
                            data-overlay-blur-bg="true">
-                            <img class="img-fluid" src="{{ asset('templates/template-5/sticker.png') }}" alt="Exemple">
+                            <img class="img-fluid" src="{{ asset('templates/template-5/sticker.png') }}"
+                                 alt="Exemple">
                         </a>
                     </div>
 
@@ -62,7 +66,8 @@
                            data-src="{{ asset('templates/template-3/sticker.png') }}" data-caption="Exemples"
                            data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
                            data-overlay-blur-bg="true">
-                            <img class="img-fluid" src="{{ asset('templates/template-3/sticker.png') }}" alt="Exemple">
+                            <img class="img-fluid" src="{{ asset('templates/template-3/sticker.png') }}"
+                                 alt="Exemple">
                         </a>
                     </div>
 
@@ -71,87 +76,156 @@
                            data-src="{{ asset('templates/template-2/sticker.png') }}" data-caption="Exemples"
                            data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
                            data-overlay-blur-bg="true">
-                            <img class="img-fluid" src="{{ asset('templates/template-2/sticker.png') }}" alt="Exemple">
+                            <img class="img-fluid" src="{{ asset('templates/template-2/sticker.png') }}"
+                                 alt="Exemple">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+
+            <div class="col-lg-6 align-self-center g-mb-60">
+                <div class="mb-2">
+                    <h2 class="h3 g-color-black text-uppercase mb-2">Tout le nécessaire à votre
+                        activité</h2>
+                    <div class="d-inline-block g-width-35 g-height-2 g-bg-primary mb-2"></div>
+                </div>
                 <div class="mb-5">
-                    <p class="g-mb-30">Toutes les pages nécessaires à votre activité</p>
+                    <p class="mb-5">L'ensemble des pages sont créées et prêtes à être enrichies selon vos envies</p>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-lg-6">
                             <ul class="list-unstyled g-font-size-13 mb-0">
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
                                     Accueil
                                 </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
                                     Présentation
                                 </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
                                     Blog
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="col-sm-6">
+                        <div class="col-lg-6">
                             <ul class="list-unstyled g-font-size-13 mb-0">
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
                                     Tarif
                                 </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
                                     Devis
                                 </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
                                     Contact
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
+                <a class="btn btn-md u-btn-outline-black g-font-size-default g-rounded-50 g-py-10 mr-2"
+                   href="{{ path('our-contact', {'subject':3}) }}">Plus d'informations ?</a>
+                <a class="btn btn-md u-btn-primary g-font-size-default g-rounded-50 g-py-10"
+                   href="{{ path('order_index') }}">Je crée mon site</a>
+            </div>
+        </div>
+    </section>
+    <hr/>
+    <section class="container g-pb-40">
+        <div class="row">
+            <div class="col-lg-6 align-self-center g-mb-60">
+                <div class="mb-2">
+                    <h2 class="h3 g-color-black text-uppercase mb-2">Exigences qualité</h2>
+                    <div class="d-inline-block g-width-35 g-height-2 g-bg-primary mb-2"></div>
+                </div>
                 <div class="mb-5">
-                    <p class="g-mb-30">Tous les sites izibrick répondent à des exigences qualités des standards du
-                        web.</p>
+                    <p class="mb-5">Tous les sites izibrick répondent à des exigences qualités des standards du web</p>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-lg-6">
                             <ul class="list-unstyled g-font-size-13 mb-0">
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
-                                    Site responsive.
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
+                                    Site responsive
                                 </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
-                                    Assistance à la création.
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
+                                    Assistance à la création
                                 </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
-                                    Accès à votre back-office.
-                                </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
-                                    Support par mail.
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
+                                    Accès à votre back-office
                                 </li>
                             </ul>
                         </div>
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled g-font-size-13 mb-0">
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
+                                    Support par mail
+                                </li>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
+                                    Suivi des visites (offre professionnelle)
+                                </li>
+                                <li>
+                                    <i class="d-inline-block g-color-primary mr-2 mb-3 fa fa-check"></i>
+                                    Campagne publicitaire (offre professionnelle)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-md u-btn-outline-black g-font-size-default g-rounded-50 g-py-10 mr-2"
+                   href="{{ path('our-contact', {'subject':3}) }}">Plus d'informations ?</a>
+                <a class="btn btn-md u-btn-primary g-font-size-default g-rounded-50 g-py-10"
+                   href="{{ path('order_index') }}">Je crée mon site</a>
+            </div>
+            <div class="col-lg-6 align-self-center g-mb-60">
+                <div class="js-carousel text-center g-pb-30" data-infinite="true"
+                     data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-35 g-height-40 g-font-size-18 g-color-gray g-bg-white g-mt-minus-10"
+                     data-arrow-left-classes="fa fa-angle-left g-left-0"
+                     data-arrow-right-classes="fa fa-angle-right g-right-0">
+                    <div class="js-slide">
+                        <a class="js-fancybox" href="javascript:;" data-fancybox="lightbox-gallery--07-1"
+                           data-src="{{ asset('templates/template-4/sticker.png') }}" data-caption="Exemples"
+                           data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
+                           data-overlay-blur-bg="true">
+                            <img class="img-fluid" src="{{ asset('templates/template-4/sticker.png') }}"
+                                 alt="Exemple">
+                        </a>
+                    </div>
 
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled g-font-size-13 mb-0">
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
-                                    Suivi des visites (offre professionnelle).
-                                </li>
-                                <li class="d-flex mb-3">
-                                    <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
-                                    Campagne publicitaire (offre professionnelle).
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="js-slide">
+                        <a class="js-fancybox" href="javascript:;" data-fancybox="lightbox-gallery--07-1"
+                           data-src="{{ asset('templates/template-5/sticker.png') }}" data-caption="Exemples"
+                           data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
+                           data-overlay-blur-bg="true">
+                            <img class="img-fluid" src="{{ asset('templates/template-5/sticker.png') }}"
+                                 alt="Exemple">
+                        </a>
+                    </div>
+
+                    <div class="js-slide">
+                        <a class="js-fancybox" href="javascript:;" data-fancybox="lightbox-gallery--07-1"
+                           data-src="{{ asset('templates/template-3/sticker.png') }}" data-caption="Exemples"
+                           data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
+                           data-overlay-blur-bg="true">
+                            <img class="img-fluid" src="{{ asset('templates/template-3/sticker.png') }}"
+                                 alt="Exemple">
+                        </a>
+                    </div>
+
+                    <div class="js-slide">
+                        <a class="js-fancybox" href="javascript:;" data-fancybox="lightbox-gallery--07-1"
+                           data-src="{{ asset('templates/template-2/sticker.png') }}" data-caption="Exemples"
+                           data-animate-in="bounceInDown" data-animate-out="bounceOutDown" data-speed="1000"
+                           data-overlay-blur-bg="true">
+                            <img class="img-fluid" src="{{ asset('templates/template-2/sticker.png') }}"
+                                 alt="Exemple">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -161,23 +235,23 @@
 
 {% endblock %}
 
-{% block javascripts %}
-    <!-- JS Implementing Plugins -->
-    <script src="{{ asset('assets/vendor/fancybox/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
+    {% block javascripts %}
+        <!-- JS Implementing Plugins -->
+        <script src="{{ asset('assets/vendor/fancybox/jquery.fancybox.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
 
-    <!-- JS Unify -->
-    <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
-    <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
+        <!-- JS Unify -->
+        <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
+        <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
 
-    <!-- JS Plugins Init. -->
-    <script>
-        $(document).on('ready', function () {
-            // initialization of popups
-            $.HSCore.components.HSPopup.init('.js-fancybox');
+        <!-- JS Plugins Init. -->
+        <script>
+            $(document).on('ready', function () {
+                // initialization of popups
+                $.HSCore.components.HSPopup.init('.js-fancybox');
 
-            // initialization of carousel
-            $.HSCore.components.HSCarousel.init('.js-carousel');
-        });
-    </script>
-{% endblock %}
+                // initialization of carousel
+                $.HSCore.components.HSCarousel.init('.js-carousel');
+            });
+        </script>
+    {% endblock %}
