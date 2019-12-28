@@ -301,21 +301,21 @@ a {
                         <td class="content-wrap">
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td>
-                                        <img src="img/email-templates/email-header.jpg">
+                                    <td align="center">
+                                        <img src="https://www.izibrick.com/assets/img/logo/logo-izibrick-email.png" height="80">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="content-block">
+                                    <td class="content-block" align="center">
                                         <h3>Demande de contact</h3>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="content-block">
-                                        Sujet : {{ contact.getById(command.subject)['label'] }}<br/>
-                                        Nom : {{ command.name }}<br/>
-                                        Email : {{ command.email }}<br/>
-                                        Message : {{ command.message | raw | nl2br }}<br/>
+                                        <strong>Sujet : </strong>{{ contact.getById(command.subject)['label'] }}<br/>
+                                        <strong>Nom : </strong> {{ command.name }}<br/>
+                                        <strong>Email : </strong> {{ command.email }}<br/>
+                                        <strong>Message : </strong> {{ command.message | raw | nl2br }}<br/>
                                     </td>
                                 </tr>
                             </table>
