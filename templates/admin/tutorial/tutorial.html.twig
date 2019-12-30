@@ -1,0 +1,22 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        createTitle = function (title) {
+            return "<img class=\"mar-rgt\" src=\"{{ asset('assets/img/logo/favicon.png') }}\"><span class=\"tuto-modal-title\">" + title + "</span>";
+        }
+
+        forwardModal = function (previous, next) {
+            $('#tuto-' + previous).on('hidden.bs.modal', function (e) {
+                var tutoNext = eval('prepareTuto' + next + '()');
+                tutoNext.modal('show');
+            })
+            $('#tuto-' + previous).modal('hide');
+        }
+        $('#start-tuto').on('click', function () {
+            var tuto1 = prepareTuto1();
+            tuto1.modal('show');
+        });
+    });
+</script>
+
+{% include 'admin/tutorial/partial/tutorial-1.html.twig' %}
+{% include 'admin/tutorial/partial/tutorial-2.html.twig' %}
