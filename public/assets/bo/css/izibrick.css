@@ -127,12 +127,12 @@
 }
 
 .option-block:hover {
-    border: solid 1px var(--color-izibrick) !important;
+    border: solid 1px #25476a !important;
 }
 
 .option-block.selected {
-    border: solid 1px var(--color-izibrick) !important;
-    background-color: var(--color-izibrick);
+    border: solid 1px #25476a !important;
+    background-color: #25476a;
     color: white;
 }
 
@@ -159,7 +159,7 @@
     font-size: small;
 }
 
-.option-domain input {
+.option-domain input{
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -168,41 +168,5 @@
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-
-.tuto-modal-title {
-    font-size: 22px;
-}
-
-.tuto-menu-item {
-    text-align: center;
-    min-height: 60px;
-    display: table-cell;
-    padding: 2px !important;
-}
-
-.tuto-menu-item > div {
-    border: solid 1px #f7f7f7;
-    height: 100%;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.tuto-menu-item > div:hover {
-    border: solid 1px white;
-    background-color: var(--color-izibrick);
-}
-
-.tuto-menu-item > div:hover a, .tuto-menu-item > div:hover .text-main {
-    color: white;
-}
-
-.tuto-menu-item > div i {
-    font-size: 35px;
-    margin-bottom: 10px;
-}
-
-.modal-dialog.animated{
-    animation-duration: .5s;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

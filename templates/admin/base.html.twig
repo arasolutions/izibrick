@@ -80,11 +80,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155056518-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
+        function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
         gtag('config', 'UA-155056518-1');
@@ -121,14 +117,7 @@
             <!--================================-->
             <div class="navbar-content">
                 <ul class="nav navbar-top-links">
-                    <li>
-                        <a>
-                            <button id="start-tuto" class="btn btn-md btn-warning"><i class="ti-world"></i>&nbsp;Accéder
-                                au
-                                tutoriel
-                            </button>
-                        </a>
-                    </li>
+
                     {% if site.domainActif and site.domain %}
                         <li>
                             <a href="{{ site.domain }}" target="_blank">
@@ -489,21 +478,22 @@
     </footer>
 </div>
 
-
 <button class="scroll-top btn">
     <i class="pci-chevron chevron-up"></i>
 </button>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 
+
 <!--BootstrapJS [ RECOMMENDED ]-->
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
+
 <!--NiftyJS [ RECOMMENDED ]-->
 <script src="{{ asset('assets/js/nifty.min.js') }}"></script>
-
-<script src="{{ asset('assets/plugins/bootbox/bootbox.min.js') }}"></script>
-
-{% include 'admin/tutorial/tutorial.html.twig' %}
-
+{% block javascripts %}
+    <script type="text/javascript">
+    </script>
+{% endblock %}
+</div>
 </body>
 </html>
