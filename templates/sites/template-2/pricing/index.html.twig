@@ -1,7 +1,7 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{site.name}} | Tarif - {{ pricing.seoTitle }}{% endblock %}
-{% block description %}{{ pricing.seoDescription }}{% endblock %}
+{% block title %}{{site.name}} | {{ site.pricing.seoTitle }}{% endblock %}
+{% block description %}{{ site.pricing.seoDescription }}{% endblock %}
 
 {% block pricingActive %}active{% endblock %}
 

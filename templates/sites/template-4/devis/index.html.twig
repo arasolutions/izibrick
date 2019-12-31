@@ -1,6 +1,7 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{ site.name }} | Devis{% endblock %}
+{% block title %}{{site.name}} - {{site.quote.seoTitle}}{% endblock %}
+{% block description %}{{site.quote.seoDescription}}{% endblock %}
 
 {% block devisActive %}active{% endblock %}
 

@@ -1,6 +1,7 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{ site.name }} | Présentation{% endblock %}
+{% block title %}{{site.name}} - {{site.presentation.seoTitle}}{% endblock %}
+{% block description %}{{site.presentation.seoDescription}}{% endblock %}
 
 {% block quiSommesNousActive %}active{% endblock %}
 
