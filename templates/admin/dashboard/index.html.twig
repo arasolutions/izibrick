@@ -16,27 +16,37 @@
 
                 <!--Extra Small Weather Widget-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <div class="panel">
+                <div class="panel {{ referencement.referencementTaux < 100 ? 'panel-bordered-danger' : 'panel-bordered-success' }}">
                     <div class="panel-body text-center clearfix">
                         <div class="col-sm-4 pad-top">
                             <div class="text-lg">
-                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux }}%</p>
+                                <p class="text-sm text-bold text-uppercase">Référencement naturel</p>
+                                <p class="text-sm">Taux de remplissage :</p>
+                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux|round}}%</p>
                             </div>
-                            <p class="text-sm text-bold text-uppercase">Référencement</p>
                         </div>
                         <div class="col-sm-8">
-                            <a href="{{ path('bo-seo') }}"><button class="btn btn-primary mar-ver">Mettre à jour</button></a>
-                            <p class="text-xs">Optimiser la visibilité de votre site grace au référencement</p>
-                            <ul class="list-unstyled text-center bord-top pad-top mar-no row">
+                            <ul class="list-unstyled text-center bord-bottom pad-bottom mar-no row">
+                                <p class="text-sm">Taux de remplissage :</p>
                                 <li class="col-xs-6">
-                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementTitleTaux }}%</span>
                                     <p class="text-sm text-muted mar-no">Titre</p>
+                                    <span class="text-lg text-semibold text-main mt20">{{ referencement.referencementTitleTaux|round }}%</span>
                                 </li>
                                 <li class="col-xs-6">
-                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementDescriptionTaux }}%</span>
                                     <p class="text-sm text-muted mar-no">Description</p>
+                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementDescriptionTaux|round }}%</span>
                                 </li>
                             </ul>
+                            {% if referencement.referencementTaux < 100 %}
+                            <p class="text-sm mt20 color-red">
+                                Le référencement de votre site n'est pas otpimal, veuillez renseigner un titre et une description pour chaque page.
+                            </p>
+                            <a href="{{ path('bo-seo') }}"><button class="btn btn-primary">Mettre à jour</button></a>
+                            {% else %}
+                            <p class="text-sm mt20">
+                                Félicitations ! Votre site est optimisé pour le référencemnt naturel.
+                            </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

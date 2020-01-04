@@ -143,6 +143,7 @@ class AdminController extends AbstractController
         $home = $this->homeRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $presentation = $this->presentationRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $blog = $this->blogRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
+        $pricing = $this->pricingRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $quote = $this->quoteRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $contact = $this->contactRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         // Début Référencement
@@ -151,18 +152,31 @@ class AdminController extends AbstractController
         $referencementTitleTaux = 0;
         $referencementDescriptionTaux = 0;
         $referencementTaux = 0;
+        $nbrPages = 4;
         if ($home->getSeoTitle() != '') $referencementTitle++;
         if ($presentation->getSeoTitle() != '') $referencementTitle++;
         if ($blog->getSeoTitle() != '') $referencementTitle++;
-        if ($quote->getSeoTitle() != '') $referencementTitle++;
+        if($pricing->getDisplay() == true){
+            if ($pricing->getSeoTitle() != '') $referencementTitle++;
+            $nbrPages ++;
+        }
+        if($quote->getDisplay() == true){
+            if ($quote->getSeoTitle() != '') $referencementTitle++;
+            $nbrPages ++;
+        }
         if ($contact->getSeoTitle() != '') $referencementTitle++;
         if ($home->getSeoDescription() != '') $referencementDescription++;
         if ($presentation->getSeoDescription() != '') $referencementDescription++;
         if ($blog->getSeoDescription() != '') $referencementDescription++;
-        if ($quote->getSeoDescription() != '') $referencementDescription++;
+        if($pricing->getDisplay() == true){
+            if ($pricing->getSeoDescription() != '') $referencementDescription++;
+        }
+        if($quote->getDisplay() == true){
+            if ($quote->getSeoDescription() != '') $referencementDescription++;
+        }
         if ($contact->getSeoDescription() != '') $referencementDescription++;
-        if ($referencementTitle != 0) $referencementTitleTaux = $referencementTitle / 5 * 100;
-        if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementTitle / 5 * 100;
+        if ($referencementTitle != 0) $referencementTitleTaux = $referencementTitle / $nbrPages * 100;
+        if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementTitle / $nbrPages * 100;
         if ($referencementTitle != 0 || $referencementDescription != 0) $referencementTaux = ($referencementTitleTaux + $referencementDescriptionTaux) / 2;
         $referencement = array(
             'referencementTitleTaux' => $referencementTitleTaux,
