@@ -24,6 +24,7 @@ class CreateUserCommandHandler
             $user->setFirstname($command->getFirstname());
             $user->setLastname($command->getLastname());
             $user->setPhone($command->getPhone());
+            $user->setActive(true);
 
             return $user;
         }

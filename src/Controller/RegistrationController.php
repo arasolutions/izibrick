@@ -144,7 +144,6 @@ class RegistrationController extends BaseController
                 $site = $this->siteRepository->getById($command->getSiteId());
                 $userSite = new UserSite($user, $site);
                 $userSite = $this->userSiteRepository->save($userSite);
-                $site->getUsers()->add($userSite);
                 $this->siteRepository->save($site);
 
                 if (null === $response = $event->getResponse()) {
