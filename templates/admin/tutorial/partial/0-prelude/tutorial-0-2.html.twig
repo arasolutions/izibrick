@@ -1,103 +1,68 @@
-<div id="tuto-2-html" class="hidden">
-    <div class="media">
-        <div class="media-left">
-            <img class="media-object img-md mar-all"
-                 src="{{ asset('assets/img/logo/logo-izibrick.png') }}"
-                 alt="Avatar"></div>
-        <div class="media-body">
-            <p class="text-semibold text-main">Voici les thèmes du tutoriel</p>
-            <div class="col-sm-4 tuto-menu-item pad-no">
-                <div class="panel pos-rel">
-                    <div class="pad-all text-center">
-                        <a href="#">
-                            <i class="fa fa-star icon-lg icon-fw"></i>
-                            <p class="text-md text-semibold mar-no text-main">La totale</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 tuto-menu-item pad-no">
-                <div class="panel pos-rel">
-                    <div class="pad-all text-center">
-                        <a href="{{ path('dashboard', {'tuto':1}) }}">
-                            <i class="fa fa-bars icon-lg icon-fw"></i>
-                            <p class="text-md text-semibold mar-no text-main">1. Les menus</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 tuto-menu-item pad-no">
-                <div class="panel pos-rel">
-                    <div class="pad-all text-center">
-                        <a href="#">
-                            <i class="fa fa-trophy icon-lg icon-fw"></i>
-                            <p class="text-md text-semibold mar-no text-main">2. Le référencement</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 tuto-menu-item pad-no">
-                <div class="panel pos-rel">
-                    <div class="pad-all text-center">
-                        <a href="#">
-                            <i class="fa fa-file icon-lg icon-fw"></i>
-                            <p class="text-md text-semibold mar-no text-main">3. Ma formule</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 tuto-menu-item pad-no">
-                <div class="panel pos-rel">
-                    <div class="pad-all text-center">
-                        <a href="#">
-                            <i class="fa fa-line-chart icon-lg icon-fw"></i>
-                            <p class="text-md text-semibold mar-no text-main">4. Statistiques</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 tuto-menu-item pad-no">
-                <div class="panel pos-rel">
-                    <div class="pad-all text-center">
-                        <a href="#">
-                            <i class="fa fa-window-maximize icon-lg icon-fw"></i>
-                            <p class="text-md text-semibold mar-no text-main">5. Les pages</p>
-                        </a>
-                    </div>
-                </div>
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Voici les thèmes du tutoriel</p>
+    <div class="col-sm-4 tuto-menu-item pad-no">
+        <div class="panel pos-rel">
+            <div class="pad-all text-center">
+                <a href="#">
+                    <i class="fa fa-star icon-lg icon-fw"></i>
+                    <p class="text-md text-semibold mar-no text-main">La totale</p>
+                    <p class="text-sm mar-no text-main text-italic">&nbsp;</p>
+                </a>
             </div>
         </div>
     </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        prepareTutoPrelude2 = function () {
-            dialog = bootbox.dialog({
-                size: 'large',
-                title: createTitle('Menu du tutoriel'),
-                message: $('#tuto-2-html').html(),
-                onEscape: false,
-                backdrop: true,
-                closeButton: false,
-                show: false,
-                animateIn: 'fadeInLeft',
-                animateOut: 'fadeOutRight',
-                buttons: {
-                    cancel: {
-                        label: 'Quitter le tutoriel',
-                        className: 'btn-danger pull-left btn-sm',
-                        callback: function () {
-                            exitTuto();
-                        }
-                    }
-                }
-            });
-            dialog.on("shown.bs.modal", function () {
-                dialog.attr("id", "tuto-Prelude2");
-            });
-            return dialog;
-        }
-    });
-
-</script>
+    <div class="col-sm-4 tuto-menu-item pad-no">
+        <div class="panel pos-rel">
+            <div class="pad-all text-center">
+                <a href="{{ path('dashboard', {'tuto':1}) }}">
+                    <i class="fa fa-bars icon-lg icon-fw"></i>
+                    <p class="text-md text-semibold mar-no text-main">1. Les menus</p>
+                    <p class="text-sm mar-no text-main text-italic">3 étapes</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 tuto-menu-item pad-no">
+        <div class="panel pos-rel">
+            <div class="pad-all text-center">
+                <a href="{{ path('dashboard', {'tuto':2}) }}">
+                    <i class="fa fa-trophy icon-lg icon-fw"></i>
+                    <p class="text-md text-semibold mar-no text-main">2. Le référencement</p>
+                    <p class="text-sm mar-no text-main text-italic">3 étapes</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 tuto-menu-item pad-no">
+        <div class="panel pos-rel">
+            <div class="pad-all text-center">
+                <a href="#">
+                    <i class="fa fa-file icon-lg icon-fw"></i>
+                    <p class="text-md text-semibold mar-no text-main">3. Ma formule</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 tuto-menu-item pad-no">
+        <div class="panel pos-rel">
+            <div class="pad-all text-center">
+                <a href="#">
+                    <i class="fa fa-line-chart icon-lg icon-fw"></i>
+                    <p class="text-md text-semibold mar-no text-main">4. Statistiques</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 tuto-menu-item pad-no">
+        <div class="panel pos-rel">
+            <div class="pad-all text-center">
+                <a href="#">
+                    <i class="fa fa-window-maximize icon-lg icon-fw"></i>
+                    <p class="text-md text-semibold mar-no text-main">5. Les pages</p>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

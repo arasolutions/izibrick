@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     $(document).ready(function () {
         createTitle = function (title) {
@@ -19,17 +18,21 @@
         }
 
         $('#start-tuto').on('click', function () {
-            var tuto1 = prepareTutoPrelude1();
+            var tuto1 = prepareTuto0_1();
             tuto1.modal('show');
         });
 
     });
 </script>
 
-{% include 'admin/tutorial/partial/0-prelude/tutorial-0-1.html.twig' %}
-{% include 'admin/tutorial/partial/0-prelude/tutorial-0-2.html.twig' %}
+{% include 'admin/tutorial/partial/0-prelude/tutorial-0-1.html.twig' with {'tuto_id':'0_1', 'tuto_title' : 'Bienvenue', 'tuto_id_next' : '0_2'} %}
+{% include 'admin/tutorial/partial/0-prelude/tutorial-0-2.html.twig' with {'tuto_id':'0_2', 'tuto_title' : 'Menus'} %}
 
-{% include 'admin/tutorial/partial/1-menus/tutorial-1-1.html.twig' %}
-{% include 'admin/tutorial/partial/1-menus/tutorial-1-2.html.twig' %}
-{% include 'admin/tutorial/partial/1-menus/tutorial-1-3.html.twig' %}
+{% include 'admin/tutorial/partial/1-menus/tutorial-1-1.html.twig' with {'tuto_id':'1_1', 'tuto_title' : 'Les menus', 'tuto_nav' :'1/3', 'tuto_id_next' : '1_2'} %}
+{% include 'admin/tutorial/partial/1-menus/tutorial-1-2.html.twig' with {'tuto_id':'1_2', 'tuto_title' : 'Les menus', 'tuto_nav' :'2/3', 'tuto_id_next' : '1_3'} %}
+{% include 'admin/tutorial/partial/1-menus/tutorial-1-3.html.twig' with {'tuto_id':'1_3', 'tuto_title' : 'Les menus', 'tuto_nav' :'3/3'} %}
+
+{% include 'admin/tutorial/partial/2-referencement/tutorial-2-1.html.twig' with {'tuto_id':'2_1', 'tuto_title' : 'Le référencement', 'tuto_nav' :'1/3', 'tuto_id_next' : '2_2'} %}
+{% include 'admin/tutorial/partial/2-referencement/tutorial-2-2.html.twig' with {'tuto_id':'2_2', 'tuto_title' : 'Le référencement', 'tuto_nav' :'2/3', 'tuto_id_next' : '2_3'} %}
+{% include 'admin/tutorial/partial/2-referencement/tutorial-2-3.html.twig' with {'tuto_id':'2_3', 'tuto_title' : 'Le référencement', 'tuto_nav' :'3/3'} %}
 

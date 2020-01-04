@@ -1,57 +1,21 @@
-<div id="tuto-menus-1-html" class="hidden">
-    <div class="media">
-        <div class="media-left">
-            <img class="media-object img-md mar-all"
-                 src="{{ asset('assets/img/logo/logo-izibrick.png') }}"
-                 alt="Avatar"></div>
-        <div class="media-body">
-            <p class="text-semibold text-main">Nous allons vous présenter les différents menus de l'application</p>
-        </div>
-    </div>
-</div>
+{% extends 'admin/tutorial/partial/base.html.twig' %}
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        prepareTutoMenus1 = function () {
-            dialog = bootbox.dialog({
-                size: 'large',
-                title: createTitle('Les menus'),
-                message: $('#tuto-menus-1-html').html(),
-                onEscape: false,
-                backdrop: true,
-                closeButton: false,
-                show: false,
-                animateIn: 'fadeInLeft',
-                animateOut: 'fadeOutRight',
-                buttons: {
-                    confirm: {
-                        label: "Accéder au menu",
-                        className: 'btn-primary btn-sm',
-                        callback: function () {
-                            forwardModal('Menus1', 'Menus2');
-                        }
-                    },
-                    cancel: {
-                        label: 'Quitter le tutoriel',
-                        className: 'btn-danger pull-left btn-sm',
-                        callback: function () {
-                            exitTuto();
-                        }
-                    }
-                }
-            });
-            dialog.on("shown.bs.modal", function () {
-                dialog.attr("id", "tuto-Menus1");
-            });
-            return dialog;
-        }
+{% block tuto_body %}
+    <p class="text-semibold text-main">Nous allons vous présenter les différents menus de l'application</p>
+{% endblock %}
 
-        {% if app.request.get('tuto') %}
-            if ({{ app.request.get('tuto') }} == "1")
-            {
-                var tutoMenu1 = prepareTutoMenus1();
-                tutoMenu1.modal('show');
+{% block modal_class %}
+{% endblock %}
+
+{% block tuto_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% set tuto = app.request.get('tuto') %}
+            if ('{{ tuto }}' === '1') {
+                var tutoMenu = prepareTuto{{ tuto_id }}();
+                tutoMenu.modal('show');
             }
-        {% endif %}
-    });
-</script>
+        });
+    </script>
+
+{% endblock %}

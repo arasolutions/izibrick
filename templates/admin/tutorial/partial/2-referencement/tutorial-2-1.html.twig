@@ -1,0 +1,29 @@
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Le référencement c'est quoi ?</p>
+    <ul>
+        <li>C'est le <strong>référencement naturel</strong>, qui désigne l'ensemble des techniques
+            qui consiste à positionner favorablement votre site sur les premiers résultats des différents moteurs de
+            recherche (Google, Yahoo, etc...). Chaque page doit contenir à minima un titre et une description permettant
+            aux moteurs de recherche de les proposer en fonction des recherches des internautes.
+        </li>
+        <li>C'est également <strong>le référencement payant</strong>, c'est l'optimisation via campagnes publicitaires
+            de votre site qui force vote site a être dans les premiers résultats de recherche en fonction de mot-clés.
+            <span class="text-danger text-bold">Ce référencement est inclus dans la formule PROFESSIONNELLE d'izibrick</span>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block tuto_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% set tuto = app.request.get('tuto') %}
+            if ('{{ tuto }}' === '2') {
+                var tutoMenu = prepareTuto{{ tuto_id }}();
+                tutoMenu.modal('show');
+            }
+        });
+    </script>
+
+{% endblock %}

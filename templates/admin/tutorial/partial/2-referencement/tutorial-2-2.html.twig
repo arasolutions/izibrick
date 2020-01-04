@@ -1,0 +1,22 @@
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Le taux de référencement</p>
+    <p>Sur le tableau de bord, le taux de référencement est indiqué</p>
+    <img src="{{ asset('assets/img/tutorial/2-referencement/2-2-dashboard.png') }}"
+         class="width-100 margin-right-10 margin-left-10"/>
+
+    <p> Dans cet exemple, seulement <strong>40%</strong> est effectué : </p>
+    <ul class="no-vertical-spacing">
+        <li><strong>50%</strong> des titres des pages sont renseignés</li>
+        <li><strong>30%</strong> des descriptions des pages sont renseignées</li>
+    </ul>
+
+    <p class="text-danger text-bold">Pour un référencement optimal, chaque page doit contenir à minima un titre et une
+        description permettant aux moteurs de recherche de les proposer en fonction des recherches des internautes.</p>
+{% endblock %}
+
+{% block next_action %}
+    window.location.href = '{{ path('bo-seo', {'tuto':'2-3'}) }}';
+    return;
+{% endblock %}
