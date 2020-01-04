@@ -1,0 +1,68 @@
+<div id="tuto-menus-2-html" class="hidden">
+    <div class="media">
+        <div class="media-left">
+            <img class="media-object img-md mar-all"
+                 src="{{ asset('assets/img/logo/logo-izibrick.png') }}"
+                 alt="Avatar"></div>
+        <div class="media-body">
+            <p class="text-semibold text-main">Menu du haut (header)</p>
+            <p>Le menu du haut vous propose plusieurs entrées :</p>
+            <ul>
+                <li><strong>Accéder au tutoriel</strong> : En cas d'oubli, de problème, ce bouton vous permettra
+                    d'accéder à ce
+                    tutoriel
+                </li>
+                <li><strong>Accéder à mon site</strong> : Lien direct sur votre afin de voir les modifications que vous
+                    avez effectuées.
+                    Dans le cas où votre nom de domaine est en cours de création, vous verrez le site hebergé sur notre
+                    infrastrcture, qui sera porté à l'identique dés lors que votre nom de domaine sera prêt.
+                </li>
+                <li><strong>Menu dédié à votre compte</strong> :
+                    <ul>
+                        <li>Mon profil : accéder à vos informations postales et bancaires</li>
+                        <li>Facturation : liste des factures reçues</li>
+                        <li>Mon profil : accéder à noter formulaire de contact et à la FAQ</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        prepareTutoMenus2 = function () {
+            dialog = bootbox.dialog({
+                size: 'large',
+                title: createTitle('Les menus'),
+                message: $('#tuto-menus-2-html').html(),
+                onEscape: false,
+                backdrop: true,
+                closeButton: false,
+                show: false,
+                animateIn: 'fadeInLeft',
+                animateOut: 'fadeOutRight',
+                buttons: {
+                    confirm: {
+                        label: "Accéder au menu",
+                        className: 'btn-primary btn-sm',
+                        callback: function () {
+                            forwardModal('Menus2', 'Menus3');
+                        }
+                    },
+                    cancel: {
+                        label: 'Quitter le tutoriel',
+                        className: 'btn-danger pull-left btn-sm',
+                        callback: function () {
+                            exitTuto();
+                        }
+                    }
+                }
+            });
+            dialog.on("shown.bs.modal", function () {
+                dialog.attr("id", "tuto-Menus2");
+            });
+            return dialog;
+        }
+    });
+</script>

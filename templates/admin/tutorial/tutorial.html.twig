@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
     $(document).ready(function () {
         createTitle = function (title) {
@@ -11,12 +12,24 @@
             })
             $('#tuto-' + previous).modal('hide');
         }
+
+        exitTuto = function () {
+            $(".modal").modal("hide");
+            window.location.href = '{{ path('dashboard') }}';
+        }
+
         $('#start-tuto').on('click', function () {
-            var tuto1 = prepareTuto1();
+            var tuto1 = prepareTutoPrelude1();
             tuto1.modal('show');
         });
+
     });
 </script>
 
-{% include 'admin/tutorial/partial/tutorial-1.html.twig' %}
-{% include 'admin/tutorial/partial/tutorial-2.html.twig' %}
+{% include 'admin/tutorial/partial/0-prelude/tutorial-0-1.html.twig' %}
+{% include 'admin/tutorial/partial/0-prelude/tutorial-0-2.html.twig' %}
+
+{% include 'admin/tutorial/partial/1-menus/tutorial-1-1.html.twig' %}
+{% include 'admin/tutorial/partial/1-menus/tutorial-1-2.html.twig' %}
+{% include 'admin/tutorial/partial/1-menus/tutorial-1-3.html.twig' %}
+

@@ -1,25 +1,22 @@
-
-<div id="tuto-1-html" class="hidden">
+<div id="tuto-menus-1-html" class="hidden">
     <div class="media">
         <div class="media-left">
             <img class="media-object img-md mar-all"
                  src="{{ asset('assets/img/logo/logo-izibrick.png') }}"
                  alt="Avatar"></div>
         <div class="media-body">
-            <p class="text-semibold text-main">Bienvenue sur le tutoriel de l'<strong
-                        class="text-primary">administration de izibrick</strong></p>
-            <p>Nous allons parcourir ensemble l'ensemble des fonctionnalités de l'administration pour vous permettre de
-                profiter pleinement de l'outil</p>
+            <p class="text-semibold text-main">Nous allons vous présenter les différents menus de l'application</p>
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
-        prepareTuto1 = function () {
+        prepareTutoMenus1 = function () {
             dialog = bootbox.dialog({
                 size: 'large',
-                title: createTitle('Bienvenue dans le tutoriel'),
-                message: $('#tuto-1-html').html(),
+                title: createTitle('Les menus'),
+                message: $('#tuto-menus-1-html').html(),
                 onEscape: false,
                 backdrop: true,
                 closeButton: false,
@@ -31,23 +28,30 @@
                         label: "Accéder au menu",
                         className: 'btn-primary btn-sm',
                         callback: function () {
-                            forwardModal(1, 2);
+                            forwardModal('Menus1', 'Menus2');
                         }
                     },
                     cancel: {
                         label: 'Quitter le tutoriel',
                         className: 'btn-danger pull-left btn-sm',
                         callback: function () {
-                            $(this).modal('hide');
+                            exitTuto();
                         }
                     }
                 }
             });
             dialog.on("shown.bs.modal", function () {
-                dialog.attr("id", "tuto-1");
+                dialog.attr("id", "tuto-Menus1");
             });
             return dialog;
         }
-    });
 
+        {% if app.request.get('tuto') %}
+            if ({{ app.request.get('tuto') }} == "1")
+            {
+                var tutoMenu1 = prepareTutoMenus1();
+                tutoMenu1.modal('show');
+            }
+        {% endif %}
+    });
 </script>

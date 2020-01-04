@@ -187,6 +187,7 @@
     height: 100%;
     background-color: transparent;
     cursor: pointer;
+    margin-bottom: 0;
 }
 
 .tuto-menu-item > div:hover {
@@ -203,7 +204,31 @@
     margin-bottom: 10px;
 }
 
-.modal-dialog.animated{
+.modal-dialog.animated {
     -webkit-animation-duration: .5s;
     animation-duration: 0.5s;
+}
+
+.no-z-index {
+    z-index: 1 !important;
+}
+
+.z-index {
+    z-index: 10000 !important;
+}
+
+.tuto-decal-menu-gauche {
+    margin-left: 100px;
+}
+
+.panel-body {
+    position: relative;
+}
+
+.media-body > ul > li {
+    margin-bottom: 15px;
+}
+
+.media-body li > i {
+    margin-right: 5px;
 }
