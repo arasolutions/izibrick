@@ -147,8 +147,8 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 if ($codePromoFounded) {
                     $codePromo = $form->get('codePromo')->getData();
                     $newPrice = floatval($codePromoFounded->getPriceDecrease());
-                    $trialDays = (int) ($codePromoFounded->getTrialDays());
-                    if($newPrice == 0){
+                    $trialDays = (int)($codePromoFounded->getTrialDays());
+                    if ($newPrice == 0) {
                         $free = true;
                     }
                 } else {
@@ -267,6 +267,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     public function orderPayment($siteId, $userId, Request $request)
     {
         $site = $this->siteRepository->getById($siteId);
+        /** @var User $user */
         $user = $this->userRepository->get($userId);
 
         // On récupère le plan tarifaire associé
@@ -274,10 +275,10 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         $free = false;
         $trialDays = 0;
         $stripe = new StripeHelper();
-        if($user->getLastSite()->getSite()->getCodePromotion()){
+        if ($user->getLastSite()->getSite()->getCodePromotion()) {
             $planTarifaireId = $user->getLastSite()->getSite()->getCodePromotion()->getStripePlanTarifaireId();
             $trialDays = $user->getLastSite()->getSite()->getCodePromotion()->getTrialDays();
-            if($user->getLastSite()->getSite()->getCodePromotion()->getPriceDecrease() == 0){
+            if ($user->getLastSite()->getSite()->getCodePromotion()->getPriceDecrease() == 0) {
                 $free = true;
                 // Abonnement du user au plan tarifaire
                 $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
@@ -288,7 +289,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     $this->siteRepository->save($site);
                 }
             }
-        }elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()){
+        } elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()) {
             $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
             $trialDays = $user->getLastSite()->getSite()->getProduct()->getTrialDays();
         }
@@ -297,7 +298,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             $token = $request->request->get('tokenId');
             // Enregistrement de la carte dans Stripe
             $card = $stripe->createCard($user->getStripeCustomerId(), $token);
-            if($card){
+            if ($card) {
                 // Abonnement du user au plan tarifaire
                 $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId);
                 $site->setStripeSubscriptionId($subscription['id']);
@@ -307,7 +308,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     // Le site devient actif
                     $site->setStatus(SiteStatus::ACTIF['name']);
                     $this->siteRepository->save($site);
-                    return $this->render('bo/order/payment-completed.html.twig');
+                    return $this->render('bo/order/payment-completed.html.twig', array('newUser' => !$user->isEnabled()));
                 }
                 return $this->render('bo/order/payment-failure.html.twig');
             }
@@ -315,12 +316,12 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
         // On récupère les informations de la commande
         $invoiceTotalAmount = 0;
-        if($planTarifaireId != '' && $planTarifaireId != null){
+        if ($planTarifaireId != '' && $planTarifaireId != null) {
             $plan = $stripe->getPlan($planTarifaireId);
-            $invoiceTotalAmount= $plan->amount/100;
+            $invoiceTotalAmount = $plan->amount / 100;
         }
-        $invoiceTitle= 'Offre '.$user->getLastSite()->getSite()->getProduct()->getName();
-        $invoiceDescription= 'Abonnement du ' . date("d/m/y") . ' au ' . date('d/m/y', strtotime('+1 month'));
+        $invoiceTitle = 'Offre ' . $user->getLastSite()->getSite()->getProduct()->getName();
+        $invoiceDescription = 'Abonnement du ' . date("d/m/y") . ' au ' . date('d/m/y', strtotime('+1 month'));
         $invoice = ['title' => $invoiceTitle,
             'description' => $invoiceDescription,
             'totalAmount' => $invoiceTotalAmount];//var_dump($invoiceTotalAmount);die;
@@ -389,12 +390,16 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'formLogin' => $formLogin->createView()
         ));
     }
+
     /**
-     * @Route("/order-valid", name="order_valid")
+     * @Route("/order/{siteId}/{userId}/order-valid", name="order_valid")
      * @return Response
      */
-    public function orderValid()
+    public function orderValid($siteId, $userId, Request $request)
     {
-        return $this->render('bo/order/payment-completed.html.twig');
+        $site = $this->siteRepository->getById($siteId);
+        /** @var User $user */
+        $user = $this->userRepository->get($userId);
+        return $this->render('bo/order/payment-completed.html.twig', array('newUser' => !$user->isEnabled()));
     }
 }
