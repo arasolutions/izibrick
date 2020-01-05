@@ -186,3 +186,18 @@
 .color-red {
     color: red;
 }
+
+
+.form-errors {
+    margin-top: -10px;
+}
+
+.form-errors > ul {
+    padding-left: 10px;
+}
+
+.form-errors > ul > li {
+    color: #C00;
+    list-style-type: none;
+    font-size: .9em;
+}
