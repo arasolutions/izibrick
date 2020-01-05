@@ -5,16 +5,12 @@
 
 {% block description %}Représente les tarifs à afficher sur votre site de votre site{% endblock %}
 
-{% block stylesheets %}
-    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
-{% endblock %}
-
 
 {% block body %}
     {% if success %}
-    <div class="alert alert-success">
-        <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
-    </div>
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
+        </div>
     {% endif %}
     <div class="panel">
         <div class="panel-body">
@@ -34,41 +30,30 @@
                 </div>
                 <div class="panel-body">
 
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.name) }}</label>
-                        <div>
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.content) }}</label>
-                        <div>
-                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.content) }}>
+                        {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.category) }}</label>
-                        <div>
-                            {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.category) }}
+                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.price) }}</label>
-                        <div>
-                            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.price) }}
+                        {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                        <span class="form-errors">{{ form_errors(form.price) }}</span>
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.currency) }}</label>
-                        <div>
-                            {{ form_widget(form.currency, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.currency) }}
+                        {{ form_widget(form.currency, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.active) }}</label>
-                        <div>
-                            {{ form_widget(form.active, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.active) }}
+                        {{ form_widget(form.active, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
             </div>

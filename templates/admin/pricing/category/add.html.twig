@@ -34,29 +34,21 @@
                 </div>
                 <div class="panel-body">
 
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.name) }}</label>
-                        <div>
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.description) }}</label>
-                        <div>
-                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.displayOrder) }}</label>
-                        <div>
-                            {{ form_widget(form.displayOrder, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.displayOrder) }}
+                        {{ form_widget(form.displayOrder, {'attr': {'class': 'form-control'}}) }}
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.active) }}</label>
-                        <div>
-                            {{ form_widget(form.active, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                    <div class="col-sm-12 form-group">
+                        {{ form_label(form.active) }}
+                        {{ form_widget(form.active, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
             </div>

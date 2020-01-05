@@ -42,6 +42,7 @@ class EditPricingProductType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'required' => false,
+                'label' => 'Catégorie',
                 'class' => PricingCategory::class,
                 'choice_label' => 'name'
             ])
