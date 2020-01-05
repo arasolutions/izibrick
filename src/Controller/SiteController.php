@@ -87,7 +87,6 @@ class SiteController extends AbstractController
         $blog = $this->blogRepository->getBySiteId($site->getId());
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/index.html.twig', [
-            'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
             'blog' => $blog,
             'posts' => $blog->getPosts()
@@ -118,7 +117,6 @@ class SiteController extends AbstractController
 
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/blog/detail.html.twig', [
-            'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
             'post' => $post
         ]);

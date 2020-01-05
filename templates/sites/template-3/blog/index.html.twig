@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         {% if posts|length > 0 %}
-                            {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
+                            {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                             {% for post in posts %}
                                 {% set siteName = siteName|merge({'post':post.id}) %}
                                 <div class="blog-post">
@@ -67,7 +67,7 @@
 
                                                 <div class="slider-img">
                                                     {% if post.image is defined and post.image is not null %}
-                                                        <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('main_picture') }}"/>
+                                                        <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"/>
                                                     {% endif %}
                                                 </div>
                                             </div>

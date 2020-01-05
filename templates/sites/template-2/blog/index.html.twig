@@ -46,7 +46,7 @@
                         <div class="v-blog-widget col-sm-12">
                             <div class="v-blog-wrap">
                                 {% if posts|length > 0 %}
-                                    {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
+                                    {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                                     <div class="v-blog-items-wrap v-blog-masonry">
                                         <ul class="v-blog-items row masonry-items first-load clearfix" id="blogGrid">
                                             {% for post in posts %}
@@ -55,7 +55,7 @@
                                                     <div class="v-blog-masonry-item">
                                                         <figure class="animated-overlay overlay-alt">
                                                             {% if post.image is defined and post.image is not null %}
-                                                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('main_picture') }}"/>
+                                                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"/>
                                                             {% endif %}
                                                             <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}"
                                                                class="link-to-post"></a>
