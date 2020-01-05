@@ -1,17 +1,23 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{site.name}} - {{site.blog.seoTitle}}{% endblock %}
-{% block description %}{{site.blog.seoDescription}}{% endblock %}
+{% block title %}{{ site.name }} - {{ site.blog.seoTitle }}{% endblock %}
+{% block description %}{{ site.blog.seoDescription }}{% endblock %}
 
 {% block blogActive %}active{% endblock %}
 
 {% block body %}
 
     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
-        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
+<section
+        class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0"
+        data-plugin-parallax data-plugin-options="{'speed': 1.5}"
+        data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
     {% else %}
-        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
-    {% endif %}
+    <section
+            class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0"
+            data-plugin-parallax data-plugin-options="{'speed': 1.5}"
+            data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
+        {% endif %}
         <div class="container py-9">
             <div class="row text-left">
                 <div class="col-lg-12">
@@ -29,57 +35,65 @@
 
                         {% if posts|length > 0 %}
                             {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
-                        <div class="v-blog-items-wrap blog-mini">
-                            <ul class="v-blog-items row mini-items clearfix">
-                                {% for post in posts %}
-                                    {% set siteName = siteName|merge({'post':post.id}) %}
-                                    <li class="v-blog-item col-sm-12">
-                                        <div class="mini-v-blog-item-wrap">
-                                            <figure class="animated-overlay overlay-alt">
-                                                {% if post.image is defined and post.image is not null %}
-                                                    <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}" />
-                                                {% endif %}
-                                                <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}" class="link-to-post"></a>
-                                                <figcaption>
-                                                    <div class="thumb-info thumb-info-v2"><i class="fa fa-angle-right"></i></div>
-                                                </figcaption>
-                                            </figure>
-                                            <div class="blog-v-blog-item-info">
-                                                <h3><a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}">{{ post.title }}</a></h3>
-                                                <div class="v-blog-item-details">Le {{ post.creationDate|date('d/m/Y') }}</div>
-                                                <div class="v-blog-item-description">
-                                                    <p>
-                                                        {{ post.introduction }}
-                                                    </p>
+                            <div class="v-blog-items-wrap blog-mini">
+                                <ul class="v-blog-items row mini-items clearfix">
+                                    {% for post in posts %}
+                                        {% set siteName = siteName|merge({'post':post.id}) %}
+                                        <li class="v-blog-item col-sm-12">
+                                            <div class="mini-v-blog-item-wrap">
+                                                <figure class="animated-overlay overlay-alt">
+                                                    {% if post.image is defined and post.image is not null %}
+                                                        <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"/>
+                                                    {% endif %}
+                                                    <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}"
+                                                       class="link-to-post"></a>
+                                                    <figcaption>
+                                                        <div class="thumb-info thumb-info-v2"><i
+                                                                    class="fa fa-angle-right"></i></div>
+                                                    </figcaption>
+                                                </figure>
+                                                <div class="blog-v-blog-item-info">
+                                                    <h3>
+                                                        <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}">{{ post.title }}</a>
+                                                    </h3>
+                                                    <div class="v-blog-item-details">
+                                                        Le {{ post.creationDate|date('d/m/Y') }}</div>
+                                                    <div class="v-blog-item-description">
+                                                        <p>
+                                                            {{ post.introduction }}
+                                                        </p>
+                                                    </div>
+                                                    <a class="btn v-btn standard white sf-icon-stroke"
+                                                       href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}"
+                                                       target="_self">
+                                                        <i class="icon-arrow-32"></i><span
+                                                                class="text">Voir la suite</span>
+                                                    </a>
                                                 </div>
-                                                <a class="btn v-btn standard white sf-icon-stroke" href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}" target="_self">
-                                                    <i class="icon-arrow-32"></i><span class="text">Voir la suite</span>
-                                                </a>
                                             </div>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-
-                            <!--<nav aria-label="...">
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <span class="page-link">Previous</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active">
-                                                <span class="page-link">
-                                                    2
-                                                    <span class="sr-only">(current)</span>
-                                                </span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
-                            </nav>-->
-                        </div>
+
+                                <!--<nav aria-label="...">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item active">
+                                                    <span class="page-link">
+                                                        2
+                                                        <span class="sr-only">(current)</span>
+                                                    </span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>-->
+                            </div>
                         {% else %}
                             <div style="margin-bottom:20px;">Aucun article n'a été publié.</div>
                         {% endif %}
@@ -88,4 +102,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

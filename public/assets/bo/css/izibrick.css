@@ -165,7 +165,7 @@
 
 .option-domain input{
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size: small;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;

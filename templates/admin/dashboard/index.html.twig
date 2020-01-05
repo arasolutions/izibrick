@@ -22,7 +22,7 @@
                             <div class="text-lg">
                                 <p class="text-sm text-bold text-uppercase">Référencement naturel</p>
                                 <p class="text-sm">Taux de remplissage :</p>
-                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux|round}}%</p>
+                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux|round }}%</p>
                             </div>
                         </div>
                         <div class="col-sm-8">
@@ -38,14 +38,17 @@
                                 </li>
                             </ul>
                             {% if referencement.referencementTaux < 100 %}
-                            <p class="text-sm mt20 color-red">
-                                Le référencement de votre site n'est pas otpimal, veuillez renseigner un titre et une description pour chaque page.
-                            </p>
-                            <a href="{{ path('bo-seo') }}"><button class="btn btn-primary">Mettre à jour</button></a>
+                                <p class="text-sm mt20 color-red">
+                                    Le référencement de votre site n'est pas otpimal, veuillez renseigner un titre et
+                                    une description pour chaque page.
+                                </p>
+                                <a href="{{ path('bo-seo') }}">
+                                    <button class="btn btn-primary">Mettre à jour</button>
+                                </a>
                             {% else %}
-                            <p class="text-sm mt20">
-                                Félicitations ! Votre site est optimisé pour le référencemnt naturel.
-                            </p>
+                                <p class="text-sm mt20">
+                                    Félicitations ! Votre site est optimisé pour le référencemnt naturel.
+                                </p>
                             {% endif %}
                         </div>
                     </div>
@@ -120,7 +123,6 @@
                         </a>
                     </div>
                 </div>
-
 
 
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
