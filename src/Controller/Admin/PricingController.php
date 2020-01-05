@@ -129,13 +129,10 @@ class PricingController extends AbstractController
 
         $form = $this->createForm(EditPricingProductType::class, $command);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $editPricingProductCommandHandler->handle($command, $site);
             $success = true;
-            return $this->render('admin/pricing/index.html.twig', [
-                'site' => $site,
-                'categories' => $site->getPricingCategories(),
-                'products' => $site->getPricingProducts(),
+            return $this->redirectToRoute('bo-pricing', [
                 'success' => $success
             ]);
         }
@@ -173,13 +170,10 @@ class PricingController extends AbstractController
 
         $form = $this->createForm(EditPricingProductType::class, $command);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $editPricingProductCommandHandler->handle($command, $site);
             $success = true;
-            return $this->render('admin/pricing/index.html.twig', [
-                'site' => $site,
-                'categories' => $site->getPricingCategories(),
-                'products' => $site->getPricingProducts(),
+            return $this->redirectToRoute('bo-pricing', [
                 'success' => $success
             ]);
         }
@@ -197,7 +191,9 @@ class PricingController extends AbstractController
      * @return Response
      *
      * @Route("/product/{id}/remove", name="bo-pricing-product-remove")
-     * @method ({"GET"})
+     * @method ({
+    "GET"
+    })
      */
     public function removePricing(PricingProduct $pricingProduct, RemovePricingProductCommandHandler $handler)
     {
@@ -208,7 +204,7 @@ class PricingController extends AbstractController
         try {
             $handler->handle($command);
             $success = true;
-        } catch ( \Exception $e ) {
+        } catch (\Exception $e) {
             $success = false;
         }
 
@@ -320,7 +316,9 @@ class PricingController extends AbstractController
      * @return Response
      *
      * @Route("/category/{id}/remove", name="bo-pricing-category-remove")
-     * @method ({"GET"})
+     * @method ({
+    "GET"
+    })
      */
     public function removeCategoryPricing(PricingCategory $pricingCategory, RemovePricingCategoryCommandHandler $handler)
     {
@@ -331,7 +329,7 @@ class PricingController extends AbstractController
         try {
             $handler->handle($command);
             $success = true;
-        } catch ( \Exception $e ) {
+        } catch (\Exception $e) {
             $success = false;
         }
 
