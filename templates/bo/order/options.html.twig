@@ -47,7 +47,7 @@
                                                 <p>{{ option.description }}</p>
                                                 <div class="option-domain">
                                                     {{ form_label(form.newDomain, null, {'label_attr':{'class':'control-label text-bold mb-0'}}) }}
-                                                    {{ form_widget(form.newDomain, {'attr':{'class':'input-sm'}}) }}
+                                                    {{ form_widget(form.newDomain, {'attr':{'class':'input-sm', 'placeholder':'www.mon-sit.fr'}}) }}
                                                 </div>
                                                 <div class="option-price">
                                                     <span class="u-label g-bg-bluegray g-rounded-3">{{ option.price.label }}</span>
@@ -66,7 +66,7 @@
                                                 <p>{{ option.description }}</p>
                                                 <div class="option-domain">
                                                     {{ form_label(form.existingDomain, null, {'label_attr':{'class':'control-label text-bold mb-0'}}) }}
-                                                    {{ form_widget(form.existingDomain, {'attr':{'class':'input-sm'}}) }}
+                                                    {{ form_widget(form.existingDomain, {'attr':{'class':'input-sm', 'placeholder':'www.mon-sit.fr'}}) }}
                                                 </div>
                                                 <div class="option-price">
                                                     <span class="u-label g-bg-bluegray g-rounded-3">{{ option.price.label }}</span>

@@ -36,14 +36,14 @@
                         {% if posts|length > 0 %}
                             <div class="v-blog-items-wrap blog-mini">
                                 <ul class="v-blog-items row mini-items clearfix">
-                                    {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
+                                    {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                                     {% for post in posts %}
                                         {% set siteName = siteName|merge({'post':post.id}) %}
                                         <li class="v-blog-item col-sm-12">
                                             <div class="mini-v-blog-item-wrap">
                                                 <figure class="animated-overlay overlay-alt">
                                                     {% if post.image is defined and post.image is not null %}
-                                                        <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('main_picture') }}"/>
+                                                        <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"/>
                                                     {% endif %}
                                                     <a href="{{ path('blog_detail'|route(app.request.server.get('REQUEST_URI')), siteName) }}"
                                                        class="link-to-post"></a>

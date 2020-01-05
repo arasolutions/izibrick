@@ -42,6 +42,6 @@ abstract class AbstractRepository extends ServiceEntityRepository
 
     public function getAllBySiteId($siteId)
     {
-        return $this->findAll(['site' => $siteId]);
+        return $this->findBy(['site' => $siteId]);
     }
 }
