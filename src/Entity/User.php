@@ -27,6 +27,11 @@ class User extends BaseUser
     private $sites;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Support", mappedBy="user")
      */
     private $support;
@@ -98,6 +103,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->createdAt = new \DateTime();
         $this->sites = new ArrayCollection();
         $this->support = new ArrayCollection();
     }
@@ -149,6 +155,18 @@ class User extends BaseUser
                 $site->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
