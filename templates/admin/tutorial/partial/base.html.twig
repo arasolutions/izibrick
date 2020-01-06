@@ -1,0 +1,63 @@
+<div id="tuto-{{ tuto_id }}-html" class="hidden">
+    <div class="media">
+        <div class="media-left">
+            <img class="media-object mar-all tuto-helper"
+                 src="{{ asset('assets/img/logo/izibrick-helper.png') }}"
+                 alt="Helper"></div>
+        <div class="media-body">
+            {% block tuto_body %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        prepareTuto{{ tuto_id }} = function () {
+            dialog = bootbox.dialog({
+                size: 'large',
+                title: createTitle('Tutoriel - {{ tuto_title }}<div class="pull-right">{% if tuto_nav is defined %} {{ tuto_nav }} {% endif %}</div>'),
+                message: $('#tuto-{{ tuto_id }}-html').html(),
+                onEscape: false,
+                backdrop: true,
+                closeButton: false,
+                show: false,
+                animateIn: 'fadeInLeft',
+                animateOut: 'fadeOutRight',
+                buttons: {
+                    confirm: {
+                        label: "Suivant",
+                        className: 'btn-primary btn-sm {% if not tuto_id_next is defined %} no-display {% endif %}',
+                        callback: function (e) {
+                            {% block next_action %}
+                            {% endblock %}
+                            forwardModal('{{ tuto_id }}', {% if tuto_id_next is defined %}'{{ tuto_id_next }}'{% endif %});
+                        }
+                    },
+                    cancel: {
+                        label: 'Quitter le tutoriel',
+                        className: 'btn-danger pull-left btn-sm',
+                        callback: function () {
+                            {% block exit_action %}
+                            {% endblock %}
+                            exitTuto();
+                        }
+                    },
+                }
+            })
+            ;
+            dialog.on("shown.bs.modal", function () {
+                dialog.attr("id", "tuto-{{ tuto_id }}");
+                {% block modal_class %}
+                {% endblock %}
+            });
+
+
+            return dialog;
+        }
+    })
+    ;
+
+</script>
+{% block tuto_javascript %}
+{% endblock %}

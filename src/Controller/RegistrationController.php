@@ -3,7 +3,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Invoice;
+use App\Entity\Quote;
 use App\Entity\User;
 use App\Entity\UserSite;
 use App\Izibrick\Command\RegistrationCommand;
@@ -12,7 +14,9 @@ use App\Izibrick\CommandHandler\CreateUserCommandHandler;
 use App\Form\OrderLoginType;
 use App\Form\RegistrationType;
 use App\Helper\StripeHelper;
+use App\Repository\ContactRepository;
 use App\Repository\InvoiceRepository;
+use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
 use App\Repository\UserSiteRepository;
 use App\Repository\UserRepository;
@@ -41,6 +45,12 @@ class RegistrationController extends BaseController
     /** @var SiteRepository */
     private $siteRepository;
 
+    /** @var ContactRepository */
+    private $contactRepository;
+
+    /** @var QuoteRepository */
+    private $quoteRepository;
+
     /** @var UserSiteRepository */
     private $userSiteRepository;
 
@@ -58,16 +68,20 @@ class RegistrationController extends BaseController
      * @param FactoryInterface $formFactory
      * @param CreateUserCommandHandler $handler
      * @param SiteRepository $siteRepository
+     * @param ContactRepository $contactRepository
+     * @param QuoteRepository $quoteRepository
      * @param UserSiteRepository $userSiteRepository
      * @param UserRepository $userRepository
      * @param InvoiceRepository $invoiceRepository
      * @param AddInvoiceCommandHandler $addInvoiceCommandHandler
      */
-    public function __construct(FactoryInterface $formFactory, CreateUserCommandHandler $handler, SiteRepository $siteRepository, UserSiteRepository $userSiteRepository, UserRepository $userRepository, InvoiceRepository $invoiceRepository, AddInvoiceCommandHandler $addInvoiceCommandHandler)
+    public function __construct(FactoryInterface $formFactory, CreateUserCommandHandler $handler, SiteRepository $siteRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, UserSiteRepository $userSiteRepository, UserRepository $userRepository, InvoiceRepository $invoiceRepository, AddInvoiceCommandHandler $addInvoiceCommandHandler)
     {
         $this->formFactory = $formFactory;
         $this->handler = $handler;
         $this->siteRepository = $siteRepository;
+        $this->contactRepository = $contactRepository;
+        $this->quoteRepository = $quoteRepository;
         $this->userSiteRepository = $userSiteRepository;
         $this->userRepository = $userRepository;
         $this->invoiceRepository = $invoiceRepository;
@@ -92,7 +106,7 @@ class RegistrationController extends BaseController
 
         $command = new RegistrationCommand($request->get('siteId'));
 
-        if($this->getUser() != null){
+        if ($this->getUser() != null) {
             // Affectation du site au user
             $site = $this->siteRepository->getById($command->getSiteId());
             $userSite = new UserSite($this->getUser(), $site);
@@ -144,7 +158,16 @@ class RegistrationController extends BaseController
                 $site = $this->siteRepository->getById($command->getSiteId());
                 $userSite = new UserSite($user, $site);
                 $userSite = $this->userSiteRepository->save($userSite);
-                $this->siteRepository->save($site);
+
+                /** @var Contact $contact */
+                $contact = $this->contactRepository->getBySiteId($command->getSiteId());
+                $contact->setEmail($user->getEmailCanonical());
+                $this->contactRepository->save($contact);
+
+                /** @var Quote $quote */
+                $quote = $this->quoteRepository->getBySiteId($command->getSiteId());
+                $quote->setEmail($user->getEmailCanonical());
+                $this->quoteRepository->save($quote);
 
                 if (null === $response = $event->getResponse()) {
                     //$url = $this->generateUrl('fos_user_registration_confirmed');

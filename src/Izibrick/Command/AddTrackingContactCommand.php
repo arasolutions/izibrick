@@ -22,4 +22,30 @@ class AddTrackingContactCommand
      * @var string
      */
     public $content;
+
+    /**
+     * @return string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+
 }

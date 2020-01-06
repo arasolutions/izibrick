@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,15 +29,14 @@ class AddTrackingContactType extends AbstractType
                 'required' => false,
                 'label' => 'Votre nom'
             ))
-            ->add('email', TextType::class, array(
-                'required' => false,
+            ->add('email', EmailType::class, array(
+                'required' => true,
                 'label' => 'Votre email'
             ))
             ->add('content', TextareaType::class, [
                 'required' => false,
                 'label' => 'Votre message',
                 'attr' => array('rows' => '10'),
-                'required' => false
             ]);
     }
 

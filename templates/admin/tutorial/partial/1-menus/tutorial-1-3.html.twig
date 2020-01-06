@@ -1,0 +1,41 @@
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Menu de gauche (menu principal)</p>
+    <p>Le menu de gauche vous permet d'administrer votre site :</p>
+    <ul>
+        <li><strong>Tableau de bord</strong> : cette écran contient les éléments généraux de votre
+            administration (taux de référencement, nombre d'articles créés, nombre de devix recus, nombre de
+            demande de contact, ...)
+        </li>
+        <li><strong>Les pages de votre site </strong> :
+            <ul>
+                <li><i class="ti-home"></i><strong>Accueil</strong> : La page d'accueil de votre site</li>
+                <li><i class="ti-pencil-alt"></i><strong>Présentation</strong> : La page de présentation de votre site
+                </li>
+                <li><i class="ti-comment"></i><strong>Blog / articles</strong> : La page de blog et des articles de
+                    votre site
+                </li>
+                <li><i class="ti-money"></i><strong>Tarifs</strong> : La page des tarifs de votre site</li>
+                <li><i class="ti-shopping-cart"></i><strong>Devis</strong> : La page de demande de devis votre site</li>
+                <li><i class="ti-email"></i><strong>Contact</strong> : La page de demande de contact de votre site</li>
+            </ul>
+        </li>
+        <li><strong>Les paramètres de votre site </strong> :
+            <ul>
+                <li><i class="ti-panel"></i><strong>Paramètres du site</strong> : Configuration des logos, réseaux
+                    sociaux, thèmes de votre site
+                </li>
+                <li><i class="ti-stats-up"></i><strong>Référencement</strong> : Configuration des mot-clés de chaque
+                    page de votre site
+                </li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block modal_class %}
+    $('#navbar').addClass('no-z-index');
+    $('#mainnav-container').addClass('z-index');
+    $(this).addClass('ml100');
+{% endblock %}

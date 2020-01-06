@@ -15,6 +15,14 @@
     margin-left: 50px;
 }
 
+.mt100 {
+    margin-top: 100px;
+}
+
+.ml100 {
+    margin-left: 100px;
+}
+
 .mr10 {
     margin-right: 10px;
 }
@@ -25,6 +33,10 @@
 
 :root {
     --color-izibrick: #25476a;
+}
+
+.margin-t-b-10 {
+    margin: 10px 0;
 }
 
 ::selection {
@@ -187,6 +199,14 @@
     color: red;
 }
 
+.tuto-menu-item > div {
+    border: solid 1px #f7f7f7;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
 
 .form-errors {
     margin-top: -10px;
@@ -200,4 +220,74 @@
     color: #C00;
     list-style-type: none;
     font-size: .9em;
+}
+
+.modal-dialog.animated {
+    -webkit-animation-duration: .5s;
+    animation-duration: 0.5s;
+}
+
+.no-z-index {
+    z-index: 1 !important;
+    opacity: 0.1;
+}
+
+.z-index {
+    z-index: 10000 !important;
+    opacity: 1;
+}
+
+.tuto-decal-menu-gauche {
+    margin-left: 100px;
+}
+
+.panel-body {
+    position: relative;
+}
+
+.media-body > ul > li {
+    margin-bottom: 15px;
+}
+
+.media-body li > i {
+    margin-right: 5px;
+}
+
+.tuto-helper {
+    width: 100px;
+}
+
+.no-display {
+    display: none;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.media-body img {
+    padding: 0 30px 20px;
+}
+
+ul.no-vertical-spacing > li {
+    margin-bottom: 0 !important;
+}
+
+.pull-bottom-right > .modal-dialog {
+    position: absolute;
+    bottom: 50px;
+    right: 15px;
+}
+
+.with-border {
+    border: solid 2px #25476A;
+    border-radius: 5px;
+}
+
+.border-shadow {
+    box-shadow: 0px 0px 5px 0px grey;
+}
+
+.no-padding {
+    padding: 0 !important;
 }

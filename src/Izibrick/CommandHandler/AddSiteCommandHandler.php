@@ -154,28 +154,34 @@ class AddSiteCommandHandler
 
         // Création de la page Home
         $home = new Home($site);
+        $home->setSeoTitle('Accueil');
         $this->homeRepository->save($home);
 
         // Création de la page Presentation
         $presentation = new Presentation($site);
+        $presentation->setSeoTitle('Présentation');
         $this->presentationRepository->save($presentation);
 
         // Création de la page Blog
         $blog = new Blog($site);
+        $blog->setSeoTitle('Blog');
         $this->blogRepository->save($blog);
 
         // Création de la page Tarif
         $pricing = new Pricing($site);
+        $pricing->setSeoTitle('Tarifs');
         $pricing->setDisplay(true);
         $this->pricingRepository->save($pricing);
 
         // Création de la page Devis
         $quote = new Quote($site);
+        $quote->setSeoTitle('Devis');
         $quote->setDisplay(true);
         $this->quoteRepository->save($quote);
 
         // Création de la page Contact
         $contact = new Contact($site);
+        $contact->setSeoTitle('Contact');
         $this->contactRepository->save($contact);
 
         return $site;

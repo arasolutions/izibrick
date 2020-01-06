@@ -70,14 +70,18 @@ class IndexController extends AbstractController
     public function ourContact(Request $request, \Swift_Mailer $mailer)
     {
         $subject = $request->query->get('subject');
+        $success = false;
+        if ($request->query->has('success')) {
+            $success = $request->query->get('success');
+        }
         $command = new OurContactCommand($subject);
         $form = $this->createForm(ContactType::class, $command);
         $form->handleRequest($request);
-        $success = false;
         if ($form->isSubmitted() && $form->isValid()) {
             $message = (new \Swift_Message('Demande de contact - ' . ContactSubject::getById($command->getSubject())['label']))
                 ->setFrom($_ENV['MAILER_USER'])
                 ->setTo($_ENV['CONTACT_RECEIVER'])
+                ->setReplyTo($command->getEmail())
                 ->setBody($this->renderView(
                     'bo/contact/email.txt.twig',
                     ['command' => $command]
@@ -85,8 +89,9 @@ class IndexController extends AbstractController
                 );
             $mailer->send($message);
             $success = true;
-            $command = new OurContactCommand();
-            $form = $this->createForm(ContactType::class, $command);
+
+            return $this->redirectToRoute('our-contact', array('success' => $success));
+
         }
         return $this->render('bo/contact/index.html.twig', [
             'form' => $form->createView(),

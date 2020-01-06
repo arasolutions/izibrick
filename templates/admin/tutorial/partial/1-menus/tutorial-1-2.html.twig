@@ -1,0 +1,24 @@
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Menu du haut (header)</p>
+    <p>Le menu du haut vous propose plusieurs entrées :</p>
+    <ul>
+        <li><strong>Accéder au tutoriel</strong> : En cas d'oubli, de problème, ce bouton vous permettra
+            d'accéder à ce
+            tutoriel
+        </li>
+        <li><strong>Accéder à mon site</strong> : Lien direct sur votre afin de voir les modifications que vous
+            avez effectuées.
+            Dans le cas où votre nom de domaine est en cours de création, vous verrez le site hebergé sur notre
+            infrastrcture, qui sera porté à l'identique dés lors que votre nom de domaine sera prêt.
+        </li>
+        <li><strong>Menu dédié à votre compte</strong> :
+            <ul>
+                <li>Mon profil : accéder à vos informations postales et bancaires</li>
+                <li>Facturation : liste des factures reçues</li>
+                <li>Mon profil : accéder à noter formulaire de contact et à la FAQ</li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
