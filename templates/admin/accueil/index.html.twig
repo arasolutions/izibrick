@@ -33,14 +33,17 @@
                     <div class="col-sm-10">
                         {{ form_widget(form.mainPicture, {'attr':{'class':'form-control input-lg'}}) }}
                     </div>
-                    <div class="col-sm-12 mt10">
-                        <div class="col-sm-2">
-                            <label class="control-label"  style="text-align:left;">{{ form_label(form.textPicture) }}</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <div>
-                                {{ form_widget(form.textPicture, {'attr': {'class': 'form-control'}}) }}
-                            </div>
+                </div>
+            </div>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Texte sur l'image de fond</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div id="summernote">
+                            {{ form_widget(form.textPicture, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
                 </div>

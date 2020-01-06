@@ -18,14 +18,18 @@ class EditHomeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textPicture', TextType::class, [
+            ->add('textPicture', CKEditorType::class, [
                 'label' => 'Texte sur l\'image',
                 'constraints' => array(
                     new Length(array(
                         'min' => '2',
                         'max' => '255'
                     ))
-                )
+                ),
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
             ])
             ->add('mainPicture', FileType::class, [
                 'required' => false,
