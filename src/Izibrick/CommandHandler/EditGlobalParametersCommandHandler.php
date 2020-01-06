@@ -55,8 +55,10 @@ class EditGlobalParametersCommandHandler
         $site->setName($command->getName());
 
         // Gestion du nom interne
-        $internalName = SiteHelper::generateInternalName($site);
-        $site->setInternalName($site->getId() . '-' . $internalName);
+        if($site->getInternalName() == '') {
+            $internalName = SiteHelper::generateInternalName($site);
+            $site->setInternalName($site->getId() . '-' . $internalName);
+        }
         $site = $this->siteRepository->save($site);
 
         $site->setDescription($command->getDescription());
