@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Site;
 use App\Entity\Blog;
+use App\Enum\ContactSubject;
 use App\Izibrick\Command\AddTrackingContactCommand;
 use App\Izibrick\Command\AddTrackingQuoteCommand;
 use App\Izibrick\CommandHandler\AddTrackingContactCommandHandler;
@@ -209,13 +210,13 @@ class SiteController extends AbstractController
      * @param Request $request
      * @param $siteName
      * @param AddTrackingContactCommandHandler $addTrackingContactCommandHandler
+     * @param \Swift_Mailer $mailer
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function contact(Request $request,
-                            $siteName = null,
-                            AddTrackingContactCommandHandler $addTrackingContactCommandHandler)
+    public function contact(Request $request, $siteName,
+                            AddTrackingContactCommandHandler $addTrackingContactCommandHandler, \Swift_Mailer $mailer)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -228,8 +229,20 @@ class SiteController extends AbstractController
 
         $form = $this->createForm(AddTrackingContactType::class, $command);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $addTrackingContactCommandHandler->handle($command, $site);
+
+            $message = (new \Swift_Message('Demande de contact'))
+                ->setFrom($_ENV['SITE_MAILER_USER'])
+                ->setTo($site->getContact()->getEmail())
+                ->setReplyTo($command->getEmail())
+                ->setBody($this->renderView(
+                    'sites/emails/contact.txt.twig',
+                    ['command' => $command,
+                        'site' => $site]
+                ), 'text/html'
+                );
+            $mailer->send($message);
             $success = true;
         }
 
