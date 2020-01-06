@@ -237,6 +237,7 @@ class AdminController extends AbstractController
         $command = new HomeCommand();
         $command->setOriginalContent($site->getHome()->getContent());
         $command->setTextPicture($site->getHome()->getTextPicture());
+        $command->setContent($site->getHome()->getContent());
 
         $success = false;
 
@@ -268,7 +269,7 @@ class AdminController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
         $command = new PresentationCommand();
-        //$command->setContent($site->getPresentation()->getContent());
+        $command->setContent($site->getPresentation()->getContent());
 
         $success = false;
 
