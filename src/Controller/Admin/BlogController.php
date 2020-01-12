@@ -152,28 +152,31 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param Blog $blog
-     * @param RemoveBlogCommandHandler $handler
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/    post/{id}/remove", name="bo-post-remove")
-     * @method ({
-    * "GET"
-    * })
+     * @Route("/post/{id}/remove", name="bo-post-remove")
+     * @param Post $post
+     * @param RemoveBlogCommandHandler $removeBlogCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function remove(Blog $blog, RemoveBlogCommandHandler $handler)
+    public function remove(Post $post, RemoveBlogCommandHandler $removeBlogCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $command = new RemoveBlogCommand();
-        $command->id = $blog->getId();
+        $command->id = $post->getId();
 
         try {
-            $handler->handle($command);
+            $removeBlogCommandHandler->handle($command);
             $success = true;
         } catch (\Exception $e) {
             $success = false;
         }
 
-        return $this->redirectToRoute('bo-blog', array('success' => $success));
+        return $this->render('admin/blog/index.html.twig', [
+            'site' => $site,
+            'posts' => $site->getBlog()->getPosts(),
+            'success' => $success
+        ]);
     }
+
 }

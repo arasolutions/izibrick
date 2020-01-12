@@ -94,6 +94,7 @@ class PricingController extends AbstractController
         $success = false;
 
         $command = new PricingCommand();
+        $command->setContent($site->getPricing()->getContent());
 
         $form = $this->createForm(EditPricingType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
