@@ -209,7 +209,7 @@
 
 
 .form-errors {
-    margin-top: -10px;
+    margin-top: 10px;
 }
 
 .form-errors > ul {
@@ -290,4 +290,8 @@ ul.no-vertical-spacing > li {
 
 .no-padding {
     padding: 0 !important;
+}
+
+.u-file-attach-v3{
+    padding: 10px;
 }

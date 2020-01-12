@@ -24,8 +24,8 @@ class AddOrderType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'required' => false,
-                'label' => 'Nom de votre projet'
+                'required' => true,
+                'label' => 'Nom de votre projet (Plomberie Mercier, FC Julian, Elyan Music Band, ...)'
             ))
             ->add('productId', HiddenType::class)
             ->add('hasCodePromo', HiddenType::class)
@@ -42,7 +42,8 @@ class AddOrderType extends AbstractType
             ))
             ->add('logo', FileType::class, array(
                 'required' => false,
-                'label' => 'Choisissez un logo'
+                'label' => 'Choisissez un logo',
+                'multiple' => false
             ));
     }
 

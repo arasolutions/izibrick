@@ -126,7 +126,6 @@ class AddSiteCommandHandler
             }
         }
         $site = $this->siteRepository->save($site);
-
         // Gestion du logo
         if ($command->getLogo() != null) {
             $site->setLogoFile($command->getLogo());
