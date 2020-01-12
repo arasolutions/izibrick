@@ -1,3 +1,7 @@
+.container img {
+    max-width: unset !important;
+}
+
 a.active {
     color: var(--colorTheme) !important;
 }

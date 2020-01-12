@@ -1,3 +1,7 @@
+.container img {
+    max-width: unset !important;
+}
+
 .mt10 {
     margin-top: 10px;
 }

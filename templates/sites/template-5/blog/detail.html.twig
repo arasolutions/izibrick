@@ -30,9 +30,9 @@
 
                     <article>
 
-                        <figure class="media-wrap">
+                        <figure class="txt-center mb20">
                             {% if post.image is defined and post.image is not null %}
-                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}" />
+                                <img style="width: 50%;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}" />
                             {% endif %}
                         </figure>
 
@@ -48,7 +48,7 @@
 
                             <div class="body-text clearfix">
                                 <p>
-                                    {{ post.introduction }}
+                                    {{ post.content|raw }}
                                 </p>
                             </div>
                         </section>
