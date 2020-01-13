@@ -234,6 +234,9 @@
                     }
                 });
                 $.HSCore.helpers.HSFocusState.init();
+                $('#add_order_logo').on('click', function(){
+                    $('.jFiler').trigger('filer.reset');
+                })
             });
         </script>
     {% endblock %}

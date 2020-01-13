@@ -7,6 +7,9 @@
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-core.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-components.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-globals.css') }}">
 {% endblock %}
 
 
@@ -19,146 +22,136 @@
     <div class="panel">
         <div class="panel-body">
             {{ form_start(form) }}
-
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Général</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.name) }}
-                        {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+            <div class="row col-md-12">
+                <div class="panel panel-mint">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><label class="control-label">Général</label></h3>
                     </div>
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.description) }}
-                        {{ form_widget(form.description, {'attr':{'class':'form-control'}}) }}
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.domain) }}
-                        {{ form_widget(form.domain, {'attr':{'class':'form-control'}}) }}
+                    <div class="panel-body">
+                        <div class="col-sm-12 form-group">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            {{ form_label(form.description) }}
+                            {{ form_widget(form.description, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="col-sm-12 form-group">
+                            {{ form_label(form.domain) }}
+                            {{ form_widget(form.domain, {'attr':{'class':'form-control'}}) }}
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">{{ form_label(form.logo) }}</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-2 text-center">
-                            {% if site.logo %}
-                                <img alt="" height="100%"
-                                     src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}"/>
-                            {% else %}
-                                <img alt="" height="100%"
-                                     src="{{ asset('assets/img/logo_site_default.png') }}"/>
-                            {% endif %}
+            <div class="row col-md-12">
+                <div class="col-md-6">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">{{ form_label(form.logo) }}</label>
+                            </h3>
                         </div>
-                        <div class="col-sm-10">
-                            <div class="row">{{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}</div>
-                            <div class="row">
-                                <div class="checkbox">
-                                    {{ form_widget(form.nameInLogo, {'attr':{'class':'form-control magic-checkbox'}}) }}
-                                    {{ form_label(form.nameInLogo) }}
+                        <div class="panel-body">
+                            <div class="col-sm-12">{{ form_widget(form.logo, {'attr':{'class':'js-file-attachment-logo'}} ) }}
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <div class="row">
+                                    <div class="checkbox">
+                                        {{ form_widget(form.nameInLogo, {'attr':{'class':'form-control magic-checkbox'}}) }}
+                                        {{ form_label(form.nameInLogo) }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="panel panel-mint">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><label class="control-label">{{ form_label(form.favicon) }}</label></h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-2 text-center">
-                                {% if site.favicon %}
-                                    <img alt="" height="32"
-                                         src="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
-                                {% else %}
-                                    <img alt="" height="32"
-                                         src="{{ asset('assets/img/logo_site_default.png') }}"/>
-                                {% endif %}
-                            </div>
-                            <div class="col-sm-10">
-                                {{ form_widget(form.favicon, {'attr':{'class':'form-control input-lg'}}) }}
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">{{ form_label(form.favicon) }}</label>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">{{ form_widget(form.favicon, {'attr':{'class':'js-file-attachment-favicon'}} ) }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Réseaux sociaux</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.facebook) }}
-                        {{ form_widget(form.facebook, {'attr':{'class':'form-control'}}) }}
-                    </div>
-
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.twitter) }}
-                        {{ form_widget(form.twitter, {'attr':{'class':'form-control'}}) }}
-                    </div>
-
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.instagram) }}
-                        {{ form_widget(form.instagram, {'attr':{'class':'form-control'}}) }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Structure</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-6">
-                        <div class="col-sm-12 form-group">
-                            {{ form_label(form.template) }}
-                            {{ form_widget(form.template, {'attr':{'class':'form-control'}}) }}
+                <div class="row col-md-12">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Réseaux sociaux</label></h3>
                         </div>
-                        <div class="col-sm-12 form-group">
-                            {{ form_label(form.colorTheme) }}
-                            {{ form_widget(form.colorTheme) }}
-                        </div>
-                        <div class="col-sm-12 form-group">
-                            {{ form_label(form.lightTheme) }}
-                            {{ form_widget(form.lightTheme, {'attr':{'class':'form-control'}}) }}
+                        <div class="panel-body">
+                            <div class="col-sm-12 form-group">
+                                {{ form_label(form.facebook) }}
+                                {{ form_widget(form.facebook, {'attr':{'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                {{ form_label(form.twitter) }}
+                                {{ form_widget(form.twitter, {'attr':{'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                {{ form_label(form.instagram) }}
+                                {{ form_widget(form.instagram, {'attr':{'class':'form-control'}}) }}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <img id="dynamic-theme" src="" width="100%"/>
-                    </div>
-
                 </div>
-            </div>
 
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Pages</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.displayPricing) }}
-                        {{ form_widget(form.displayPricing, {'attr':{'class':'form-control'}}) }}
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        {{ form_label(form.displayQuote) }}
-                        {{ form_widget(form.displayQuote, {'attr':{'class':'form-control'}}) }}
-                    </div>
-                </div>
-            </div>
+                <div class="row col-md-12">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Structure</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-6">
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.template) }}
+                                    {{ form_widget(form.template, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.colorTheme) }}
+                                    {{ form_widget(form.colorTheme) }}
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.lightTheme) }}
+                                    {{ form_widget(form.lightTheme, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <img id="dynamic-theme" src="" width="100%"/>
+                            </div>
 
-            <div class="col-sm-12 form-group">
-                <button class="btn btn-success pull-right" type="submit">
-                    Enregistrer
-                </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Pages</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12 form-group">
+                                {{ form_label(form.displayPricing) }}
+                                {{ form_widget(form.displayPricing, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                {{ form_label(form.displayQuote) }}
+                                {{ form_widget(form.displayQuote, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success pull-right" type="submit">
+                        Enregistrer
+                    </button>
+                </div>
             </div>
             {{ form_end(form) }}
         </div>
@@ -166,8 +159,17 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('assets/bo/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/imageTool.js') }}"></script>
+    <script src="{{ asset('assets/bo/js/hs.core.js') }}"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="{{ asset('assets/bo/vendor/jquery.filer/js/jquery.filer.min.js') }}"></script>
+
+    <!-- JS Unify -->
+    <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
+    <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
     <script type="text/javascript">
         $('.colorpicker:not(.expert)').colorPicker({
             opacity: false
@@ -190,6 +192,46 @@
         });
 
         changeSrc();
+
+        // initialization of forms
+        $.HSCore.components.HSFileAttachment.init('.js-file-attachment-logo', {
+            changeInput: '<div class="u-file-attach-v3 g-mb-15">\
+                            <div class="col-sm-12">\
+                                <img id="edit_global_parameters_logo-img" height="100" src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}" />\
+                            </div>\
+                            <div class="col-sm-12">\
+               				    <h3 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_global_parameters_logo_filer_title">\
+               				        <span class="g-color-primary">Modifier l\'image</span>\
+               				    </h3>\
+               				</div>\
+              			</div>',
+            limit: 1,
+            templates: {
+                item: '<div></div>'
+            }
+        });
+
+        $.HSCore.components.HSFileAttachment.init('.js-file-attachment-favicon', {
+            changeInput: '<div class="u-file-attach-v3 g-mb-15">\
+                            <div class="col-sm-12">\
+                                <img id="edit_global_parameters_favicon-img" width="32" src="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}" />\
+                            </div>\
+                            <div class="col-sm-12">\
+               				    <h3 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_global_parameters_favicon_filer_title">\
+               				        <span class="g-color-primary">Modifier le favicon</span>\
+               				    </h3>\
+               				</div>\
+              			</div>',
+            limit: 1,
+            templates: {
+                item: '<div></div>'
+            }
+        });
+        $("#edit_global_parameters_favicon, #edit_global_parameters_logo").change(function () {
+            readURL(this, true);
+        });
+
+        $.HSCore.helpers.HSFocusState.init();
     </script>
 
 {% endblock %}
