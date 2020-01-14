@@ -75,7 +75,7 @@ class EditGlobalParametersType extends AbstractType
             ])
             ->add('nameInLogo', CheckboxType::class, [
                 'required' => false,
-                'label' => 'Afficher le nom du site à côté du logo'
+                'label' => 'Le nom est visible dans le logo'
             ])
             ->add('colorTheme', ColorPickerType::class, [
                 'label' => 'Couleur principale du thème',

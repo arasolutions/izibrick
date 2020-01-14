@@ -24,7 +24,7 @@ class AddOrderType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'required' => true,
+                'required' => false,
                 'label' => 'Nom de votre projet (Plomberie Mercier, FC Julian, Elyan Music Band, ...)'
             ))
             ->add('productId', HiddenType::class)

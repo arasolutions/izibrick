@@ -15,6 +15,7 @@ use App\Entity\User;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\AddSiteCommand;
+use App\Namer\DirectoryFaviconMd5;
 use App\Namer\DirectoryLogoMd5;
 use App\Namer\Md5;
 use App\Repository\BlogRepository;
@@ -126,6 +127,7 @@ class AddSiteCommandHandler
             }
         }
         $site = $this->siteRepository->save($site);
+
         // Gestion du logo
         if ($command->getLogo() != null) {
             $site->setLogoFile($command->getLogo());
@@ -144,6 +146,22 @@ class AddSiteCommandHandler
 
             $site->setLogo($name);
         }
+
+        // Gestion du favicon
+        // Favicon par défaut
+        $default = \dirname(__DIR__) . '/../../public/assets/img/logo/favicon.png';
+        $destDir = \dirname(__DIR__) . '/../../public/uploads/site/';
+
+        $directoryMd5 = new DirectoryFaviconMd5();
+        $directory = $directoryMd5->directoryName($site, new PropertyMapping($default, $default));
+        mkdir($destDir . $directory, 0777, true);
+
+        $md5 = new Md5();
+        $name = $md5->name($site, new PropertyMapping($default, $default));
+        copy($default, $destDir . $directory . '/' . $name);
+
+        $site->setFavicon($name);
+
         $site = $this->siteRepository->save($site);
 
         // Gestion du nom interne
