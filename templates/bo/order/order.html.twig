@@ -42,7 +42,7 @@
                                                     {{ product.trialDays }} jours d'essai gratuit
                                                 {% endif %}
                                             </div>
-                                        {% elseif free == false%}
+                                        {% elseif free == false %}
                                             <div class="col-sm-6 bandeau-white">
                                                 A partir de <span
                                                         class="old-price">{{ product.price | number_format(2,',', ' ') }}</span>
@@ -92,31 +92,40 @@
                                                 <h2 class="pull-left text-3x">Étape 2 : choix du thème</h2>
                                             </div>
                                             {{ form_start(form, {'attr':{'method':'post', 'action': path('order_index', {'product': product.id }),'class':'form-horizontal'}}) }}
-                                            <div class="col-sm-12 form-group">
-                                                {{ form_label(form.name, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                                {{ form_widget(form.name, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="col-sm-12 form-group">
+                                                        {{ form_label(form.name, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                                        {{ form_widget(form.name, {'attr':{'class':'form-control form-control-md rounded-0'}}) }}
+                                                    </div>
+                                                    <div class="col-sm-12 form-errors">
+                                                        {{ form_errors(form.name) }}
+                                                    </div>
+                                                    <div class="col-sm-12 form-group">
+                                                        {{ form_label(form.colorTheme, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                                        {{ form_widget(form.colorTheme, {'attr':{'class':'form-control form-control-md rounded-0 colorpicker'}}) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="col-sm-12 form-group">
+                                                        {{ form_label(form.logo, null, {'label_attr':{'class':'control-label'}}) }}
+                                                        {{ form_widget(form.logo, {'attr':{'class':'js-file-attachment'}}) }}
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-12 form-errors">
-                                                {{ form_errors(form.name) }}
-                                            </div>
-                                            <div class="col-sm-12 form-group">
-                                                {{ form_label(form.colorTheme, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                                {{ form_widget(form.colorTheme, {'attr':{'class':'form-control form-control-md rounded-0 colorpicker'}}) }}
-                                            </div>
-                                            <div class="col-sm-12 form-group">
-                                                {{ form_label(form.logo, null, {'label_attr':{'class':'control-label'}}) }}
-                                                {{ form_widget(form.logo, {'attr':{'class':'form-control input-lg'}}) }}
-                                            </div>
-                                            <hr class="g-brd-gray-light-v4 g-mx-minus-30">
+                                        </div>
+                                        <hr class="g-brd-gray-light-v4 g-mx-minus-30">
 
-                                            <div class="col-sm-12 form-group">
-                                                {{ form_label(form.template, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                                <span class="form-errors">{{ form_errors(form.template) }}</span>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="cbp text-center" data-controls="#filterControls"
-                                                     data-animation="quicksand"
-                                                     data-x-gap="10" data-y-gap="10" data-media-queries='[
+                                        <div class="col-sm-12 form-group">
+                                            {{ form_label(form.template, null, {'label_attr':{'class':'g-mb-10'}}) }}
+                                            <span class="form-errors">{{ form_errors(form.template) }}</span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="cbp text-center" data-controls="#filterControls"
+                                                 data-animation="quicksand"
+                                                 data-x-gap="10" data-y-gap="10" data-media-queries='[
                                                  {"width": 1500, "cols": 6},
                                                  {"width": 1100, "cols": 6},
                                                  {"width": 800, "cols": 4},
@@ -124,46 +133,49 @@
                                                  {"width": 300, "cols": 2},
                                                  {"width": 0, "cols": 1}
                                                ]'>
-                                                    <!-- Cube Portfolio Blocks - Item -->
-                                                    {% for template in templates %}
-                                                        <div class="cbp-item identity design"
-                                                             data-id="{{ template.id }}">
-                                                            <div class="u-block-hover g-parent">
-                                                                <img class="img-fluid g-transform-scale-1_1--parent-hover g-transition-0_5 g-transition--ease-in-out"
-                                                                     src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
-                                                                     alt="Image description">
-                                                                <div class="d-flex w-100 h-100 g-bg-black-opacity-0_6 opacity-0 g-opacity-1--parent-hover g-pos-abs g-top-0 g-left-0 g-transition-0_3 g-transition--ease-in u-block-hover__additional--fade u-block-hover__additional--fade-in g-pa-15">
-                                                                    <ul class="align-items-end flex-column list-inline mt-auto ml-auto mb-0">
-                                                                        <li class="list-inline-item">
-                                                                            <a class="u-icon-v2 u-icon-size--xs g-brd-white g-color-black g-bg-white rounded-circle"
-                                                                               href="{{ template.urlExample }}"
-                                                                               target="_blank">
-                                                                                <i class="et-icon-video u-line-icon-pro"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="g-bg-white text-center g-pa-15">
-                                                                <h3 class="h6 g-font-weight-700 mb-1">{{ template.name }}</h3>
-                                                                <p class="g-font-size-13 mb-0">{{ template.description }}</p>
+                                                <!-- Cube Portfolio Blocks - Item -->
+                                                {% for template in templates %}
+                                                    <div class="cbp-item identity design"
+                                                         data-id="{{ template.id }}">
+                                                        <div class="u-block-hover g-parent">
+                                                            <img class="img-fluid g-transform-scale-1_1--parent-hover g-transition-0_5 g-transition--ease-in-out"
+                                                                 src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
+                                                                 alt="Image description">
+                                                            <div class="d-flex w-100 h-100 g-bg-black-opacity-0_6 opacity-0 g-opacity-1--parent-hover g-pos-abs g-top-0 g-left-0 g-transition-0_3 g-transition--ease-in u-block-hover__additional--fade u-block-hover__additional--fade-in g-pa-15">
+                                                                <ul class="align-items-end flex-column list-inline mt-auto ml-auto mb-0">
+                                                                    <li class="list-inline-item">
+                                                                        <a class="u-icon-v2 u-icon-size--xs g-brd-white g-color-black g-bg-white rounded-circle"
+                                                                           href="{{ template.urlExample }}"
+                                                                           target="_blank">
+                                                                            <i class="et-icon-video u-line-icon-pro"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
                                                         </div>
-                                                    {% endfor %}
-                                                </div>
+                                                        <div class="g-bg-white text-center g-pa-15">
+                                                            <h3 class="h6 g-font-weight-700 mb-1">{{ template.name }}</h3>
+                                                            <p class="g-font-size-13 mb-0">{{ template.description }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
                                             </div>
-                                            <div class="col-sm-12 form-group text-right">
-                                                <button type="submit" class="btn btn-md u-btn-primary rounded g-py-13 g-px-25">Suivant</button>
-                                            </div>
-                                            {{ form_end(form) }}
                                         </div>
+                                        <div class="col-sm-12 form-group text-right">
+                                            <button type="submit"
+                                                    class="btn btn-md u-btn-primary rounded g-py-13 g-px-25">Suivant
+                                            </button>
+                                        </div>
+                                        {{ form_end(form) }}
                                     </div>
                                 </div>
-                                <!-- End Tab panes -->
                             </div>
+                            <!-- End Tab panes -->
                         </div>
+
                     </div>
                 </div>
+            </div>
     </section>
 {% endblock %}
 
@@ -174,6 +186,13 @@
         <script src="{{ asset('assets/bo/js/components/hs.tabs.js') }}"></script>
         <script src="{{ asset('assets/bo/vendor/cubeportfolio-full/cubeportfolio/js/jquery.cubeportfolio.min.js') }}"></script>
         <script src="{{ asset('assets/bo/js/components/hs.cubeportfolio.js') }}"></script>
+        <script src="{{ asset('assets/js/imageTool.js') }}"></script>
+        <!-- JS Implementing Plugins -->
+        <script src="{{ asset('assets/bo/vendor/jquery.filer/js/jquery.filer.min.js') }}"></script>
+
+        <!-- JS Unify -->
+        <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
+        <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
         <script type="text/javascript">
             $(document).on('ready', function () {
                 // initialization of tabs
@@ -195,6 +214,29 @@
                 $('.colorpicker').colorPicker({
                     opacity: false
                 });
+            });
+
+            $("#add_order_logo").change(function () {
+                readURL(this);
+            });
+        </script>
+        <script>
+            $(document).on('ready', function () {
+                // initialization of forms
+                $.HSCore.components.HSFileAttachment.init('.js-file-attachment', {
+                    changeInput: '<div class="u-file-attach-v3 g-mb-15">\
+               				<h3 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="add_order_logo_filer_title"><span class="g-color-primary">Choisissez votre logo</span></h3>\
+                            <img id="add_order_logo-img" width="100%" class="no-display" />\
+              			</div>',
+                    limit: 1,
+                    templates: {
+                        item: '<div></div>'
+                    }
+                });
+                $.HSCore.helpers.HSFocusState.init();
+                $('#add_order_logo').on('click', function(){
+                    $('.jFiler').trigger('filer.reset');
+                })
             });
         </script>
     {% endblock %}

@@ -122,7 +122,7 @@ class AdminController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if (!isset($_SESSION["SITE_ID"])) {
+        if (!isset($_SESSION[Constants::SESSION_SITE_ID])) {
             $sites = $user->getSites();
             if (sizeof($sites) == 0) {
                 $request->getSession()->set(Security::AUTHENTICATION_ERROR, new AuthenticationException('Vous n\'avez aucun site actif.'));

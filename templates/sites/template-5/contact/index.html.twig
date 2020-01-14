@@ -7,6 +7,7 @@
 
 {% block body %}
 
+
     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
         <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
     {% else %}

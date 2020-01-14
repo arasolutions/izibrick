@@ -175,7 +175,7 @@
     font-size: small;
 }
 
-.option-domain input{
+.option-domain input {
     padding: .375rem .75rem;
     font-size: small;
     line-height: 1.5;
@@ -184,7 +184,7 @@
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .pad-bottom {
@@ -192,7 +192,7 @@
 }
 
 .bord-bottom {
-    border-bottom: 1px solid rgba(0,0,0,0.07);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
 .color-red {
@@ -209,7 +209,7 @@
 
 
 .form-errors {
-    margin-top: -10px;
+    margin-top: 10px;
 }
 
 .form-errors > ul {
@@ -290,4 +290,17 @@ ul.no-vertical-spacing > li {
 
 .no-padding {
     padding: 0 !important;
+}
+
+.u-file-attach-v3 {
+    padding: 10px !important;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    background-color: #f7f7f7;
+    overflow: hidden;
+    border: 1px dashed #ccc;
+    transition-property: background-color;
+    transition-duration: .2s;
+    transition-timing-function: ease-in;
 }

@@ -154,6 +154,7 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 } else {
                     $form->get('codePromo')->addError(new FormError('Code promotion inconnu'));
                 }
+                $form->get('name')->clearErrors();
             } else {
                 if ($form->isValid()) {
                     if (empty($form->get('template')->getData())) {

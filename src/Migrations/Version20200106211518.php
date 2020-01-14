@@ -22,7 +22,7 @@ final class Version20200106211518 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE fir_user ADD created_at DATETIME NOT NULL');
+        $this->addSql('ALTER TABLE fir_user ADD created_at DATETIME NOT NULL DEFAULT \'2020-01-01\'');
     }
 
     public function down(Schema $schema) : void
