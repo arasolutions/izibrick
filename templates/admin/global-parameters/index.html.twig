@@ -7,9 +7,6 @@
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-core.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-components.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/bo/css/unify-globals.css') }}">
 {% endblock %}
 
 
@@ -200,9 +197,9 @@
                                 <img id="edit_global_parameters_logo-img" height="100" src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo') }}" />\
                             </div>\
                             <div class="col-sm-12">\
-               				    <h3 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_global_parameters_logo_filer_title">\
+               				    <h4 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_global_parameters_logo_filer_title">\
                				        <span class="g-color-primary">Modifier l\'image</span>\
-               				    </h3>\
+               				    </h4>\
                				</div>\
               			</div>',
             limit: 1,
@@ -217,9 +214,9 @@
                                 <img id="edit_global_parameters_favicon-img" width="32" src="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}" />\
                             </div>\
                             <div class="col-sm-12">\
-               				    <h3 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_global_parameters_favicon_filer_title">\
+               				    <h4 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_global_parameters_favicon_filer_title">\
                				        <span class="g-color-primary">Modifier le favicon</span>\
-               				    </h3>\
+               				    </h4>\
                				</div>\
               			</div>',
             limit: 1,
