@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,12 +23,14 @@ class AddSiteOptionsType extends AbstractType
                 'expanded' => true,
                 'choices' => SiteOption::toIdArray()
             ))
-            ->add('newDomain', TextType::class, array(
+            ->add('newDomain', UrlType::class, array(
                 'label' => 'Quel nom souhaitez-vous ?',
+                'default_protocol' => 'https',
                 'required' => false,
             ))
-            ->add('existingDomain', TextType::class, array(
+            ->add('existingDomain', UrlType::class, array(
                 'label' => 'Quel nom avez-vous ?',
+                'default_protocol' => 'https',
                 'required' => false,
             ));
     }

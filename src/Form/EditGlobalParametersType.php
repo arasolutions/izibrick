@@ -36,8 +36,9 @@ class EditGlobalParametersType extends AbstractType
                 'required' => false,
                 'label' => 'Description'
             ])
-            ->add('domain', TextType::class, [
+            ->add('domain', UrlType::class, [
                 'required' => false,
+                'default_protocol' => 'https',
                 'label' => 'Nom de domaine (exemple : www.monsite.com)',
                 'constraints' => array(
                     new Length(array(
