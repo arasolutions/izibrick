@@ -213,7 +213,7 @@ class SiteController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function contact(Request $request, $siteName,
+    public function contact(Request $request, $siteName = null,
                             AddTrackingContactCommandHandler $addTrackingContactCommandHandler, \Swift_Mailer $mailer)
     {
         /** @var Site $site */
