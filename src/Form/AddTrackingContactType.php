@@ -30,7 +30,7 @@ class AddTrackingContactType extends AbstractType
                 'label' => 'Votre nom'
             ))
             ->add('email', EmailType::class, array(
-                'required' => true,
+                'required' => false,
                 'label' => 'Votre email'
             ))
             ->add('content', TextareaType::class, [

@@ -6,6 +6,7 @@ namespace App\Izibrick\CommandHandler;
 
 use App\Entity\Pricing;
 use App\Entity\Site;
+use App\Enum\Constants;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\GlobalParametersCommand;
@@ -74,7 +75,7 @@ class EditGlobalParametersCommandHandler
         // détection de la couleur du texte en fonction du fond choisi
         $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));
         $textColor = "#FFFFFF";
-        if ($luminance > .30) {
+        if ($luminance > Constants::LUMINANCE_THRESHOLD) {
             $textColor="#222222";
         }
 

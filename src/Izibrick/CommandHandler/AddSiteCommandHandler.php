@@ -12,6 +12,7 @@ use App\Entity\Pricing;
 use App\Entity\Quote;
 use App\Entity\Site;
 use App\Entity\User;
+use App\Enum\Constants;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\AddSiteCommand;
@@ -112,7 +113,7 @@ class AddSiteCommandHandler
 
         // détection de la couleur du texte en fonction du fond choisi
         $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));
-        if ($luminance > 0.5) {
+        if ($luminance > Constants::LUMINANCE_THRESHOLD) {
             $site->setTextColor("#222222");
         } else {
             $site->setTextColor("#FFFFFF");

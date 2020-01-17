@@ -25,13 +25,8 @@
                     <h3 class="panel-title"><label class="control-label">Image de fond</label></h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-sm-2">
-                        {% if site.home.mainPicture is defined and site.home.mainPicture is not null and site.home.mainPicture != '' %}
-                            <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('logo') }}" />
-                        {% endif %}
-                    </div>
-                    <div class="col-sm-10">
-                        {{ form_widget(form.mainPicture, {'attr':{'class':'form-control input-lg'}}) }}
+                    <div class="col-sm-12">
+                        {{ form_widget(form.mainPicture, {'attr':{'class':'js-file-attachment-background'}} ) }}
                     </div>
                 </div>
             </div>
@@ -76,4 +71,42 @@
 
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/bo/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/imageTool.js') }}"></script>
+    <script src="{{ asset('assets/bo/js/hs.core.js') }}"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="{{ asset('assets/bo/vendor/jquery.filer/js/jquery.filer.min.js') }}"></script>
+
+    <!-- JS Unify -->
+    <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
+    <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
+    <script type="text/javascript">
+        $.HSCore.components.HSFileAttachment.init('.js-file-attachment-background', {
+            changeInput: '<div class="u-file-attach-v3 g-mb-15">\
+                            <div class="col-sm-12">\
+                                <img id="edit_home_mainPicture-img" width="500" src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" />\
+                            </div>\
+                            <div class="col-sm-12">\
+               				    <h4 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_home_mainPicture_filer_title">\
+               				        <span class="g-color-primary">Modifier l\'image de fond</span>\
+               				    </h4>\
+               				</div>\
+              			</div>',
+            limit: 1,
+            templates: {
+                item: '<div></div>'
+            }
+        });
+        $("#edit_home_mainPicture").change(function () {
+            readURL(this, true);
+        });
+
+        $.HSCore.helpers.HSFocusState.init();
+    </script>
+
 {% endblock %}

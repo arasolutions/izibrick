@@ -94,13 +94,10 @@ class SiteRepository extends ServiceEntityRepository
         try {
             $q = $this->createQueryBuilder('s')
                 ->andWhere('s.domain = :val')
-                ->setParameter('val', $domain)
+                ->setParameter('val', 'https://' . $domain)
                 ->getQuery();
-
-            //var_dump($q->getSQL());die();
-
+            
             return $q->getSingleResult();
-            //var_dump($site);die();
         } catch (NoResultException $e) {
             return null;
         } catch (NonUniqueResultException $e) {
