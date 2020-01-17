@@ -64,6 +64,10 @@ class EditGlobalParametersCommandHandler
 
         $site->setDescription($command->getDescription());
         $site->setDomain($command->getDomain());
+        if($command->getDomain() != ''){
+            // Enlever le https
+            $site->setDomainHost(substr($command->getDomain(), 8));
+        }
         $site->setKeyWords($command->getKeys());
         $site->setFacebook($command->getFacebook());
         $site->setTwitter($command->getTwitter());
