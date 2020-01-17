@@ -2,6 +2,7 @@
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/
+!/public/bundles/fosckeditor/plugins/background/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
