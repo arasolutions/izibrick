@@ -117,6 +117,14 @@
             <!--================================-->
             <div class="navbar-content">
                 <ul class="nav navbar-top-links">
+                    <li>
+                        <a>
+                            <button id="start-tuto" class="btn btn-md btn-warning"><i class="ti-world"></i>&nbsp;Accéder
+                                au
+                                tutoriel
+                            </button>
+                        </a>
+                    </li>
 
                     {% if site.domainActif and site.domain %}
                         <li>
@@ -490,10 +498,13 @@
 
 <!--NiftyJS [ RECOMMENDED ]-->
 <script src="{{ asset('assets/js/nifty.min.js') }}"></script>
+
+<script src="{{ asset('assets/plugins/bootbox/bootbox.min.js') }}"></script>
+
+{% include 'admin/tutorial/tutorial.html.twig' %}
+
 {% block javascripts %}
-    <script type="text/javascript">
-    </script>
 {% endblock %}
-</div>
+
 </body>
 </html>

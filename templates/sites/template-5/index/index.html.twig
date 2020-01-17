@@ -1,7 +1,7 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{site.name}} - {{site.home.seoTitle}}{% endblock %}
-{% block description %}{{site.home.seoDescription}}{% endblock %}
+{% block title %}{{ site.name }} - {{ site.home.seoTitle }}{% endblock %}
+{% block description %}{{ site.home.seoDescription }}{% endblock %}
 
 {% block indexActive %}active{% endblock %}
 
@@ -13,7 +13,8 @@
                 <li data-transition="fade" data-title="Welcome to Vertex">
 
                     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
-                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" alt=""
+                        <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}"
+                             alt=""
                              data-bgposition="center center"
                              data-bgfit="cover"
                              data-bgrepeat="no-repeat"
@@ -34,15 +35,25 @@
                     </div>-->
 
                     <div class="tp-caption"
-                         data-x="left" data-hoffset="100"
-                         data-y="center" data-voffset="-70"
-                         data-fontsize="['40','70','34','44']"
+                         data-x="['left','left','left','left']" data-hoffset="['250','150','70','25']"
+                         data-y="['top','top','top','top']" data-voffset="['210','200','180','125']"
+                         data-fontsize="['30','30','30','20']"
+                         data-lineheight="['65,'55','46','30']"
+                         data-width="['500','500','500','300']"
+                         data-height="['60','120','120','120']"
                          data-start="1500"
-                         data-whitespace="nowrap"
-                         data-transform_in="y:[100%];s:400;"
-                         data-transform_out="opacity:0;s:400;"
-                         style="z-index: 5;padding-top: 10px;"
-                         data-mask_in="x:0px;y:0px;">{{ site.home.textPicture|raw }}
+                         data-whitespace="normal"
+                         data-transform_idle="o:1;"
+                         data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                         data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                         data-splitin="none"
+                         data-splitout="none"
+                         data-basealign="slide"
+                         data-responsive_offset="off"
+                         data-responsive="off"
+                         data-mask_in="x:0px;y:0px;"
+                         style="z-index: 7;margin-top:10px!important;font-weight: 300!important;">
+                        {{ site.home.textPicture|raw }}
                     </div>
 
                     <!--<div class="tp-caption text-white"

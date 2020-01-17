@@ -199,12 +199,37 @@
     color: red;
 }
 
+.tuto-modal-title {
+    font-size: 22px;
+}
+
+.tuto-menu-item {
+    text-align: center;
+    min-height: 60px;
+    display: table-cell;
+    padding: 2px !important;
+}
+
 .tuto-menu-item > div {
     border: solid 1px #f7f7f7;
     height: 100%;
     background-color: transparent;
     cursor: pointer;
     margin-bottom: 0;
+}
+
+.tuto-menu-item > div:hover {
+    border: solid 1px white;
+    background-color: var(--color-izibrick);
+}
+
+.tuto-menu-item > div:hover a, .tuto-menu-item > div:hover .text-main {
+    color: white;
+}
+
+.tuto-menu-item > div i {
+    font-size: 35px;
+    margin-bottom: 10px;
 }
 
 
