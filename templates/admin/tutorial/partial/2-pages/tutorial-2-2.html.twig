@@ -1,0 +1,19 @@
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Activez ou désactivez les pages <strong>Tarifs</strong> et/ou <strong>Devis</strong> en fonction de votre besoin.</p>
+    <p>Pour ce faire :</p>
+    <ul>
+        <li>
+            Cliquez sur le menu <strong>Paramètres du site</strong>
+        </li>
+        <li>
+            Cochez/Décochez les pages à rendre visibles ou non
+        </li>
+    </ul>
+{% endblock %}
+
+{% block next_action %}
+    window.location.href = '{{ path('bo-global-parameters', {'tuto':'2-2'}) }}';
+    return;
+{% endblock %}

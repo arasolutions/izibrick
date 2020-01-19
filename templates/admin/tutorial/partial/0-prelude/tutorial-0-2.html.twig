@@ -1,7 +1,7 @@
 {% extends 'admin/tutorial/partial/base.html.twig' %}
 
 {% block tuto_body %}
-    <p class="text-semibold text-main">Voici les thèmes du tutoriel</p>
+    <p class="text-semibold text-main">Les thèmes du tutoriel :</p>
     <!--<div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
@@ -13,39 +13,39 @@
             </div>
         </div>
     </div>-->
-    <div class="col-sm-4 tuto-menu-item pad-no">
-        <div class="panel pos-rel">
-            <div class="pad-all text-center">
-                <a href="{{ path('dashboard', {'tuto':1}) }}">
+    <a href="{{ path('dashboard', {'tuto':1}) }}">
+        <div class="col-sm-4 tuto-menu-item pad-no">
+            <div class="panel pos-rel">
+                <div class="pad-all text-center">
                     <i class="fa fa-bars icon-lg icon-fw"></i>
-                    <p class="text-md text-semibold mar-no text-main">1. Les menus</p>
+                    <p class="text-md text-semibold mar-no text-main">1. Les menus de l'administration</p>
                     <p class="text-sm mar-no text-main text-italic">3 étapes</p>
-                </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4 tuto-menu-item pad-no">
-        <div class="panel pos-rel">
-            <div class="pad-all text-center">
-                <a href="{{ path('dashboard', {'tuto':2}) }}">
+    </a>
+    <a href="{{ path('dashboard', {'tuto':2}) }}">
+        <div class="col-sm-4 tuto-menu-item pad-no">
+            <div class="panel pos-rel">
+                <div class="pad-all text-center">
                     <i class="fa fa-trophy icon-lg icon-fw"></i>
-                    <p class="text-md text-semibold mar-no text-main">2. Le référencement</p>
-                    <p class="text-sm mar-no text-main text-italic">3 étapes</p>
-                </a>
+                    <p class="text-md text-semibold mar-no text-main">2. Les pages de votre site</p>
+                    <p class="text-sm mar-no text-main text-italic">2 étapes</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4 tuto-menu-item pad-no">
-        <div class="panel pos-rel">
-            <div class="pad-all text-center">
-                <a href="{{ path('dashboard', {'tuto':3}) }}">
+    </a>
+    <a href="{{ path('dashboard', {'tuto':3}) }}">
+        <div class="col-sm-4 tuto-menu-item pad-no">
+            <div class="panel pos-rel">
+                <div class="pad-all text-center">
                     <i class="fa fa-file icon-lg icon-fw"></i>
-                    <p class="text-md text-semibold mar-no text-main">3. Ma formule</p>
+                    <p class="text-md text-semibold mar-no text-main">3. Optimiser votre référencement</p>
                     <p class="text-sm mar-no text-main text-italic">3 étapes</p>
-                </a>
+                </div>
             </div>
         </div>
-    </div>
+    </a>
     <!--<div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
@@ -56,15 +56,15 @@
             </div>
         </div>
     </div>-->
-    <div class="col-sm-4 tuto-menu-item pad-no">
-        <div class="panel pos-rel">
-            <div class="pad-all text-center">
-                <a href="{{ path('dashboard', {'tuto':4}) }}">
+    <!--<a href="{{ path('dashboard', {'tuto':4}) }}">
+        <div class="col-sm-4 tuto-menu-item pad-no">
+            <div class="panel pos-rel">
+                <div class="pad-all text-center">
                     <i class="fa fa-window-maximize icon-lg icon-fw"></i>
-                    <p class="text-md text-semibold mar-no text-main">4. Les pages</p>
+                    <p class="text-md text-semibold mar-no text-main">3. Ma formule</p>
                     <p class="text-sm mar-no text-main text-italic">3 étapes</p>
-                </a>
+                </div>
             </div>
         </div>
-    </div>
+    </a>-->
 {% endblock %}

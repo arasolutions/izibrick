@@ -8,9 +8,8 @@
             recherche (Google, Yahoo, etc...). Chaque page doit contenir à minima un titre et une description permettant
             aux moteurs de recherche de les proposer en fonction des recherches des internautes.
         </li>
-        <li>C'est également <strong>le référencement payant</strong>, c'est l'optimisation via campagnes publicitaires
-            de votre site qui force vote site a être dans les premiers résultats de recherche en fonction de mot-clés.
-            <span class="text-danger text-bold">Ce référencement est inclus dans la formule PROFESSIONNELLE d'izibrick</span>
+        <li>C'est également <strong>le référencement payant</strong>, c'est l'optimisation via des campagnes publicitaires. L'objectif est de forcer vote site à être dans les premiers résultats de recherche en fonction de mot-clés.
+            <span class="text-primary text-bold">Ce référencement est inclus dans la formule PROFESSIONNELLE d'izibrick</span>
         </li>
     </ul>
 {% endblock %}
@@ -19,7 +18,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             {% set tuto = app.request.get('tuto') %}
-            if ('{{ tuto }}' === '2') {
+            if ('{{ tuto }}' === '3') {
                 var tutoMenu = prepareTuto{{ tuto_id }}();
                 tutoMenu.modal('show');
             }
