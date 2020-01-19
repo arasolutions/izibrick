@@ -2,7 +2,7 @@
 
 {% block tuto_body %}
     <p class="text-semibold text-main">Voici les thèmes du tutoriel</p>
-    <div class="col-sm-4 tuto-menu-item pad-no">
+    <!--<div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
                 <a href="#">
@@ -12,7 +12,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
@@ -38,14 +38,15 @@
     <div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
-                <a href="#">
+                <a href="{{ path('dashboard', {'tuto':3}) }}">
                     <i class="fa fa-file icon-lg icon-fw"></i>
                     <p class="text-md text-semibold mar-no text-main">3. Ma formule</p>
+                    <p class="text-sm mar-no text-main text-italic">3 étapes</p>
                 </a>
             </div>
         </div>
     </div>
-    <div class="col-sm-4 tuto-menu-item pad-no">
+    <!--<div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
                 <a href="#">
@@ -54,13 +55,14 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="col-sm-4 tuto-menu-item pad-no">
         <div class="panel pos-rel">
             <div class="pad-all text-center">
-                <a href="#">
+                <a href="{{ path('dashboard', {'tuto':4}) }}">
                     <i class="fa fa-window-maximize icon-lg icon-fw"></i>
-                    <p class="text-md text-semibold mar-no text-main">5. Les pages</p>
+                    <p class="text-md text-semibold mar-no text-main">4. Les pages</p>
+                    <p class="text-sm mar-no text-main text-italic">3 étapes</p>
                 </a>
             </div>
         </div>

@@ -14,6 +14,8 @@
 
         exitTuto = function () {
             $(".modal").modal("hide");
+            $('.z-index').removeClass('z-index');
+            $('.no-z-index').removeClass('no-z-index');
             window.location.href = '{{ path('dashboard') }}';
         }
 
@@ -35,4 +37,12 @@
 {% include 'admin/tutorial/partial/2-referencement/tutorial-2-1.html.twig' with {'tuto_id':'2_1', 'tuto_title' : 'Le référencement', 'tuto_nav' :'1/3', 'tuto_id_next' : '2_2'} %}
 {% include 'admin/tutorial/partial/2-referencement/tutorial-2-2.html.twig' with {'tuto_id':'2_2', 'tuto_title' : 'Le référencement', 'tuto_nav' :'2/3', 'tuto_id_next' : '2_3'} %}
 {% include 'admin/tutorial/partial/2-referencement/tutorial-2-3.html.twig' with {'tuto_id':'2_3', 'tuto_title' : 'Le référencement', 'tuto_nav' :'3/3'} %}
+
+{% include 'admin/tutorial/partial/3-formule/tutorial-3-1.html.twig' with {'tuto_id':'3_1', 'tuto_title' : 'Ma formule', 'tuto_nav' :'1/3', 'tuto_id_next' : '3_2'} %}
+{% include 'admin/tutorial/partial/3-formule/tutorial-3-2.html.twig' with {'tuto_id':'3_2', 'tuto_title' : 'Ma formule', 'tuto_nav' :'2/3', 'tuto_id_next' : '3_3'} %}
+{% include 'admin/tutorial/partial/3-formule/tutorial-3-3.html.twig' with {'tuto_id':'3_3', 'tuto_title' : 'Ma formule', 'tuto_nav' :'3/3'} %}
+
+{% include 'admin/tutorial/partial/4-pages/tutorial-4-1.html.twig' with {'tuto_id':'4_1', 'tuto_title' : 'Les pages', 'tuto_nav' :'1/3', 'tuto_id_next' : '3_2'} %}
+{% include 'admin/tutorial/partial/4-pages/tutorial-4-2.html.twig' with {'tuto_id':'4_2', 'tuto_title' : 'Les pages', 'tuto_nav' :'2/3', 'tuto_id_next' : '3_3'} %}
+{% include 'admin/tutorial/partial/4-pages/tutorial-4-3.html.twig' with {'tuto_id':'4_3', 'tuto_title' : 'Les pages', 'tuto_nav' :'3/3'} %}
 
