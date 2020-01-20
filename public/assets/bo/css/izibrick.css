@@ -1,4 +1,8 @@
 
+.mt0 {
+    margin-top: 0px !important;
+}
+
 .mt10 {
     margin-top: 10px;
 }
@@ -41,40 +45,40 @@
 
 ::selection {
     color: #fff;
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
 }
 
 .g-bg-izibrick {
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
 }
 
 .u-btn-izibrick {
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
     color: white;
 }
 
 .u-btn-izibrick:hover {
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
     color: white;
 }
 
 .u-btn-outline-izibrick {
-    color: var(--color-izibrick);
-    border-color: var(--color-izibrick);
+    color: #25476a;
+    border-color: #25476a;
     background-color: transparent;
 }
 
 .u-btn-outline-izibrick:hover {
     color: #fff !important;
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
 }
 
 #navBar a:hover {
-    color: var(--color-izibrick) !important;
+    color: #25476a !important;
 }
 
 #banner {
-    background-color: var(--color-izibrick) !important;
+    background-color: #25476a !important;
 }
 
 .g-bg-izibrick-light-v5 {
@@ -86,18 +90,18 @@
 }
 
 .nav-link.active {
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
     color: white;
     border: none;
 }
 
 .cbp-item.selected > .cbp-item-wrapper > div:last-child {
-    background-color: var(--color-izibrick) !important;
+    background-color: #25476a !important;
     color: white !important;
 }
 
 .progress-bar-izibrick {
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
 }
 
 .alert-error {
@@ -220,7 +224,7 @@
 
 .tuto-menu-item > div:hover {
     border: solid 1px white;
-    background-color: var(--color-izibrick);
+    background-color: #25476a;
 }
 
 .tuto-menu-item > div:hover a, .tuto-menu-item > div:hover .text-main {
@@ -328,4 +332,8 @@ ul.no-vertical-spacing > li {
     transition-property: background-color;
     transition-duration: .2s;
     transition-timing-function: ease-in;
+}
+
+.cbp-item {
+    cursor: pointer;
 }

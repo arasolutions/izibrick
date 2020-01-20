@@ -59,6 +59,46 @@
             --colorTheme: {{ site.colorTheme }};
             --textColor: {{ site.textColor }};
         }
+
+         a.active {
+             color: {{ site.colorTheme }} !important;
+         }
+
+          footer {
+              background: {{ site.colorTheme }} !important;
+              color: {{ site.textColor }} !important;
+          }
+
+
+        .v-pagination li a:hover,
+        ul.bar-styling li:not(.selected) > a:hover,
+        ul.bar-styling li > .comments-likes:hover,
+        ul.page-numbers li > a:hover,
+        ul.page-numbers li > span.current,
+        .slideout-filter ul li.selected a,
+        .btn.v-btn.v-btn-default {
+            background: {{ site.colorTheme }} !important;
+            color: {{ site.textColor }} !important;
+        }
+
+        .v-blog-item-info .v-btn.sf-icon-stroke i,
+        .mini-v-blog-item-wrap .v-btn.sf-icon-stroke i,
+        .post-inner .v-btn.sf-icon-stroke i {
+            background: {{ site.colorTheme }} !important;
+            color: {{ site.textColor }} !important;
+        }
+
+        .v-heading-v2 h2,
+        .v-heading-v2 h3,
+        .v-heading-v2 h4,
+        .v-link:hover,
+        .v-search-items a:hover,
+        .post-info a,
+        .tags-wrap .tags a,
+        .v-team-member-box .read-more:hover,
+        .v-tweets-slide-widget .tweet-text a {
+            border-bottom-color: {{ site.colorTheme }};
+        }
     </style>
 
     <!-- Firebrick LESS -->

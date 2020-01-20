@@ -15,9 +15,10 @@
     <meta name="description" content="{% block description %}{% endblock %}">
 
     {% if site.favicon %}
-        <link rel="icon" type="image/png" href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}" />
+        <link rel="icon" type="image/png"
+              href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
     {% else %}
-        <link rel="icon" type="image/png" href="{{ asset('/assets/img/logo/favicon.png') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('/assets/img/logo/favicon.png') }}"/>
     {% endif %}
 
     <!--[if lt IE 9]>
@@ -46,8 +47,74 @@
         :root {
             --colorTheme: {{ site.colorTheme }};
             --textColor: {{ site.textColor }};
+            --headerTextColor: {{ site.lightTheme ? '#333' : 'white'  }};
+            --headerBackgroundColor: {{ site.lightTheme ? 'white' : '#333'  }};
+            --footerTextColor: {{ site.lightTheme ? '#333' : 'white'  }};
+            --footerBackgroundColor: {{ site.lightTheme ? 'white' : '#333'  }};
         }
     </style>
+    <!--[if lte IE 11]>
+    <style type="text/css">
+        ::selection {
+            background: {{ site.colorTheme }} !important;
+        }
+
+        .navigation > li:hover > a,
+        .navigation > li > a:hover,
+        .navigation > li > .activelink {
+            color: {{ site.colorTheme }} !important;
+        }
+
+        .navigation > li > a{
+            color: {{ site.lightTheme ? '#333' : 'white'  }} !important;
+        }
+
+        .body-wrapper a:hover,
+        .top-body a:hover,
+        .top-footer a:hover {
+            color: {{ site.colorTheme }} !important;
+        }
+
+        .blog-post-details-item.blog-post-details-item-right a:hover i {
+            color: {{ site.colorTheme }} !important;
+        }
+
+        #header {
+            background-color: {{ site.lightTheme ? 'white' : '#333'  }};
+            color: {{ site.lightTheme ? '#333' : 'white'  }};
+        }
+
+        #footer {
+            background: {{ site.lightTheme ? 'white' : '#333'  }};
+            color: {{ site.lightTheme ? '#333' : 'white'  }} !important;
+        }
+
+        .button, .body-wrapper input[type="submit"], .body-wrapper input[type="button"], .section-content.section-color-bg, .content-box.content-style4 h4 i, button.button-main, .body-wrapper .tags a:hover, .callout-box.callout-box2, .blog-search .blog-search-button, .top-title-wrapper, .testimonial-big,
+        .content-style3:hover .content-style3-icon, table.table thead tr, .price-table .price-label-badge, .price-table .price-table-header, .section-subscribe .subscribe-button.icon-envelope-alt {
+            background-color: {{ site.colorTheme }} !important;
+            color: {{ site.textColor }} !important;
+        }
+
+        .blog-post .blog-post-type {
+            background-color: {{ site.colorTheme }} !important;
+            color: {{ site.textColor }} !important;
+        }
+
+
+        .h1-page-title, .h2-page-desc {
+            color: {{ site.textColor }} !important;
+        }
+
+        .btn, input[type="submit"], input[type="button"], button.btn, .btn-izibrick {
+            background-color: {{ site.colorTheme }} !important;
+            color: {{ site.textColor }} !important;
+        }
+
+        .copyright{
+            background-color: {{ site.colorTheme }} !important;
+        }
+    </style>
+    <![endif]-->
     <link href="{{ asset('templates/template-3/assets/css/izibrick.css') }}"
           rel='stylesheet' type='text/css' id="skin-file">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
@@ -129,14 +196,14 @@
                                     </a>
                                 </li>
                                 {% if site.pricing.display == true %}
-                                <li>
-                                    <a class="{% block tarifActive %}{% endblock %}"
-                                       href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
+                                    <li>
+                                        <a class="{% block tarifActive %}{% endblock %}"
+                                           href="{{ path('tarif'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                         <span class="label-nav">
                                         Tarif
                                                 </span>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
                                 {% endif %}
                                 {% if site.quote.display == true %}
                                     <li>

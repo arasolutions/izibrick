@@ -71,7 +71,6 @@
                                                         </button>
                                                     </div>
                                                     {{ form_end(formLogin) }}
-                                                    <!-- End Form -->
                                             </div>
                                         </div>
 
@@ -80,6 +79,14 @@
                                                 <!-- Form -->
                                                 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'g-py-15'}}) }}
                                                 <h2 class="h3 g-color-black mb-4">Je crée mon compte</h2>
+                                                {% if error is defined and error is not null %}
+                                                    <div class="alert alert-danger">
+                                                        {{ error }}<br/>
+                                                        En cas de problème, <a
+                                                                href="{{ path('our-contact', {'subject':1}) }}"
+                                                                class="alert-link">contactez-nous</a>
+                                                    </div>
+                                                {% endif %}
                                                 <div class="mb-4 row">
                                                     <div class="col-6">
                                                         <div class="input-group rounded">
@@ -155,11 +162,18 @@
                                                         <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
                                                             <i class="fa" data-check-icon="&#xf00c"></i>
                                                         </div>
-                                                        J'accepte les&nbsp;<a href="{{path('cgu')}}" target="_blank">Conditions Générales d'Utilisation</a>
+                                                        J'accepte les&nbsp;<a href="{{ path('cgu') }}" target="_blank">Conditions
+                                                            Générales d'Utilisation</a>
                                                     </label>
+                                                    <div class="col-sm-12 form-errors mt0 no-display" id="error-cgu">
+                                                        <ul>
+                                                            <li>Veuillez valider les CGU.</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
 
-                                                <button class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13"
+                                                <button id="form-register-submit"
+                                                        class="btn btn-md btn-block u-btn-primary rounded text-uppercase g-py-13"
                                                         type="submit">Créer mon compte
                                                 </button>
                                                 {{ form_end(form) }}
@@ -176,3 +190,19 @@
         </div>
     </section>
 {% endblock body %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).on('ready', function () {
+            $('#form-register-submit').on('click', function (e) {
+                if(!$('#app_user_registration_cgu').prop('checked')){
+                    $('#error-cgu').removeClass('no-display');
+                    e.preventDefault();
+                }else{
+                    $('#error-cgu').addClass('no-display');
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

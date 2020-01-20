@@ -134,6 +134,7 @@ class RegistrationController extends BaseController
         $formLogin->handleRequest($request);
 
         if ($formRegister->isSubmitted()) {
+
             if ($formRegister->isValid()) {
                 $find = $userManager->findUserByEmail($command->getEmail());
 

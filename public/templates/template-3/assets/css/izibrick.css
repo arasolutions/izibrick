@@ -17,7 +17,7 @@
 .navigation > li:hover > a,
 .navigation > li > a:hover,
 .navigation > li > .activelink {
-    color: var(--textColor) !important;
+    color: var(--colorTheme) !important;
 }
 
 .navigation > li > a{
