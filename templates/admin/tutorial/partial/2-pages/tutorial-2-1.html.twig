@@ -1,0 +1,44 @@
+{% extends 'admin/tutorial/partial/base.html.twig' %}
+
+{% block tuto_body %}
+    <p class="text-semibold text-main">Les pages de votre site : </p>
+    <ul>
+        <li>
+            <i class="ti-home"></i><strong>Accueil</strong> : La page est composée d'une image de fond et d'un contenu permettant de présenter vos services et votre activité.
+        </li>
+        <li>
+            <i class="ti-pencil-alt"></i><strong>Présentation</strong> : Contenu permettant de décrire votre parcours et/ou de présenter votre société.
+        </li>
+        <li>
+            <i class="ti-comment"></i><strong>Blog / articles</strong> : Ajoutez des articles afin de partager vos projets.
+        </li>
+        <li>
+            <i class="ti-money"></i><strong>Tarifs</strong> (possibilité de ne pas l'afficher) : Précisez les tarifs de vos produits ou prestations.
+        </li>
+        <li>
+            <i class="ti-shopping-cart"></i><strong>Devis</strong> (possibilité de ne pas l'afficher) : Laissez les internautes réaliser des demandes de devis.
+        </li>
+        <li>
+            <i class="ti-email"></i><strong>Contact</strong> : Retrouvez toutes les informations pour que les internautes puissent vous contacter.
+        </li>
+    </ul>
+{% endblock %}
+
+{% block tuto_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% set tuto = app.request.get('tuto') %}
+            if ('{{ tuto }}' === '2') {
+                var tutoMenu = prepareTuto{{ tuto_id }}();
+                tutoMenu.modal('show');
+            }
+        });
+    </script>
+
+{% endblock %}
+
+{% block modal_class %}
+    $('#navbar').addClass('no-z-index');
+    $('#mainnav-container').addClass('z-index');
+    $(this).addClass('ml100');
+{% endblock %}

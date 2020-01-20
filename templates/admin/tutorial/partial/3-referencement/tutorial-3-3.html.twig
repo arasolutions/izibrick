@@ -2,24 +2,16 @@
 
 {% block tuto_body %}
     <p class="text-semibold text-main">Renseignement des éléments de référencement</p>
-    <div class="text-center margin-t-b-10">
-        <img src="{{ asset('assets/img/tutorial/2-referencement/2-3-annonce.png') }}"
-         class="width-90 border-shadow no-padding"/>
-    </div>
-    <p>Dans la page de référencement, et plus particulièrement dans le référencement de la page <strong>Accueil</strong>,
-        vous devez indiquer</p>
-    <p>Un titre. Exemple:</p>
+    <p>Dans la page de référencement, et plus particulièrement dans la rubrique de la page <strong>Accueil</strong>, vous devez indiquer un titre et une description.</p>
+    <p>Le titre. Exemple:</p>
     <ul class="no-vertical-spacing">
         <li>Accueil <span class="text-italic">(par défaut)</span></li>
-        <li>Bienvenue</li>
-        <li class="text-danger">Cet élément sera présent dans le titre de votre page dans le navigateur</li>
+        <li class="text-primary">Cet élément est visible dans le titre de la page de votre navigateur internet</li>
     </ul>
     <p>Une description. Exemple:</p>
     <ul class="no-vertical-spacing">
-        <li>Page de bienvenue de ...</li>
         <li>Bienvenue sur le site de l'entreprise ...</li>
-        <li class="text-danger">Cet élément sera présent dans la description de cette page sur les moteurs de
-            recherche
+        <li class="text-primary">Votre description est affichée dans le résultat des moteurs de recherche
         </li>
     </ul>
 {% endblock %}
@@ -35,7 +27,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             {% set tuto = app.request.get('tuto') %}
-            if ('{{ tuto }}' === '2-3') {
+            if ('{{ tuto }}' === '3-3') {
                 var tutoMenu = prepareTuto{{ tuto_id }}();
                 tutoMenu.modal('show');
             }

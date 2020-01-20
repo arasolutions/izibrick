@@ -27,7 +27,7 @@
                 buttons: {
                     confirm: {
                         label: "Suivant",
-                        className: 'btn-primary btn-sm {% if not tuto_id_next is defined %} no-display {% endif %}',
+                        className: 'btn-primary {% if not tuto_id_next is defined %} no-display {% endif %}',
                         callback: function (e) {
                             {% block next_action %}
                             {% endblock %}
@@ -36,7 +36,7 @@
                     },
                     cancel: {
                         label: 'Quitter le tutoriel',
-                        className: 'btn-danger pull-left btn-sm',
+                        className: 'btn-danger pull-left',
                         callback: function () {
                             {% block exit_action %}
                             {% endblock %}
