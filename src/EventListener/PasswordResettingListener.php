@@ -10,22 +10,25 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class PasswordResettingListener  implements EventSubscriberInterface
+class PasswordResettingListener implements EventSubscriberInterface
 {
     private $router;
 
-    public function __construct(UrlGeneratorInterface $router) {
+    public function __construct(UrlGeneratorInterface $router)
+    {
         $this->router = $router;
     }
 
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents()
+    {
         return [
             FOSUserEvents::RESETTING_RESET_SUCCESS => 'onPasswordResettingSuccess',
         ];
     }
 
-    public function onPasswordResettingSuccess(FormEvent $event) {
-        $url = $this->router->generate('fos_user_security_login', ['from_reset'=>1]);
+    public function onPasswordResettingSuccess(FormEvent $event)
+    {
+        $url = $this->router->generate('fos_user_security_login', ['from_reset' => 1]);
         $event->setResponse(new RedirectResponse($url));
     }
 }

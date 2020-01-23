@@ -5,35 +5,33 @@
 {% block title %}Réinitialisation de votre mot de passe{% endblock %}
 
 {% block fos_user_content %}
-    <div id="container" class="cls-container">
-
-        <!-- BACKGROUND IMAGE -->
-        <!--===================================================-->
-        <div id="bg-overlay"></div>
-
-
-        <!-- PASSWORD RESETTING FORM -->
-        <!--===================================================-->
-        <div class="cls-content">
-            <div class="cls-content-sm panel">
-                <div class="panel-body">
-                    <h1 class="h3">Réinitilisation du mot de passe</h1>
-                    <p class="pad-btm">Renseignez votre email.</p>
+<section class="g-bg-izibrick-light-v5 g-bg-img-hero" style="height: 130%; background-image: url({{ asset('templates/bo/img/bg6.jpg') }});">
+    <div class="container g-py-100">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-lg-5">
+                <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+                    <header class="text-center mb-4">
+                        <h2 class="h2 g-color-black g-font-weight-600">Réinitialisation de votre mot de passe</h2>
+                    </header>
                     <form action="{{ path('fos_user_resetting_send_email') }}" method="POST"
                           class="fos_user_resetting_request">
                         <div class="form-group">
-                            <input type="text" id="username" name="username" placeholder="Email" required="required" class="form-control"/>
+                            <input type="text" id="username" name="username" placeholder="Email" required="required"
+                                   class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"/>
                         </div>
-                        <div class="form-group text-right">
-                            <input class="btn btn-danger btn-lg btn-block" type="submit" value="{{ 'resetting.request.submit'|trans }}"/>
+                        <div class="form-group text-center">
+                            <input class="btn btn-md rounded g-py-13 g-px-25 btn-danger" type="submit"
+                                   value="{{ 'resetting.request.submit'|trans }}"/>
                         </div>
                     </form>
-                    <div class="pad-top">
-                        <a href="{{ path('fos_user_security_login') }}" class="btn-link text-bold text-main">Retour à la connexion</a>
+                    <div class="pad-top pull-right">
+                        <a href="{{ path('fos_user_security_login') }}" class="g-font-size-12">Retour à la
+                            connexion</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
 {% endblock fos_user_content %}
