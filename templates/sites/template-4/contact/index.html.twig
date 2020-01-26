@@ -39,7 +39,7 @@
                         </div>
 
                         <p class="pull-bottom-small">
-                            {{ contact.presentation }}
+                            {{ contact.presentation|raw|nl2br }}
                         </p>
 
                         {{ form_start(form) }}
