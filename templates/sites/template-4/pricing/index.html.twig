@@ -3,7 +3,7 @@
 {% block title %}{{site.name}} | {{ site.pricing.seoTitle }}{% endblock %}
 {% block description %}{{ site.pricing.seoDescription }}{% endblock %}
 
-{% block devisActive %}active{% endblock %}
+{% block tarifActive %}active{% endblock %}
 
 {% block body %}
     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="container">
-            {{ site.pricing.content|raw }}
+            {{ site.pricing.content|raw|nl2br }}
         </div>
     </div>
 </div>
