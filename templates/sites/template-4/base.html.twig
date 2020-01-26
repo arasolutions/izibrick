@@ -8,9 +8,10 @@
     <meta name="keywords" content="responsive, catalog, cart, themes, twitter bootstrap, bootstrap">
     <meta name="author" content="afriq yasin ramadhan">
     {% if site.favicon %}
-        <link rel="icon" type="image/png" href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}" />
+        <link rel="icon" type="image/png"
+              href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
     {% else %}
-        <link rel="icon" type="image/png" href="{{ asset('/assets/img/logo/favicon.png') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('/assets/img/logo/favicon.png') }}"/>
     {% endif %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -53,7 +54,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand visible-xs" href="#">Dodolan Manuk</a>
+            <a class="navbar-brand visible-xs" href="#">
+                <img alt="Logo {{ site.name }}" height="35"
+                     src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo_template') }}"/>
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
