@@ -78,6 +78,8 @@ class EditGlobalParametersCommandHandler
 
         // détection de la couleur du texte en fonction du fond choisi
         $luminance = ColorHelper::getLuminance(ColorHelper::hexaToRgb($command->getColorTheme()));
+
+        //var_dump($luminance);die();
         $textColor = "#FFFFFF";
         if ($luminance > Constants::LUMINANCE_THRESHOLD) {
             $textColor="#222222";

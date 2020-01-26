@@ -40,7 +40,7 @@
                                 <a href="#">
                                     {{ post.title }}
                                 </a>
-                                {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
+                                {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                                 <a class="btn btn-izibrick pull-right" href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                                     Retour
                                 </a>
