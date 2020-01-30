@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\PricingCategory;
 use App\Izibrick\Command\PricingProductCommand;
+use App\Repository\PricingCategoryRepository;
+use App\Repository\PricingRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -44,7 +46,12 @@ class EditPricingProductType extends AbstractType
                 'required' => false,
                 'label' => 'Catégorie',
                 'class' => PricingCategory::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'query_builder' => function (PricingCategoryRepository $repository) use ($options){
+                    return $repository->createQueryBuilder('c')
+                        ->andwhere('c.site = :site')
+                        ->setParameter('site', $options['siteId']);
+                },
             ])
             ->add('price', NumberType::class, [
                 'label'    => 'Prix',
@@ -71,6 +78,7 @@ class EditPricingProductType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PricingProductCommand::class,
+            'siteId' => '',
         ]);
     }
 }
