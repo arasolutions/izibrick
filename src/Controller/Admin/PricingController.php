@@ -209,10 +209,7 @@ class PricingController extends AbstractController
             $success = false;
         }
 
-        return $this->render('admin/pricing/index.html.twig', [
-            'site' => $site,
-            'categories' => $site->getPricingCategories(),
-            'products' => $site->getPricingProducts(),
+        return $this->redirectToRoute('bo-pricing', [
             'success' => $success
         ]);
     }
