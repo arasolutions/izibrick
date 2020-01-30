@@ -55,7 +55,7 @@ class EditPricingProductType extends AbstractType
                 'label' => 'Devise',
                 'constraints' => array (
                     new Length(array (
-                        'min' => '2',
+                        'min' => '1',
                         'max' => '255'
                     ))
                 )

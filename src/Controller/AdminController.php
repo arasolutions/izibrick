@@ -176,7 +176,7 @@ class AdminController extends AbstractController
         }
         if ($contact->getSeoDescription() != '') $referencementDescription++;
         if ($referencementTitle != 0) $referencementTitleTaux = $referencementTitle / $nbrPages * 100;
-        if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementTitle / $nbrPages * 100;
+        if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementDescription / $nbrPages * 100;
         if ($referencementTitle != 0 || $referencementDescription != 0) $referencementTaux = ($referencementTitleTaux + $referencementDescriptionTaux) / 2;
         $referencement = array(
             'referencementTitleTaux' => $referencementTitleTaux,

@@ -91,7 +91,7 @@ class PricingController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $categories = $this->pricingCategoryRepository->getAllBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
         $products = $this->pricingProductRepository->getAllBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $success = false;
+        $success = $request->query->get('success', false);
 
         $command = new PricingCommand();
         $command->setContent($site->getPricing()->getContent());

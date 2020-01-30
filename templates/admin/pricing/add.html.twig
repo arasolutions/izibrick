@@ -12,6 +12,11 @@
             <strong>Parfait !</strong> Votre page Devis à bien été mise à jour.
         </div>
     {% endif %}
+    {% if not form.vars.valid %}
+        <div class="alert alert-danger">
+            <strong>Erreur !</strong> Votre formulaire n'est pas valide.
+        </div>
+    {%endif%}
     <div class="panel">
         <div class="panel-body">
 
@@ -33,10 +38,12 @@
                     <div class="col-sm-12 form-group">
                         {{ form_label(form.name) }}
                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                        <span class="form-errors">{{ form_errors(form.name) }}</span>
                     </div>
                     <div class="col-sm-12 form-group">
                         {{ form_label(form.content) }}
                         {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                        <span class="form-errors">{{ form_errors(form.content) }}</span>
                     </div>
                     <div class="col-sm-12 form-group">
                         {{ form_label(form.category) }}
@@ -50,6 +57,7 @@
                     <div class="col-sm-12 form-group">
                         {{ form_label(form.currency) }}
                         {{ form_widget(form.currency, {'attr': {'class': 'form-control'}}) }}
+                        <span class="form-errors">{{ form_errors(form.currency) }}</span>
                     </div>
                     <div class="col-sm-12 form-group">
                         {{ form_label(form.active) }}
