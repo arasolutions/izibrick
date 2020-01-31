@@ -16,15 +16,6 @@
                         <h2 class="h2-page-desc">
                             {{ site.blog.seoDescription ~ ' / ' ~ post.title }}
                         </h2>
-
-                        <div class="breadcrumb-container">
-                            <ol class="breadcrumbs">
-                                {% set siteName = site.name|param(app.request.server.get('REQUEST_URI')) %}
-                                <li>
-                                    <a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Retour</a>
-                                </li>
-                            </ol>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -42,8 +33,7 @@
                     <div class="blog-span">
                         <div class="blog-post-featured-img img-overlay">
                             {% if post.image is defined and post.image is not null %}
-                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"
-                                     class="img-responsive"/>
+                                <img style="width: 50%;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}" />
                             {% endif %}
 
                         </div>
@@ -52,7 +42,7 @@
                         </h2>
 
                         <div class="blog-post-body">
-                            {{ post.content }}
+                            {{ post.content|raw }}
                         </div>
 
                         <div class="blog-post-details">

@@ -12,12 +12,9 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="page-info">
                         <h1 class="h1-page-title">{{ site.blog.seoTitle }}</h1>
-
                         <h2 class="h2-page-desc">
                             {{ site.blog.seoDescription }}
-
                         </h2>
-
                     </div>
                 </div>
             </div>
@@ -34,7 +31,6 @@
                         <h2 class="h2-section-title">{{ site.blog.seoTitle }}</h2>
                         <div class="i-section-title">
                             <i class="icon-feather">
-
                             </i>
                         </div>
                     </div>
@@ -47,6 +43,8 @@
                             {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                             {% for post in posts %}
                                 {% set siteName = siteName|merge({'post':post.id}) %}
+
+                                <div class="col-sm-6">
                                 <div class="blog-post">
                                     <div class="blog-post-type">
                                         <i class="icon-photo"> </i>
@@ -96,6 +94,7 @@
                                             </a>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             {% endfor %}
                         {% else %}
