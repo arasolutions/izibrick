@@ -172,7 +172,10 @@ class PricingController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditPricingProductType::class, $command);
+        $form = $this->createForm(EditPricingProductType::class, $command, [
+            'method' => 'POST',
+            'siteId' => $site->getId()
+        ]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $editPricingProductCommandHandler->handle($command, $site);
