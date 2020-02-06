@@ -83,18 +83,30 @@
                         </div>
 
                         <p>
-                            {{ contact.name }}<br/>
+                            {% if contact.name %}
+                                {{ contact.name }}<br/>
+                            {% endif %}
                             {{ contact.postCode }} {{ contact.city }} {{ contact.country }}
                         </p>
                     {% endif %}
 
                     {% if (contact.email is defined and contact.email is not null) or (contact.phone is defined and contact.phone is not null) %}
                         <div class="v-heading-v2">
-                            <h3>Téléphone & Email</h3>
+                            {% if contact.email and contact.phone %}
+                                <h3>Téléphone & Email</h3>
+                            {% elseif contact.phone %}
+                                <h3>Téléphone</h3>
+                            {% else %}
+                                <h3>Email</h3>
+                            {% endif %}
                         </div>
                         <p>
-                            Email: <a href="#" target="_blank">{{ contact.email }}</a><br/>
-                            Phone: {{ contact.phone }}<br/>
+                            {% if contact.email %}
+                                Email : <a href="mailto:{{ contact.email }}?subject=[{{site.name}}] Site - Contact" target="_blank">{{ contact.email }}</a><br/>
+                            {% endif %}
+                            {% if contact.phone %}
+                                Phone : {{ contact.phone }}
+                            {% endif %}
                         </p>
                     {% endif %}
 

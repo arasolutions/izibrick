@@ -61,3 +61,9 @@ ul.page-numbers li > span.current,
     background: var(--colorTheme);
     color: var(--textColor);
 }
+
+@media (max-width: 640px) {
+    ul {
+        margin-left: 0px !important;
+    }
+}

@@ -39,10 +39,23 @@
 
                     <!-- Profile Details -->
                     <p class="pad-ver text-main text-sm text-uppercase text-bold">A propos de moi</p>
-                    <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> San Jose, CA</p>
-                    <p><a href="#" class="btn-link"><i class="demo-pli-internet icon-lg icon-fw"></i>
-                            http://www.themeon.net</a></p>
-                    <p><i class="demo-pli-old-telephone icon-lg icon-fw"></i>(123) 456 1234</p>
+                    <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> {{ site.contact.postCode }} {{ site.contact.city }}, {{ site.contact.country }}</p>
+                    {% if site.contact.phone %}
+                        <p><i class="demo-pli-old-telephone icon-lg icon-fw"></i>{{ site.contact.phone }}</p>
+                    {% endif %}
+                    <p>
+                        {% if site.domainActif and site.domain %}
+                        <a href="{{ site.domain }}" target="_blank" class="btn-link">
+                            <i class="demo-pli-internet icon-lg icon-fw"></i>
+                            {{ site.domain }}
+                        </a>
+                    {% else %}
+                        <a href="{{ path('site_home', {'siteName':site.internalName}) }}" target="_blank" class="btn-link">
+                            <i class="demo-pli-internet icon-lg icon-fw"></i>
+                            {{ site.internalName }}
+                        </a>
+                    {% endif %}
+                    </p>
 
 
                 </div>
