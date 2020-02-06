@@ -113,17 +113,23 @@
                         <div class="v-heading-v2">
                             <h3>Réseaux sociaux</h3>
                         </div>
-                        <ul class="social-icons standard circle">
+                        <div class="contact-social">
                             {% if site.twitter %}
-                                <li class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <p>
+                                    <span class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i> {{ site.getTwitterKey() }}</a></span>
+                                </p>
                             {% endif %}
                             {% if site.facebook %}
-                                <li class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <p>
+                                    <span class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i> {{ site.getFacebookKey() }}</a></span>
+                                </p>
                             {% endif %}
                             {% if site.instagram %}
-                                <li class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                <p>
+                                    <span class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-2x fa-instagram"></i> {{ site.getInstagramKey() }}</a></span>
+                                </p>
                             {% endif %}
-                        </ul>
+                        </div>
                     {% endif %}
 
                 </div>

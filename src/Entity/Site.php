@@ -788,4 +788,19 @@ class Site
         return $this;
     }
 
+    public function getTwitterKey(): ?string
+    {
+        return str_replace("https://www.twitter.com", "", $this->twitter);
+    }
+
+    public function getFacebookKey(): ?string
+    {
+        return str_replace("https://www.facebook.com", "", $this->facebook);
+    }
+
+    public function getInstagramKey(): ?string
+    {
+        return str_replace("https://www.instagram.com", "", $this->instagram);
+    }
+
 }
