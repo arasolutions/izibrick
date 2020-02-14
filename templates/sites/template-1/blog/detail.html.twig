@@ -32,7 +32,7 @@
 
                         <figure class="media-wrap">
                             {% if post.image is defined and post.image is not null %}
-                                <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('main_picture') }}" />
+                                <img style="width: 30%;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('main_picture') }}" />
                             {% endif %}
                         </figure>
 
