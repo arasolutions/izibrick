@@ -42,7 +42,7 @@
                         </div>
 
                         <p class="pull-bottom-small">
-                            {{ contact.presentation }}
+                            {{ contact.presentation|raw }}
                         </p>
 
                         {{ form_start(form) }}
@@ -86,18 +86,30 @@
                         </div>
 
                         <p>
-                            {{ contact.name }}<br/>
+                            {% if contact.name %}
+                                {{ contact.name }}<br/>
+                            {% endif %}
                             {{ contact.postCode }} {{ contact.city }} {{ contact.country }}
                         </p>
                     {% endif %}
 
                     {% if (contact.email is defined and contact.email is not null) or (contact.phone is defined and contact.phone is not null) %}
                         <div class="v-heading-v2">
-                            <h3>Téléphone & Email</h3>
+                            {% if contact.email and contact.phone %}
+                                <h3>Téléphone & Email</h3>
+                            {% elseif contact.phone %}
+                                <h3>Téléphone</h3>
+                            {% else %}
+                                <h3>Email</h3>
+                            {% endif %}
                         </div>
                         <p>
-                            Email: <a href="#" target="_blank">{{ contact.email }}</a><br/>
-                            Phone: {{ contact.phone }}<br/>
+                            {% if contact.email %}
+                                Email : <a href="mailto:{{ contact.email }}?subject=[{{site.name}}] Site - Contact" target="_blank">{{ contact.email }}</a><br/>
+                            {% endif %}
+                            {% if contact.phone %}
+                                Phone : {{ contact.phone }}
+                            {% endif %}
                         </p>
                     {% endif %}
 
@@ -116,17 +128,23 @@
                         <div class="v-heading-v2">
                             <h3>Réseaux sociaux</h3>
                         </div>
-                        <ul class="social-icons standard circle">
+                        <div class="contact-social">
                             {% if site.twitter %}
-                                <li class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <p>
+                                    <span class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i> {{ site.getTwitterKey() }}</a></span>
+                                </p>
                             {% endif %}
                             {% if site.facebook %}
-                                <li class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <p>
+                                    <span class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i> {{ site.getFacebookKey() }}</a></span>
+                                </p>
                             {% endif %}
                             {% if site.instagram %}
-                                <li class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                <p>
+                                    <span class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i> {{ site.getInstagramKey() }}</a></span>
+                                </p>
                             {% endif %}
-                        </ul>
+                        </div>
                     {% endif %}
 
                 </div>
