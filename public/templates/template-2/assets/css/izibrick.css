@@ -53,3 +53,15 @@ ul.page-numbers li > span.current,
     background: var(--colorTheme);
     color: var(--textColor) !important;
 }
+
+html #header.header-transparent .header-body:before {
+    color: var(--textColor) !important;
+}
+
+@media (max-width: 767px) {
+    #index-container {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 20px 0 !important;
+    }
+}

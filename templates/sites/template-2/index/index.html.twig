@@ -10,7 +10,7 @@
         <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.7" data-plugin-revolution-slider
              data-plugin-options="{'delay': 9000, 'gridwidth': [1140,960,720,540], 'gridheight': [720,720,720,720], 'disableProgressBar': 'on', 'responsiveLevels': [4096,1200,992,576], 'navigation' : {'arrows': { 'enable': true, 'style': 'slider-arrows-style-1' }, 'bullets': {'enable': true, 'style': 'bullets-style-1', 'h_align': 'center', 'v_align': 'bottom', 'space': 7, 'v_offset': 35, 'h_offset': 0}}}">
             <ul>
-                <li data-transition="fade" data-title="Welcome to Vertex">
+                <li data-transition="fade" data-title="{{site.name}}">
 
                     {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
                         <img src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" alt=""
@@ -30,46 +30,16 @@
                          data-x="left" data-hoffset="100"
                          data-y="center" data-voffset="-125"
                          data-start="1000"
-                         data-transform_in="y:[-300%];opacity:0;s:400;">{{ site.home.textPicture|raw }}
+                         data-transform_in="y:[-300%];opacity:0;s:400;">
+                        {{ site.home.textPicture|raw }}
                     </div>
-
-                    <!--<div class="tp-caption"
-                         data-x="['left','left','left','left']" data-hoffset="['250','150','70','25']"
-                         data-y="['top','top','top','top']" data-voffset="['210','200','180','125']"
-                         data-fontsize="['30','30','30','20']"
-                         data-lineheight="['65,'55','46','30']"
-                         data-width="['500','500','500','300']"
-                         data-height="['60','120','120','120']"
-                         data-start="1500"
-                         data-whitespace="normal"
-                         data-transform_idle="o:1;"
-                         data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                         data-transform_out="y:50px;opacity:0;s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                         data-splitin="none"
-                         data-splitout="none"
-                         data-basealign="slide"
-                         data-responsive_offset="off"
-                         data-responsive="off"
-                         data-mask_in="x:0px;y:0px;"
-                         style="z-index: 7;margin-top:10px!important;font-weight: 300!important;">
-                    </div>-->
-
-                    <!--<div class="tp-caption text-white"
-                         data-x="left" data-hoffset="100"
-                         data-width="['none','none','none','400']"
-                         data-y="center" data-voffset="15"
-                         data-start="2000"
-                         style="font-size:17px;font-weight: 300;line-height: 24px; color:#e0e0e0!important;font-family: 'Museo500Regular', Arial, Helvetica, Tahoma, sans-serif;"
-                         data-transform_in="y:[100%];opacity:0;s:400;">
-                        Créée en 1012
-                    </div>-->
                 </li>
             </ul>
         </div>
     </div>
     <div class="v-page-wrap no-top-spacing no-bottom-spacing">
         <div class="v-bg-stylish pb-0">
-            <div class="container">
+            <div id="index-container" class="container">
                 {{ site.home.content|raw }}
             </div>
         </div>
