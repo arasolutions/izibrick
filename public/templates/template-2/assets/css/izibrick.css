@@ -2,29 +2,30 @@
     max-width: unset !important;
 }
 
-a.active{
-  color: var(--colorTheme) !important;
+a.active {
+    color: var(--colorTheme) !important;
 }
 
-footer{
+footer {
     background: var(--colorTheme) !important;
     color: var(--textColor) !important;
 }
 
-footer, footer p{
+footer, footer p {
     color: white !important;
     padding: 20px 0px 0px 0px;
 }
 
-.logo-title{
-    font-size:1.5em;
-    padding-left:10px;
+.logo-title {
+    font-size: 1.5em;
+    padding-left: 10px;
     color: #FFF;
 }
-.footer-title{
-     font-size:1.5em;
-     padding-left:10px;
- }
+
+.footer-title {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
 
 .v-heading-v2 h2,
 .v-heading-v2 h3,
@@ -44,7 +45,7 @@ ul.bar-styling li > .comments-likes:hover,
 ul.page-numbers li > a:hover,
 ul.page-numbers li > span.current,
 .slideout-filter ul li.selected a,
-.btn.v-btn.v-btn-default{
+.btn.v-btn.v-btn-default {
     background: var(--colorTheme);
     color: var(--textColor) !important;
 }
@@ -54,14 +55,25 @@ ul.page-numbers li > span.current,
     color: var(--textColor) !important;
 }
 
-html #header.header-transparent .header-body:before {
-    color: var(--textColor) !important;
+html.sticky-header-active #header.header-transparent .header-body .logo-title {
+    color: #333 !important;
 }
 
 @media (max-width: 767px) {
-    #index-container {
+    #index-container img, #presentation-container img, .blog-detail-container img {
         width: 100% !important;
         height: 100% !important;
         margin: 20px 0 !important;
+    }
+
+}
+
+@media (max-width: 991px) {
+    #header .header-btn-collapse-nav .hamburguer span {
+        background: white;
+    }
+
+    #header .header-btn-collapse-nav .close span {
+        background: white;
     }
 }
