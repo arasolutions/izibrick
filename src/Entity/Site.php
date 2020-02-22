@@ -229,6 +229,12 @@ class Site
     private $commandOption;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Font")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $font;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -801,6 +807,18 @@ class Site
     public function getInstagramKey(): ?string
     {
         return str_replace("https://www.instagram.com", "", $this->instagram);
+    }
+
+    public function getFont(): ?Font
+    {
+        return $this->font;
+    }
+
+    public function setFont(?Font $font): self
+    {
+        $this->font = $font;
+
+        return $this;
     }
 
 }

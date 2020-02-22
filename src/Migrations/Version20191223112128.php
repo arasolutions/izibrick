@@ -23,7 +23,6 @@ final class Version20191223112128 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE fir_site ADD stripe_subscription_id VARCHAR(65) NOT NULL');
-        $this->addSql('CREATE INDEX site_internal_name_idx ON fir_site (internal_name)');
     }
 
     public function down(Schema $schema) : void
@@ -32,6 +31,5 @@ final class Version20191223112128 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE fir_site DROP stripe_subscription_id');
-        $this->addSql('CREATE INDEX site_internal_name_idx ON fir_site (internal_name)');
     }
 }
