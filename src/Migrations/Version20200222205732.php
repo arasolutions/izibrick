@@ -12,17 +12,18 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200222205732 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE font (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(15) NOT NULL, real_font_name VARCHAR(15) NOT NULL, active TINYINT(1) NOT NULL, path VARCHAR(127) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE fir_font (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(15) NOT NULL, real_font_name VARCHAR(15) NOT NULL, active TINYINT(1) NOT NULL, path VARCHAR(127) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('INSERT INTO fir_font (id, name, real_font_name, active, path) VALUES (NULL, \'Poppins\', \'Poppins\', 1, \'Poppins/Poppins-Regular.ttf\')');
         $this->addSql('ALTER TABLE fir_blog CHANGE site_id site_id INT DEFAULT NULL, CHANGE seo_title seo_title VARCHAR(128) DEFAULT NULL, CHANGE seo_description seo_description VARCHAR(256) DEFAULT NULL');
         $this->addSql('ALTER TABLE fir_product_code_promotion CHANGE product_id product_id INT DEFAULT NULL, CHANGE date_end date_end DATE DEFAULT NULL, CHANGE stripe_plan_tarifaire_id stripe_plan_tarifaire_id VARCHAR(256) DEFAULT NULL');
         $this->addSql('ALTER TABLE fir_contact CHANGE site_id site_id INT DEFAULT NULL, CHANGE presentation presentation VARCHAR(512) DEFAULT NULL, CHANGE email email VARCHAR(512) DEFAULT NULL, CHANGE phone phone VARCHAR(128) DEFAULT NULL, CHANGE name name VARCHAR(255) DEFAULT NULL, CHANGE post_code post_code VARCHAR(32) DEFAULT NULL, CHANGE city city VARCHAR(255) DEFAULT NULL, CHANGE country country VARCHAR(255) DEFAULT NULL, CHANGE opening_time opening_time VARCHAR(1028) DEFAULT NULL, CHANGE seo_title seo_title VARCHAR(128) DEFAULT NULL, CHANGE seo_description seo_description VARCHAR(256) DEFAULT NULL');
@@ -39,7 +40,8 @@ final class Version20200222205732 extends AbstractMigration
         $this->addSql('DROP INDEX site_internal_name_idx ON fir_site');
         $this->addSql('DROP INDEX site_domain_host_idx ON fir_site');
         $this->addSql('ALTER TABLE fir_site ADD font_id INT NOT NULL, CHANGE code_promotion_id code_promotion_id INT DEFAULT NULL, CHANGE logo logo VARCHAR(255) DEFAULT NULL, CHANGE domain domain VARCHAR(255) DEFAULT NULL, CHANGE key_words key_words VARCHAR(1023) DEFAULT NULL, CHANGE favicon favicon VARCHAR(255) DEFAULT NULL, CHANGE facebook facebook VARCHAR(1023) DEFAULT NULL, CHANGE instagram instagram VARCHAR(1023) DEFAULT NULL, CHANGE twitter twitter VARCHAR(1023) DEFAULT NULL, CHANGE internal_name internal_name VARCHAR(255) DEFAULT NULL, CHANGE stripe_subscription_id stripe_subscription_id VARCHAR(65) DEFAULT NULL, CHANGE command_domain command_domain VARCHAR(255) DEFAULT NULL, CHANGE command_option command_option INT DEFAULT NULL, CHANGE domain_host domain_host VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE fir_site ADD CONSTRAINT FK_D9265D4BD7F7F9EB FOREIGN KEY (font_id) REFERENCES font (id)');
+        $this->addSql('UPDATE fir_site SET font_id = 1');
+        $this->addSql('ALTER TABLE fir_site ADD CONSTRAINT FK_D9265D4BD7F7F9EB FOREIGN KEY (font_id) REFERENCES fir_font (id)');
         $this->addSql('CREATE INDEX IDX_D9265D4BD7F7F9EB ON fir_site (font_id)');
         $this->addSql('CREATE INDEX site_internal_name_idx ON fir_site (internal_name)');
         $this->addSql('CREATE INDEX site_domain_host_idx ON fir_site (domain_host)');
@@ -48,17 +50,15 @@ final class Version20200222205732 extends AbstractMigration
         $this->addSql('ALTER TABLE fir_tracking_quote CHANGE site_id site_id INT DEFAULT NULL, CHANGE name name VARCHAR(256) DEFAULT NULL, CHANGE email email VARCHAR(256) DEFAULT NULL');
         $this->addSql('ALTER TABLE fir_user CHANGE salt salt VARCHAR(255) DEFAULT NULL, CHANGE last_login last_login DATETIME DEFAULT NULL, CHANGE confirmation_token confirmation_token VARCHAR(180) DEFAULT NULL, CHANGE password_requested_at password_requested_at DATETIME DEFAULT NULL, CHANGE firstname firstname VARCHAR(63) DEFAULT NULL, CHANGE lastname lastname VARCHAR(63) DEFAULT NULL, CHANGE phone phone VARCHAR(14) DEFAULT NULL, CHANGE stripe_customer_id stripe_customer_id VARCHAR(256) DEFAULT NULL, CHANGE account account VARCHAR(255) DEFAULT NULL, CHANGE address1 address1 VARCHAR(255) DEFAULT NULL, CHANGE address2 address2 VARCHAR(255) DEFAULT NULL, CHANGE postal_code postal_code VARCHAR(15) DEFAULT NULL, CHANGE city city VARCHAR(255) DEFAULT NULL, CHANGE society_name society_name VARCHAR(127) DEFAULT NULL, CHANGE created_at created_at DATETIME NOT NULL');
         $this->addSql('ALTER TABLE fir_user_site CHANGE created_at created_at DATETIME DEFAULT NULL');
-        $this->addSql('ALTER TABLE audit_associations CHANGE tbl tbl VARCHAR(128) DEFAULT NULL, CHANGE label label VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE audit_logs CHANGE target_id target_id INT DEFAULT NULL, CHANGE blame_id blame_id INT DEFAULT NULL, CHANGE diff diff JSON DEFAULT NULL');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE fir_site DROP FOREIGN KEY FK_D9265D4BD7F7F9EB');
-        $this->addSql('DROP TABLE font');
+        $this->addSql('DROP TABLE fir_font');
         $this->addSql('ALTER TABLE audit_associations CHANGE tbl tbl VARCHAR(128) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE label label VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE audit_logs CHANGE target_id target_id INT DEFAULT NULL, CHANGE blame_id blame_id INT DEFAULT NULL, CHANGE diff diff TEXT CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE fir_blog CHANGE site_id site_id INT DEFAULT NULL, CHANGE seo_title seo_title VARCHAR(128) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`, CHANGE seo_description seo_description VARCHAR(256) CHARACTER SET utf8mb4 DEFAULT \'NULL\' COLLATE `utf8mb4_unicode_ci`');
