@@ -132,6 +132,9 @@ class AddSiteCommandHandler
             }
         }
 
+        $site->setFontSize(13);
+        $site->setFont($templateChosen->getDefaultFont());
+
         $site = $this->siteRepository->save($site);
 
         // Gestion du logo

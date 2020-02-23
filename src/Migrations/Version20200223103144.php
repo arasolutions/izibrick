@@ -23,10 +23,10 @@ final class Version20200223103144 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE fir_template ADD default_font_id INT NOT NULL');
-        $this->addSql('ALTER TABLE fir_template ADD CONSTRAINT FK_3A36BCD22572A8AE FOREIGN KEY (default_font_id) REFERENCES fir_font (id)');
-        $this->addSql('CREATE INDEX IDX_3A36BCD22572A8AE ON fir_template (default_font_id)');
         $this->addSql('UPDATE fir_template SET default_font_id = 1');
         $this->addSql('UPDATE fir_template SET default_font_id = 16 WHERE id = 4');
+        $this->addSql('ALTER TABLE fir_template ADD CONSTRAINT FK_3A36BCD22572A8AE FOREIGN KEY (default_font_id) REFERENCES fir_font (id)');
+        $this->addSql('CREATE INDEX IDX_3A36BCD22572A8AE ON fir_template (default_font_id)');
     }
 
     public function down(Schema $schema) : void
