@@ -235,6 +235,11 @@ class Site
     private $font;
 
     /**
+     * @ORM\Column(type="smallint")
+     */
+    private $fontSize;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -817,6 +822,18 @@ class Site
     public function setFont(?Font $font): self
     {
         $this->font = $font;
+
+        return $this;
+    }
+
+    public function getFontSize(): ?int
+    {
+        return $this->fontSize;
+    }
+
+    public function setFontSize(int $fontSize): self
+    {
+        $this->fontSize = $fontSize;
 
         return $this;
     }

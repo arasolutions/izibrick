@@ -54,6 +54,12 @@ class Template
      */
     private $public=true;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Font")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $defaultFont;
+
     public function __construct()
     {
         $this->sites = new ArrayCollection();
@@ -169,5 +175,17 @@ class Template
     public function isPublic()
     {
         return $this->public;
+    }
+
+    public function getDefaultFont(): ?Font
+    {
+        return $this->defaultFont;
+    }
+
+    public function setDefaultFont(?Font $defaultFont): self
+    {
+        $this->defaultFont = $defaultFont;
+
+        return $this;
     }
 }

@@ -22,6 +22,7 @@ use App\Namer\Md5;
 use App\Repository\BlogRepository;
 use App\Repository\CodePromotionRepository;
 use App\Repository\ContactRepository;
+use App\Repository\FontRepository;
 use App\Repository\HomeRepository;
 use App\Repository\PresentationRepository;
 use App\Repository\PricingRepository;
@@ -72,6 +73,9 @@ class AddSiteCommandHandler
 
     /** @var CodePromotionRepository */
     private $codePromotionRepository;
+
+    /** @var FontRepository */
+    private $fontRepository;
 
     /** @var VichUploaderBundle $vich */
     private $vich;
@@ -127,6 +131,7 @@ class AddSiteCommandHandler
                 $site->setCodePromotion($codePromo);
             }
         }
+
         $site = $this->siteRepository->save($site);
 
         // Gestion du logo
