@@ -3,6 +3,7 @@
 
 namespace App\Izibrick\Command;
 
+use App\Entity\Font;
 use App\Entity\Product;
 use App\Entity\Site;
 
@@ -23,6 +24,8 @@ class GlobalParametersCommand
     private $lightTheme;
     private $displayPricing;
     private $displayQuote;
+    private $font;
+    private $fontSize;
 
     /**
      * GlobalParametersCommand constructor.
@@ -44,6 +47,8 @@ class GlobalParametersCommand
         $this->lightTheme = $site->getLightTheme();
         $this->displayPricing = $site->getPricing()->getDisplay();
         $this->displayQuote = $site->getQuote()->getDisplay();
+        $this->font = $site->getFont();
+        $this->fontSize = $site->getFontSize();
     }
 
     /**
@@ -286,4 +291,38 @@ class GlobalParametersCommand
     {
         $this->displayQuote = $displayQuote;
     }
+
+    /**
+     * @return Font|null
+     */
+    public function getFont(): Font
+    {
+        return $this->font;
+    }
+
+    /**
+     * @param Font|null $font
+     */
+    public function setFont(?Font $font): void
+    {
+        $this->font = $font;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFontSize(): int
+    {
+        return $this->fontSize;
+    }
+
+    /**
+     * @param int|null $fontSize
+     */
+    public function setFontSize(int $fontSize): void
+    {
+        $this->fontSize = $fontSize;
+    }
+
+
 }

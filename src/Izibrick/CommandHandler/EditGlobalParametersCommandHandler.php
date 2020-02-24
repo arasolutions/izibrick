@@ -10,6 +10,7 @@ use App\Enum\Constants;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\GlobalParametersCommand;
+use App\Repository\FontRepository;
 use App\Repository\PricingRepository;
 use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
@@ -25,16 +26,24 @@ class EditGlobalParametersCommandHandler
     /** @var QuoteRepository */
     private $quoteRepository;
 
+    /** @var FontRepository */
+    private $fontRepository;
+
     /**
      * EditGlobalParametersCommandHandler constructor.
      * @param SiteRepository $siteRepository
+     * @param PricingRepository $pricingRepository
+     * @param QuoteRepository $quoteRepository
+     * @param FontRepository $fontRepository
      */
-    public function __construct(SiteRepository $siteRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository)
+    public function __construct(SiteRepository $siteRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->pricingRepository = $pricingRepository;
         $this->quoteRepository = $quoteRepository;
+        $this->fontRepository = $fontRepository;
     }
+
 
     /**
      * @param GlobalParametersCommand $command
@@ -56,15 +65,19 @@ class EditGlobalParametersCommandHandler
         $site->setName($command->getName());
 
         // Gestion du nom interne
-        if($site->getInternalName() == '') {
+        if ($site->getInternalName() == '') {
             $internalName = SiteHelper::generateInternalName($site);
             $site->setInternalName($site->getId() . '-' . $internalName);
         }
+
+        $site->setFontSize($command->getFontSize());
+        $site->setFont($this->fontRepository->findOneBy(array('id' => $command->getFont())));
+
         $site = $this->siteRepository->save($site);
 
         $site->setDescription($command->getDescription());
         $site->setDomain($command->getDomain());
-        if($command->getDomain() != ''){
+        if ($command->getDomain() != '') {
             // Enlever le https
             $site->setDomainHost(substr($command->getDomain(), 8));
         }
@@ -82,7 +95,7 @@ class EditGlobalParametersCommandHandler
         //var_dump($luminance);die();
         $textColor = "#FFFFFF";
         if ($luminance > Constants::LUMINANCE_THRESHOLD) {
-            $textColor="#222222";
+            $textColor = "#222222";
         }
 
         $site->setTextColor($textColor);

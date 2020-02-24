@@ -33,6 +33,7 @@ use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
 use App\Izibrick\CommandHandler\RemoveSiteCommandHandler;
+use App\Repository\FontRepository;
 use App\Repository\PricingCategoryRepository;
 use App\Repository\PricingProductRepository;
 use App\Repository\PricingRepository;
@@ -82,6 +83,9 @@ class AdminController extends AbstractController
     /** @var PricingProductRepository */
     private $pricingProductRepository;
 
+    /** @var FontRepository */
+    private $fontRepository;
+
     /**
      * AdminController constructor.
      * @param SiteRepository $siteRepository
@@ -93,16 +97,9 @@ class AdminController extends AbstractController
      * @param ContactRepository $contactRepository
      * @param PricingCategoryRepository $pricingCategoryRepository
      * @param PricingProductRepository $pricingProductRepository
+     * @param FontRepository $fontRepository
      */
-    public function __construct(SiteRepository $siteRepository,
-                                HomeRepository $homeRepository,
-                                PresentationRepository $presentationRepository,
-                                BlogRepository $blogRepository,
-                                PricingRepository $pricingRepository,
-                                QuoteRepository $quoteRepository,
-                                ContactRepository $contactRepository,
-                                PricingCategoryRepository $pricingCategoryRepository,
-                                PricingProductRepository $pricingProductRepository)
+    public function __construct(SiteRepository $siteRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->homeRepository = $homeRepository;
@@ -113,7 +110,9 @@ class AdminController extends AbstractController
         $this->contactRepository = $contactRepository;
         $this->pricingCategoryRepository = $pricingCategoryRepository;
         $this->pricingProductRepository = $pricingProductRepository;
+        $this->fontRepository = $fontRepository;
     }
+
 
     /**
      * @Route("/dashboard", name="dashboard")
@@ -387,6 +386,7 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
             'site' => $site,
             'form' => $form->createView(),
+            'fonts' => $this->fontRepository->findAll(),
             'success' => $success
         ]);
     }

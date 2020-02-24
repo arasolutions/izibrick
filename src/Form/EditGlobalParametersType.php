@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Font;
 use App\Entity\Template;
 use App\Izibrick\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
@@ -9,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -95,6 +97,14 @@ class EditGlobalParametersType extends AbstractType
                     'Sombre' => false,
                 ]
 
+            ])
+            ->add('font', EntityType::class, [
+                'required' => true,
+                'class' => Font::class,
+                'choice_label' => 'name'
+            ])
+            ->add('fontSize', NumberType::class, [
+                'label' => 'Taille du texte'
             ])
             ->add('displayPricing', CheckboxType::class, [
                 'label' => 'Afficher la page Tarif',

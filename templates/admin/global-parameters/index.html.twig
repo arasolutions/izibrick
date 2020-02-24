@@ -7,6 +7,18 @@
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/noUiSlider/nouislider.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/chosen/chosen.min.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+        {% for font in fonts %}
+        @font-face {
+            font-family: '{{ font.realFontName }}';
+            src: url({{ asset('templates/fonts/' ~ font.path) }})
+        }
+
+        {% endfor %}
+    </style>
 {% endblock %}
 
 
@@ -127,6 +139,49 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row col-md-12">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Police du site</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-4">
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.font) }}
+                                    {{ form_widget(form.font) }}
+                                </div>
+                                <div class="col-sm-12 form-group">
+                                    {{ form_label(form.fontSize) }}
+                                    {{ form_widget(form.fontSize, {'attr':{'class':'hidden'}}) }}
+                                    <div id="demo-range-step"></div>
+                                    <span id="demo-range-step-val"></span> px
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div id="test-font">
+                                    <label>Exemple</label>
+                                    <p>
+                                        Le Lorem Ipsum est simplement du faux texte employé dans la composition et la
+                                        mise en page avant impression. Le Lorem Ipsum est le faux texte standard de
+                                        l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla
+                                        ensemble des morceaux de texte pour réaliser un livre spécimen de polices de
+                                        texte.
+                                    </p>
+                                    <p>
+                                        Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la
+                                        bureautique informatique, sans que son contenu n'en soit modifié. Il a été
+                                        popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant
+                                        des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des
+                                        applications de mise en page de texte, comme Aldus PageMaker.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row col-md-12">
                     <div class="panel panel-mint">
                         <div class="panel-heading">
@@ -167,6 +222,11 @@
     <!-- JS Unify -->
     <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
     <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
+
+    <script src="{{ asset('assets/plugins/noUiSlider/nouislider.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/chosen/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/wnumb/wNumb.js') }}"></script>
+
     <script type="text/javascript">
         $('.colorpicker:not(.expert)').colorPicker({
             opacity: false
@@ -229,6 +289,50 @@
         });
 
         $.HSCore.helpers.HSFocusState.init();
+
+        $('#edit_global_parameters_font, #edit_global_parameters_lightTheme, #edit_global_parameters_template').chosen({
+            width: '100%',
+            disable_search_threshold: 15
+        });
+
+        var rs_step = document.getElementById('demo-range-step');
+        var rs_step_value = document.getElementById('demo-range-step-val');
+
+        noUiSlider.create(rs_step, {
+            start: [ {{ site.fontSize }} ],
+            connect: 'upper',
+            step: 1,
+            range: {
+                'min': [10],
+                'max': [30]
+            },
+            format: {
+                // 'to' the formatted value. Receives a number.
+                to: function (value) {
+                    return value;
+                },
+                // 'from' the formatted value.
+                // Receives a string, should return a number.
+                from: function (value) {
+                    return Number(value);
+                }
+            }
+        });
+
+        rs_step.noUiSlider.on('update', function (values, handle) {
+            rs_step_value.innerHTML = values[handle];
+            $('#edit_global_parameters_fontSize').val(values[handle]);
+            changeTestFont();
+        });
+
+        $('#edit_global_parameters_font').on('change', function (values, handle) {
+            changeTestFont();
+        });
+
+        function changeTestFont() {
+            $('#test-font p').css('font-family', $('#edit_global_parameters_font :selected').text());
+            $('#test-font p').css('font-size', $('#edit_global_parameters_fontSize').val() + 'px');
+        }
     </script>
 
 {% endblock %}

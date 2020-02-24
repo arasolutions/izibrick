@@ -93,7 +93,7 @@ class AddSiteCommandHandler
      * @param QuoteRepository $quoteRepository
      * @param CodePromotionRepository $codePromotionRepository
      */
-    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository, PricingRepository $pricingRepository)
+    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository, PricingRepository $pricingRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->productRepository = $productRepository;
@@ -105,6 +105,7 @@ class AddSiteCommandHandler
         $this->pricingRepository = $pricingRepository;
         $this->quoteRepository = $quoteRepository;
         $this->codePromotionRepository = $codePromotionRepository;
+        $this->fontRepository = $fontRepository;
     }
 
 

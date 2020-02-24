@@ -77,3 +77,7 @@ html.sticky-header-active #header.header-transparent .header-body .logo-title {
         background: white;
     }
 }
+
+p {
+    font-size: inherit !important;
+}

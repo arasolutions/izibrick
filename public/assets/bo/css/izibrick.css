@@ -337,3 +337,7 @@ ul.no-vertical-spacing > li {
 .cbp-item {
     cursor: pointer;
 }
+
+.noUi-target {
+    margin: 12px 0;
+}
