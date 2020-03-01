@@ -18,12 +18,12 @@ class Font
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=32)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=32)
      */
     private $realFontName;
 
@@ -33,7 +33,7 @@ class Font
     private $active;
 
     /**
-     * @ORM\Column(type="string", length=127)
+     * @ORM\Column(type="string", length=128)
      */
     private $path;
 

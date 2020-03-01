@@ -10,6 +10,7 @@ use App\Entity\UserSite;
 use App\Entity\Contact;
 use App\Enum\Constants;
 use App\Helper\SiteHelper;
+use App\Helper\ApiAnalyticsHelper;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\BlogCommand;
@@ -190,12 +191,28 @@ class AdminController extends AbstractController
         if ($userSite->getInstagram() != '') $nbrReseauxSociaux++;
         // Fin Réseaux sociaux
 
+        // Analytics
+        $dataVisiteursUnique = '';
+        $dataVisiteursRecurrent = '';
+        if($userSite->getAnalyticsViewId()){
+            $analytics = ApiAnalyticsHelper::initializeAnalytics();
+            $dataVisiteursUnique = ApiAnalyticsHelper::getReportVisiteurUnique($analytics, $userSite->getAnalyticsViewId());
+            $dataVisiteursRecurrent = ApiAnalyticsHelper::getReportVisiteurRecurrent($analytics, $userSite->getAnalyticsViewId());
+        }
+        //var_dump($dataVisiteursUnique);die;
+        //$this->view->inlineScript()->appendScript('var dataVisiteursUnique = ' . $dataVisiteursUnique . ';');
+        //$this->view->inlineScript()->appendScript('var dataVisiteursRecurrent = ' . $dataVisiteursRecurrent . ';');
+        //var_dump($dataAnalytics);die;
+        //$analytics = $this->getHelper('ApiAnalytics')->initializeAnalytics();
+
         return $this->render('admin/dashboard/index.html.twig', [
             'site' => $userSite,
             'referencement' => $referencement,
             'nbrReseauxSociaux' => $nbrReseauxSociaux,
             'quotes' => $userSite->getTrackingQuotes(),
             'contacts' => $userSite->getTrackingContacts(),
+            'dataVisiteursUnique' => $dataVisiteursUnique,
+            'dataVisiteursRecurrent' => $dataVisiteursRecurrent,
             'posts' => $blog->getPosts()
         ]);
     }

@@ -13,46 +13,27 @@
 
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-
-                <!--Extra Small Weather Widget-->
-                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <div class="panel {{ referencement.referencementTaux < 100 ? 'panel-bordered-danger' : 'panel-bordered-success' }}">
-                    <div class="panel-body text-center clearfix">
-                        <div class="col-sm-4 pad-top">
-                            <div class="text-lg">
-                                <p class="text-sm text-bold text-uppercase">Référencement naturel</p>
-                                <p class="text-sm">Taux de remplissage :</p>
-                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux|round }}%</p>
+                {% if site.analyticsViewId != '' %}
+                    <div id="demo-panel-network" class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Trafic quotidien de votre site (30 derniers jours)</h3>
+                        </div>
+                        <!--chart placeholder-->
+                        <div class="pad-all">
+                            <div id="demo-chart-network" style="height: 255px; padding: 0px; position: relative;">
                             </div>
                         </div>
-                        <div class="col-sm-8">
-                            <ul class="list-unstyled text-center bord-bottom pad-bottom mar-no row">
-                                <p class="text-sm">Taux de remplissage :</p>
-                                <li class="col-xs-6">
-                                    <p class="text-sm text-muted mar-no">Titre</p>
-                                    <span class="text-lg text-semibold text-main mt20">{{ referencement.referencementTitleTaux|round }}%</span>
-                                </li>
-                                <li class="col-xs-6">
-                                    <p class="text-sm text-muted mar-no">Description</p>
-                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementDescriptionTaux|round }}%</span>
-                                </li>
-                            </ul>
-                            {% if referencement.referencementTaux < 100 %}
-                                <p class="text-sm mt20 color-red">
-                                    Le référencement de votre site n'est pas otpimal, veuillez renseigner un titre et
-                                    une description pour chaque page.
-                                </p>
-                                <a href="{{ path('bo-seo') }}">
-                                    <button class="btn btn-primary">Mettre à jour</button>
-                                </a>
-                            {% else %}
-                                <p class="text-sm mt20">
-                                    Félicitations ! Votre site est optimisé pour le référencemnt naturel.
-                                </p>
-                            {% endif %}
-                        </div>
+                        <!--
+                        <div class="panel-body">
+                            <div class="row">
+                                    <div class="pad-rgt">
+                                        <p class="text-semibold text-uppercase text-main">Today Tips</p>
+                                        <p class="text-muted mar-top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+                                    </div>
+                            </div>
+                        </div>-->
                     </div>
-                </div>
+                {% endif %}
 
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
@@ -125,6 +106,46 @@
                 </div>
 
 
+                <!--Extra Small Weather Widget-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <div class="panel {{ referencement.referencementTaux < 100 ? 'panel-bordered-danger' : 'panel-bordered-success' }}">
+                    <div class="panel-body text-center clearfix">
+                        <div class="col-sm-4 pad-top">
+                            <div class="text-lg">
+                                <p class="text-sm text-bold text-uppercase">Référencement naturel</p>
+                                <p class="text-sm">Taux de remplissage :</p>
+                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux|round }}%</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <ul class="list-unstyled text-center bord-bottom pad-bottom mar-no row">
+                                <p class="text-sm">Taux de remplissage :</p>
+                                <li class="col-xs-6">
+                                    <p class="text-sm text-muted mar-no">Titre</p>
+                                    <span class="text-lg text-semibold text-main mt20">{{ referencement.referencementTitleTaux|round }}%</span>
+                                </li>
+                                <li class="col-xs-6">
+                                    <p class="text-sm text-muted mar-no">Description</p>
+                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementDescriptionTaux|round }}%</span>
+                                </li>
+                            </ul>
+                            {% if referencement.referencementTaux < 100 %}
+                                <p class="text-sm mt20 color-red">
+                                    Le référencement de votre site n'est pas otpimal, veuillez renseigner un titre et
+                                    une description pour chaque page.
+                                </p>
+                                <a href="{{ path('bo-seo') }}">
+                                    <button class="btn btn-primary">Mettre à jour</button>
+                                </a>
+                            {% else %}
+                                <p class="text-sm mt20">
+                                    Félicitations ! Votre site est optimisé pour le référencemnt naturel.
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End Extra Small Weather Widget-->
 
@@ -195,9 +216,16 @@
     <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.resize.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/flot-charts/jquery.flot.time.min.js') }}"></script>
     <!--Sparkline [ OPTIONAL ]-->
     <script src="{{ asset('assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-
+    <script>
+        function gd(year, month, day) {
+            return new Date(year, month - 1, day).getTime();
+        }
+        var dataVisiteursUnique = {{ dataVisiteursUnique }};
+        var dataVisiteursRecurrent = {{ dataVisiteursRecurrent }};
+    </script>
     <!--Specify page [ SAMPLE ]-->
     <script src="{{ asset('assets/js/demo/dashboard.js') }}"></script>
 
