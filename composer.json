@@ -8,6 +8,7 @@
         "data-dog/audit-bundle": "^0.1.14",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "~2.0",
+        "google/apiclient": "1.1.8",
         "helios-ag/fm-elfinder-bundle": "^9.3",
         "kunicmarko/color-picker-bundle": "^1.1",
         "liip/imagine-bundle": "^2.2",

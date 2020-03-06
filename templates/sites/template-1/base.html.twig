@@ -103,6 +103,20 @@
 
     <!-- Firebrick LESS -->
     <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/izibrick.css') }}">
+
+    <!-- Google Analytics -->
+    {% if site.analyticsViewId != null %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-{{ site.analyticsViewId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{ site.analyticsViewId }}');
+        </script>
+    {% endif %}
+
 </head>
 
 <body>

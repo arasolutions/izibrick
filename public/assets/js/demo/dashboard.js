@@ -16,22 +16,19 @@ $(document).on('nifty.ready', function() {
     // http://www.flotcharts.org/
     // =================================================================
 
-    var dwData = [[1, 24], [2, 34], [3, 33], [4, 22], [5, 28], [6, 60], [7, 60], [8, 70], [9, 67], [10, 86], [11, 86], [12, 113], [13, 130], [14, 114], [15, 80], [16, 109], [17, 100], [18, 105], [19, 110], [20, 102], [21, 107], [22, 60], [23, 67], [24, 76], [25, 73], [26, 94], [27, 135], [28, 154], [29, 120], [30, 100], [31, 130], [32, 100], [33, 60], [34, 70], [35, 67], [36, 86], [37, 86], [38, 113], [39, 130], [40, 114], [41, 80], [42, 109], [43, 100], [44, 105], [45, 110], [46, 102], [47, 107], [48, 60], [49, 67], [50, 76], [51, 73], [52, 94], [53, 79]],
-        upData = [[1, 2], [2, 22], [3, 7], [4, 6], [5, 17], [6, 15], [7, 17], [8, 7], [9, 18], [10, 18], [11, 18], [12, 29], [13, 23], [14, 10], [15, 22], [16, 7], [17, 6], [18, 17], [19, 15], [20, 17], [21, 7], [22, 18], [23, 18], [24, 18], [25, 29], [26, 13], [27, 2], [28, 22], [29, 7], [30, 6], [31, 17], [32, 15], [33, 17], [34, 7], [35, 18], [36, 18], [37, 18], [38, 29], [39, 23], [40, 10], [41, 22], [42, 7], [43, 6], [44, 17], [45, 15], [46, 17], [47, 7], [48, 18], [49, 18], [50, 18], [51, 29], [52, 13], [53, 24]];
-
     var plot = $.plot('#demo-chart-network', [
         {
-            label: 'Download Speed',
-            data: dwData,
+            label: 'Visiteurs',
+            data: dataVisiteursRecurrent,
             lines: {
                 show: true,
                 lineWidth: 0,
                 fill: true,
                 fillColor: {
                     colors: [{
-                        opacity: 0.2
+                        opacity: 0.8
                     }, {
-                        opacity: 0.2
+                        opacity: 0.8
                     }]
                 }
             },
@@ -40,8 +37,8 @@ $(document).on('nifty.ready', function() {
             }
         },
         {
-            label: 'Upload Speed',
-            data: upData,
+            label: 'Nouveaux visiteurs',
+            data: dataVisiteursUnique,
             lines: {
                 show: true,
                 lineWidth: 0,
@@ -80,14 +77,14 @@ $(document).on('nifty.ready', function() {
             clickable: true
         },
         yaxis: {
-            show: false,
+            show: true,
             ticks: 5,
             tickColor: 'rgba(0,0,0,.1)'
         },
         xaxis: {
             show: true,
-            ticks: 10,
-            tickColor: 'transparent'
+            mode: 'time',
+            timeformat: '%d/%m'
         },
         tooltip: {
             show: true,

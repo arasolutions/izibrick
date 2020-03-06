@@ -240,6 +240,11 @@ class Site
     private $fontSize;
 
     /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $analyticsViewId;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -838,4 +843,19 @@ class Site
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAnalyticsViewId()
+    {
+        return $this->analyticsViewId;
+    }
+
+    /**
+     * @param mixed $analyticsViewId
+     */
+    public function setAnalyticsViewId($analyticsViewId)
+    {
+        $this->analyticsViewId = $analyticsViewId;
+    }
 }
