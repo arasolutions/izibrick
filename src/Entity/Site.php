@@ -245,6 +245,11 @@ class Site
     private $analyticsViewId;
 
     /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $analyticsSuiviId;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -857,5 +862,21 @@ class Site
     public function setAnalyticsViewId($analyticsViewId)
     {
         $this->analyticsViewId = $analyticsViewId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnalyticsSuiviId()
+    {
+        return $this->analyticsSuiviId;
+    }
+
+    /**
+     * @param mixed $analyticsSuiviId
+     */
+    public function setAnalyticsSuiviId($analyticsSuiviId)
+    {
+        $this->analyticsSuiviId = $analyticsSuiviId;
     }
 }
