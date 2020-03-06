@@ -128,6 +128,20 @@
     <script type="text/javascript"
             src="{{ asset('templates/template-3/assets/js/respond.js') }}"></script>
     <![endif]-->
+
+    <!-- Google Analytics -->
+    {% if site.analyticsViewId != null %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-{{ site.analyticsViewId }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{ site.analyticsViewId }}');
+        </script>
+    {% endif %}
+
 </head>
 <body>
 <div id="wrapper">
