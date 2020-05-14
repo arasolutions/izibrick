@@ -107,7 +107,7 @@
     <!-- Google Analytics -->
     {% if site.analyticsViewId != null %}
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-{{ site.analyticsSuiviId }}"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analyticsSuiviId }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
