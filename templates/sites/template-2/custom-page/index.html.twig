@@ -1,0 +1,37 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} - {{customPage.seoTitle}}{% endblock %}
+{% block description %}{{customPage.seoDescription}}{% endblock %}
+
+{% block presentationActive %}active{% endblock %}
+
+{% block body %}
+
+    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
+    {% else %}
+        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-6 py-0 mb-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
+    {% endif %}
+            <div class="container py-5">
+                <div class="row pt-9 mt-9">
+                    <div class="col-md-12 mt-4">
+                    </div>
+                </div>
+                <div class="row text-left mb-9 center">
+                    <div class="col-md-12">
+                        <h1 class="line-height-2 mb-3 fs-60">{{ customPage.nameMenu }}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+
+        <div class="v-page-wrap no-top-spacing no-bottom-spacing">
+            <div class="v-bg-stylish pb-0">
+                <div id="presentation-container" class="container">
+                        {{ customPage.content|raw }}
+                </div>
+            </div>
+        </div>
+{% endblock %}

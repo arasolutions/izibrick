@@ -269,7 +269,15 @@
 
     <div class="copyright">
         <div class="container">
-            <p>© Copyright 2019 by <a href="https://www.izibrick.com">izibrick</a>. Tous droits réservés.</p>
+            <p>© Copyright 2019 by <a href="https://www.izibrick.com">izibrick</a>. Tous droits réservés.&nbsp;</p>
+            {% if site.customPages is not empty %}
+                {% for customPage in site.customPages %}
+                    {% if customPage.place == 2 %}
+                            {% set param = siteName|merge({'name':customPage.nameMenuUrl}) %}
+                            <p> - <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ customPage.nameMenu }}&nbsp;</a></p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
 
             <div class="clearfix pull-right">
                 {% if site.facebook %}

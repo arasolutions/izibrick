@@ -48,6 +48,12 @@ class Site
     private $template;
 
     /**
+     * @var ArrayCollection|CustomPage[]
+     * @ORM\OneToMany(targetEntity="App\Entity\CustomPage", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $customPages;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="sites", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -345,6 +351,14 @@ class Site
         $this->template = $template;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|CustomPage[]
+     */
+    public function getCustomPages()
+    {
+        return $this->customPages;
     }
 
     public function getProduct(): ?Product

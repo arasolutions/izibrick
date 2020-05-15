@@ -1,0 +1,105 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page personnalisée{% endblock %}
+
+{% block description %}Tous les paramètres liés à votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/noUiSlider/nouislider.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/chosen/chosen.min.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+        {% for font in fonts %}
+        @font-face {
+            font-family: '{{ font.realFontName }}';
+            src: url({{ asset('templates/fonts/' ~ font.path) }})
+        }
+
+        {% endfor %}
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form) }}
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Emplacement</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.place, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Nom du menu</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.nameMenu, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Titre SEO</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.seoTitle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Description SEO</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.seoDescription, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Contenu de la page</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                    Annuler
+                </button>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
