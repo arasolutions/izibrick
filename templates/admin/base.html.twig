@@ -420,6 +420,26 @@
                                     </a>
                                 </li>
 
+                                {% if site.pages is not empty %}
+                                    <li class="list-divider"></li>
+
+                                    <!--Category name-->
+                                    <li class="list-header">Pages v2</li>
+
+                                    <li class="list-divider"></li>
+
+                                    {% for page in site.pages %}
+                                        <li>
+                                            <a href="{{ path('bo-page', { 'id': page.id }) }}">
+                                                <i class="ti-write"></i>
+                                                <span class="menu-title">
+                                                    {{ page.nameMenu }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+
                                 {% if site.customPages is not empty %}
                                     <li class="list-divider"></li>
 

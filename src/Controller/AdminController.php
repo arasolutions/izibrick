@@ -38,6 +38,7 @@ use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
 use App\Izibrick\CommandHandler\RemoveSiteCommandHandler;
 use App\Repository\CustomPageRepository;
+use App\Repository\PageRepository;
 use App\Repository\FontRepository;
 use App\Repository\PricingCategoryRepository;
 use App\Repository\PricingProductRepository;
@@ -66,6 +67,9 @@ class AdminController extends AbstractController
 
     /** @var CustomPageRepository $customPageRepository */
     private $customPageRepository;
+
+    /** @var PageRepository $pageRepository */
+    private $pageRepository;
 
     /** @var HomeRepository $homeRepository */
     private $homeRepository;
@@ -98,6 +102,7 @@ class AdminController extends AbstractController
      * AdminController constructor.
      * @param SiteRepository $siteRepository
      * @param CustomPageRepository $customPageRepository
+     * @param PageRepository $pageRepository
      * @param HomeRepository $homeRepository
      * @param PresentationRepository $presentationRepository
      * @param BlogRepository $blogRepository
@@ -108,10 +113,11 @@ class AdminController extends AbstractController
      * @param PricingProductRepository $pricingProductRepository
      * @param FontRepository $fontRepository
      */
-    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository)
+    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, PageRepository $pageRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->customPageRepository = $customPageRepository;
+        $this->pageRepository = $pageRepository;
         $this->homeRepository = $homeRepository;
         $this->presentationRepository = $presentationRepository;
         $this->blogRepository = $blogRepository;
@@ -505,7 +511,6 @@ class AdminController extends AbstractController
         return $this->render('bo/cross/site_removed.html.twig', []);
     }
 
-
     /**
      * @Route("/custom-page/{id}", name="bo-custom-page")
      * @param Request $request
@@ -543,6 +548,54 @@ class AdminController extends AbstractController
             'fonts' => $this->fontRepository->findAll(),
             'success' => $success
         ]);
+    }
+
+    /**
+     * @Route("/page/{id}", name="bo-page")
+     * @param Request $request
+     * @param EditCustomPageCommandHandler $editCustomPageCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function Page(Request $request, $id = null, EditCustomPageCommandHandler $editCustomPageCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $page = $this->pageRepository->getBySiteAndId($site, $id);
+
+        // Type de page présentation
+        if ($page->getType() == 1) {
+            return $this->render('admin/page/type-1/index.html.twig', [
+                'controller_name' => 'AdminController',
+                'site' => $site,
+                'fonts' => $this->fontRepository->findAll(),
+                'success' => true
+            ]);
+        }
+        /*$command = new CustomPageCommand($site);
+        $command->id = $customPage->getId();
+        $command->place = $customPage->getPlace();
+        $command->nameMenu = $customPage->getNameMenu();
+        $command->content = $customPage->getContent();
+        $command->seoTitle = $customPage->getSeoTitle();
+        $command->seoDescription = $customPage->getSeoDescription();
+
+        $success = false;
+
+        $form = $this->createForm(EditCustomPageType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $editCustomPageCommandHandler->handle($command, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/page/1/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'form' => $form->createView(),
+            'fonts' => $this->fontRepository->findAll(),
+            'success' => $success
+        ]);*/
     }
 
 }

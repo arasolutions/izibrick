@@ -18,4 +18,26 @@ class PageRepository extends AbstractRepository
     {
         parent::__construct($registry, Page::class);
     }
+
+    /**
+     * @param $site
+     * @param $id
+     * @return CustomPage
+     */
+    public function getBySiteAndId($site, $id)
+    {
+        try {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.id = :id')
+                ->andWhere('p.site = :site')
+                ->setParameter('id', $id)
+                ->setParameter('site', $site)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        } catch (NonUniqueResultException $e) {
+            return null;
+        }
+    }
 }
