@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page personnalisée{% endblock %}
+
+{% block description %}Tous les paramètres liés à votre site{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/noUiSlider/nouislider.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/chosen/chosen.min.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+        {% for font in fonts %}
+        @font-face {
+            font-family: '{{ font.realFontName }}';
+            src: url({{ asset('templates/fonts/' ~ font.path) }})
+        }
+
+        {% endfor %}
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre page présentation à bien été mise à jour.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form) }}
+            <div class="col-sm-12">
+                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                    Annuler
+                </button>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

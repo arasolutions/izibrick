@@ -48,6 +48,18 @@ class Site
     private $template;
 
     /**
+     * @var ArrayCollection|CustomPage[]
+     * @ORM\OneToMany(targetEntity="App\Entity\CustomPage", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $customPages;
+
+    /**
+     * @var ArrayCollection|Page[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Page", mappedBy="site", cascade={"persist"}, fetch="LAZY")
+     */
+    private $pages;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="sites", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -245,6 +257,11 @@ class Site
     private $analyticsViewId;
 
     /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $analyticsSuiviId;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -340,6 +357,22 @@ class Site
         $this->template = $template;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|CustomPage[]
+     */
+    public function getCustomPages()
+    {
+        return $this->customPages;
+    }
+
+    /**
+     * @return ArrayCollection|Page[]
+     */
+    public function getPages()
+    {
+        return $this->pages;
     }
 
     public function getProduct(): ?Product
@@ -857,5 +890,21 @@ class Site
     public function setAnalyticsViewId($analyticsViewId)
     {
         $this->analyticsViewId = $analyticsViewId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnalyticsSuiviId()
+    {
+        return $this->analyticsSuiviId;
+    }
+
+    /**
+     * @param mixed $analyticsSuiviId
+     */
+    public function setAnalyticsSuiviId($analyticsSuiviId)
+    {
+        $this->analyticsSuiviId = $analyticsSuiviId;
     }
 }

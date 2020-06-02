@@ -332,7 +332,7 @@
                                 <li class="list-divider"></li>
 
                                 <!--Category name-->
-                                <li class="list-header">Pages</li>
+                                <li class="list-header">Pages standards</li>
 
                                 <!--Menu list item-->
                                 {% if app.request.get('_route') == 'bo-home' %}
@@ -420,7 +420,45 @@
                                     </a>
                                 </li>
 
-                                <li class="list-divider"></li>
+                                {% if site.pages is not empty %}
+                                    <li class="list-divider"></li>
+
+                                    <!--Category name-->
+                                    <li class="list-header">Pages v2</li>
+
+                                    <li class="list-divider"></li>
+
+                                    {% for page in site.pages %}
+                                        <li>
+                                            <a href="{{ path('bo-page', { 'id': page.id }) }}">
+                                                <i class="ti-write"></i>
+                                                <span class="menu-title">
+                                                    {{ page.nameMenu }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if site.customPages is not empty %}
+                                    <li class="list-divider"></li>
+
+                                    <!--Category name-->
+                                    <li class="list-header">Pages personnalisées</li>
+
+                                    <li class="list-divider"></li>
+
+                                    {% for customPage in site.customPages %}
+                                        <li>
+                                            <a href="{{ path('bo-custom-page', { 'id': customPage.id }) }}">
+                                                <i class="ti-write"></i>
+                                                <span class="menu-title">
+                                                    {{ customPage.nameMenu }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
 
                                 <li class="list-header">Paramètres globaux</li>
                                 {% if app.request.get('_route') == 'bo-global-parameters' %}

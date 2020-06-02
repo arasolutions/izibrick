@@ -13,6 +13,7 @@ use App\Izibrick\CommandHandler\AddTrackingQuoteCommandHandler;
 use App\Form\AddTrackingContactType;
 use App\Form\AddTrackingQuoteType;
 use App\Repository\BlogRepository;
+use App\Repository\CustomPageRepository;
 use App\Repository\PricingRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +24,8 @@ class SiteController extends AbstractController
 {
     /** @var SiteRepository */
     private $siteRepository;
+    /** @var CustomPageRepository */
+    private $customPageRepository;
     /** @var BlogRepository */
     private $blogRepository;
     /** @var PricingRepository */
@@ -34,9 +37,10 @@ class SiteController extends AbstractController
      * @param BlogRepository $blogRepository
      * @param PricingRepository $pricingRepository
      */
-    public function __construct(SiteRepository $siteRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository)
+    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository)
     {
         $this->siteRepository = $siteRepository;
+        $this->customPageRepository = $customPageRepository;
         $this->blogRepository = $blogRepository;
         $this->pricingRepository = $pricingRepository;
     }
@@ -250,6 +254,40 @@ class SiteController extends AbstractController
             'contact' => $site->getContact(),
             'success' => $success
         ]);
+    }
+
+
+    /**
+     * @Route("/{name}/",
+     *     name="page",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     * @Route("/site/{siteName<.*>}/{name}/", name="site_page",
+     *     host="%base_host%")
+     */
+    public function page($siteName = null, $name = null)
+    {
+        /** @var Site $site */
+        if ($siteName != null) {
+            $site = $this->siteRepository->getByInternalName($siteName);//var_dump($siteName);die;
+        } else {
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
+        }
+
+        $customPage = $this->customPageRepository->getBySiteAndNameUrl($site, $name);
+        if($customPage) {
+            return $this->render('sites/template-' . $site->getTemplate()->getId() . '/custom-page/index.html.twig', [
+                'controller_name' => 'SiteController' . $site->getName(),
+                'site' => $site,
+                'customPage' => $customPage
+            ]);
+        } else {
+            return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
+                'site' => $site
+            ]);
+        }
     }
 
     /**
