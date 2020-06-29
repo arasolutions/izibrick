@@ -535,6 +535,12 @@
 
 <script src="{{ asset('assets/plugins/bootbox/bootbox.min.js') }}"></script>
 
+<script>
+    if (typeof(CKEDITOR) !== 'undefined') {
+        CKEDITOR.config.contentsCss = ['/assets/bo/vendor/bootstrap/bootstrap.css'];
+    }
+</script>
+
 {% include 'admin/tutorial/tutorial.html.twig' %}
 
 {% block javascripts %}
