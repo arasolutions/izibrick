@@ -651,14 +651,14 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/page-edit/{id}", name="bo-page-edit")
+     * @Route("/page-presentation-edit/{id}", name="bo-page-presentation-edit")
      * @param Request $request
      * @param EditPageTypePresentationCommandHandler $editPageTypePresentationCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function PageEdit(Request $request, $id = null, EditPageTypePresentationCommandHandler $editPageTypePresentationCommandHandler)
+    public function PagePresentationEdit(Request $request, $id = null, EditPageTypePresentationCommandHandler $editPageTypePresentationCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         /** @var User $user */
@@ -670,6 +670,10 @@ class AdminController extends AbstractController
         $pageTypeCommand = new PageTypePresentationCommand();
         $pageTypeCommand->id = $page->getId();
         $pageTypeCommand->name = $page->getNameMenu();
+        $pageTypeCommand->menuHeaderOrder = $page->getMenuHeaderOrder();
+        $pageTypeCommand->menuFooterOrder = $page->getMenuFooterOrder();
+        $pageTypeCommand->seoTitle = $page->getSeoTitle();
+        $pageTypeCommand->seoDescription = $page->getSeoDescription();
         $pageTypeCommand->content = $pageTypePresentation->getContent();
         //$pageTypeCommand->type = $typePage;
 

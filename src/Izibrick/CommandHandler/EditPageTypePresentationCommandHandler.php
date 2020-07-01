@@ -56,6 +56,10 @@ class EditPageTypePresentationCommandHandler
         }
         $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
+        $page->setMenuHeaderOrder($command->menuHeaderOrder);
+        $page->setMenuFooterOrder($command->menuFooterOrder);
+        $page->setSeoTitle($command->seoTitle);
+        $page->setSeoDescription($command->seoDescription);
         $this->pageRepository->save($page);
         $pageTypePresentation->setContent($command->content);
         $this->pageTypePresentationRepository->save($pageTypePresentation);
