@@ -63,6 +63,16 @@ class Page
     private $menuOrder;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $menuHeaderOrder;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $menuFooterOrder;
+
+    /**
      * @ORM\Column(type="text", length=128, nullable=true)
      */
     private $nameMenu;
@@ -232,6 +242,38 @@ class Page
     public function setMenuOrder($menuOrder)
     {
         $this->menuOrder = $menuOrder;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuHeaderOrder()
+    {
+        return $this->menuHeaderOrder;
+    }
+
+    /**
+     * @param mixed $menuHeaderOrder
+     */
+    public function setMenuHeaderOrder($menuHeaderOrder)
+    {
+        $this->menuHeaderOrder = $menuHeaderOrder;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuFooterOrder()
+    {
+        return $this->menuFooterOrder;
+    }
+
+    /**
+     * @param mixed $menuFooterOrder
+     */
+    public function setMenuFooterOrder($menuFooterOrder)
+    {
+        $this->menuFooterOrder = $menuFooterOrder;
     }
 
     public function getContent(): ?string
