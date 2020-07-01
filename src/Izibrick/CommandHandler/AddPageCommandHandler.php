@@ -4,7 +4,6 @@ namespace App\Izibrick\CommandHandler;
 
 use App\Entity\Site;
 use App\Entity\Page;
-use App\Entity\User;
 use App\Izibrick\Command\AddPageCommand;
 use App\Repository\SiteRepository;
 use App\Repository\PageRepository;

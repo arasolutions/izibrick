@@ -1,0 +1,114 @@
+{% extends 'admin/base.html.twig' %}
+
+
+{% block title %}Page Accueil{% endblock %}
+
+{% block description %}Ajouter une page{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Parfait !</strong> Votre page à bien été ajoutée.
+        </div>
+    {% endif %}
+    <div class="panel">
+        <div class="panel-body">
+            {{ form_start(form) }}
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Nom de la page</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Type de la page</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        {{ form_widget(form.type, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-6">
+                        <img id="dynamic-theme" src="" width="100%"/>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Contenu de la page</label></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                    Enregistrer
+                </button>
+                <button id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                    Annuler
+                </button>
+            </div>
+            <!--===================================================-->
+            <!-- End Summernote -->
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/bo/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/imageTool.js') }}"></script>
+    <script src="{{ asset('assets/bo/js/hs.core.js') }}"></script>
+    <!-- JS Implementing Plugins -->
+    <script src="{{ asset('assets/bo/vendor/jquery.filer/js/jquery.filer.min.js') }}"></script>
+
+    <!-- JS Unify -->
+    <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
+    <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
+    <script type="text/javascript">
+        $.HSCore.components.HSFileAttachment.init('.js-file-attachment-background', {
+            changeInput: '<div class="u-file-attach-v3 g-mb-15">\
+                            <div class="col-sm-12">\
+                                <img id="edit_home_mainPicture-img" width="500" src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" />\
+                            </div>\
+                            <div class="col-sm-12">\
+               				    <h4 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_home_mainPicture_filer_title">\
+               				        <span class="g-color-primary">Modifier l\'image de fond</span>\
+               				    </h4>\
+               				</div>\
+              			</div>',
+            limit: 1,
+            templates: {
+                item: '<div></div>'
+            }
+        });
+        $("#edit_home_mainPicture").change(function () {
+            readURL(this, true);
+        });
+
+        $.HSCore.helpers.HSFocusState.init();
+    </script>
+
+{% endblock %}
