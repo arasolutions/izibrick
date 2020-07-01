@@ -9,9 +9,11 @@ use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Contact;
 use App\Enum\Constants;
+use App\Form\AddPageType;
 use App\Form\EditCustomPageType;
 use App\Helper\SiteHelper;
 use App\Helper\ApiAnalyticsHelper;
+use App\Izibrick\Command\AddPageCommand;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\CustomPageCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
@@ -20,6 +22,7 @@ use App\Izibrick\Command\HomeCommand;
 use App\Izibrick\Command\PresentationCommand;
 use App\Izibrick\Command\QuoteCommand;
 use App\Izibrick\Command\SeoCommand;
+use App\Izibrick\CommandHandler\AddPageCommandHandler;
 use App\Izibrick\CommandHandler\EditContactCommandHandler;
 use App\Izibrick\CommandHandler\EditCustomPageCommandHandler;
 use App\Izibrick\CommandHandler\EditGlobalParametersCommandHandler;
@@ -596,6 +599,39 @@ class AdminController extends AbstractController
             'fonts' => $this->fontRepository->findAll(),
             'success' => $success
         ]);*/
+    }
+
+
+    /**
+     * @Route("/page-add", name="bo-page-add")
+     * @param Request $request
+     * @param AddPageCommandHandler $addPageCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function PageAdd(Request $request, AddPageCommandHandler $addPageCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $success = false;
+
+        $page = new AddPageCommand();
+
+        $form = $this->createForm(AddPageType::class, $page);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $addPageCommandHandler->handle($page, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/page/add.html.twig', [
+            'form' => $form->createView(),
+            'site' => $site,
+            'success' => $success
+        ]);
     }
 
 }

@@ -117,6 +117,11 @@
             <div class="navbar-content">
                 <ul class="nav navbar-top-links">
                     <li>
+                        <a href="{{ path('dashboard') }}">
+                            <button class="btn btn-md btn-dark"><i class="ti-world"></i>&nbsp;Tableau de bord</button>
+                        </a>
+                    </li>
+                    <li>
                         <a>
                             <button id="start-tuto" class="btn btn-md btn-dark"><i class="ti-help-alt"></i>&nbsp;Accéder au tutoriel</button>
                         </a>
@@ -309,22 +314,10 @@
 
 
                             <ul id="mainnav-menu" class="list-group">
-                                <li class="list-divider"></li>
 
-                                <li class="list-header">Accueil</li>
-
-
-                                {% if app.request.get('_route') == 'dashboard' %}
-                                <li class="active-link">
-                            {% else %}
                                 <li>
-                                    {% endif %}
-                                    <a href="{{ path('dashboard') }}">
-                                        <i class="ti-world"></i>
-                                        <span class="menu-title">
-                                                Tableau de bord
-                                            <!--<span class="pull-right badge badge-warning">24</span>-->
-                                            </span>
+                                    <a href="{{ path('bo-page-add') }}">
+                                    <button class="btn btn-large btn-primary"><i class="ti-plus"></i>&nbsp;Ajouter une page</button>
                                     </a>
                                 </li>
 
