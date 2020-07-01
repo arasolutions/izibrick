@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Accueil{% endblock %}
+{% block title %}Administration de la page{% endblock %}
 
-{% block description %}Ajouter une page{% endblock %}
+{% block description %}Modifier la page{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -20,6 +20,7 @@
         <div class="panel-body">
             {{ form_start(form) }}
 
+
             <div class="panel panel-mint">
                 <div class="panel-heading">
                     <h3 class="panel-title"><label class="control-label">Nom de la page</label></h3>
@@ -27,6 +28,46 @@
                 <div class="panel-body">
                     <div class="col-sm-12">
                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Affichage dans les menus</label></h3>
+                </div>
+                <div class="panel-body" id="seo-home">
+                    <div class="col-sm-12">
+                        <label class="control-label" style="text-align:left;">Ordre d'affichage dans le header</label>
+                        <div>
+                            {{ form_widget(form.menuHeaderOrder, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">Ordre d'affichage dans le footer</label>
+                        <div>
+                            {{ form_widget(form.menuFooterOrder, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-mint">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><label class="control-label">Référencement (SEO)</label></h3>
+                </div>
+                <div class="panel-body" id="seo-home">
+                    <div class="col-sm-12">
+                        <label class="control-label" style="text-align:left;">{{ form_label(form.seoTitle) }}</label>
+                        <div>
+                            {{ form_widget(form.seoTitle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescription) }}</label>
+                        <div>
+                            {{ form_widget(form.seoDescription, {'attr': {'class': 'form-control'}}) }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,52 +104,18 @@
                 <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
                     Enregistrer
                 </button>
-                <button id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                <button id="form-revert" class="btn btn-dark pull-right mr10" type="button">
                     Annuler
                 </button>
             </div>
-            <!--===================================================-->
-            <!-- End Summernote -->
+
+            <div class="col-sm-12 mt20">
+                <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                    Supprimer la page
+                </a>
+            </div>
             {{ form_end(form) }}
 
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    <script src="{{ asset('assets/bo/vendor/jquery-migrate/jquery-migrate.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('bundles/colorpicker/js/jqColorPicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/imageTool.js') }}"></script>
-    <script src="{{ asset('assets/bo/js/hs.core.js') }}"></script>
-    <!-- JS Implementing Plugins -->
-    <script src="{{ asset('assets/bo/vendor/jquery.filer/js/jquery.filer.min.js') }}"></script>
-
-    <!-- JS Unify -->
-    <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
-    <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
-    <script type="text/javascript">
-        $.HSCore.components.HSFileAttachment.init('.js-file-attachment-background', {
-            changeInput: '<div class="u-file-attach-v3 g-mb-15">\
-                            <div class="col-sm-12">\
-                                <img id="edit_home_mainPicture-img" width="500" src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" />\
-                            </div>\
-                            <div class="col-sm-12">\
-               				    <h4 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_home_mainPicture_filer_title">\
-               				        <span class="g-color-primary">Modifier l\'image de fond</span>\
-               				    </h4>\
-               				</div>\
-              			</div>',
-            limit: 1,
-            templates: {
-                item: '<div></div>'
-            }
-        });
-        $("#edit_home_mainPicture").change(function () {
-            readURL(this, true);
-        });
-
-        $.HSCore.helpers.HSFocusState.init();
-    </script>
-
 {% endblock %}

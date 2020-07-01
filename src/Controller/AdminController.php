@@ -42,6 +42,7 @@ use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
+use App\Izibrick\CommandHandler\RemovePageCommandHandler;
 use App\Izibrick\CommandHandler\RemoveSiteCommandHandler;
 use App\Repository\CustomPageRepository;
 use App\Repository\PageRepository;
@@ -649,7 +650,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/page-edit/{id}", name="bo-page-edit")
      * @param Request $request
@@ -683,13 +683,25 @@ class AdminController extends AbstractController
         return $this->render('admin/page/type-2/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
+            'page' => $page,
             'form' => $form->createView(),
             'success' => false,
         ]);
-
-
-
     }
 
+    /**
+     * @Route("/page-remove/{id}", name="bo-page-remove")
+     * @param Request $request
+     * @param RemovePageCommandHandler $removePageCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function PageRemove(Request $request, $id = null, RemovePageCommandHandler $removePageCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $removePageCommandHandler->handle($id);
+        return $this->redirectToRoute('dashboard');
+    }
 
 }
