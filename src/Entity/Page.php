@@ -38,6 +38,11 @@ class Page
     private $pagesTypePresentation;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PageTypeContact", mappedBy="page")
+     */
+    private $pagesTypeContact;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -154,6 +159,22 @@ class Page
     public function setPagesTypePresentation($pagesTypePresentation)
     {
         $this->pagesTypePresentation = $pagesTypePresentation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPagesTypeContact()
+    {
+        return $this->pagesTypeContact;
+    }
+
+    /**
+     * @param mixed $pagesTypeContact
+     */
+    public function setPagesTypeContact($pagesTypeContact)
+    {
+        $this->pagesTypeContact = $pagesTypeContact;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
