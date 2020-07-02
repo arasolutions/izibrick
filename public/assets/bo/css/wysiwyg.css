@@ -1,0 +1,56 @@
+
+.editor-slider-row {
+    width: 100% !important;
+    display: flex !important;
+}
+
+.editor-slider-col-img {
+    height: 60px !important;
+    width: 25% !important;
+    float: left !important;
+}
+
+.editor-slider-col-img img {
+    height: inherit;
+}
+
+.editor-slider-col-alt {
+    width: 55% !important;
+    height: 40px !important;
+    float: left !important;
+}
+
+.editor-slider-col-alt input {
+    margin: 5px 0;
+}
+
+.dialog-slider-input {
+    display: block !important;
+    margin: 2px !important;
+}
+
+.editor-slider-col-action {
+    float: left !important;
+    height: 60px !important;
+    line-height: 60px !important;
+}
+
+.editor-slider-col-action i {
+    padding: 5px;
+}
+
+[class^="ti-"], [class*=" ti-"] {
+    font-family: 'themify' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.text-danger{
+    color:#f22314 !important;
+}

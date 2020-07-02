@@ -53,3 +53,16 @@ ul.page-numbers li > span.current,
     background: var(--colorTheme);
     color: var(--textColor) !important;
 }
+
+html.sticky-header-active #header.header-transparent .header-body .logo-title {
+    color: #333 !important;
+}
+
+@media (max-width: 767px) {
+    #index-container img, #presentation-container img, .blog-detail-container img {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 20px 0 !important;
+    }
+
+}

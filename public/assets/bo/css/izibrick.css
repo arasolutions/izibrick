@@ -341,3 +341,25 @@ ul.no-vertical-spacing > li {
 .noUi-target {
     margin: 12px 0;
 }
+
+.inscription {
+    border-radius: 10px;
+    margin: 10px 20px;
+    box-shadow: #25476a 0px 0px 5px -1px;
+}
+
+.inscription .header {
+    color: #25476a;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+.inscription .content {
+    min-height: 200px;
+}
+
+.inscription .footer {
+    padding: 20px;
+}
