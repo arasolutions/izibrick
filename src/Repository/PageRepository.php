@@ -40,4 +40,30 @@ class PageRepository extends AbstractRepository
             return null;
         }
     }
+
+    /**
+     * @param $id
+     * @return Page
+     */
+    public function getBySiteAndNameUrl($site, $nameUrl)
+    {
+        try {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.nameMenuUrl = :nameUrl')
+                ->andWhere('p.site = :site')
+                ->setParameter('nameUrl', $nameUrl)
+                ->setParameter('site', $site)
+                ->getQuery()
+                ->getOneOrNullResult();
+        } catch (NoResultException $e) {
+            return null;
+        } catch (NonUniqueResultException $e) {
+            return null;
+        }
+    }
+
+    public function getAlBySiteId($siteId)
+    {
+        return $this->findBy(['site' => $siteId]);
+    }
 }

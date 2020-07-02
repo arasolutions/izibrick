@@ -101,6 +101,7 @@ class PageTypeBlogController extends AbstractController
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $id);
+        $posts = $this->postRepository->getByPageId($id);
 
         $command = new PostCommand();
 
@@ -114,7 +115,7 @@ class PageTypeBlogController extends AbstractController
             return $this->render('admin/page/type-4/index.html.twig', [
                 'site' => $site,
                 'page' => $page,
-                'posts' => $site->getBlog()->getPosts(),
+                'posts' => $posts,
                 'success' => $success
             ]);
         }
@@ -140,6 +141,7 @@ class PageTypeBlogController extends AbstractController
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $idPage);
+        $posts = $this->postRepository->getByPageId($idPage);
 
         $command = new PostCommand();
         $command->id = $post->getId();
@@ -158,7 +160,7 @@ class PageTypeBlogController extends AbstractController
             return $this->render('admin/page/type-4/index.html.twig', [
                 'site' => $site,
                 'page' => $page,
-                'posts' => $site->getBlog()->getPosts(),
+                'posts' => $posts,
                 'success' => $success
             ]);
         }
@@ -184,6 +186,7 @@ class PageTypeBlogController extends AbstractController
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $idPage);
+        $posts = $this->postRepository->getByPageId($idPage);
         $command = new RemoveBlogCommand();
         $command->id = $post->getId();
 
@@ -197,7 +200,7 @@ class PageTypeBlogController extends AbstractController
         return $this->render('admin/page/type-4/index.html.twig', [
             'site' => $site,
             'page' => $page,
-            'posts' => $site->getBlog()->getPosts(),
+            'posts' => $posts,
             'success' => $success
         ]);
     }

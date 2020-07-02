@@ -1,0 +1,137 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | {{ page.seoTitle }}{% endblock %}
+{% block description %}{{ page.seoDescription }}{% endblock %}
+
+{% block contactActive %}active{% endblock %}
+
+{% block body %}
+
+    <div class="v-page-wrap no-top-spacing">
+        <div class="container">
+            {% if success %}
+                <div class="alert alert-success-icon alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Merci!</strong> Votre demande de prise de contact a bien été envoyée.
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="v-comment-form">
+
+                        <div class="v-heading-v2">
+                            <h3>Demande d'informations</h3>
+                        </div>
+
+                        <p class="pull-bottom-small">
+                            {{ page.pagesTypeContact.presentation|raw }}
+                        </p>
+
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {{ form_label(form.name) }} <span class="required">*</span>
+                                    {{ form_widget(form.name, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ form_label(form.email) }} <span class="required">*</span>
+                                    {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    {{ form_label(form.content) }} <span class="required">*</span>
+                                    {{ form_widget(form.content, {'attr':{'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button name="submit" type="submit" id="Button1"
+                                        class="btn v-btn v-btn-default v-small-button"><i class="fa fa-send-o"></i>
+                                    Envoyer le message
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+
+
+                    {% if page.pagesTypeContact.city is defined and page.pagesTypeContact.city is not null %}
+                        <div class="v-heading-v2">
+                            <h3>Adresse</h3>
+                        </div>
+
+                        <p>
+                            {% if page.pagesTypeContact.name %}
+                                {{ page.pagesTypeContact.name }}<br/>
+                            {% endif %}
+                            {{ page.pagesTypeContact.postCode }} {{ page.pagesTypeContact.city }} {{ page.pagesTypeContact.country }}
+                        </p>
+                    {% endif %}
+
+                    {% if (page.pagesTypeContact.email is defined and page.pagesTypeContact.email is not null) or (page.pagesTypeContact.phone is defined and page.pagesTypeContact.phone is not null) %}
+                        <div class="v-heading-v2">
+                            {% if page.pagesTypeContact.email and page.pagesTypeContact.phone %}
+                                <h3>Téléphone & Email</h3>
+                            {% elseif page.pagesTypeContact.phone %}
+                                <h3>Téléphone</h3>
+                            {% else %}
+                                <h3>Email</h3>
+                            {% endif %}
+                        </div>
+                        <p>
+                            {% if page.pagesTypeContact.email %}
+                                Email : <a href="mailto:{{ page.pagesTypeContact.email }}?subject=[{{site.name}}] Site - Contact" target="_blank">{{ page.pagesTypeContact.email }}</a><br/>
+                            {% endif %}
+                            {% if page.pagesTypeContact.phone %}
+                                Phone : {{ page.pagesTypeContact.phone }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    {% if page.pagesTypeContact.openingTime is defined and page.pagesTypeContact.openingTime is not null %}
+                        <div class="v-heading-v2">
+                            <h3>Horaires</h3>
+                        </div>
+                        <p>
+                            {{ page.pagesTypeContact.openingTime }}
+                        </p>
+                    {% endif %}
+
+                    {% if (site.twitter is defined and site.twitter is not null) or
+                        (site.facebook is defined and site.facebook is not null) or
+                        (site.instagram is defined and site.instagram is not null) %}
+                        <div class="v-heading-v2">
+                            <h3>Réseaux sociaux</h3>
+                        </div>
+                        <div class="contact-social">
+                            {% if site.twitter %}
+                                <p>
+                                    <span class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i> {{ site.getTwitterKey() }}</a></span>
+                                </p>
+                            {% endif %}
+                            {% if site.facebook %}
+                                <p>
+                                    <span class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i> {{ site.getFacebookKey() }}</a></span>
+                                </p>
+                            {% endif %}
+                            {% if site.instagram %}
+                                <p>
+                                    <span class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i> {{ site.getInstagramKey() }}</a></span>
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endblock %}
