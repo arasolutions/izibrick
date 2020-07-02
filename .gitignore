@@ -1,8 +1,11 @@
 
 ###> symfony/framework-bundle ###
 /.env
-/public/bundles/
+/public/bundles/fosckeditor/adapters
+/public/bundles/fosckeditor/lang
+/public/bundles/fosckeditor/plugins/*
 !/public/bundles/fosckeditor/plugins/background/
+!/public/bundles/fosckeditor/plugins/slider/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
