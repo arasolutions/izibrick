@@ -28,19 +28,24 @@ class Page
     private $site;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageTypeHome", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypeHome", mappedBy="page", cascade={"persist", "remove"})
      */
     private $pagesTypeHome;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageTypePresentation", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypePresentation", mappedBy="page", cascade={"persist", "remove"})
      */
     private $pagesTypePresentation;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageTypeContact", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypeContact", mappedBy="page", cascade={"persist", "remove"})
      */
     private $pagesTypeContact;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypeBlog", mappedBy="page", cascade={"persist", "remove"})
+     */
+    private $pagesTypeBlog;
 
     /**
      * @ORM\Column(type="datetime")
@@ -175,6 +180,22 @@ class Page
     public function setPagesTypeContact($pagesTypeContact)
     {
         $this->pagesTypeContact = $pagesTypeContact;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPagesTypeBlog()
+    {
+        return $this->pagesTypeBlog;
+    }
+
+    /**
+     * @param mixed $pagesTypeBlog
+     */
+    public function setPagesTypeBlog($pagesTypeBlog)
+    {
+        $this->pagesTypeBlog = $pagesTypeBlog;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

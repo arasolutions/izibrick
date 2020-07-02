@@ -28,6 +28,13 @@ class Post
     private $blog;
 
     /**
+     * @var User
+     * @ORM\JoinColumn(name="page_type_blog_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\PageTypeBlog", inversedBy="posts", fetch="EAGER")
+     */
+    private $pageTypeBlog;
+
+    /**
      * @var string
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -80,6 +87,18 @@ class Post
     public function setBlog(?Blog $blog): self
     {
         $this->blog = $blog;
+
+        return $this;
+    }
+
+    public function getPageTypeBlog(): ?PageTypeBlog
+    {
+        return $this->pageTypeBlog;
+    }
+
+    public function setPageTypeBlog(?PageTypeBlog $pageTypeBlog): self
+    {
+        $this->pageTypeBlog = $pageTypeBlog;
 
         return $this;
     }
