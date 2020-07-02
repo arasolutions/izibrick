@@ -48,6 +48,12 @@ class Page
     private $pagesTypeBlog;
 
     /**
+     * @var ArrayCollection|Post[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="page", cascade={"persist"}, fetch="LAZY")
+     */
+    private $posts;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -196,6 +202,22 @@ class Page
     public function setPagesTypeBlog($pagesTypeBlog)
     {
         $this->pagesTypeBlog = $pagesTypeBlog;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param mixed $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

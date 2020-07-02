@@ -4,6 +4,7 @@
 namespace App\Izibrick\CommandHandler;
 
 use App\Entity\Site;
+use App\Entity\Page;
 use App\Entity\Post;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\HomeCommand;
@@ -39,7 +40,7 @@ class EditPostCommandHandler
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(PostCommand $command, Site $site)
+    public function handle(PostCommand $command, Site $site, Page $page = null)
     {
         $id = $command->id;
         if (empty($id)) {
@@ -55,6 +56,7 @@ class EditPostCommandHandler
         $post->setTitle($command->title);
         $post->setIntroduction($command->introduction);
         $post->setContent($command->content);
+        $post->setPage($page);
         if ($command->image != null) {
             $post->setImage(null);
             $post->setImageFile($command->image);
