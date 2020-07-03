@@ -143,8 +143,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                             a.preview && a.preview.removeStyle("display");
 
                                             var pictures = CKEDITOR.document.getById('pictures');
-                                            var row = new CKEDITOR.dom.element('div');
-                                            row.setStyle('background-color', 'red');
+                                            /*var row = new CKEDITOR.dom.element('div');
                                             row.addClass('editor-slider-row');
 
                                             var colImg = new CKEDITOR.dom.element('div');
@@ -164,6 +163,82 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                             inputAlt.setAttribute('maxLength', 20);
 
                                             colAlt.append(inputAlt);
+                                            row.append(colAlt);
+
+                                            pictures.append(row);
+*/
+                                            var row = new CKEDITOR.dom.element('div');
+                                            row.addClass('editor-slider-row');
+
+                                            var colActions = new CKEDITOR.dom.element('div');
+                                            colActions.addClass('editor-slider-col-action');
+
+                                            var deleteAction = new CKEDITOR.dom.element('i');
+                                            deleteAction.addClass('ti-trash');
+                                            deleteAction.addClass('text-danger');
+
+                                            deleteAction.on('click', function (element) {
+                                                //Suppression de la ligne
+                                                row.remove();
+                                            });
+
+                                            colActions.append(deleteAction);
+
+                                            var upAction = new CKEDITOR.dom.element('i');
+                                            upAction.addClass('ti-arrow-up');
+                                            upAction.on('click', function (element) {
+                                                // Remontée de la ligne
+                                                if(row.hasPrevious()) {
+                                                    row.insertBefore(row.getPrevious());
+                                                    //pictures.append(row, pictures.getChildren().getFirst());
+                                                }else{
+                                                    alert('c\'est le premier');
+                                                }
+                                            });
+                                            colActions.append(upAction);
+
+                                            var downAction = new CKEDITOR.dom.element('i');
+                                            downAction.addClass('ti-arrow-down');
+                                            downAction.on('click', function (element) {
+                                                // Descente de la ligne
+                                                if(row.hasNext()) {
+                                                    row.insertAfter(row.getNext());
+                                                }else{
+                                                    //C'est la dernière
+                                                    alert("C'est la dernière");
+                                                }
+                                            });
+                                            colActions.append(downAction);
+
+                                            row.append(colActions);
+
+                                            var colImg = new CKEDITOR.dom.element('div');
+                                            colImg.addClass('editor-slider-col-img');
+
+                                            var img = new CKEDITOR.dom.element('img');
+                                            img.setAttribute('src', b);
+
+                                            colImg.append(img);
+                                            row.append(colImg);
+
+                                            var colAlt = new CKEDITOR.dom.element('div');
+                                            colAlt.addClass('editor-slider-col-alt');
+
+                                            var inputAlt = new CKEDITOR.dom.element('input');
+                                            inputAlt.addClass('cke_dialog_ui_input_text');
+                                            inputAlt.addClass('dialog-slider-input');
+                                            inputAlt.setAttribute('placeholder', 'Description');
+                                            inputAlt.setAttribute('maxLength', 20);
+
+                                            var inputTitle = new CKEDITOR.dom.element('input');
+                                            inputTitle.addClass('cke_dialog_ui_input_text');
+                                            inputTitle.addClass('dialog-slider-input');
+                                            inputTitle.setAttribute('placeholder', 'Titre');
+                                            inputTitle.setAttribute('maxLength', 100);
+
+                                            colAlt.append(inputTitle);
+                                            colAlt.append(inputAlt);
+
                                             row.append(colAlt);
 
                                             pictures.append(row);
