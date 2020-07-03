@@ -266,6 +266,35 @@ class SiteController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/site/{siteName<.*>}/{name}/{post}/", name="site_page_blog_detail",
+     *     host="%base_host%")
+     * @Route("/site/{siteName<.*>}/{name}/{post}/{postTitle}/", name="site_page_blog_detail",
+     *     host="%base_host%")
+     */
+    public function pageDetailBlog(Request $request, $siteName = null, $name = null, $post = null, $postTitle = null, AddTrackingContactCommandHandler $addTrackingContactCommandHandler, \Swift_Mailer $mailer)
+    {
+        /** @var Site $site */
+        if ($siteName != null) {
+            $site = $this->siteRepository->getByInternalName($siteName);
+        } else {
+            $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
+        }//var_dump($siteName);die;
+        $pages = $this->pageRepository->getAlBySiteId($site->getId());
+        $customPage = $this->customPageRepository->getBySiteAndNameUrl($site, $name);
+        $page = $this->pageRepository->getBySiteAndNameUrl($site, $name);
+        // Page de type Blog
+        $success = false;
+        $postDetail = $this->postRepository->get($post);
+
+        return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/detail.html.twig', [
+            'controller_name' => 'SiteController' . $site->getName(),
+            'site' => $site,
+            'pages' => $pages,
+            'page' => $page,
+            'post' => $postDetail
+        ]);
+    }
 
     /**
      * @Route("/{name}/",
@@ -281,10 +310,10 @@ class SiteController extends AbstractController
     {
         /** @var Site $site */
         if ($siteName != null) {
-            $site = $this->siteRepository->getByInternalName($siteName);//var_dump($siteName);die;
+            $site = $this->siteRepository->getByInternalName($siteName);
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
-        }
+        }//var_dump($siteName);die;
         $pages = $this->pageRepository->getAlBySiteId($site->getId());
         $customPage = $this->customPageRepository->getBySiteAndNameUrl($site, $name);
         $page = $this->pageRepository->getBySiteAndNameUrl($site, $name);
@@ -357,6 +386,8 @@ class SiteController extends AbstractController
             ]);
         }
     }
+
+
 
     /**
      * @Route("/",
