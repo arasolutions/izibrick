@@ -53,4 +53,12 @@ class PageType
         $this->label = $label;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->label;
+    }
+
 }

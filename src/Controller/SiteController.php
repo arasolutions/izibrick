@@ -14,6 +14,8 @@ use App\Form\AddTrackingContactType;
 use App\Form\AddTrackingQuoteType;
 use App\Repository\BlogRepository;
 use App\Repository\CustomPageRepository;
+use App\Repository\PageRepository;
+use App\Repository\PostRepository;
 use App\Repository\PricingRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,24 +26,32 @@ class SiteController extends AbstractController
 {
     /** @var SiteRepository */
     private $siteRepository;
+    /** @var PageRepository */
+    private $pageRepository;
     /** @var CustomPageRepository */
     private $customPageRepository;
     /** @var BlogRepository */
     private $blogRepository;
+    /** @var PostRepository */
+    private $postRepository;
     /** @var PricingRepository */
     private $pricingRepository;
 
     /**
      * SiteController constructor.
      * @param SiteRepository $siteRepository
+     * @param PageRepository $pageRepository
      * @param BlogRepository $blogRepository
+     * @param PostRepository $postRepository
      * @param PricingRepository $pricingRepository
      */
-    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository)
+    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, CustomPageRepository $customPageRepository, BlogRepository $blogRepository, PostRepository $postRepository, PricingRepository $pricingRepository)
     {
         $this->siteRepository = $siteRepository;
+        $this->pageRepository = $pageRepository;
         $this->customPageRepository = $customPageRepository;
         $this->blogRepository = $blogRepository;
+        $this->postRepository = $postRepository;
         $this->pricingRepository = $pricingRepository;
     }
 
@@ -267,7 +277,7 @@ class SiteController extends AbstractController
      * @Route("/site/{siteName<.*>}/{name}/", name="site_page",
      *     host="%base_host%")
      */
-    public function page($siteName = null, $name = null)
+    public function page(Request $request, $siteName = null, $name = null, AddTrackingContactCommandHandler $addTrackingContactCommandHandler, \Swift_Mailer $mailer)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -275,17 +285,75 @@ class SiteController extends AbstractController
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
-
+        $pages = $this->pageRepository->getAlBySiteId($site->getId());
         $customPage = $this->customPageRepository->getBySiteAndNameUrl($site, $name);
+        $page = $this->pageRepository->getBySiteAndNameUrl($site, $name);
+        if($page) {
+            if ($page->getType() == 2) {
+                // Page de type Présentation
+                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
+                    'controller_name' => 'SiteController' . $site->getName(),
+                    'site' => $site,
+                    'pages' => $pages,
+                    'page' => $page,
+                    'success' => false,
+                ]);
+            } else if ($page->getType() == 3) {
+                // Page de type Contact
+                $success = false;
+                $command = new AddTrackingContactCommand();
+
+                $form = $this->createForm(AddTrackingContactType::class, $command);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $addTrackingContactCommandHandler->handle($command, $site);
+
+                    $message = (new \Swift_Message('Demande de contact'))
+                        ->setFrom($_ENV['SITE_MAILER_USER'])
+                        ->setTo($site->getContact()->getEmail())
+                        ->setReplyTo($command->getEmail())
+                        ->setBody($this->renderView(
+                            'sites/emails/contact.txt.twig',
+                            ['command' => $command,
+                                'site' => $site]
+                        ), 'text/html'
+                        );
+                    $mailer->send($message);
+                    $success = true;
+                }
+                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
+                    'controller_name' => 'SiteController' . $site->getName(),
+                    'site' => $site,
+                    'pages' => $pages,
+                    'page' => $page,
+                    'form' => $form->createView(),
+                    'success' => false,
+                ]);
+            } else if ($page->getType() == 4) {
+                // Page de type Blog
+                $success = false;
+                $posts = $this->postRepository->getByPageId($page->getId());
+
+                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
+                    'controller_name' => 'SiteController' . $site->getName(),
+                    'site' => $site,
+                    'pages' => $pages,
+                    'page' => $page,
+                    'posts' => $posts
+                ]);
+            }
+        }
         if($customPage) {
             return $this->render('sites/template-' . $site->getTemplate()->getId() . '/custom-page/index.html.twig', [
                 'controller_name' => 'SiteController' . $site->getName(),
                 'site' => $site,
+                'pages' => $pages,
                 'customPage' => $customPage
             ]);
         } else {
             return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
-                'site' => $site
+                'site' => $site,
+                'pages' => $pages
             ]);
         }
     }
@@ -310,9 +378,11 @@ class SiteController extends AbstractController
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
+        $pages = $this->pageRepository->getAlBySiteId($site->getId());
 
         return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
-            'site' => $site
+            'site' => $site,
+            'pages' => $pages
         ]);
     }
 

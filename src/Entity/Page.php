@@ -28,14 +28,30 @@ class Page
     private $site;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageTypeHome", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypeHome", mappedBy="page", cascade={"persist", "remove"})
      */
     private $pagesTypeHome;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageTypePresentation", mappedBy="page")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypePresentation", mappedBy="page", cascade={"persist", "remove"})
      */
     private $pagesTypePresentation;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypeContact", mappedBy="page", cascade={"persist", "remove"})
+     */
+    private $pagesTypeContact;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PageTypeBlog", mappedBy="page", cascade={"persist", "remove"})
+     */
+    private $pagesTypeBlog;
+
+    /**
+     * @var ArrayCollection|Post[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="page", cascade={"persist"}, fetch="LAZY")
+     */
+    private $posts;
 
     /**
      * @ORM\Column(type="datetime")
@@ -61,6 +77,16 @@ class Page
      * @ORM\Column(type="integer", nullable=true)
      */
     private $menuOrder;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $menuHeaderOrder;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $menuFooterOrder;
 
     /**
      * @ORM\Column(type="text", length=128, nullable=true)
@@ -144,6 +170,54 @@ class Page
     public function setPagesTypePresentation($pagesTypePresentation)
     {
         $this->pagesTypePresentation = $pagesTypePresentation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPagesTypeContact()
+    {
+        return $this->pagesTypeContact;
+    }
+
+    /**
+     * @param mixed $pagesTypeContact
+     */
+    public function setPagesTypeContact($pagesTypeContact)
+    {
+        $this->pagesTypeContact = $pagesTypeContact;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPagesTypeBlog()
+    {
+        return $this->pagesTypeBlog;
+    }
+
+    /**
+     * @param mixed $pagesTypeBlog
+     */
+    public function setPagesTypeBlog($pagesTypeBlog)
+    {
+        $this->pagesTypeBlog = $pagesTypeBlog;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param mixed $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -232,6 +306,38 @@ class Page
     public function setMenuOrder($menuOrder)
     {
         $this->menuOrder = $menuOrder;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuHeaderOrder()
+    {
+        return $this->menuHeaderOrder;
+    }
+
+    /**
+     * @param mixed $menuHeaderOrder
+     */
+    public function setMenuHeaderOrder($menuHeaderOrder)
+    {
+        $this->menuHeaderOrder = $menuHeaderOrder;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuFooterOrder()
+    {
+        return $this->menuFooterOrder;
+    }
+
+    /**
+     * @param mixed $menuFooterOrder
+     */
+    public function setMenuFooterOrder($menuFooterOrder)
+    {
+        $this->menuFooterOrder = $menuFooterOrder;
     }
 
     public function getContent(): ?string

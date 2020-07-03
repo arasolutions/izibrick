@@ -9,22 +9,31 @@ use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Contact;
 use App\Enum\Constants;
+use App\Form\AddPageType;
 use App\Form\EditCustomPageType;
+use App\Form\EditPageTypeContactType;
+use App\Form\EditPageTypePresentationType;
 use App\Helper\SiteHelper;
 use App\Helper\ApiAnalyticsHelper;
+use App\Izibrick\Command\AddPageCommand;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\CustomPageCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\BlogCommand;
 use App\Izibrick\Command\HomeCommand;
+use App\Izibrick\Command\PageTypeContactCommand;
+use App\Izibrick\Command\PageTypePresentationCommand;
 use App\Izibrick\Command\PresentationCommand;
 use App\Izibrick\Command\QuoteCommand;
 use App\Izibrick\Command\SeoCommand;
+use App\Izibrick\CommandHandler\AddPageCommandHandler;
 use App\Izibrick\CommandHandler\EditContactCommandHandler;
 use App\Izibrick\CommandHandler\EditCustomPageCommandHandler;
 use App\Izibrick\CommandHandler\EditGlobalParametersCommandHandler;
 use App\Izibrick\CommandHandler\EditBlogCommandHandler;
 use App\Izibrick\CommandHandler\EditHomeCommandHandler;
+use App\Izibrick\CommandHandler\EditPageTypeContactCommandHandler;
+use App\Izibrick\CommandHandler\EditPageTypePresentationCommandHandler;
 use App\Izibrick\CommandHandler\EditPresentationCommandHandler;
 use App\Izibrick\CommandHandler\EditQuoteCommandHandler;
 use App\Izibrick\CommandHandler\EditSeoCommandHandler;
@@ -36,10 +45,14 @@ use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Form\EditQuoteType;
 use App\Form\EditSeoType;
+use App\Izibrick\CommandHandler\RemovePageCommandHandler;
 use App\Izibrick\CommandHandler\RemoveSiteCommandHandler;
 use App\Repository\CustomPageRepository;
 use App\Repository\PageRepository;
 use App\Repository\FontRepository;
+use App\Repository\PageTypeContactRepository;
+use App\Repository\PageTypePresentationRepository;
+use App\Repository\PageTypeRepository;
 use App\Repository\PricingCategoryRepository;
 use App\Repository\PricingProductRepository;
 use App\Repository\PricingRepository;
@@ -70,6 +83,15 @@ class AdminController extends AbstractController
 
     /** @var PageRepository $pageRepository */
     private $pageRepository;
+
+    /** @var PageTypeRepository $pageTypeRepository */
+    private $pageTypeRepository;
+
+    /** @var PageTypePresentationRepository $pageTypePresentationRepository */
+    private $pageTypePresentationRepository;
+
+    /** @var PageTypeContactRepository $pageTypeContactRepository */
+    private $pageTypeContactRepository;
 
     /** @var HomeRepository $homeRepository */
     private $homeRepository;
@@ -103,6 +125,9 @@ class AdminController extends AbstractController
      * @param SiteRepository $siteRepository
      * @param CustomPageRepository $customPageRepository
      * @param PageRepository $pageRepository
+     * @param PageTypeRepository $pageTypeRepository
+     * @param PageTypePresentationRepository $pageTypePresentationRepository
+     * @param PageTypeContactRepository $pageTypeContactRepository
      * @param HomeRepository $homeRepository
      * @param PresentationRepository $presentationRepository
      * @param BlogRepository $blogRepository
@@ -113,11 +138,14 @@ class AdminController extends AbstractController
      * @param PricingProductRepository $pricingProductRepository
      * @param FontRepository $fontRepository
      */
-    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, PageRepository $pageRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository)
+    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, PageRepository $pageRepository, PageTypeRepository $pageTypeRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->customPageRepository = $customPageRepository;
         $this->pageRepository = $pageRepository;
+        $this->pageTypeRepository = $pageTypeRepository;
+        $this->pageTypePresentationRepository = $pageTypePresentationRepository;
+        $this->pageTypeContactRepository =  $pageTypeContactRepository;
         $this->homeRepository = $homeRepository;
         $this->presentationRepository = $presentationRepository;
         $this->blogRepository = $blogRepository;
@@ -598,4 +626,145 @@ class AdminController extends AbstractController
         ]);*/
     }
 
+
+    /**
+     * @Route("/page-add", name="bo-page-add")
+     * @param Request $request
+     * @param AddPageCommandHandler $addPageCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function PageAdd(Request $request, AddPageCommandHandler $addPageCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $success = false;
+
+        $page = new AddPageCommand();
+
+        $form = $this->createForm(AddPageType::class, $page);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $addPageCommandHandler->handle($page, $site);
+            $success = true;
+        }
+
+        return $this->render('admin/page/add.html.twig', [
+            'form' => $form->createView(),
+            'site' => $site,
+            'success' => $success
+        ]);
+    }
+
+    /**
+     * @Route("/page-presentation-edit/{id}", name="bo-page-presentation-edit")
+     * @param Request $request
+     * @param EditPageTypePresentationCommandHandler $editPageTypePresentationCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function PagePresentationEdit(Request $request, $id = null, EditPageTypePresentationCommandHandler $editPageTypePresentationCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $success = false;
+        $page = $this->pageRepository->getBySiteAndId($site, $id);
+        $typePage = $this->pageTypeRepository->get($page->getType());
+        $pageTypePresentation = $this->pageTypePresentationRepository->getByPageId($id);
+        $pageTypeCommand = new PageTypePresentationCommand();
+        $pageTypeCommand->id = $page->getId();
+        $pageTypeCommand->name = $page->getNameMenu();
+        $pageTypeCommand->menuHeaderOrder = $page->getMenuHeaderOrder();
+        $pageTypeCommand->menuFooterOrder = $page->getMenuFooterOrder();
+        $pageTypeCommand->seoTitle = $page->getSeoTitle();
+        $pageTypeCommand->seoDescription = $page->getSeoDescription();
+        $pageTypeCommand->type = $typePage;
+        // Spécifique page Présentation
+        $pageTypeCommand->content = $pageTypePresentation->getContent();
+
+        $form = $this->createForm(EditPageTypePresentationType::class, $pageTypeCommand, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editPageTypePresentationCommandHandler->handle($pageTypeCommand, $site);
+            $success = true;
+        }
+        return $this->render('admin/page/type-2/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'page' => $page,
+            'form' => $form->createView(),
+            'success' => false,
+        ]);
+    }
+
+    /**
+     * @Route("/page-remove/{id}", name="bo-page-remove")
+     * @param Request $request
+     * @param RemovePageCommandHandler $removePageCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function PageRemove(Request $request, $id = null, RemovePageCommandHandler $removePageCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $removePageCommandHandler->handle($id);
+        return $this->redirectToRoute('dashboard');
+    }
+
+    /**
+     * @Route("/page-contact-edit/{id}", name="bo-page-contact-edit")
+     * @param Request $request
+     * @param EditPageTypeContactCommandHandler $editPageTypeContactCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function PageContactEdit(Request $request, $id = null, EditPageTypeContactCommandHandler $editPageTypeContactCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $success = false;
+        $page = $this->pageRepository->getBySiteAndId($site, $id);
+        $typePage = $this->pageTypeRepository->get($page->getType());
+        $pageTypeContact = $this->pageTypeContactRepository->getByPageId($id);
+        $pageTypeCommand = new PageTypeContactCommand();
+        $pageTypeCommand->id = $page->getId();
+        $pageTypeCommand->name = $page->getNameMenu();
+        $pageTypeCommand->menuHeaderOrder = $page->getMenuHeaderOrder();
+        $pageTypeCommand->menuFooterOrder = $page->getMenuFooterOrder();
+        $pageTypeCommand->seoTitle = $page->getSeoTitle();
+        $pageTypeCommand->seoDescription = $page->getSeoDescription();
+        $pageTypeCommand->type = $typePage;
+        // Spécifique page Contact
+        $pageTypeCommand->email = $pageTypeContact->getEmail();
+        $pageTypeCommand->phone = $pageTypeContact->getPhone();
+        $pageTypeCommand->name = $pageTypeContact->getName();
+        $pageTypeCommand->postCode = $pageTypeContact->getPostCode();
+        $pageTypeCommand->city = $pageTypeContact->getCity();
+        $pageTypeCommand->country = $pageTypeContact->getCountry();
+        $pageTypeCommand->openingTime = $pageTypeContact->getOpeningTime();
+
+        $form = $this->createForm(EditPageTypeContactType::class, $pageTypeCommand, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editPageTypeContactCommandHandler->handle($pageTypeCommand, $site);
+            $success = true;
+        }
+        return $this->render('admin/page/type-3/index.html.twig', [
+            'controller_name' => 'AdminController',
+            'site' => $site,
+            'page' => $page,
+            'form' => $form->createView(),
+            'success' => false,
+        ]);
+    }
 }

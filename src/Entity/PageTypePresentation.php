@@ -19,8 +19,7 @@ class PageTypePresentation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="pagesTypePresentation", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Page", inversedBy="pagesTypePresentation", cascade={"persist", "remove"})
      */
     private $page;
 

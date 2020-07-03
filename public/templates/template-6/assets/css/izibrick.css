@@ -1,0 +1,70 @@
+.container img {
+    max-width: unset !important;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+a.active {
+    color: var(--colorTheme) !important;
+}
+
+footer {
+    background: var(--colorTheme) !important;
+    color: var(--textColor) !important;
+}
+
+footer, footer p {
+    color: white !important;
+    padding: 20px 0px 0px 0px;
+}
+
+.logo-title {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+
+.footer-title {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+
+.v-heading-v2 h2,
+.v-heading-v2 h3,
+.v-heading-v2 h4,
+.v-link:hover,
+.v-search-items a:hover,
+.post-info a,
+.tags-wrap .tags a,
+.v-team-member-box .read-more:hover,
+.v-tweets-slide-widget .tweet-text a {
+    border-bottom-color: var(--colorTheme);
+}
+
+.v-pagination li a:hover,
+ul.bar-styling li:not(.selected) > a:hover,
+ul.bar-styling li > .comments-likes:hover,
+ul.page-numbers li > a:hover,
+ul.page-numbers li > span.current,
+.slideout-filter ul li.selected a,
+.btn.v-btn.v-btn-default{
+    background: var(--colorTheme);
+    color: var(--textColor) !important;
+}
+
+.v-blog-item-info .v-btn.sf-icon-stroke i, .mini-v-blog-item-wrap .v-btn.sf-icon-stroke i, .post-inner .v-btn.sf-icon-stroke i {
+    background: var(--colorTheme);
+    color: var(--textColor);
+}
+
+@media (max-width: 640px) {
+    ul {
+        margin-left: 0px !important;
+        padding-left: 0px !important;
+    }
+}

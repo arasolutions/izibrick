@@ -18,4 +18,9 @@ class PostRepository extends AbstractRepository
     {
         parent::__construct($registry, Post::class);
     }
+
+    public function getByPageId($pageId)
+    {
+        return $this->findBy(['page' => $pageId]);
+    }
 }

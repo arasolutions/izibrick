@@ -26,6 +26,19 @@ class Post
      * @ORM\ManyToOne(targetEntity="App\Entity\Blog", inversedBy="posts", fetch="EAGER")
      */
     private $blog;
+    /**
+     * @var User
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="posts", fetch="EAGER")
+     */
+    private $page;
+
+    /**
+     * @var User
+     * @ORM\JoinColumn(name="page_type_blog_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\PageTypeBlog", inversedBy="posts", fetch="EAGER")
+     */
+    private $pageTypeBlog;
 
     /**
      * @var string
@@ -80,6 +93,30 @@ class Post
     public function setBlog(?Blog $blog): self
     {
         $this->blog = $blog;
+
+        return $this;
+    }
+
+    public function getPageTypeBlog(): ?PageTypeBlog
+    {
+        return $this->pageTypeBlog;
+    }
+
+    public function setPageTypeBlog(?PageTypeBlog $pageTypeBlog): self
+    {
+        $this->pageTypeBlog = $pageTypeBlog;
+
+        return $this;
+    }
+
+    public function getPage(): ?Page
+    {
+        return $this->page;
+    }
+
+    public function setPage(?Page $page): self
+    {
+        $this->page = $page;
 
         return $this;
     }

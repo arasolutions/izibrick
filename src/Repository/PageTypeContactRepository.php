@@ -18,4 +18,9 @@ class PageTypeContactRepository extends AbstractRepository
     {
         parent::__construct($registry, PageTypeContact::class);
     }
+
+    public function getByPageId($pageId)
+    {
+        return $this->findOneBy(['page' => $pageId]);
+    }
 }
