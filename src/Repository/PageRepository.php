@@ -62,7 +62,7 @@ class PageRepository extends AbstractRepository
         }
     }
 
-    public function getAlBySiteId($siteId)
+    public function getAllBySiteId($siteId)
     {
         return $this->findBy(['site' => $siteId]);
     }

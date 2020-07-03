@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Font;
+use App\Entity\Page;
 use App\Entity\Template;
 use App\Izibrick\Command\GlobalParametersCommand;
 use Symfony\Component\Form\AbstractType;
@@ -113,6 +114,12 @@ class EditGlobalParametersType extends AbstractType
             ->add('displayQuote', CheckboxType::class, [
                 'label' => 'Afficher la page Devis',
                 'required' => false,
+            ])
+            ->add('defaultPage', EntityType::class, [
+                'label' => 'Page d\'accueil',
+                'required' => true,
+                'class' => Page::class,
+                'choice_label' => 'nameMenu'
             ]);
     }
 

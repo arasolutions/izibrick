@@ -114,6 +114,11 @@ class Page
     private $seoDescription;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Site", mappedBy="defaultPage", cascade={"persist", "remove"})
+     */
+    private $defaultPage;
+
+    /**
      * Page constructor.
      * @param $site
      */
@@ -398,5 +403,21 @@ class Page
     public function setNameMenuUrl($nameMenuUrl)
     {
         $this->nameMenuUrl = $nameMenuUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultPage()
+    {
+        return $this->defaultPage;
+    }
+
+    /**
+     * @param mixed $defaultPage
+     */
+    public function setDefaultPage($defaultPage)
+    {
+        $this->defaultPage = $defaultPage;
     }
 }

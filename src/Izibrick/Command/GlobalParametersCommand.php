@@ -10,6 +10,7 @@ use App\Entity\Site;
 class GlobalParametersCommand
 {
     private $name;
+    private $defaultPage;
     private $description;
     private $domain;
     private $logo;
@@ -34,6 +35,7 @@ class GlobalParametersCommand
     public function __construct(Site $site)
     {
         $this->name = $site->getName();
+        $this->defaultPage = $site->getDefaultPage();
         $this->description = $site->getDescription();
         $this->domain = $site->getDomain();
         $this->instagram = $site->getInstagram();
@@ -67,6 +69,21 @@ class GlobalParametersCommand
         $this->name = $name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDefaultPage()
+    {
+        return $this->defaultPage;
+    }
+
+    /**
+     * @param mixed $defaultPage
+     */
+    public function setDefaultPage($defaultPage)
+    {
+        $this->defaultPage = $defaultPage;
+    }
 
     /**
      * @return null|string

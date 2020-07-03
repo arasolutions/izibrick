@@ -210,18 +210,14 @@
                                 <div class="horizontal-break"></div>
                             </div>
                             <ul>
-                                <li>
-                                    <a href="{{ path('presentation'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Présentation</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('blog'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('devis'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Devis</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('contact'|route(app.request.server.get('REQUEST_URI')), siteName) }}">Contact</a>
-                                </li>
+                                {% for page in pages %}
+                                    <li>
+                                        {% set param = siteName|merge({'name':page.nameMenuUrl}) %}
+                                        <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">
+                                            {{ page.nameMenu }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>

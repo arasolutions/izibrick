@@ -262,6 +262,11 @@ class Site
     private $analyticsSuiviId;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Page", inversedBy="defaultPage", cascade={"persist", "remove"})
+     */
+    private $defaultPage;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -906,5 +911,21 @@ class Site
     public function setAnalyticsSuiviId($analyticsSuiviId)
     {
         $this->analyticsSuiviId = $analyticsSuiviId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultPage()
+    {
+        return $this->defaultPage;
+    }
+
+    /**
+     * @param mixed $defaultPage
+     */
+    public function setDefaultPage($defaultPage)
+    {
+        $this->defaultPage = $defaultPage;
     }
 }

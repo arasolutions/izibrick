@@ -63,6 +63,7 @@ class EditGlobalParametersCommandHandler
         $this->quoteRepository->save($quote);
 
         $site->setName($command->getName());
+        $site->setDefaultPage($command->getDefaultPage());
 
         // Gestion du nom interne
         if ($site->getInternalName() == '') {
