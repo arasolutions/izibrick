@@ -279,7 +279,6 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
 
                     var divTextItem = editor.document.createElement('div');
                     divTextItem.addClass('carousel-caption');
-                    divTextItem.addClass('d-none');
                     divTextItem.addClass('d-md-block');
 
                     var textItemTitle = editor.document.createElement('h5');
