@@ -66,4 +66,26 @@ class PageRepository extends AbstractRepository
     {
         return $this->findBy(['site' => $siteId]);
     }
+
+    public function getAllHeaderBySiteId($siteId)
+    {
+        $q = $this->createQueryBuilder('p')
+            ->andWhere('p.site = :site')
+            ->andWhere('p.menuHeaderOrder > 0')
+            ->setParameter('site', $siteId)
+            ->orderBy('p.menuHeaderOrder','ASC')
+            ->getQuery();
+        return $q->getResult();
+    }
+
+    public function getAllFooterBySiteId($siteId)
+    {
+        $q = $this->createQueryBuilder('p')
+            ->andWhere('p.site = :site')
+            ->andWhere('p.menuFooterOrder > 0')
+            ->setParameter('site', $siteId)
+            ->orderBy('p.menuFooterOrder','ASC')
+            ->getQuery();
+        return $q->getResult();
+    }
 }

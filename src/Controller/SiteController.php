@@ -69,7 +69,8 @@ class SiteController extends AbstractController
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }//var_dump($siteName);die;
-        $pages = $this->pageRepository->getAllBySiteId($site->getId());
+        $pages = $this->pageRepository->getAllHeaderBySiteId($site->getId());
+        $pagesFooter = $this->pageRepository->getAllFooterBySiteId($site->getId());
         $customPage = $this->customPageRepository->getBySiteAndNameUrl($site, $name);
         $page = $this->pageRepository->getBySiteAndNameUrl($site, $name);
         // Page de type Blog
@@ -80,6 +81,7 @@ class SiteController extends AbstractController
             'controller_name' => 'SiteController' . $site->getName(),
             'site' => $site,
             'pages' => $pages,
+            'pagesFooter' => $pagesFooter,
             'page' => $page,
             'post' => $postDetail
         ]);
@@ -103,7 +105,8 @@ class SiteController extends AbstractController
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }//var_dump($siteName);die;
-        $pages = $this->pageRepository->getAllBySiteId($site->getId());
+        $pages = $this->pageRepository->getAllHeaderBySiteId($site->getId());
+        $pagesFooter = $this->pageRepository->getAllFooterBySiteId($site->getId());
         $customPage = $this->customPageRepository->getBySiteAndNameUrl($site, $name);
         $page = $this->pageRepository->getBySiteAndNameUrl($site, $name);
         if($page) {
@@ -113,6 +116,7 @@ class SiteController extends AbstractController
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
+                    'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'success' => false,
                 ]);
@@ -143,6 +147,7 @@ class SiteController extends AbstractController
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
+                    'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'form' => $form->createView(),
                     'success' => false,
@@ -156,6 +161,7 @@ class SiteController extends AbstractController
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
+                    'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'posts' => $posts
                 ]);
@@ -166,12 +172,14 @@ class SiteController extends AbstractController
                 'controller_name' => 'SiteController' . $site->getName(),
                 'site' => $site,
                 'pages' => $pages,
+                'pagesFooter' => $pagesFooter,
                 'customPage' => $customPage
             ]);
         } else {
             return $this->render('sites/template-' . $site->getTemplate()->getId() . '/index/index.html.twig', [
                 'site' => $site,
-                'pages' => $pages
+                'pages' => $pages,
+                'pagesFooter' => $pagesFooter,
             ]);
         }
     }
@@ -196,7 +204,8 @@ class SiteController extends AbstractController
         } else {
             $site = $this->siteRepository->getByDomain($_SERVER['HTTP_HOST']);
         }
-        $pages = $this->pageRepository->getAllBySiteId($site->getId());
+        $pages = $this->pageRepository->getAllHeaderBySiteId($site->getId());
+        $pagesFooter = $this->pageRepository->getAllFooterBySiteId($site->getId());
         $page = $this->pageRepository->get($site->getDefaultPage());
 
 
@@ -207,6 +216,7 @@ class SiteController extends AbstractController
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
+                    'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'success' => false,
                 ]);
@@ -237,6 +247,7 @@ class SiteController extends AbstractController
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
+                    'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'form' => $form->createView(),
                     'success' => false,
@@ -250,6 +261,7 @@ class SiteController extends AbstractController
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
+                    'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'posts' => $posts
                 ]);
