@@ -81,14 +81,14 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             inputAlt.addClass('cke_dialog_ui_input_text');
                             inputAlt.addClass('dialog-slider-input');
                             inputAlt.setAttribute('placeholder', 'Description');
-                            inputAlt.setAttribute('maxLength', 20);
+                            inputAlt.setAttribute('maxLength', 100);
                             inputAlt.setAttribute('value', element.find('div').getItem(0).find('p').getItem(0).getText());
 
                             var inputTitle = new CKEDITOR.dom.element('input');
                             inputTitle.addClass('cke_dialog_ui_input_text');
                             inputTitle.addClass('dialog-slider-input');
                             inputTitle.setAttribute('placeholder', 'Titre');
-                            inputTitle.setAttribute('maxLength', 100);
+                            inputTitle.setAttribute('maxLength', 20);
                             inputTitle.setAttribute('value', element.find('div').getItem(0).find('h5').getItem(0).getText());
 
                             colAlt.append(inputTitle);
@@ -319,21 +319,21 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                 div.addClass('carousel');
                 div.addClass('slide');
 
-                var ol = editor.document.createElement('ol');
-                ol.addClass('carousel-indicators');
+                if(pictures.getChildren().length > 1 ) {
+                    var ol = editor.document.createElement('ol');
+                    ol.addClass('carousel-indicators');
 
-                pictures.getChildren().toArray().forEach(function (element, index) {
-                    var li = editor.document.createElement('li');
-                    li.setAttribute('data-target', '#carouselExampleIndicators');
-                    li.setAttribute('data-slide-to', index);
-                    if (index === 0) {
-                        li.addClass('active');
-                    }
-                    ol.append(li);
-                });
-
-
-                div.append(ol);
+                    pictures.getChildren().toArray().forEach(function (element, index) {
+                        var li = editor.document.createElement('li');
+                        li.setAttribute('data-target', '#carouselExampleIndicators');
+                        li.setAttribute('data-slide-to', index);
+                        if (index === 0) {
+                            li.addClass('active');
+                        }
+                        ol.append(li);
+                    });
+                    div.append(ol);
+                }
 
                 var divInner = editor.document.createElement('div');
                 divInner.addClass('carousel-inner');
@@ -375,43 +375,45 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
 
                 div.append(divInner);
 
-                var aPrec = editor.document.createElement('a');
-                aPrec.addClass('carousel-control-prev');
-                aPrec.setAttribute('href', '#carouselExampleIndicators');
-                aPrec.setAttribute('role', 'button');
-                aPrec.setAttribute('data-slide', 'prev');
+                if(pictures.getChildren().length > 1 ) {
+                    var aPrec = editor.document.createElement('a');
+                    aPrec.addClass('carousel-control-prev');
+                    aPrec.setAttribute('href', '#carouselExampleIndicators');
+                    aPrec.setAttribute('role', 'button');
+                    aPrec.setAttribute('data-slide', 'prev');
 
-                var spanIconPrec = editor.document.createElement('span');
-                spanIconPrec.addClass('carousel-control-prev-icon');
-                spanIconPrec.setAttribute('aria-hidden', 'true');
+                    var spanIconPrec = editor.document.createElement('span');
+                    spanIconPrec.addClass('carousel-control-prev-icon');
+                    spanIconPrec.setAttribute('aria-hidden', 'true');
 
-                var spanPrec = editor.document.createElement('span');
-                spanPrec.addClass('sr-only');
-                spanPrec.appendText('Précédent');
+                    var spanPrec = editor.document.createElement('span');
+                    spanPrec.addClass('sr-only');
+                    spanPrec.appendText('Précédent');
 
-                aPrec.append(spanIconPrec);
-                aPrec.append(spanPrec);
+                    aPrec.append(spanIconPrec);
+                    aPrec.append(spanPrec);
 
-                var aNext = editor.document.createElement('a');
-                aNext.addClass('carousel-control-next');
-                aNext.setAttribute('href', '#carouselExampleIndicators');
-                aNext.setAttribute('role', 'button');
-                aNext.setAttribute('data-slide', 'next');
+                    var aNext = editor.document.createElement('a');
+                    aNext.addClass('carousel-control-next');
+                    aNext.setAttribute('href', '#carouselExampleIndicators');
+                    aNext.setAttribute('role', 'button');
+                    aNext.setAttribute('data-slide', 'next');
 
-                var spanIconNext = editor.document.createElement('span');
-                spanIconNext.addClass('carousel-control-next-icon');
-                spanIconNext.setAttribute('aria-hidden', 'true');
-                spanIconNext.appendText(' ');
+                    var spanIconNext = editor.document.createElement('span');
+                    spanIconNext.addClass('carousel-control-next-icon');
+                    spanIconNext.setAttribute('aria-hidden', 'true');
+                    spanIconNext.appendText(' ');
 
-                var spanNext = editor.document.createElement('span');
-                spanNext.addClass('sr-only');
-                spanNext.appendText('Suivant');
+                    var spanNext = editor.document.createElement('span');
+                    spanNext.addClass('sr-only');
+                    spanNext.appendText('Suivant');
 
-                aNext.append(spanIconNext);
-                aNext.append(spanNext);
+                    aNext.append(spanIconNext);
+                    aNext.append(spanNext);
 
-                div.append(aPrec);
-                div.append(aNext);
+                    div.append(aPrec);
+                    div.append(aNext);
+                }
 
                 editor.insertElement(div);
             }
