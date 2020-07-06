@@ -267,6 +267,11 @@ class Site
     private $defaultPage;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
+    private $displayBoxed;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -927,5 +932,21 @@ class Site
     public function setDefaultPage($defaultPage)
     {
         $this->defaultPage = $defaultPage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayBoxed()
+    {
+        return $this->displayBoxed;
+    }
+
+    /**
+     * @param mixed $displayBoxed
+     */
+    public function setDisplayBoxed($displayBoxed)
+    {
+        $this->displayBoxed = $displayBoxed;
     }
 }

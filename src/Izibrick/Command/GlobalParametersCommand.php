@@ -12,6 +12,7 @@ class GlobalParametersCommand
     private $name;
     private $defaultPage;
     private $description;
+    private $displayBoxed;
     private $domain;
     private $logo;
     private $nameInLogo;
@@ -37,6 +38,7 @@ class GlobalParametersCommand
         $this->name = $site->getName();
         $this->defaultPage = $site->getDefaultPage();
         $this->description = $site->getDescription();
+        $this->displayBoxed = $site->getDisplayBoxed();
         $this->domain = $site->getDomain();
         $this->instagram = $site->getInstagram();
         $this->facebook = $site->getFacebook();
@@ -83,6 +85,22 @@ class GlobalParametersCommand
     public function setDefaultPage($defaultPage)
     {
         $this->defaultPage = $defaultPage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayBoxed()
+    {
+        return $this->displayBoxed;
+    }
+
+    /**
+     * @param mixed $displayBoxed
+     */
+    public function setDisplayBoxed($displayBoxed)
+    {
+        $this->displayBoxed = $displayBoxed;
     }
 
     /**

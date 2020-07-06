@@ -120,6 +120,14 @@ class EditGlobalParametersType extends AbstractType
                 'required' => true,
                 'class' => Page::class,
                 'choice_label' => 'nameMenu'
+            ])
+            ->add('displayBoxed', ChoiceType::class, [
+                'label' => 'Affichage sur toute la largeur de l\'écran',
+                'required' => true,
+                'choices' => [
+                    'Oui' => false,
+                    'Non' => true,
+                ]
             ]);
     }
 

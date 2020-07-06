@@ -77,6 +77,7 @@ class EditGlobalParametersCommandHandler
         $site = $this->siteRepository->save($site);
 
         $site->setDescription($command->getDescription());
+        $site->setDisplayBoxed($command->getDisplayBoxed());
         $site->setDomain($command->getDomain());
         if ($command->getDomain() != '') {
             // Enlever le https

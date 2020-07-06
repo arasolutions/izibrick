@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html class="{{  site.displayBoxed == true ? 'boxed' : '' }}">
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{{ site.name }}{% endblock %}</title>
@@ -119,7 +119,7 @@
 
 </head>
 
-<body>
+<body class="{{ site.displayBoxed == true ? 'body' : '' }}">
 
 <!--Header-->
 <header id="header" class="header-effect-reveal"
