@@ -8,10 +8,12 @@ use App\Entity\User;
 use App\Entity\UserSite;
 use App\Entity\Post;
 use App\Enum\Constants;
+use App\Form\EditPageTypeBlogType;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\BlogCommand;
+use App\Izibrick\Command\PageTypeBlogCommand;
 use App\Izibrick\Command\PostCommand;
 use App\Izibrick\Command\RemoveBlogCommand;
 use App\Izibrick\Command\HomeCommand;
@@ -19,6 +21,7 @@ use App\Izibrick\Command\PresentationCommand;
 use App\Izibrick\CommandHandler\EditContactCommandHandler;
 use App\Izibrick\CommandHandler\EditGlobalParametersCommandHandler;
 use App\Izibrick\CommandHandler\EditBlogCommandHandler;
+use App\Izibrick\CommandHandler\EditPageTypeBlogCommandHandler;
 use App\Izibrick\CommandHandler\EditPostCommandHandler;
 use App\Izibrick\CommandHandler\RemoveBlogCommandHandler;
 use App\Izibrick\CommandHandler\EditHomeCommandHandler;
@@ -31,6 +34,7 @@ use App\Form\EditPostType;
 use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Repository\PageRepository;
+use App\Repository\PageTypeRepository;
 use App\Repository\PostRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,6 +54,9 @@ class PageTypeBlogController extends AbstractController
     /** @var PageRepository */
     private $pageRepository;
 
+    /** @var PageTypeRepository $pageTypeRepository */
+    private $pageTypeRepository;
+
     /** @var PostRepository */
     private $postRepository;
 
@@ -57,34 +64,53 @@ class PageTypeBlogController extends AbstractController
      * BlogController constructor.
      * @param SiteRepository $siteRepository
      * @param PageRepository $pageRepository
+     * @param PageTypeRepository $pageTypeRepository
      * @param PostRepository $postRepository
      */
-    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PostRepository $postRepository)
+    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypeRepository $pageTypeRepository, PostRepository $postRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->postRepository = $postRepository;
         $this->pageRepository = $pageRepository;
+        $this->pageTypeRepository = $pageTypeRepository;
     }
 
     /**
      * @Route("/{id}", name="bo-type-blog")
      * @param Request $request
-     * @param EditPresentationCommandHandler $editPresentationCommandHandler
+     * @param EditPageTypeBlogCommandHandler $editPageTypeBlogCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function boBlog(Request $request, $id = null, $success = false)
+    public function boBlog(Request $request, $id = null, $success = false, EditPageTypeBlogCommandHandler $editPageTypeBlogCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $id);
+        $typePage = $this->pageTypeRepository->get($page->getType());
         $posts = $this->postRepository->getByPageId($id);
+        $pageTypeCommand = new PageTypeBlogCommand();
+        $pageTypeCommand->id = $page->getId();
+        $pageTypeCommand->name = $page->getNameMenu();
+        $pageTypeCommand->menuHeaderOrder = $page->getMenuHeaderOrder();
+        $pageTypeCommand->menuFooterOrder = $page->getMenuFooterOrder();
+        $pageTypeCommand->seoTitle = $page->getSeoTitle();
+        $pageTypeCommand->seoDescription = $page->getSeoDescription();
+        $pageTypeCommand->type = $typePage;
 
+        $form = $this->createForm(EditPageTypeBlogType::class, $pageTypeCommand, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editPageTypeBlogCommandHandler->handle($pageTypeCommand, $site);
+            $success = true;
+        }
         return $this->render('admin/page/type-4/index.html.twig', [
             'site' => $site,
             'page' => $page,
             'blog' => $site->getBlog(),
             'posts' => $posts,
+            'form' => $form->createView(),
             'success' => $success
         ]);
     }
@@ -112,12 +138,7 @@ class PageTypeBlogController extends AbstractController
         if ($form->isSubmitted()) {
             $editPostCommandHandler->handle($command, $site, $page);
             $success = true;
-            return $this->render('admin/page/type-4/index.html.twig', [
-                'site' => $site,
-                'page' => $page,
-                'posts' => $posts,
-                'success' => $success
-            ]);
+            return $this->redirectToRoute('bo-type-blog', array('id' => $page->getId()));
         }
 
         return $this->render('admin/page/type-4/add.html.twig', [
@@ -157,12 +178,7 @@ class PageTypeBlogController extends AbstractController
         if ($form->isSubmitted()) {
             $editPostCommandHandler->handle($command, $site, $page);
             $success = true;
-            return $this->render('admin/page/type-4/index.html.twig', [
-                'site' => $site,
-                'page' => $page,
-                'posts' => $posts,
-                'success' => $success
-            ]);
+            return $this->redirectToRoute('bo-type-blog', array('id' => $page->getId()));
         }
 
         return $this->render('admin/page/type-4/add.html.twig', [
@@ -186,7 +202,6 @@ class PageTypeBlogController extends AbstractController
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $idPage);
-        $posts = $this->postRepository->getByPageId($idPage);
         $command = new RemoveBlogCommand();
         $command->id = $post->getId();
 
@@ -197,12 +212,7 @@ class PageTypeBlogController extends AbstractController
             $success = false;
         }
 
-        return $this->render('admin/page/type-4/index.html.twig', [
-            'site' => $site,
-            'page' => $page,
-            'posts' => $posts,
-            'success' => $success
-        ]);
+        return $this->redirectToRoute('bo-type-blog', array('id' => $page->getId()));
     }
 
 }

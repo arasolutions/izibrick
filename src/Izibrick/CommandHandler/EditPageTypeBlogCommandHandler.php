@@ -5,8 +5,8 @@ namespace App\Izibrick\CommandHandler;
 use App\Entity\Site;
 use App\Entity\Page;
 use App\Izibrick\Command\AddPageCommand;
-use App\Izibrick\Command\PageTypeContactCommand;
-use App\Repository\PageTypeContactRepository;
+use App\Izibrick\Command\PageTypeBlogCommand;
+use App\Repository\PageTypeBlogRepository;
 use App\Repository\SiteRepository;
 use App\Repository\PageRepository;
 
@@ -14,7 +14,7 @@ use App\Repository\PageRepository;
  * Class AddSupportCommandHandler
  * @package App\Izibrick\CommandHandler
  */
-class EditPageTypeContactCommandHandler
+class EditPageTypeBlogCommandHandler
 {
     /** @var SiteRepository */
     private $siteRepository;
@@ -22,20 +22,20 @@ class EditPageTypeContactCommandHandler
     /** @var PageRepository */
     private $pageRepository;
 
-    /** @var PageTypeContactRepository */
-    private $pageTypeContactRepository;
+    /** @var PageTypeBlogRepository */
+    private $pageTypeBlogRepository;
 
     /**
      * EditGlobalParametersCommandHandler constructor.
      * @param SiteRepository $siteRepository
      * @param PageRepository $pageRepository
-     * @param PageTypeContactRepository $pageTypeContactRepository
+     * @param PageTypeBlogRepository $pageTypeBlogRepository
      */
-    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypeContactRepository $pageTypeContactRepository)
+    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypeBlogRepository $pageTypeBlogRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->pageRepository = $pageRepository;
-        $this->pageTypeContactRepository = $pageTypeContactRepository;
+        $this->pageTypeBlogRepository = $pageTypeBlogRepository;
     }
 
     /**
@@ -44,15 +44,15 @@ class EditPageTypeContactCommandHandler
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function handle(PageTypeContactCommand $command, Site $site)
+    public function handle(PageTypeBlogCommand $command, Site $site)
     {
         $page = $this->pageRepository->get($command->id);
         if (!$page) {
             throw new \Exception(sprintf('Error - Page not found (id: %d)', $command->id));
         }
-        $pageTypeContact = $this->pageTypeContactRepository->getByPageId($command->id);
-        if (!$pageTypeContact) {
-            throw new \Exception(sprintf('Error - PageTypeContact not found (id: %d)', $command->id));
+        $pageTypeBlog = $this->pageTypeBlogRepository->getByPageId($command->id);
+        if (!$pageTypeBlog) {
+            throw new \Exception(sprintf('Error - PageTypeBlog not found (id: %d)', $command->id));
         }
         $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
@@ -61,15 +61,8 @@ class EditPageTypeContactCommandHandler
         $page->setSeoTitle($command->seoTitle);
         $page->setSeoDescription($command->seoDescription);
         $this->pageRepository->save($page);
-        $pageTypeContact->setPresentation($command->presentation);
-        $pageTypeContact->setEmail($command->email);
-        $pageTypeContact->setPhone($command->phone);
-        $pageTypeContact->setName($command->nameAddress);
-        $pageTypeContact->setPostCode($command->postCode);
-        $pageTypeContact->setCity($command->city);
-        $pageTypeContact->setCountry($command->country);
-        $pageTypeContact->setOpeningTime($command->openingTime);
-        $this->pageTypeContactRepository->save($pageTypeContact);
+        //$pageTypeBlog->setContent($command->content);
+        //$this->pageTypeBlogRepository->save($pageTypeBlog);
     }
 
 }

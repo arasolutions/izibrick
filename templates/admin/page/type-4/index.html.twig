@@ -16,66 +16,181 @@
             <strong>Parfait !</strong> Votre page blog à bien été mise à jour.
         </div>
     {% endif %}
+    {{ form_start(form) }}
+    <div class="tab-base">
+        <!--Nav Tabs-->
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#contenu" aria-expanded="true"><i class="fa fa-edit"></i> Contenu</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#structure" aria-expanded="false"><i class="fa fa-sitemap"></i> Structure</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#referencement" aria-expanded="false"><i class="fa fa-crosshairs"></i> Référencement (SEO)</a>
+            </li>
+        </ul>
 
-    <div class="panel">
-        <div class="panel-body">
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Mes posts</h2>
-                </div>
-                <div class="panel-body">
-                    <div id="page-content">
-                        <div style="text-align: right;">
-                            <a href="{{ path('bo-type-post-add', {id: page.id}) }}">
-                                <button id="demo-edit-text" class="btn btn-primary" type="button"><i class="fa fa-paint-brush"></i> Ajouter un post</button>
-                            </a>
+        <div class="tab-content">
+            <div id="contenu" class="tab-pane fade active in">
+                <div class="panel" style="display: flow-root;">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Mes posts</h2>
                         </div>
-                        <div class="panel">
-                            <div class="panel-body">
-                                <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered table-vcenter" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th style="text-align: center;width:80px;"></th>
-                                        <th style="text-align: center;">Titre</th>
-                                        <th style="text-align: center;">Introduction</th>
-                                        <th style="text-align: center;">Date de création</th>
-                                        <th style="text-align: center;">Actions</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    {% if posts|length > 0 %}
-                                        {% for post in posts %}
+                        <div class="panel-body">
+                            <div id="page-content">
+                                <div style="text-align: right;">
+                                    <a href="{{ path('bo-type-post-add', {id: page.id}) }}">
+                                        <button id="demo-edit-text" class="btn btn-primary" type="button"><i class="fa fa-paint-brush"></i> Ajouter un post</button>
+                                    </a>
+                                </div>
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <table id="demo-dt-basic" style="text-align: center;" class="table table-striped table-bordered table-vcenter" cellspacing="0" width="100%">
+                                            <thead>
                                             <tr>
-                                                <td>
-                                                    {% if post.image is defined and post.image is not null %}
-                                                        <img class="img-responsive img-sm" style="display: unset;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('logo') }}" alt="{{ post.title }}">
-                                                    {% endif %}
-                                                </td>
-                                                <td>{{ post.title }}</td>
-                                                <td>{{ post.introduction }}</td>
-                                                <td>{{ post.creationDate|date('d/m/Y') }}</td>
-                                                <td width="300px">
-                                                    <a href="{{ path('bo-type-post-edit', {id: post.id, idPage: page.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-edit"></i> Modifier</button></a>
-                                                    <a href="{{ path('bo-type-post-remove', {id: post.id, idPage: page.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
-                                                </td>
+                                                <th style="text-align: center;width:80px;"></th>
+                                                <th style="text-align: center;">Titre</th>
+                                                <th style="text-align: center;">Introduction</th>
+                                                <th style="text-align: center;">Date de création</th>
+                                                <th style="text-align: center;">Actions</th>
                                             </tr>
-                                        {% endfor %}
-                                    {% else %}
-                                        <tr>
-                                            <td colspan="4">Aucun article</td>
-                                        </tr>
-                                    {% endif %}
-                                    </tbody>
-                                </table>
+                                            </thead>
+                                            <tbody>
+
+                                            {% if posts|length > 0 %}
+                                                {% for post in posts %}
+                                                    <tr>
+                                                        <td>
+                                                            {% if post.image is defined and post.image is not null %}
+                                                                <img class="img-responsive img-sm" style="display: unset;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('logo') }}" alt="{{ post.title }}">
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>{{ post.title }}</td>
+                                                        <td>{{ post.introduction }}</td>
+                                                        <td>{{ post.creationDate|date('d/m/Y') }}</td>
+                                                        <td width="300px">
+                                                            <a href="{{ path('bo-type-post-edit', {id: post.id, idPage: page.id}) }}"><button class="btn btn-sm btn-primary" type="button"><i class="fa fa-edit"></i> Modifier</button></a>
+                                                            <a href="{{ path('bo-type-post-remove', {id: post.id, idPage: page.id}) }}"><button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash-o"></i> Supprimer</button></a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                                <tr>
+                                                    <td colspan="4">Aucun article</td>
+                                                </tr>
+                                            {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="structure" class="tab-pane fade">
+                <div class="panel" style="display: flow-root;">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Nom de la page</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Affichage dans les menus</label></h3>
+                        </div>
+                        <div class="panel-body" id="seo-home">
+                            <div class="col-sm-12">
+                                <label class="control-label" style="text-align:left;">Ordre d'affichage dans le header</label>
+                                <div>
+                                    {{ form_widget(form.menuHeaderOrder, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">Ordre d'affichage dans le footer</label>
+                                <div>
+                                    {{ form_widget(form.menuFooterOrder, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Type de la page</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-6">
+                                {{ form_widget(form.type, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-6">
+                                <img id="dynamic-theme" src="" width="100%"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                            Enregistrer
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 mt20">
+                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                            Supprimer la page
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="referencement" class="tab-pane fade">
+                <div class="panel" style="display: flow-root;">
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Référencement (SEO)</label></h3>
+                        </div>
+                        <div class="panel-body" id="seo-home">
+                            <div class="col-sm-12">
+                                <label class="control-label" style="text-align:left;">{{ form_label(form.seoTitle) }}</label>
+                                <div>
+                                    {{ form_widget(form.seoTitle, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescription) }}</label>
+                                <div>
+                                    {{ form_widget(form.seoDescription, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                            Enregistrer
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 mt20">
+                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                            Supprimer la page
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    {{ form_end(form) }}
+
 {% endblock %}
 {% block javascripts %}
     <!--DataTables [ OPTIONAL ]-->

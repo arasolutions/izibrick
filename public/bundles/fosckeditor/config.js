@@ -6,6 +6,7 @@
 
 CKEDITOR.editorConfig = function (config) {
     config.extraPlugins = 'background,slider';
+    config.height = '600px';
     config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
         {name: 'clipboard', groups: ['clipboard', 'undo']},
