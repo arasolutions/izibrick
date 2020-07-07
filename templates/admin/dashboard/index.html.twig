@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
 
-                        <a href="{{ path('bo-blog') }}">
+                        <a href="">
                             <div class="panel panel-warning panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">{{ posts|length }}</p>
+                                    <p class="text-2x mar-no text-semibold">xxx</p>
                                     <p class="mar-no">Articles</p>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-sm-6 col-lg-6">
 
-                        <a href="{{ path('bo-global-parameters') }}">
+                        <a href="">
                             <div class="panel panel-info panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">{{ nbrReseauxSociaux }}/3</p>
+                                    <p class="text-2x mar-no text-semibold">xxx</p>
                                     <p class="mar-no">Réseaux sociaux</p>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-6">
 
-                        <a href="{{ path('bo-tracking-quote') }}">
+                        <a href="">
                             <div class="panel panel-mint panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">{{ quotes|length }}</p>
+                                    <p class="text-2x mar-no text-semibold">xxx</p>
                                     <p class="mar-no">Demandes de Devis</p>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-sm-6 col-lg-6">
 
-                        <a href="{{ path('bo-tracking-contact') }}">
+                        <a href="">
                             <div class="panel panel-danger panel-colorful media middle pad-all">
                                 <div class="media-left">
                                     <div class="pad-hor">
@@ -97,58 +97,13 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <p class="text-2x mar-no text-semibold">{{ contacts|length }}</p>
+                                    <p class="text-2x mar-no text-semibold">xxx</p>
                                     <p class="mar-no">Prises de contact</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-
-
-                <!--Extra Small Weather Widget-->
-                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <div class="panel {{ referencement.referencementTaux < 100 ? 'panel-bordered-danger' : 'panel-bordered-success' }}">
-                    <div class="panel-body text-center clearfix">
-                        <div class="col-sm-4 pad-top">
-                            <div class="text-lg">
-                                <p class="text-sm text-bold text-uppercase">Référencement naturel</p>
-                                <p class="text-sm">Taux de remplissage :</p>
-                                <p class="text-5x text-thin text-main">{{ referencement.referencementTaux|round }}%</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <ul class="list-unstyled text-center bord-bottom pad-bottom mar-no row">
-                                <p class="text-sm">Taux de remplissage :</p>
-                                <li class="col-xs-6">
-                                    <p class="text-sm text-muted mar-no">Titre</p>
-                                    <span class="text-lg text-semibold text-main mt20">{{ referencement.referencementTitleTaux|round }}%</span>
-                                </li>
-                                <li class="col-xs-6">
-                                    <p class="text-sm text-muted mar-no">Description</p>
-                                    <span class="text-lg text-semibold text-main">{{ referencement.referencementDescriptionTaux|round }}%</span>
-                                </li>
-                            </ul>
-                            {% if referencement.referencementTaux < 100 %}
-                                <p class="text-sm mt20 color-red">
-                                    Le référencement de votre site n'est pas otpimal, veuillez renseigner un titre et
-                                    une description pour chaque page.
-                                </p>
-                                <a href="{{ path('bo-seo') }}">
-                                    <button class="btn btn-primary">Mettre à jour</button>
-                                </a>
-                            {% else %}
-                                <p class="text-sm mt20">
-                                    Félicitations ! Votre site est optimisé pour le référencemnt naturel.
-                                </p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-
-                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                <!--End Extra Small Weather Widget-->
-
 
             </div>
 

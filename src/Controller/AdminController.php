@@ -183,50 +183,6 @@ class AdminController extends AbstractController
         }
 
         $userSite = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-        $home = $this->homeRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $presentation = $this->presentationRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $blog = $this->blogRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $pricing = $this->pricingRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $quote = $this->quoteRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $contact = $this->contactRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        // Début Référencement
-        $referencementTitle = 0;
-        $referencementDescription = 0;
-        $referencementTitleTaux = 0;
-        $referencementDescriptionTaux = 0;
-        $referencementTaux = 0;
-        $nbrPages = 4;
-        if ($home->getSeoTitle() != '') $referencementTitle++;
-        if ($presentation->getSeoTitle() != '') $referencementTitle++;
-        if ($blog->getSeoTitle() != '') $referencementTitle++;
-        if($pricing->getDisplay() == true){
-            if ($pricing->getSeoTitle() != '') $referencementTitle++;
-            $nbrPages ++;
-        }
-        if($quote->getDisplay() == true){
-            if ($quote->getSeoTitle() != '') $referencementTitle++;
-            $nbrPages ++;
-        }
-        if ($contact->getSeoTitle() != '') $referencementTitle++;
-        if ($home->getSeoDescription() != '') $referencementDescription++;
-        if ($presentation->getSeoDescription() != '') $referencementDescription++;
-        if ($blog->getSeoDescription() != '') $referencementDescription++;
-        if($pricing->getDisplay() == true){
-            if ($pricing->getSeoDescription() != '') $referencementDescription++;
-        }
-        if($quote->getDisplay() == true){
-            if ($quote->getSeoDescription() != '') $referencementDescription++;
-        }
-        if ($contact->getSeoDescription() != '') $referencementDescription++;
-        if ($referencementTitle != 0) $referencementTitleTaux = $referencementTitle / $nbrPages * 100;
-        if ($referencementDescription != 0) $referencementDescriptionTaux = $referencementDescription / $nbrPages * 100;
-        if ($referencementTitle != 0 || $referencementDescription != 0) $referencementTaux = ($referencementTitleTaux + $referencementDescriptionTaux) / 2;
-        $referencement = array(
-            'referencementTitleTaux' => $referencementTitleTaux,
-            'referencementDescriptionTaux' => $referencementDescriptionTaux,
-            'referencementTaux' => $referencementTaux
-        );
-        // Fin Référencement
         // Début Réseaux sociaux
         $nbrReseauxSociaux = 0;
         if ($userSite->getFacebook() != '') $nbrReseauxSociaux++;
@@ -242,21 +198,15 @@ class AdminController extends AbstractController
             $dataVisiteursUnique = ApiAnalyticsHelper::getReportVisiteurUnique($analytics, $userSite->getAnalyticsViewId());
             $dataVisiteursRecurrent = ApiAnalyticsHelper::getReportVisiteurRecurrent($analytics, $userSite->getAnalyticsViewId());
         }
-        //var_dump($dataVisiteursUnique);die;
-        //$this->view->inlineScript()->appendScript('var dataVisiteursUnique = ' . $dataVisiteursUnique . ';');
-        //$this->view->inlineScript()->appendScript('var dataVisiteursRecurrent = ' . $dataVisiteursRecurrent . ';');
-        //var_dump($dataAnalytics);die;
-        //$analytics = $this->getHelper('ApiAnalytics')->initializeAnalytics();
 
         return $this->render('admin/dashboard/index.html.twig', [
             'site' => $userSite,
-            'referencement' => $referencement,
+            'referencement' => null,
             'nbrReseauxSociaux' => $nbrReseauxSociaux,
             'quotes' => $userSite->getTrackingQuotes(),
             'contacts' => $userSite->getTrackingContacts(),
             'dataVisiteursUnique' => $dataVisiteursUnique,
             'dataVisiteursRecurrent' => $dataVisiteursRecurrent,
-            'posts' => $blog->getPosts()
         ]);
     }
 
@@ -278,144 +228,6 @@ class AdminController extends AbstractController
 
         return $this->render('bo/cross/choose_site.html.twig', [
             'sites' => $this->siteRepository->findAllActiveSiteByUser($user)
-        ]);
-    }
-
-    /**
-     * @Route("/bo-home", name="bo-home")
-     * @param Request $request
-     * @param EditHomeCommandHandler $editHomeCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boHome(Request $request, EditHomeCommandHandler $editHomeCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-
-        $command = new HomeCommand();
-        $command->setOriginalContent($site->getHome()->getContent());
-        $command->setTextPicture($site->getHome()->getTextPicture());
-        $command->setContent($site->getHome()->getContent());
-
-        $success = false;
-
-        $form = $this->createForm(EditHomeType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $editHomeCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/accueil/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
-            'success' => $success
-        ]);
-    }
-
-    /**
-     * @Route("/bo-presentation", name="bo-presentation")
-     * @param Request $request
-     * @param EditPresentationCommandHandler $editPresentationCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boPresentation(Request $request, EditPresentationCommandHandler $editPresentationCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-
-        $command = new PresentationCommand();
-        $command->setContent($site->getPresentation()->getContent());
-
-        $success = false;
-
-        $form = $this->createForm(EditPresentationType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $editPresentationCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/presentation/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
-            'success' => $success
-        ]);
-    }
-
-    /**
-     * @Route("/bo-quote", name="bo-quote")
-     * @param Request $request
-     * @param EditQuoteCommandHandler $editQuoteCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boQuote(Request $request, EditQuoteCommandHandler $editQuoteCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-
-        $command = new QuoteCommand();
-        $command->presentation = $site->getQuote()->getPresentation();
-        $command->email = $site->getQuote()->getEmail();
-
-        $success = false;
-
-        $form = $this->createForm(EditQuoteType::class, $command);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $editQuoteCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/quote/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
-            'success' => $success
-        ]);
-    }
-
-    /**
-     * @Route("/bo-contact", name="bo-contact")
-     * @param Request $request
-     * @param EditContactCommandHandler $editContactCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boContact(Request $request, EditContactCommandHandler $editContactCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-
-        $command = new ContactCommand();
-        $command->presentation = $site->getContact()->getPresentation();
-        $command->email = $site->getContact()->getEmail();
-        $command->phone = $site->getContact()->getPhone();
-        $command->name = $site->getContact()->getName();
-        $command->postCode = $site->getContact()->getPostCode();
-        $command->city = $site->getContact()->getCity();
-        $command->country = $site->getContact()->getCountry();
-        $command->openingTime = $site->getContact()->getOpeningTime();
-
-        $success = false;
-
-        $form = $this->createForm(EditContactType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $editContactCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/contact/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
-            'success' => $success
         ]);
     }
 
@@ -447,56 +259,6 @@ class AdminController extends AbstractController
             'site' => $site,
             'form' => $form->createView(),
             'fonts' => $this->fontRepository->findAll(),
-            'success' => $success
-        ]);
-    }
-
-
-    /**
-     * @Route("/bo-seo", name="bo-seo")
-     * @param Request $request
-     * @param EditSeoCommandHandler $editSeoCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function boSeo(Request $request, EditSeoCommandHandler $editSeoCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-        $home = $this->homeRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $presentation = $this->presentationRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $blog = $this->blogRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $pricing = $this->pricingRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $quote = $this->quoteRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-        $contact = $this->contactRepository->getBySiteId($_SESSION[Constants::SESSION_SITE_ID]);
-
-        $command = new SeoCommand();//var_dump($contact);die;
-        $command->seoTitleHome = $home->getSeoTitle();
-        $command->seoDescriptionHome = $home->getSeoDescription();
-        $command->seoTitlePresentation = $presentation->getSeoTitle();
-        $command->seoDescriptionPresentation = $presentation->getSeoDescription();
-        $command->seoTitleBlog = $blog->getSeoTitle();
-        $command->seoDescriptionBlog = $blog->getSeoDescription();
-        $command->seoTitlePricing = $pricing->getSeoTitle();
-        $command->seoDescriptionPricing = $pricing->getSeoDescription();
-        $command->seoTitleQuote = $quote->getSeoTitle();
-        $command->seoDescriptionQuote = $quote->getSeoDescription();
-        $command->seoTitleContact = $contact->getSeoTitle();
-        $command->seoDescriptionContact = $contact->getSeoDescription();
-
-        $success = false;
-
-        $form = $this->createForm(EditSeoType::class, $command);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $editSeoCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/seo/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
             'success' => $success
         ]);
     }
@@ -537,45 +299,6 @@ class AdminController extends AbstractController
     public function siteRemoved(Request $request)
     {
         return $this->render('bo/cross/site_removed.html.twig', []);
-    }
-
-    /**
-     * @Route("/custom-page/{id}", name="bo-custom-page")
-     * @param Request $request
-     * @param EditCustomPageCommandHandler $editCustomPageCommandHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function CustomPage(Request $request, $id = null, EditCustomPageCommandHandler $editCustomPageCommandHandler)
-    {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
-        $customPage = $this->customPageRepository->getBySiteAndId($site, $id);
-
-        $command = new CustomPageCommand($site);
-        $command->id = $customPage->getId();
-        $command->place = $customPage->getPlace();
-        $command->nameMenu = $customPage->getNameMenu();
-        $command->content = $customPage->getContent();
-        $command->seoTitle = $customPage->getSeoTitle();
-        $command->seoDescription = $customPage->getSeoDescription();
-
-        $success = false;
-
-        $form = $this->createForm(EditCustomPageType::class, $command, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $editCustomPageCommandHandler->handle($command, $site);
-            $success = true;
-        }
-
-        return $this->render('admin/custom-page/index.html.twig', [
-            'controller_name' => 'AdminController',
-            'site' => $site,
-            'form' => $form->createView(),
-            'fonts' => $this->fontRepository->findAll(),
-            'success' => $success
-        ]);
     }
 
     /**
