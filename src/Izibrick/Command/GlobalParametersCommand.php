@@ -12,6 +12,7 @@ class GlobalParametersCommand
     private $name;
     private $defaultPage;
     private $description;
+    private $displayBoxed;
     private $domain;
     private $logo;
     private $nameInLogo;
@@ -23,8 +24,6 @@ class GlobalParametersCommand
     private $template;
     private $colorTheme;
     private $lightTheme;
-    private $displayPricing;
-    private $displayQuote;
     private $font;
     private $fontSize;
 
@@ -37,6 +36,7 @@ class GlobalParametersCommand
         $this->name = $site->getName();
         $this->defaultPage = $site->getDefaultPage();
         $this->description = $site->getDescription();
+        $this->displayBoxed = $site->getDisplayBoxed();
         $this->domain = $site->getDomain();
         $this->instagram = $site->getInstagram();
         $this->facebook = $site->getFacebook();
@@ -47,8 +47,6 @@ class GlobalParametersCommand
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
         $this->lightTheme = $site->getLightTheme();
-        $this->displayPricing = $site->getPricing()->getDisplay();
-        $this->displayQuote = $site->getQuote()->getDisplay();
         $this->font = $site->getFont();
         $this->fontSize = $site->getFontSize();
     }
@@ -83,6 +81,22 @@ class GlobalParametersCommand
     public function setDefaultPage($defaultPage)
     {
         $this->defaultPage = $defaultPage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayBoxed()
+    {
+        return $this->displayBoxed;
+    }
+
+    /**
+     * @param mixed $displayBoxed
+     */
+    public function setDisplayBoxed($displayBoxed)
+    {
+        $this->displayBoxed = $displayBoxed;
     }
 
     /**
@@ -278,38 +292,6 @@ class GlobalParametersCommand
     }
 
     /**
-     * @return bool|null
-     */
-    public function getDisplayPricing(): ?bool
-    {
-        return $this->displayPricing;
-    }
-
-    /**
-     * @param bool|null $displayPricing
-     */
-    public function setDisplayPricing(?bool $displayPricing): void
-    {
-        $this->displayPricing = $displayPricing;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getDisplayQuote(): ?bool
-    {
-        return $this->displayQuote;
-    }
-
-    /**
-     * @param bool|null $displayQuote
-     */
-    public function setDisplayQuote(?bool $displayQuote): void
-    {
-        $this->displayQuote = $displayQuote;
-    }
-
-    /**
      * @return Font|null
      */
     public function getFont(): Font
@@ -340,6 +322,5 @@ class GlobalParametersCommand
     {
         $this->fontSize = $fontSize;
     }
-
 
 }

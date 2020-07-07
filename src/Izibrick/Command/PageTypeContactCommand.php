@@ -56,6 +56,11 @@ class PageTypeContactCommand
     /**
      * @var string
      */
+    public $nameAddress;
+
+    /**
+     * @var string
+     */
     public $postCode;
 
     /**

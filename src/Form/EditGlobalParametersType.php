@@ -6,6 +6,8 @@ use App\Entity\Font;
 use App\Entity\Page;
 use App\Entity\Template;
 use App\Izibrick\Command\GlobalParametersCommand;
+use App\Repository\PageRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -107,19 +109,23 @@ class EditGlobalParametersType extends AbstractType
             ->add('fontSize', NumberType::class, [
                 'label' => 'Taille du texte'
             ])
-            ->add('displayPricing', CheckboxType::class, [
-                'label' => 'Afficher la page Tarif',
-                'required' => false,
-            ])
-            ->add('displayQuote', CheckboxType::class, [
-                'label' => 'Afficher la page Devis',
-                'required' => false,
-            ])
             ->add('defaultPage', EntityType::class, [
                 'label' => 'Page d\'accueil',
                 'required' => true,
                 'class' => Page::class,
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.site = ' . $options['site']);
+                },
                 'choice_label' => 'nameMenu'
+            ])
+            ->add('displayBoxed', ChoiceType::class, [
+                'label' => 'Affichage sur toute la largeur de l\'écran',
+                'required' => true,
+                'choices' => [
+                    'Oui' => false,
+                    'Non' => true,
+                ]
             ]);
     }
 
@@ -127,6 +133,7 @@ class EditGlobalParametersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => GlobalParametersCommand::class,
+            'site' => null
         ]);
     }
 }

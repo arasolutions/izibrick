@@ -16,174 +16,219 @@
             <strong>Parfait !</strong> Votre page à bien été ajoutée.
         </div>
     {% endif %}
-    <div class="panel">
-        <div class="panel-body">
-            {{ form_start(form) }}
 
+    {{ form_start(form) }}
+    <div class="tab-base">
+        <!--Nav Tabs-->
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#contenu" aria-expanded="true"><i class="fa fa-edit"></i> Contenu</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#structure" aria-expanded="false"><i class="fa fa-sitemap"></i> Structure</a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#referencement" aria-expanded="false"><i class="fa fa-crosshairs"></i> Référencement (SEO)</a>
+            </li>
+        </ul>
 
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Nom de la page</label></h3>
-                </div>
-                <div class="panel-body">
+        <!--Tabs Content-->
+        <div class="tab-content">
+            <div id="contenu" class="tab-pane fade active in">
+                <div class="panel" style="display: flow-root;">
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Formulaire de contact</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.presentation) }}</label>
+                                <div>
+                                    {{ form_widget(form.presentation, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Adresse postale</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.nameAddress) }}</label>
+                                <div>
+                                    {{ form_widget(form.nameAddress, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.postCode) }}</label>
+                                <div>
+                                    {{ form_widget(form.postCode, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.city) }}</label>
+                                <div>
+                                    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.country) }}</label>
+                                <div>
+                                    {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Vous contacter</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.phone) }}</label>
+                                <div>
+                                    {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label">{{ form_label(form.email) }}</label>
+                                <div>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Horaires d'ouverture</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.openingTime) }}</label>
+                                <div>
+                                    {{ form_widget(form.openingTime, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-sm-12">
-                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                        <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                            Enregistrer
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 mt20">
+                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                            Supprimer la page
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Affichage dans les menus</label></h3>
-                </div>
-                <div class="panel-body" id="seo-home">
-                    <div class="col-sm-12">
-                        <label class="control-label" style="text-align:left;">Ordre d'affichage dans le header</label>
-                        <div>
-                            {{ form_widget(form.menuHeaderOrder, {'attr': {'class': 'form-control'}}) }}
+            <div id="structure" class="tab-pane fade">
+                <div class="panel" style="display: flow-root;">
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Nom de la page</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">Ordre d'affichage dans le footer</label>
-                        <div>
-                            {{ form_widget(form.menuFooterOrder, {'attr': {'class': 'form-control'}}) }}
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Affichage dans les menus</label></h3>
                         </div>
+                        <div class="panel-body" id="seo-home">
+                            <div class="col-sm-12">
+                                <label class="control-label" style="text-align:left;">Ordre d'affichage dans le header</label>
+                                <div>
+                                    {{ form_widget(form.menuHeaderOrder, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">Ordre d'affichage dans le footer</label>
+                                <div>
+                                    {{ form_widget(form.menuFooterOrder, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Type de la page</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-6">
+                                {{ form_widget(form.type, {'attr':{'class':'form-control'}}) }}
+                            </div>
+                            <div class="col-sm-6">
+                                <img id="dynamic-theme" src="" width="100%"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                            Enregistrer
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 mt20">
+                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                            Supprimer la page
+                        </a>
                     </div>
                 </div>
             </div>
+            <div id="referencement" class="tab-pane fade">
+                <div class="panel" style="display: flow-root;">
 
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Référencement (SEO)</label></h3>
-                </div>
-                <div class="panel-body" id="seo-home">
-                    <div class="col-sm-12">
-                        <label class="control-label" style="text-align:left;">{{ form_label(form.seoTitle) }}</label>
-                        <div>
-                            {{ form_widget(form.seoTitle, {'attr': {'class': 'form-control'}}) }}
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Référencement (SEO)</label></h3>
+                        </div>
+                        <div class="panel-body" id="seo-home">
+                            <div class="col-sm-12">
+                                <label class="control-label" style="text-align:left;">{{ form_label(form.seoTitle) }}</label>
+                                <div>
+                                    {{ form_widget(form.seoTitle, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescription) }}</label>
+                                <div>
+                                    {{ form_widget(form.seoDescription, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.seoDescription) }}</label>
-                        <div>
-                            {{ form_widget(form.seoDescription, {'attr': {'class': 'form-control'}}) }}
-                        </div>
+                        <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                            Enregistrer
+                        </button>
+                    </div>
+
+                    <div class="col-sm-12 mt20">
+                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
+                            Supprimer la page
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Type de la page</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-6">
-                        {{ form_widget(form.type, {'attr':{'class':'form-control'}}) }}
-                    </div>
-                    <div class="col-sm-6">
-                        <img id="dynamic-theme" src="" width="100%"/>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Formulaire de contact</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.presentation) }}</label>
-                        <div>
-                            {{ form_widget(form.presentation, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Adresse postale</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.name) }}</label>
-                        <div>
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.postCode) }}</label>
-                        <div>
-                            {{ form_widget(form.postCode, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.city) }}</label>
-                        <div>
-                            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.country) }}</label>
-                        <div>
-                            {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Vous contacter</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.phone) }}</label>
-                        <div>
-                            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="control-label">{{ form_label(form.email) }}</label>
-                        <div>
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-mint">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><label class="control-label">Horaires d'ouverture</label></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="col-sm-12">
-                        <label class="control-label"  style="text-align:left;">{{ form_label(form.openingTime) }}</label>
-                        <div>
-                            {{ form_widget(form.openingTime, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12">
-                <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
-                    Enregistrer
-                </button>
-                <button id="form-revert" class="btn btn-dark pull-right mr10" type="button">
-                    Annuler
-                </button>
-            </div>
-
-            <div class="col-sm-12 mt20">
-                <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
-                    Supprimer la page
-                </a>
-            </div>
-            {{ form_end(form) }}
-
         </div>
     </div>
+    {{ form_end(form) }}
 {% endblock %}

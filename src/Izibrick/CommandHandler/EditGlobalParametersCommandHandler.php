@@ -20,12 +20,6 @@ class EditGlobalParametersCommandHandler
     /** @var SiteRepository */
     private $siteRepository;
 
-    /** @var PricingRepository */
-    private $pricingRepository;
-
-    /** @var QuoteRepository */
-    private $quoteRepository;
-
     /** @var FontRepository */
     private $fontRepository;
 
@@ -36,11 +30,9 @@ class EditGlobalParametersCommandHandler
      * @param QuoteRepository $quoteRepository
      * @param FontRepository $fontRepository
      */
-    public function __construct(SiteRepository $siteRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, FontRepository $fontRepository)
+    public function __construct(SiteRepository $siteRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
-        $this->pricingRepository = $pricingRepository;
-        $this->quoteRepository = $quoteRepository;
         $this->fontRepository = $fontRepository;
     }
 
@@ -53,15 +45,6 @@ class EditGlobalParametersCommandHandler
      */
     public function handle(GlobalParametersCommand $command, Site $site)
     {
-        $pricing = $this->pricingRepository->getBySiteId($site->getId());
-        $quote = $this->quoteRepository->getBySiteId($site->getId());
-
-        $pricing->setDisplay($command->getDisplayPricing());
-        $this->pricingRepository->save($pricing);
-
-        $quote->setDisplay($command->getDisplayQuote());
-        $this->quoteRepository->save($quote);
-
         $site->setName($command->getName());
         $site->setDefaultPage($command->getDefaultPage());
 
@@ -77,6 +60,7 @@ class EditGlobalParametersCommandHandler
         $site = $this->siteRepository->save($site);
 
         $site->setDescription($command->getDescription());
+        $site->setDisplayBoxed($command->getDisplayBoxed());
         $site->setDomain($command->getDomain());
         if ($command->getDomain() != '') {
             // Enlever le https

@@ -71,31 +71,4 @@
     <!-- JS Implementing Plugins -->
     <script src="{{ asset('assets/bo/vendor/jquery.filer/js/jquery.filer.min.js') }}"></script>
 
-    <!-- JS Unify -->
-    <script src="{{ asset('assets/bo/js/helpers/hs.focus-state.js') }}"></script>
-    <script src="{{ asset('assets/bo/js/components/hs.file-attachement.js') }}"></script>
-    <script type="text/javascript">
-        $.HSCore.components.HSFileAttachment.init('.js-file-attachment-background', {
-            changeInput: '<div class="u-file-attach-v3 g-mb-15">\
-                            <div class="col-sm-12">\
-                                <img id="edit_home_mainPicture-img" width="500" src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}" />\
-                            </div>\
-                            <div class="col-sm-12">\
-               				    <h4 class="g-font-size-16 g-color-gray-dark-v2 mb-10" id="edit_home_mainPicture_filer_title">\
-               				        <span class="g-color-primary">Modifier l\'image de fond</span>\
-               				    </h4>\
-               				</div>\
-              			</div>',
-            limit: 1,
-            templates: {
-                item: '<div></div>'
-            }
-        });
-        $("#edit_home_mainPicture").change(function () {
-            readURL(this, true);
-        });
-
-        $.HSCore.helpers.HSFocusState.init();
-    </script>
-
 {% endblock %}
