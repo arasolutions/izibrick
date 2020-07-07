@@ -323,5 +323,4 @@ class GlobalParametersCommand
         $this->fontSize = $fontSize;
     }
 
-
 }

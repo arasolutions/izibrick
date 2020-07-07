@@ -247,7 +247,7 @@ class AdminController extends AbstractController
 
         $success = false;
 
-        $form = $this->createForm(EditGlobalParametersType::class, $command);
+        $form = $this->createForm(EditGlobalParametersType::class, $command, ['method' => 'POST', 'site' => $site->getId()]);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $editGlobalParametersCommandHandler->handle($command, $site);
