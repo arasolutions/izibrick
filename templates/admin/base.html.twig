@@ -322,103 +322,11 @@
                                     </a>
                                 </li>
 
-
-                                <li class="list-divider"></li>
-
-                                <!--Category name-->
-                                <li class="list-header">Pages standards</li>
-
-                                <!--Menu list item-->
-                                {% if app.request.get('_route') == 'bo-home' %}
-                                <li class="active-link">
-                            {% else %}
-                                <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-home') }}">
-                                        <i class="ti-home"></i>
-                                        <span class="menu-title">
-                                                Accueil
-                                            <!--<span class="pull-right badge badge-warning">24</span>-->
-                                            </span>
-                                    </a>
-                                </li>
-
-                                {% if app.request.get('_route') == 'bo-presentation' %}
-                                <li class="active-link">
-                            {% else %}
-                                <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-presentation') }}">
-                                        <i class="ti-pencil-alt"></i>
-                                        <span class="menu-title">
-                                                Présentation
-                                            <!--<span class="pull-right badge badge-warning">24</span>-->
-                                            </span>
-                                    </a>
-                                </li>
-
-                                {% if app.request.get('_route') == 'bo-blog' or app.request.get('_route') == 'bo-post-add' or app.request.get('_route') == 'bo-post-edit' %}
-                                <li class="active-link">
-                            {% else %}
-                                <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-blog') }}">
-                                        <i class="ti-comment"></i>
-                                        <span class="menu-title">
-                                                Blog / Articles
-                                            <!--<span class="pull-right badge badge-warning">24</span>-->
-                                            </span>
-                                    </a>
-                                </li>
-
-                                {% if site.pricing is defined and site.pricing.display == true %}
-                                    {% if app.request.get('_route') == 'bo-pricing' %}
-                                        <li class="active-link">
-                                    {% else %}
-                                        <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-pricing') }}">
-                                        <i class="ti-money"></i>
-                                        <span class="menu-title">
-                                                Tarifs
-                                            </span>
-                                    </a>
-                                    </li>
-                                {% endif %}
-
-                                {% if site.quote is defined and site.quote.display == true %}
-                                    {% if app.request.get('_route') == 'bo-quote' %}
-                                        <li class="active-link">
-                                    {% else %}
-                                        <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-quote') }}">
-                                        <i class="ti-shopping-cart"></i>
-                                        <span class="menu-title">
-                                                Devis
-                                            </span>
-                                    </a>
-                                    </li>
-                                {% endif %}
-
-                                {% if app.request.get('_route') == 'bo-contact' %}
-                                <li class="active-link">
-                            {% else %}
-                                <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-contact') }}">
-                                        <i class="ti-email"></i>
-                                        <span class="menu-title">
-                                                Contact
-                                            </span>
-                                    </a>
-                                </li>
-
                                 {% if site.pages is not empty %}
                                     <li class="list-divider"></li>
 
                                     <!--Category name-->
-                                    <li class="list-header">Pages v2</li>
+                                    <li class="list-header">Pages</li>
 
                                     <li class="list-divider"></li>
 
@@ -448,31 +356,11 @@
                                     {% endfor %}
                                 {% endif %}
 
-                                {% if site.customPages is not empty %}
-                                    <li class="list-divider"></li>
-
-                                    <!--Category name-->
-                                    <li class="list-header">Pages personnalisées</li>
-
-                                    <li class="list-divider"></li>
-
-                                    {% for customPage in site.customPages %}
-                                        <li>
-                                            <a href="{{ path('bo-custom-page', { 'id': customPage.id }) }}">
-                                                <i class="ti-write"></i>
-                                                <span class="menu-title">
-                                                    {{ customPage.nameMenu }}
-                                                </span>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-
                                 <li class="list-header">Paramètres globaux</li>
-                                {% if app.request.get('_route') == 'bo-global-parameters' %}
-                                <li class="active-link">
-                            {% else %}
-                                <li>
+                                    {% if app.request.get('_route') == 'bo-global-parameters' %}
+                                        <li class="active-link">
+                                    {% else %}
+                                        <li>
                                     {% endif %}
                                     <a href="{{ path('bo-global-parameters') }}">
                                         <i class="ti-panel"></i>
@@ -482,23 +370,6 @@
                                             </span>
                                     </a>
                                 </li>
-
-                                {% if app.request.get('_route') == 'bo-seo' %}
-                                <li class="active-link">
-                                    {% else %}
-                                <li>
-                                    {% endif %}
-                                    <a href="{{ path('bo-seo') }}">
-                                        <i class="ti-stats-up"></i>
-                                        <span class="menu-title">
-                                                Référencement
-                                            <!--<span class="pull-right badge badge-warning">24</span>-->
-                                            </span>
-                                    </a>
-                                </li>
-
-                                <!--Category name-->
-
                             </ul>
                         </div>
                     </div>
