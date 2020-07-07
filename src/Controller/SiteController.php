@@ -210,7 +210,7 @@ class SiteController extends AbstractController
 
 
         if($page) {
-            if ($page->getType() == 2) {
+            if ($page->getType() == 2) {//var_dump($page->getPagesTypePresentation()->getContent());die;
                 // Page de type Présentation
                 return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
                     'controller_name' => 'SiteController' . $site->getName(),

@@ -24,8 +24,6 @@ class GlobalParametersCommand
     private $template;
     private $colorTheme;
     private $lightTheme;
-    private $displayPricing;
-    private $displayQuote;
     private $font;
     private $fontSize;
 
@@ -49,8 +47,6 @@ class GlobalParametersCommand
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
         $this->lightTheme = $site->getLightTheme();
-        $this->displayPricing = $site->getPricing()->getDisplay();
-        $this->displayQuote = $site->getQuote()->getDisplay();
         $this->font = $site->getFont();
         $this->fontSize = $site->getFontSize();
     }
@@ -293,38 +289,6 @@ class GlobalParametersCommand
     public function setLightTheme(?bool $lightTheme): void
     {
         $this->lightTheme = $lightTheme;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getDisplayPricing(): ?bool
-    {
-        return $this->displayPricing;
-    }
-
-    /**
-     * @param bool|null $displayPricing
-     */
-    public function setDisplayPricing(?bool $displayPricing): void
-    {
-        $this->displayPricing = $displayPricing;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getDisplayQuote(): ?bool
-    {
-        return $this->displayQuote;
-    }
-
-    /**
-     * @param bool|null $displayQuote
-     */
-    public function setDisplayQuote(?bool $displayQuote): void
-    {
-        $this->displayQuote = $displayQuote;
     }
 
     /**

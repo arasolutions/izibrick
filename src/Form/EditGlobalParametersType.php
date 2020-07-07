@@ -107,14 +107,6 @@ class EditGlobalParametersType extends AbstractType
             ->add('fontSize', NumberType::class, [
                 'label' => 'Taille du texte'
             ])
-            ->add('displayPricing', CheckboxType::class, [
-                'label' => 'Afficher la page Tarif',
-                'required' => false,
-            ])
-            ->add('displayQuote', CheckboxType::class, [
-                'label' => 'Afficher la page Devis',
-                'required' => false,
-            ])
             ->add('defaultPage', EntityType::class, [
                 'label' => 'Page d\'accueil',
                 'required' => true,
