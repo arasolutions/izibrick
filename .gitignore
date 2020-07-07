@@ -6,6 +6,7 @@
 /public/bundles/fosckeditor/plugins/*
 !/public/bundles/fosckeditor/plugins/background/
 !/public/bundles/fosckeditor/plugins/slider/
+!/public/bundles/fosckeditor/plugins/banner/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

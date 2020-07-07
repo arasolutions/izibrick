@@ -68,3 +68,8 @@ ul.page-numbers li > span.current,
         padding-left: 0px !important;
     }
 }
+
+.page-header{
+    margin-bottom:0 !important;
+    border-bottom: 0;
+}
