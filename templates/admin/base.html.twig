@@ -330,7 +330,7 @@
 
                                     <li class="list-divider"></li>
 
-                                    {% for page in site.pages|filter(v => v.menuHeaderOrder > 0)|sort((a, b) => a.menuHeaderOrder <=> b.menuHeaderOrder) %}
+                                    {% for page in site.pages|sort((a, b) => a.nameMenu <=> b.nameMenu) %}
                                         <li>
                                             {% if page.type == 1 %}
                                                 <a href="{{ path('bo-page-presentation-edit', { 'id': page.id }) }}">
