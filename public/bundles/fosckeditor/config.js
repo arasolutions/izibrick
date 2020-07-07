@@ -5,7 +5,7 @@
 
 
 CKEDITOR.editorConfig = function (config) {
-    config.extraPlugins = 'background,slider';
+    config.extraPlugins = 'background,slider,banner';
     config.height = '600px';
     config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
