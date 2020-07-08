@@ -402,8 +402,8 @@ class AdminController extends AbstractController
         $pageTypeCommand = new PageTypePresentationCommand();
         $pageTypeCommand->id = $page->getId();
         $pageTypeCommand->name = $page->getNameMenu();
-        $pageTypeCommand->menuHeaderOrder = $page->getMenuHeaderOrder();
-        $pageTypeCommand->menuFooterOrder = $page->getMenuFooterOrder();
+        $pageTypeCommand->displayMenuHeader = $page->getDisplayMenuHeader();
+        $pageTypeCommand->displayMenuFooter = $page->getDisplayMenuFooter();
         $pageTypeCommand->seoTitle = $page->getSeoTitle();
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
         $pageTypeCommand->type = $typePage;
@@ -461,8 +461,8 @@ class AdminController extends AbstractController
         $pageTypeCommand = new PageTypeContactCommand();
         $pageTypeCommand->id = $page->getId();
         $pageTypeCommand->name = $page->getNameMenu();
-        $pageTypeCommand->menuHeaderOrder = $page->getMenuHeaderOrder();
-        $pageTypeCommand->menuFooterOrder = $page->getMenuFooterOrder();
+        $pageTypeCommand->displayMenuHeader = $page->getDisplayMenuHeader();
+        $pageTypeCommand->displayMenuFooter = $page->getDisplayMenuFooter();
         $pageTypeCommand->seoTitle = $page->getSeoTitle();
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
         $pageTypeCommand->type = $typePage;

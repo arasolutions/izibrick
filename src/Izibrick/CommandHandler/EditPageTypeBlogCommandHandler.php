@@ -56,8 +56,8 @@ class EditPageTypeBlogCommandHandler
         }
         $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
-        $page->setMenuHeaderOrder($command->menuHeaderOrder);
-        $page->setMenuFooterOrder($command->menuFooterOrder);
+        $page->setDisplayMenuHeader($command->displayMenuHeader);
+        $page->setDisplayMenuFooter($command->displayMenuFooter);
         $page->setSeoTitle($command->seoTitle);
         $page->setSeoDescription($command->seoDescription);
         $this->pageRepository->save($page);

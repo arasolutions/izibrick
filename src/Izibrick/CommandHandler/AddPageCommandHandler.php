@@ -64,6 +64,8 @@ class AddPageCommandHandler
 
         $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
+        $page->setDisplayMenuHeader(true);
+        $page->setDisplayMenuFooter(false);
         $this->pageRepository->save($page);
         if ($command->type->getId() == 2) {
             $pageTypePresentation = new PageTypePresentation($page);

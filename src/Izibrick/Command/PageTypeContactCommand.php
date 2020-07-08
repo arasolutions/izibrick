@@ -24,14 +24,15 @@ class PageTypeContactCommand
      * @var string
      */
     public $seoDescription;
+
+    /**
+     * @var boolean
+     */
+    public $displayMenuHeader;
     /**
      * @var int
      */
-    public $menuHeaderOrder;
-    /**
-     * @var int
-     */
-    public $menuFooterOrder;
+    public $displayMenuFooter;
 
     /**
      * @var int
