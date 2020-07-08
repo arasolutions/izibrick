@@ -149,7 +149,7 @@
                         <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
                             <nav class="collapse">
                                 <ul class="nav flex-column flex-lg-row" id="mainNav">
-                                    {% for page in pages %}
+                                    {% for page in site.pages|filter(v => v.displayMenuHeader == true)|sort((a, b) => a.menuHeaderOrder <=> b.menuHeaderOrder) %}
                                         <li class="dropdown dropdown-mega dropdown-mega-style-2">
                                             {% set param = siteName|merge({'name':page.nameMenuUrl}) %}
                                             <a class="dropdown-item" href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">
@@ -228,12 +228,10 @@
     <div class="copyright">
         <div class="container">
             <p>© Copyright 2019 by <a href="https://www.izibrick.com">izibrick</a>. Tous droits réservés.</p>
-            {% if pagesFooter is defined and pagesFooter is not empty %}
-                {% for pageFooter in pagesFooter %}
-                        {% set param = siteName|merge({'name':pageFooter.nameMenuUrl}) %}
-                        <p> {% if loop.first == false %} - {% else %}&nbsp;&nbsp;&nbsp; {% endif %} <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ pageFooter.nameMenuUrl }}&nbsp;</a></p>
-                {% endfor %}
-            {% endif %}
+            {% for pageFooter in site.pages|filter(v => v.displayMenuFooter == true)|sort((a, b) => a.menuFooterOrder <=> b.menuFooterOrder) %}
+                {% set param = siteName|merge({'name':pageFooter.nameMenuUrl}) %}
+                <p> {% if loop.first == false %} - {% else %}&nbsp;&nbsp;&nbsp; {% endif %} <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ pageFooter.nameMenuUrl }}&nbsp;</a></p>
+            {% endfor %}
 
             <div class="clearfix pull-right">
                 {% if site.facebook %}
