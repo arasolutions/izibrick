@@ -7,6 +7,7 @@ use App\Entity\PageTypeContact;
 use App\Entity\PageTypePresentation;
 use App\Entity\Site;
 use App\Entity\Page;
+use App\Helper\StringHelper;
 use App\Izibrick\Command\AddPageCommand;
 use App\Repository\PageTypeBlogRepository;
 use App\Repository\PageTypeContactRepository;
@@ -64,6 +65,7 @@ class AddPageCommandHandler
 
         $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
+        $page->setNameMenuUrl(StringHelper::cleanUrl($command->name));
         $page->setDisplayMenuHeader(true);
         $page->setDisplayMenuFooter(false);
         $this->pageRepository->save($page);

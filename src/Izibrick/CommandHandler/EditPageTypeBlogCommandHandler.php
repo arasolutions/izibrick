@@ -4,6 +4,7 @@ namespace App\Izibrick\CommandHandler;
 
 use App\Entity\Site;
 use App\Entity\Page;
+use App\Helper\StringHelper;
 use App\Izibrick\Command\AddPageCommand;
 use App\Izibrick\Command\PageTypeBlogCommand;
 use App\Repository\PageTypeBlogRepository;
@@ -56,6 +57,7 @@ class EditPageTypeBlogCommandHandler
         }
         $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
+        $page->setNameMenuUrl(StringHelper::cleanUrl($command->name));
         $page->setDisplayMenuHeader($command->displayMenuHeader);
         $page->setDisplayMenuFooter($command->displayMenuFooter);
         $page->setSeoTitle($command->seoTitle);
