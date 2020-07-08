@@ -7,6 +7,7 @@ use App\Izibrick\Command\AddPageCommand;
 use App\Izibrick\Command\PageTypeContactCommand;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -31,13 +32,13 @@ class EditPageTypeContactType extends AbstractType
                 'attr' => array('rows' => '5'),
                 'required' => false
             ])
-            ->add('menuHeaderOrder', TextType::class, array(
+            ->add('displayMenuHeader', CheckboxType::class, array(
                 'required' => false,
-                'label' => 'Ordre dans le menu du haut'
+                'label' => 'Afficher la page dans le menu du haut'
             ))
-            ->add('menuFooterOrder', TextType::class, array(
+            ->add('displayMenuFooter', CheckboxType::class, array(
                 'required' => false,
-                'label' => 'Ordre dans le menu du bas'
+                'label' => 'Afficher la page dans le menu du bas'
             ))
             ->add('type', EntityType::class, [
                 'required' => true,

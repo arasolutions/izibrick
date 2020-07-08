@@ -363,3 +363,11 @@ ul.no-vertical-spacing > li {
 .inscription .footer {
     padding: 20px;
 }
+
+#nestable li{
+    cursor: move;
+}
+
+#nestable2 li{
+    cursor: move;
+}

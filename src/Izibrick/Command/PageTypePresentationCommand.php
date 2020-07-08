@@ -25,13 +25,13 @@ class PageTypePresentationCommand
      */
     public $seoDescription;
     /**
-     * @var int
+     * @var boolean
      */
-    public $menuHeaderOrder;
+    public $displayMenuHeader;
     /**
      * @var int
      */
-    public $menuFooterOrder;
+    public $displayMenuFooter;
 
     /**
      * @var int

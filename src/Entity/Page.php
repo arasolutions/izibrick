@@ -119,6 +119,16 @@ class Page
     private $defaultPage;
 
     /**
+     * @ORM\Column(type="boolean", options={"default":"1"})
+     */
+    private $displayMenuHeader;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":"0"})
+     */
+    private $displayMenuFooter;
+
+    /**
      * Page constructor.
      * @param $site
      */
@@ -419,5 +429,37 @@ class Page
     public function setDefaultPage($defaultPage)
     {
         $this->defaultPage = $defaultPage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayMenuHeader()
+    {
+        return $this->displayMenuHeader;
+    }
+
+    /**
+     * @param mixed $displayMenuHeader
+     */
+    public function setDisplayMenuHeader($displayMenuHeader)
+    {
+        $this->displayMenuHeader = $displayMenuHeader;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayMenuFooter()
+    {
+        return $this->displayMenuFooter;
+    }
+
+    /**
+     * @param mixed $displayMenuFooter
+     */
+    public function setDisplayMenuFooter($displayMenuFooter)
+    {
+        $this->displayMenuFooter = $displayMenuFooter;
     }
 }

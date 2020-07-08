@@ -82,16 +82,13 @@
                             </div>
                             <div class="panel-body" id="seo-home">
                                 <div class="col-sm-12">
-                                    <label class="control-label" style="text-align:left;">Ordre d'affichage dans le header</label>
-                                    <div>
-                                        {{ form_widget(form.menuHeaderOrder, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
+                                    {{ form_label(form.displayMenuHeader) }}
+                                    {{ form_widget(form.displayMenuHeader, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="col-sm-12">
-                                    <label class="control-label"  style="text-align:left;">Ordre d'affichage dans le footer</label>
-                                    <div>
-                                        {{ form_widget(form.menuFooterOrder, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
+                                    {{ form_label(form.displayMenuFooter) }}
+                                    {{ form_widget(form.displayMenuFooter, {'attr': {'class': 'form-control'}}) }}
+
                                 </div>
                             </div>
                         </div>
