@@ -47,7 +47,7 @@ CKEDITOR.plugins.add('slider', {
         };
 
         editor.contextMenu.addListener(function (element, selection) {
-            if (element.getParent().hasClass('carousel-item')) {
+            if (element.getParents().filter(element => isParent(element))) {
                 return {
                     addSliderCommand: CKEDITOR.TRISTATE_OFF,
                     removeSliderCommand: CKEDITOR.TRISTATE_OFF
@@ -72,5 +72,5 @@ CKEDITOR.plugins.add('slider', {
 });
 
 isParent = function (element) {
-    return element.hasClass('.carousel') && element.hasClass('.slide');
+    return element.hasClass('carousel') && element.hasClass('slide');
 }
