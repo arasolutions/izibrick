@@ -73,3 +73,14 @@ ul.page-numbers li > span.current,
     margin-bottom:0 !important;
     border-bottom: 0;
 }
+
+.page-header.page-header-text-light h1 {
+    font-size: 40px;
+    color: unset;
+}
+
+.page-header.page-header-text-light h2 {
+    font-size: 30px;
+    margin-top: 5px;
+    color: unset;
+}

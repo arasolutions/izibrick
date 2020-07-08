@@ -72,3 +72,12 @@
 .radiogroup div.hide-label td {
     text-align: center ! important;
 }
+
+.page-header.page-header-text-light h1 {
+    font-size: 40px;
+}
+
+.page-header.page-header-text-light h2 {
+    font-size: 30px;
+    margin-top: 5px;
+}

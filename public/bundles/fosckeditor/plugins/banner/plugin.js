@@ -12,12 +12,12 @@ CKEDITOR.plugins.add('banner', {
                 if (confirm('On le supprime ?')) {
                     var a = element, b = a.getSelection(),
                         c = (b = b && b.getStartElement())
-                    if (isParent(b)) {
+                    if (isBannerParent(b)) {
                         b.remove();
                         return;
                     }
-                    var parent = b.getParents().filter(element => element.is('section') && element.hasClass('page-header'))
-                    parent[0].remove();
+                    var parent = b.getParents().find(element => isBannerParent(element));
+                    if (parent) parent.remove();
                 }
             }
         });
@@ -46,7 +46,7 @@ CKEDITOR.plugins.add('banner', {
         };
 
         editor.contextMenu.addListener(function (element, selection) {
-            if (element.getParents().filter(element => element.is('section') && element.hasClass('page-header')).length > 0) {
+            if (element.getParents().find(element => isBannerParent(element))) {
                 return {
                     addBannerCommand: CKEDITOR.TRISTATE_OFF,
                     removeBannerCommand: CKEDITOR.TRISTATE_OFF
@@ -66,6 +66,6 @@ CKEDITOR.plugins.add('banner', {
     }
 });
 
-isParent = function (element) {
+isBannerParent = function (element) {
     return element.is('section') && element.hasClass('page-header');
 }

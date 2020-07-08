@@ -12,12 +12,12 @@ CKEDITOR.plugins.add('slider', {
                 if (confirm('On le supprime ?')) {
                     var a = element, b = a.getSelection(),
                         c = (b = b && b.getStartElement())
-                    if (isParent(b)) {
+                    if (isSliderParent(b)) {
                         b.remove();
                         return;
                     }
-                    var parent = b.getParents().filter(element => element.hasClass('carousel') && element.hasClass('slide'))
-                    parent[0].remove();
+                    var parent = b.getParents().find(element => isSliderParent(element));
+                    if (parent) parent.remove();
                 }
             }
         });
@@ -47,7 +47,7 @@ CKEDITOR.plugins.add('slider', {
         };
 
         editor.contextMenu.addListener(function (element, selection) {
-            if (element.getParents().filter(element => isParent(element))) {
+            if (element.getParents().find(element => isSliderParent(element))) {
                 return {
                     addSliderCommand: CKEDITOR.TRISTATE_OFF,
                     removeSliderCommand: CKEDITOR.TRISTATE_OFF
@@ -71,6 +71,6 @@ CKEDITOR.plugins.add('slider', {
     }
 });
 
-isParent = function (element) {
+isSliderParent = function (element) {
     return element.hasClass('carousel') && element.hasClass('slide');
 }

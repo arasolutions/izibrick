@@ -1,6 +1,6 @@
 CKEDITOR.dialog.add('addBannerDialog', function (editor) {
         return {
-            title: 'Propriétés du carousel',
+            title: 'Propriétés du bandeau',
             minWidth: 400,
             minHeight: 200,
             getModel: function (a) {
@@ -18,6 +18,7 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 var renderImg = CKEDITOR.document.getById('render');
                 if (d) {
                     this.setValueOf('banner', 'idOriginal', d.getAttribute("id"));
+                    this.setValueOf('banner', 'height', d.getStyle('height').substr(0,d.getStyle('height').length - 2));
                     if (d.getAttribute('data-image-src')) {
                         // C'est une image de fond
                         this.setValueOf('banner', 'typeFond', 'image');
@@ -39,6 +40,7 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 } else {
                     CKEDITOR.document.getById('renderBg').setStyle("background-color", "#FFFFFF");
                     this.setValueOf('banner', 'colorBackground', '#FFFFFF');
+                    this.setValueOf('banner', 'height', '100');
                     this.setValueOf('banner', 'typeFond', 'color');
                 }
             },
@@ -116,6 +118,16 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                                     id: "render",
                                     type: "html",
                                     html: "<div id=\"renderBg\" style=\"margin:5px;height:100px;border: solid 1px #DDDDDD;\"><img id=\"render\"/></div>"
+                                }, {
+                                    id: "height",
+                                    type: "text",
+                                    label: "Hauteur (en px)",
+                                    style: "display:inline-block",
+                                    validate: CKEDITOR.dialog.validate.functions(
+                                        CKEDITOR.dialog.validate.notEmpty(),
+                                        CKEDITOR.dialog.validate.number(),
+                                        'La hauteur doit être remplie'
+                                    )
                                 }]
                             }]
                         }, {
@@ -150,7 +162,7 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 var dialog = this;
 
                 // Suppression du bandeau actuel
-                var originalBanner = editor.document.getById(dialog.getValueOf('banner','idOriginal'));
+                var originalBanner = editor.document.getById(dialog.getValueOf('banner', 'idOriginal'));
                 if (originalBanner) originalBanner.remove(false);
 
 
@@ -160,14 +172,15 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 section.addClass("parallax");
                 section.addClass("page-header-text-light");
                 section.addClass("page-header-crumbs-light-2");
-                section.addClass("overlay");
-                section.addClass("overlay-color-dark");
-                section.addClass("overlay-show");
-                section.addClass("overlay-op-3");
                 section.addClass("py-0");
                 section.setStyle("position", "relative");
                 section.setStyle("overflow", "hidden");
+                section.setStyle("height", dialog.getValueOf('banner', 'height') + "px");
                 if (dialog.getValueOf('banner', 'typeFond') === 'image') {
+                    section.addClass("overlay");
+                    section.addClass("overlay-color-dark");
+                    section.addClass("overlay-show");
+                    section.addClass("overlay-op-3");
                     section.setAttribute("data-image-src", CKEDITOR.document.getById('render').getAttribute("src"));
                 }
 
@@ -191,6 +204,10 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 var divContainer = editor.document.createElement('div');
                 divContainer.addClass("container");
                 divContainer.addClass("py-9");
+                divContainer.setStyle("position", "absolute");
+                divContainer.setStyle("top", "50%");
+                divContainer.setStyle("margin-left", "50px");
+                divContainer.setStyle("transform", "translateY(-50%)");
 
                 var divRow = editor.document.createElement('div');
                 divRow.addClass("row");
