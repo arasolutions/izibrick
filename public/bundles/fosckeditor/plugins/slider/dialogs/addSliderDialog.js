@@ -319,7 +319,8 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                 div.addClass('carousel');
                 div.addClass('slide');
 
-                if(pictures.getChildren().length > 1 ) {
+                if(pictures.getChildCount()> 1 ) {
+                    console.log('Ajout de la pagination');
                     var ol = editor.document.createElement('ol');
                     ol.addClass('carousel-indicators');
 
@@ -346,11 +347,12 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                     if (index === 0) {
                         divItem.addClass('active');
                     }
+                    divItem.setStyle('height','100%');
+                    divItem.setStyle('background-image','url('+element.find('img').getItem(0).getAttribute('src')+')');
+                    divItem.setStyle('background-repeat','no-repeat');
+                    divItem.setStyle('background-position','center center');
+                    divItem.setStyle('background-size','cover');
 
-                    var imgItem = editor.document.createElement('img');
-                    imgItem.addClass('d-block');
-                    imgItem.addClass('w-100');
-                    imgItem.setAttribute('src', element.find('img').getItem(0).getAttribute('src'));
 
                     var divTextItem = editor.document.createElement('div');
                     divTextItem.addClass('carousel-caption');
@@ -366,16 +368,13 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
 
                     divTextItem.append(textItemP);
 
-                    imgItem.setAttribute('alt', element.find('input').getItem(0).getValue());
-                    divItem.append(imgItem);
                     divItem.append(divTextItem);
 
                     divInner.append(divItem);
                 });
 
                 div.append(divInner);
-
-                if(pictures.getChildren().length > 1 ) {
+                if(pictures.getChildCount() > 1 ) {
                     var aPrec = editor.document.createElement('a');
                     aPrec.addClass('carousel-control-prev');
                     aPrec.setAttribute('href', '#carouselExampleIndicators');

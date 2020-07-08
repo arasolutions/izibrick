@@ -42,6 +42,7 @@ CKEDITOR.plugins.add('slider', {
             label: 'Supprimer le carousel',
             command: 'removeSlider',
             group: 'slider',
+            icon: "plugins/slider/icons/trash.png",
             order: 2
         };
 
