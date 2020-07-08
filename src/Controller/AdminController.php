@@ -469,7 +469,7 @@ class AdminController extends AbstractController
         // Spécifique page Contact
         $pageTypeCommand->email = $pageTypeContact->getEmail();
         $pageTypeCommand->phone = $pageTypeContact->getPhone();
-        $pageTypeCommand->name = $pageTypeContact->getName();
+        $pageTypeCommand->nameAddress = $pageTypeContact->getName();
         $pageTypeCommand->postCode = $pageTypeContact->getPostCode();
         $pageTypeCommand->city = $pageTypeContact->getCity();
         $pageTypeCommand->country = $pageTypeContact->getCountry();
