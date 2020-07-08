@@ -26,6 +26,8 @@ class GlobalParametersCommand
     private $lightTheme;
     private $font;
     private $fontSize;
+    private $orderMenu;
+    private $orderMenuFooter;
 
     /**
      * GlobalParametersCommand constructor.
@@ -49,6 +51,8 @@ class GlobalParametersCommand
         $this->lightTheme = $site->getLightTheme();
         $this->font = $site->getFont();
         $this->fontSize = $site->getFontSize();
+        $this->orderMenu = 0;
+        $this->orderMenuFooter = 0;
     }
 
     /**
@@ -321,6 +325,38 @@ class GlobalParametersCommand
     public function setFontSize(int $fontSize): void
     {
         $this->fontSize = $fontSize;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderMenu()
+    {
+        return $this->orderMenu;
+    }
+
+    /**
+     * @param int $orderMenu
+     */
+    public function setOrderMenu($orderMenu)
+    {
+        $this->orderMenu = $orderMenu;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderMenuFooter()
+    {
+        return $this->orderMenuFooter;
+    }
+
+    /**
+     * @param int $orderMenuFooter
+     */
+    public function setOrderMenuFooter($orderMenuFooter)
+    {
+        $this->orderMenuFooter = $orderMenuFooter;
     }
 
 }

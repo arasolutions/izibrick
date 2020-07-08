@@ -11,6 +11,7 @@ use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Repository\FontRepository;
+use App\Repository\PageRepository;
 use App\Repository\PricingRepository;
 use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
@@ -23,17 +24,21 @@ class EditGlobalParametersCommandHandler
     /** @var FontRepository */
     private $fontRepository;
 
+    /** @var PageRepository */
+    private $pageRepository;
+
+
     /**
      * EditGlobalParametersCommandHandler constructor.
      * @param SiteRepository $siteRepository
-     * @param PricingRepository $pricingRepository
-     * @param QuoteRepository $quoteRepository
      * @param FontRepository $fontRepository
+     * @param PageRepository $pageRepository
      */
-    public function __construct(SiteRepository $siteRepository, FontRepository $fontRepository)
+    public function __construct(SiteRepository $siteRepository, FontRepository $fontRepository, PageRepository $pageRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->fontRepository = $fontRepository;
+        $this->pageRepository = $pageRepository;
     }
 
 
@@ -47,6 +52,31 @@ class EditGlobalParametersCommandHandler
     {
         $site->setName($command->getName());
         $site->setDefaultPage($command->getDefaultPage());
+        // Gestion de l'ordre des pages du menu
+        $pagesMenu = json_decode($command->getOrderMenu());
+        if ($pagesMenu != 0) {
+            $currentOrdre = 1;
+            foreach ($pagesMenu as $pageMenu) {
+                $row = $this->pageRepository->get($pageMenu->id);
+                if ($row) {
+                    $row->setMenuHeaderOrder($currentOrdre);
+                    $this->pageRepository->save($row);
+                    $currentOrdre++;
+                }
+            }
+        }
+        $pagesMenuFooter = json_decode($command->getOrderMenuFooter());
+        if ($pagesMenuFooter != 0) {
+            $currentOrdre = 1;
+            foreach ($pagesMenuFooter as $pageMenuFooter) {
+                $row = $this->pageRepository->get($pageMenuFooter->id);
+                if ($row) {
+                    $row->setMenuFooterOrder($currentOrdre);
+                    $this->pageRepository->save($row);
+                    $currentOrdre++;
+                }
+            }
+        }
 
         // Gestion du nom interne
         if ($site->getInternalName() == '') {
