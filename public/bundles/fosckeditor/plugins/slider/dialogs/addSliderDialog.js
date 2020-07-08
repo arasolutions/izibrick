@@ -13,13 +13,14 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
             },
             onShow: function () {
                 var a = this.getParentEditor(), b = a.getSelection(),
-                    c = (b = b && b.getSelectedElement()) && a.elementPath(b).contains("a", 1);
+                    c = b.getStartElement(),
+                    d = c.getParents().find(element => element.hasClass('carousel') && element.hasClass('slide'));
                 var pictures = CKEDITOR.document.getById('pictures');
                 pictures.setHtml('');
-                if (b) {
-                    var carouselInner = b.getParents().filter(element => element.hasClass('carousel-inner'));
-                    if (carouselInner[0]) {
-                        carouselInner[0].getChildren().toArray().forEach(function (element, index) {
+                if (d) {
+                    var carouselInner = d.findOne('div.carousel-inner');
+                    if (carouselInner) {
+                        carouselInner.getChildren().toArray().forEach(function (element, index) {
                             var row = new CKEDITOR.dom.element('div');
                             row.addClass('editor-slider-row');
 
@@ -41,10 +42,10 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             upAction.addClass('ti-arrow-up');
                             upAction.on('click', function (element) {
                                 // Remontée de la ligne
-                                if(row.hasPrevious()) {
+                                if (row.hasPrevious()) {
                                     row.insertBefore(row.getPrevious());
                                     //pictures.append(row, pictures.getChildren().getFirst());
-                                }else{
+                                } else {
                                     alert('c\'est le premier');
                                 }
                             });
@@ -54,12 +55,12 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             downAction.addClass('ti-arrow-down');
                             downAction.on('click', function (element) {
                                 // Descente de la ligne
-                                if(row.hasNext()) {
+                                if (row.hasNext()) {
                                     row.insertAfter(row.getNext());
-                                }else{
-                                        //C'est la dernière
-                                        alert("C'est la dernière");
-                                    }
+                                } else {
+                                    //C'est la dernière
+                                    alert("C'est la dernière");
+                                }
                             });
                             colActions.append(downAction);
 
@@ -69,7 +70,9 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             colImg.addClass('editor-slider-col-img');
 
                             var img = new CKEDITOR.dom.element('img');
-                            img.setAttribute('src', element.getChild(0).getAttribute('src'));
+                            var imgUrl = element.getStyle('background-image');
+                            console.log(imgUrl);
+                            img.setAttribute('src', imgUrl.substr(5, imgUrl.length - 7));
 
                             colImg.append(img);
                             row.append(colImg);
@@ -100,17 +103,17 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                         });
                     }
 
-                    var height = carouselInner[0].getParent().getStyle('height');
+                    var height = carouselInner.getParent().getStyle('height');
                     if (height) {
                         this.setValueOf('settings', 'height', height.substr(0, height.length - 2));
                     }
 
-                    var swipeTime = carouselInner[0].getParent().getAttribute('data-interval');
+                    var swipeTime = carouselInner.getParent().getAttribute('data-interval');
                     if (swipeTime) {
                         this.setValueOf('settings', 'swipeTime', swipeTime);
                     }
 
-                    var enableAnimation = carouselInner[0].getParent().getAttribute('data-ride');
+                    var enableAnimation = carouselInner.getParent().getAttribute('data-ride');
                     if (enableAnimation) {
                         this.setValueOf('settings', 'animate', enableAnimation);
                     }
@@ -188,10 +191,10 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                             upAction.addClass('ti-arrow-up');
                                             upAction.on('click', function (element) {
                                                 // Remontée de la ligne
-                                                if(row.hasPrevious()) {
+                                                if (row.hasPrevious()) {
                                                     row.insertBefore(row.getPrevious());
                                                     //pictures.append(row, pictures.getChildren().getFirst());
-                                                }else{
+                                                } else {
                                                     alert('c\'est le premier');
                                                 }
                                             });
@@ -201,9 +204,9 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                             downAction.addClass('ti-arrow-down');
                                             downAction.on('click', function (element) {
                                                 // Descente de la ligne
-                                                if(row.hasNext()) {
+                                                if (row.hasNext()) {
                                                     row.insertAfter(row.getNext());
-                                                }else{
+                                                } else {
                                                     //C'est la dernière
                                                     alert("C'est la dernière");
                                                 }
@@ -319,7 +322,8 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                 div.addClass('carousel');
                 div.addClass('slide');
 
-                if(pictures.getChildren().length > 1 ) {
+                if (pictures.getChildCount() > 1) {
+                    console.log('Ajout de la pagination');
                     var ol = editor.document.createElement('ol');
                     ol.addClass('carousel-indicators');
 
@@ -346,11 +350,12 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                     if (index === 0) {
                         divItem.addClass('active');
                     }
+                    divItem.setStyle('height', '100%');
+                    divItem.setStyle('background-image', 'url(' + element.find('img').getItem(0).getAttribute('src') + ')');
+                    divItem.setStyle('background-repeat', 'no-repeat');
+                    divItem.setStyle('background-position', 'center center');
+                    divItem.setStyle('background-size', 'cover');
 
-                    var imgItem = editor.document.createElement('img');
-                    imgItem.addClass('d-block');
-                    imgItem.addClass('w-100');
-                    imgItem.setAttribute('src', element.find('img').getItem(0).getAttribute('src'));
 
                     var divTextItem = editor.document.createElement('div');
                     divTextItem.addClass('carousel-caption');
@@ -366,16 +371,13 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
 
                     divTextItem.append(textItemP);
 
-                    imgItem.setAttribute('alt', element.find('input').getItem(0).getValue());
-                    divItem.append(imgItem);
                     divItem.append(divTextItem);
 
                     divInner.append(divItem);
                 });
 
                 div.append(divInner);
-
-                if(pictures.getChildren().length > 1 ) {
+                if (pictures.getChildCount() > 1) {
                     var aPrec = editor.document.createElement('a');
                     aPrec.addClass('carousel-control-prev');
                     aPrec.setAttribute('href', '#carouselExampleIndicators');

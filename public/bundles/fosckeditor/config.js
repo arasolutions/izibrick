@@ -5,7 +5,7 @@
 
 
 CKEDITOR.editorConfig = function (config) {
-    config.extraPlugins = 'background,slider,banner';
+    config.extraPlugins = 'background,slider,banner,cards';
     config.height = '600px';
     config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
@@ -27,9 +27,9 @@ CKEDITOR.editorConfig = function (config) {
 
     config.removeButtons = 'Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Save,NewPage,Preview,Print,About';
 
-    config.contentsCss = [CKEDITOR.getUrl("contents.css"), '/assets/bo/vendor/bootstrap/bootstrap.min.css', '/assets/plugins/themify-icons/themify-icons.css', '/assets/bo/css/wysiwyg.css'];
+    config.contentsCss = [CKEDITOR.getUrl("contents.css"), '/assets/common/bootstrap/css/bootstrap.min.css', '/assets/plugins/themify-icons/themify-icons.css', '/assets/bo/css/wysiwyg.css'];
 
-    config.extraAllowedContent = 'ol[data-*](*);li[data-*](*);div[data-*][style];a(*)[href,data-*,role];span(*)[aria-hidden];input[placeholder];section(*)[*]';
+    config.extraAllowedContent = 'ol[data-*](*);li[data-*](*);div[data-*][style];a(*)[href,data-*,role];span(*)[aria-hidden];input[placeholder];section(*)[*]{*};h4(*)[*];ul(*)[*]';
 };
 CKEDITOR.dtd.$removeEmpty['span'] = false;
 CKEDITOR.dtd.$removeEmpty['p'] = false;

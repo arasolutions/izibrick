@@ -37,9 +37,9 @@ class WysiwygSliderExtension extends AbstractExtension
 
             preg_match_all("/\<\/div\>/", $debSlider, $matchesEnd, PREG_OFFSET_CAPTURE);
 
-            $middleSlider = substr($debSlider, 0, $matchesEnd[0][sizeof($matchesEndItem[0]) * 2 + 1][1] + strlen("</div>"));
+            $middleSlider = substr($debSlider, 0, $matchesEnd[0][(sizeof($matchesEndItem[0]) * 2) + 1][1] + strlen("</div>"));
 
-            $endSlider = substr($debSlider, $matchesEnd[0][sizeof($matchesEndItem[0]) * 2 + 1][1] + strlen("</div>"));
+            $endSlider = substr($debSlider, $matchesEnd[0][(sizeof($matchesEndItem[0]) * 2) + 1][1] + strlen("</div>"));
 
             return substr($value, 0, $matches[0][0][1]) . '</div>' . $middleSlider . '<div class="container">' . $endSlider;
         }

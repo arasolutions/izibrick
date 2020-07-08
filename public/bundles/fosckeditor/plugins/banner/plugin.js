@@ -33,7 +33,7 @@ CKEDITOR.plugins.add('banner', {
             label: 'Propriétés du bandeau',
             command: "addBanner",
             group: "banner",
-            icon:"banner",
+            icon: "banner",
             order: 1
         };
 
@@ -41,6 +41,7 @@ CKEDITOR.plugins.add('banner', {
             label: 'Supprimer le bandeau',
             command: 'removeBanner',
             group: 'banner',
+            icon: "plugins/banner/icons/trash.png",
             order: 2
         };
 
