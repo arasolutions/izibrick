@@ -151,18 +151,17 @@ class PageTypeBlogController extends AbstractController
 
     /**
      * @Route("/post/{id}/edit/{idPage}", name="bo-type-post-edit")
-     * @param Post $post
      * @param Request $request
      * @param EditPostCommandHandler $editPostCommandHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function boEditBlog(Post $post, Request $request, $idPage = null, EditPostCommandHandler $editPostCommandHandler)
+    public function boEditBlog($id = null, Request $request, $idPage = null, EditPostCommandHandler $editPostCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $idPage);
-        $posts = $this->postRepository->getByPageId($idPage);
+        $post = $this->postRepository->get($id);
 
         $command = new PostCommand();
         $command->id = $post->getId();
@@ -198,12 +197,12 @@ class PageTypeBlogController extends AbstractController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function remove(Post $post, $idPage = null, RemoveBlogCommandHandler $removeBlogCommandHandler)
+    public function remove($id = null, $idPage = null, RemoveBlogCommandHandler $removeBlogCommandHandler)
     {
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $idPage);
         $command = new RemoveBlogCommand();
-        $command->id = $post->getId();
+        $command->id = $id;
 
         try {
             $removeBlogCommandHandler->handle($command);

@@ -27,12 +27,6 @@ class Blog
     private $site;
 
     /**
-     * @var ArrayCollection|Post[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="blog", cascade={"persist"}, fetch="LAZY")
-     */
-    private $posts;
-
-    /**
      * @ORM\Column(name="seo_title", type="string", length=128, nullable=true)
      */
     private $seoTitle;
@@ -62,14 +56,6 @@ class Blog
         $this->site = $site;
 
         return $this;
-    }
-
-    /**
-     * @return ArrayCollection|Post[]
-     */
-    public function getPosts()
-    {
-        return $this->posts;
     }
 
     /**
