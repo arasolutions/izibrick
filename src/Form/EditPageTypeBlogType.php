@@ -45,6 +45,15 @@ class EditPageTypeBlogType extends AbstractType
                 'required' => true,
                 'class' => PageType::class,
                 'choice_label' => 'name'
+            ])
+            ->add('content', CKEditorType::class, [
+                'label' => 'Présentation',
+                'attr' => array('rows' => '5'),
+                'required' => false,
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
             ]);
     }
 

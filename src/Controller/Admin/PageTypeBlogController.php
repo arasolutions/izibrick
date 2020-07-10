@@ -34,6 +34,7 @@ use App\Form\EditPostType;
 use App\Form\EditPresentationType;
 use App\Form\AddSiteOptionsType;
 use App\Repository\PageRepository;
+use App\Repository\PageTypeBlogRepository;
 use App\Repository\PageTypeRepository;
 use App\Repository\PostRepository;
 use App\Repository\SiteRepository;
@@ -60,19 +61,24 @@ class PageTypeBlogController extends AbstractController
     /** @var PostRepository */
     private $postRepository;
 
+    /** @var PageTypeBlogRepository */
+    private $pageTypeBlogRepository;
+
     /**
      * BlogController constructor.
      * @param SiteRepository $siteRepository
      * @param PageRepository $pageRepository
      * @param PageTypeRepository $pageTypeRepository
      * @param PostRepository $postRepository
+     * @param PageTypeBlogRepository $pageTypeBlogRepository
      */
-    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypeRepository $pageTypeRepository, PostRepository $postRepository)
+    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypeRepository $pageTypeRepository, PostRepository $postRepository, PageTypeBlogRepository $pageTypeBlogRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->postRepository = $postRepository;
         $this->pageRepository = $pageRepository;
         $this->pageTypeRepository = $pageTypeRepository;
+        $this->pageTypeBlogRepository = $pageTypeBlogRepository;
     }
 
     /**
@@ -88,6 +94,7 @@ class PageTypeBlogController extends AbstractController
         $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $page = $this->pageRepository->getBySiteAndId($site, $id);
         $typePage = $this->pageTypeRepository->get($page->getType());
+        $pageTypeBlog = $this->pageTypeBlogRepository->getByPageId($page->getId());
         $posts = $this->postRepository->getByPageId($id);
         $pageTypeCommand = new PageTypeBlogCommand();
         $pageTypeCommand->id = $page->getId();
@@ -96,6 +103,7 @@ class PageTypeBlogController extends AbstractController
         $pageTypeCommand->displayMenuFooter = $page->getDisplayMenuFooter();
         $pageTypeCommand->seoTitle = $page->getSeoTitle();
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
+        $pageTypeCommand->content = $pageTypeBlog->getContent();
         $pageTypeCommand->type = $typePage;
 
         $form = $this->createForm(EditPageTypeBlogType::class, $pageTypeCommand, ['idSite' => SiteHelper::getuniqueKeySite($site)]);

@@ -24,6 +24,7 @@ class PageTypePresentationCommand
      * @var string
      */
     public $seoDescription;
+
     /**
      * @var boolean
      */

@@ -39,4 +39,14 @@ class PageTypeBlogCommand
      */
     public $type;
 
+    /**
+     * @var string
+     */
+    public $content;
+
+    /**
+     * @var string
+     */
+    public $originalContent;
+
 }

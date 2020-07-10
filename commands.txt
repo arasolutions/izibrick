@@ -2,3 +2,9 @@
 Après installation du bundle
 php bin/console ckeditor:install
 php bin/console assets:install public
+
+
+# Offre
+# Premium :
+Google Analytics
+Page type portfolio
