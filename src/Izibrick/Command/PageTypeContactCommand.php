@@ -79,4 +79,14 @@ class PageTypeContactCommand
      */
     public $openingTime;
 
+    /**
+     * @var string
+     */
+    public $content;
+
+    /**
+     * @var string
+     */
+    public $originalContent;
+
 }

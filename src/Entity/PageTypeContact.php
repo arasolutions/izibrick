@@ -63,6 +63,11 @@ class PageTypeContact
     private $openingTime;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
+    /**
      * PageTypeContact constructor.
      * @param $site
      */
@@ -199,5 +204,17 @@ class PageTypeContact
     public function getOpeningTime()
     {
         return $this->openingTime;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
     }
 }
