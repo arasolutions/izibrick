@@ -25,6 +25,9 @@
                 <a data-toggle="tab" href="#contenu" aria-expanded="true"><i class="fa fa-edit"></i> Contenu</a>
             </li>
             <li class="">
+                <a data-toggle="tab" href="#infos" aria-expanded="false"><i class="fa fa-drivers-license-o"></i> Informations</a>
+            </li>
+            <li class="">
                 <a data-toggle="tab" href="#structure" aria-expanded="false"><i class="fa fa-sitemap"></i> Structure</a>
             </li>
             <li class="">
@@ -35,6 +38,31 @@
         <!--Tabs Content-->
         <div class="tab-content">
             <div id="contenu" class="tab-pane fade active in">
+
+                <div class="panel" style="display: flow-root;">
+
+                    <div class="panel panel-mint">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label class="control-label">Contenu de la page</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div>
+                                    {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div id="infos" class="tab-pane fade">
                 <div class="panel" style="display: flow-root;">
 
                     <div class="panel panel-mint">
@@ -123,12 +151,6 @@
                             Enregistrer
                         </button>
                     </div>
-
-                    <div class="col-sm-12 mt20">
-                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
-                            Supprimer la page
-                        </a>
-                    </div>
                 </div>
             </div>
             <div id="structure" class="tab-pane fade">
@@ -216,12 +238,6 @@
                         <button id="form-submit-whitout-valid" class="btn btn-success pull-right" type="submit">
                             Enregistrer
                         </button>
-                    </div>
-
-                    <div class="col-sm-12 mt20">
-                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
-                            Supprimer la page
-                        </a>
                     </div>
                 </div>
             </div>

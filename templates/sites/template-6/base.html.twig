@@ -227,10 +227,10 @@
 
     <div class="copyright">
         <div class="container">
-            <p>© Copyright 2019 by <a href="https://www.izibrick.com">izibrick</a>. Tous droits réservés.</p>
+            <p>© Copyright 2020 by <a href="https://www.izibrick.com">izibrick</a>. Tous droits réservés.</p>
             {% for pageFooter in site.pages|filter(v => v.displayMenuFooter == true)|sort((a, b) => a.menuFooterOrder <=> b.menuFooterOrder) %}
                 {% set param = siteName|merge({'name':pageFooter.nameMenuUrl}) %}
-                <p> {% if loop.first == false %} - {% else %}&nbsp;&nbsp;&nbsp; {% endif %} <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ pageFooter.nameMenuUrl }}&nbsp;</a></p>
+                <p> {% if loop.first == false %} - {% else %}&nbsp;&nbsp;&nbsp; {% endif %} <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ pageFooter.nameMenu }}&nbsp;</a></p>
             {% endfor %}
 
             <div class="clearfix pull-right">

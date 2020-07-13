@@ -135,6 +135,7 @@ class AddSiteCommandHandler
 
         $site->setFontSize(13);
         $site->setFont($templateChosen->getDefaultFont());
+        $site->setDisplayBoxed(false);
 
         $site = $this->siteRepository->save($site);
 

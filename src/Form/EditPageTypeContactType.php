@@ -82,6 +82,15 @@ class EditPageTypeContactType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'Email',
                 'required' => false
+            ])
+            ->add('content', CKEditorType::class, [
+                'label' => 'Présentation',
+                'attr' => array('rows' => '5'),
+                'required' => false,
+                'config' => array(
+                    'filebrowserBrowseRoute' => 'elfinder',
+                    'filebrowserBrowseRouteParameters' => array('instance' => 'default', 'homeFolder' => $options['idSite'])
+                ),
             ]);
     }
 

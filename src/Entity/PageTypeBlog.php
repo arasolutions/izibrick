@@ -32,6 +32,11 @@ class PageTypeBlog
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
     public function __construct($page)
     {
         $this->page = $page;
@@ -60,5 +65,17 @@ class PageTypeBlog
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
     }
 }

@@ -44,8 +44,8 @@ class EditPostCommandHandler
     {
         $id = $command->id;
         if (empty($id)) {
-            $post = new Post();
-            $post->setBlog($site->getBlog());
+            $post = new Post($page);
+            //$post->setBlog($site->getBlog());
         } else {
             /** @var Post $post */
             $post = $this->postRepository->get($id);
@@ -56,11 +56,10 @@ class EditPostCommandHandler
         $post->setTitle($command->title);
         $post->setIntroduction($command->introduction);
         $post->setContent($command->content);
-        $post->setPage($page);
         if ($command->image != null) {
             $post->setImage(null);
             $post->setImageFile($command->image);
-        }
+        }//var_dump($post);die;
         $this->postRepository->save($post);
     }
 

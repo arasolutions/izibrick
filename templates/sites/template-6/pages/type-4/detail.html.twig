@@ -1,29 +1,15 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{site.name}} - {{site.blog.seoTitle}}{% endblock %}
-{% block description %}{{site.blog.seoDescription}}{% endblock %}
+{% block title %}{{site.name}} | {{ page.seoTitle }}{% endblock %}
+{% block description %}{{ page.seoDescription }}{% endblock %}
 
 {% block blogActive %}active{% endblock %}
 
 {% block body %}
-    {% if site.home.mainPicture is defined and site.home.mainPicture is not null %}
-        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ vich_uploader_asset(site.home, 'mainPictureFile') | imagine_filter('main_picture') }}">
-    {% else %}
-        <section class="page-header parallax page-header-text-light page-header-crumbs-light-2 overlay overlay-color-dark overlay-show overlay-op-3 py-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="{{ asset('templates/template-1/assets/img/slider/sample.jpg') }}">
-    {% endif %}
-        <div class="container py-9">
-            <div class="row text-left">
-                <div class="col-lg-12">
-                    <p class="v-smash-text-large-2x">Blog</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <div class="v-page-wrap has-right-sidebar has-one-sidebar">
         <div class="container">
-
+            {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|raw }}
             <div class="row">
 
                 <div class="col-sm-12">

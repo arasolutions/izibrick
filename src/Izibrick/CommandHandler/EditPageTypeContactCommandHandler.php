@@ -63,6 +63,7 @@ class EditPageTypeContactCommandHandler
         $page->setSeoTitle($command->seoTitle);
         $page->setSeoDescription($command->seoDescription);
         $this->pageRepository->save($page);
+        $pageTypeContact->setContent($command->content);
         $pageTypeContact->setPresentation($command->presentation);
         $pageTypeContact->setEmail($command->email);
         $pageTypeContact->setPhone($command->phone);

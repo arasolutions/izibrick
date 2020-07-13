@@ -21,7 +21,7 @@ class DirectoryBlogPostPictureMd5 implements DirectoryNamerInterface
      */
     public function directoryName($object, PropertyMapping $mapping): string
     {
-        return '/' . SiteHelper::getuniqueKeySite($object->getBlog()->getSite()) . '/.blog/post_picture';
+        return '/' . SiteHelper::getuniqueKeySite($object->getPage()->getSite()) . '/.blog/post_picture';
     }
 
 }

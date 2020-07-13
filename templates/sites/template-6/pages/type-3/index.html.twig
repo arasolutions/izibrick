@@ -9,6 +9,7 @@
 
     <div class="v-page-wrap no-top-spacing">
         <div class="container">
+            {{ page.pagesTypeContact.content|wysiwygSlider|wysiwygBanner|raw }}
             {% if success %}
                 <div class="alert alert-success-icon alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

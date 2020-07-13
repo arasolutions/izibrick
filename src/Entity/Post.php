@@ -19,26 +19,12 @@ class Post
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @var User
-     * @ORM\JoinColumn(name="blog_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\Blog", inversedBy="posts", fetch="EAGER")
-     */
-    private $blog;
     /**
      * @var User
      * @ORM\JoinColumn(name="page_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="posts", fetch="EAGER")
      */
     private $page;
-
-    /**
-     * @var User
-     * @ORM\JoinColumn(name="page_type_blog_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\PageTypeBlog", inversedBy="posts", fetch="EAGER")
-     */
-    private $pageTypeBlog;
 
     /**
      * @var string
@@ -75,38 +61,15 @@ class Post
      */
     private $creationDate;
 
-    public function __construct()
+    public function __construct(Page $page)
     {
+        $this->page = $page;
         $this->creationDate = new \DateTime();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBlog(): ?Blog
-    {
-        return $this->blog;
-    }
-
-    public function setBlog(?Blog $blog): self
-    {
-        $this->blog = $blog;
-
-        return $this;
-    }
-
-    public function getPageTypeBlog(): ?PageTypeBlog
-    {
-        return $this->pageTypeBlog;
-    }
-
-    public function setPageTypeBlog(?PageTypeBlog $pageTypeBlog): self
-    {
-        $this->pageTypeBlog = $pageTypeBlog;
-
-        return $this;
     }
 
     public function getPage(): ?Page

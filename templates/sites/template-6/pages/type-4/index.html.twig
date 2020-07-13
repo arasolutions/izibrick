@@ -1,13 +1,14 @@
 {% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
 
-{% block title %}{{ site.name }} - {{ site.blog.seoTitle }}{% endblock %}
-{% block description %}{{ site.blog.seoDescription }}{% endblock %}
+{% block title %}{{site.name}} | {{ page.seoTitle }}{% endblock %}
+{% block description %}{{ page.seoDescription }}{% endblock %}
 
 {% block blogActive %}active{% endblock %}
 
 {% block body %}
 
     <div class="container">
+        {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|raw }}
         <div class="row">
             <div class="col-sm-12">
                 <div class="v-blog-widget">
@@ -18,7 +19,7 @@
                             <div class="v-blog-items-wrap blog-mini">
                                 <ul class="v-blog-items row mini-items clearfix">
                                     {% for post in posts %}
-                                        {% set param = siteName|merge({'name':page.nameMenuUrl})|merge({'post':post.id})|merge({'postTitle':post.title}) %}
+                                        {% set param = siteName|merge({'name':page.nameMenuUrl})|merge({'post':post.id})|merge({'postTitle':post.title|clean_url}) %}
                                         <li class="v-blog-item col-sm-12">
                                             <div class="mini-v-blog-item-wrap">
                                                 <figure class="animated-overlay overlay-alt">

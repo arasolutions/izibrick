@@ -208,7 +208,6 @@ class SiteController extends AbstractController
         $pagesFooter = $this->pageRepository->getAllFooterBySiteId($site->getId());
         $page = $this->pageRepository->get($site->getDefaultPage());
 
-
         if($page) {
             if ($page->getType() == 2) {//var_dump($page->getPagesTypePresentation()->getContent());die;
                 // Page de type Présentation

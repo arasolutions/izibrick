@@ -467,6 +467,8 @@ class AdminController extends AbstractController
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
         $pageTypeCommand->type = $typePage;
         // Spécifique page Contact
+        $pageTypeCommand->content = $pageTypeContact->getContent();
+        $pageTypeCommand->presentation = $pageTypeContact->getPresentation();
         $pageTypeCommand->email = $pageTypeContact->getEmail();
         $pageTypeCommand->phone = $pageTypeContact->getPhone();
         $pageTypeCommand->nameAddress = $pageTypeContact->getName();
