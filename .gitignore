@@ -8,6 +8,8 @@
 !/public/bundles/fosckeditor/plugins/slider/
 !/public/bundles/fosckeditor/plugins/banner/
 !/public/bundles/fosckeditor/plugins/cards/
+!/public/bundles/fosckeditor/plugins/videodetector/
+!/public/bundles/fosckeditor/plugins/fakeobjects/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
