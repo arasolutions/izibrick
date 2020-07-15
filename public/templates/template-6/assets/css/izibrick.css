@@ -14,16 +14,6 @@
     background: var(--colorTheme) !important;
 }
 
-.navigation > li:hover > a,
-.navigation > li > a:hover,
-.navigation > li > .activelink {
-    color: var(--colorTheme) !important;
-}
-
-.navigation > li > a{
-    color: var(--headerTextColor) !important;
-}
-
 .body-wrapper a:hover,
 .top-body a:hover,
 .top-footer a:hover {
@@ -83,5 +73,5 @@ footer, footer p {
 }
 
 .copyright{
-    background-color: var(--colorTheme) !important;
+    /*background-color: var(--colorTheme) !important;*/
 }
