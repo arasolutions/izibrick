@@ -56,6 +56,13 @@ class SiteController extends AbstractController
     }
 
     /**
+     * @Route("/{name}/{post}/{postTitle}/",
+     *     name="page_blog_detail",
+     *     host="{nobackoffice}",
+     *     requirements={"nobackoffice"="^((?!%base_host%).)*$"},
+     *     defaults={"nobackoffice"=""}
+     *     )
+     *
      * @Route("/site/{siteName<.*>}/{name}/{post}/", name="site_page_blog_detail",
      *     host="%base_host%")
      * @Route("/site/{siteName<.*>}/{name}/{post}/{postTitle}/", name="site_page_blog_detail",
