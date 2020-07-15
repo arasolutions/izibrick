@@ -12,3 +12,5 @@ Page type portfolio
 Il manque :
 WYSIWYG : bandeau : possibilité de chnager la couleur de fond pour le titre en modification (poissible uniquement à la création)
 WYSIWYG : slider : possibilité de mettre le titre en haut du slider
+WYSIWYG : slider : Mettre une taille en pixel par défaut (j'ai cherché pourquoi mon caroussel ne s'affichait pas)
+WYSIWYG : Ajouter un bouton pour purger (effacer) le contenu
