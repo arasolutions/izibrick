@@ -403,7 +403,7 @@
 #header .header-btn-collapse-nav {
     display: none;
     background: transparent;
-    color: #111;
+    color: var(--headerTextColor) !important;
     outline: 0;
     border: none;
     width: 30px;
@@ -614,7 +614,7 @@ html:not(.sticky-header-active) #header.header-transparent .header-body {
     }
 
     html:not(.sticky-header-active) #header.header-transparent .header-nav-main.header-nav-main-dark nav > ul > li > a:not(.active) {
-        color: #111;
+        color: var(--headerTextColor) !important;
     }
 }
 
@@ -1070,7 +1070,8 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
         /*font-weight: 600;*/
         line-height: 1.2;
         padding: 1.93333em 0.9em;
-        color: #111;
+        /*color: var(--headerTextColor);*/
+        color: var(--headerTextColor);
         /*font-family: "Museo500Regular", Arial, Helvetica, Tahoma, sans-serif;
         font-family: "source_sans_proregular";*/
     }
@@ -1465,7 +1466,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
     }
 
     #header .header-nav-main.header-nav-main-dark nav > ul > li > a {
-        color: #111;
+        color: var(--headerTextColor);
     }
 
     #header .header-nav-main.header-nav-main-dark nav > ul > li > a:hover {
@@ -2124,7 +2125,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
     }
 
     #header .header-nav.header-nav-light-dropdown .header-nav-main nav > ul li.dropdown-mega .dropdown-mega-sub-title {
-        color: #111;
+        color: var(--headerTextColor);
         font-weight: bold;
     }
 
@@ -2322,7 +2323,7 @@ html.side-header:not(.side-header-from-out) #header {
     }
 
     html.side-header #header .header-nav-main nav > ul > li.dropdown-mega .dropdown-mega-sub-title {
-        color: #111;
+        color: var(--headerTextColor);
         margin: 0.4rem 0 0;
     }
 
@@ -2872,7 +2873,7 @@ html.side-header-overlay-full-screen #header .header-nav-main nav > ul > li.drop
 }
 
 html.sticky-wrapper-active .side-header-btn-toggle {
-    color: #111;
+    color: var(--headerTextColor);
 }
 
 .side-header-btn-close {
