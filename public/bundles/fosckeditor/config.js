@@ -5,7 +5,7 @@
 
 
 CKEDITOR.editorConfig = function (config) {
-    config.extraPlugins = 'background,slider,banner,cards';
+    config.extraPlugins = 'background,slider,banner,cards,videodetector';
     config.height = '600px';
     config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function (config) {
 
     config.contentsCss = [CKEDITOR.getUrl("contents.css"), '/assets/common/bootstrap/css/bootstrap.min.css', '/assets/plugins/themify-icons/themify-icons.css', '/assets/bo/css/wysiwyg.css'];
 
-    config.extraAllowedContent = 'ol[data-*](*);li[data-*](*);div[data-*][style];a(*)[href,data-*,role];span(*)[aria-hidden];input[placeholder];section(*)[*]{*};h4(*)[*];ul(*)[*];iframe(*)[*]';
+    config.extraAllowedContent = 'ol[data-*](*);li[data-*](*);div[data-*][style];a(*)[href,data-*,role];span(*)[aria-hidden];input[placeholder];section(*)[*]{*};h4(*)[*];ul(*)[*];iframe(*)[*];img[data-*]';
 };
 CKEDITOR.dtd.$removeEmpty['span'] = false;
 CKEDITOR.dtd.$removeEmpty['p'] = false;
