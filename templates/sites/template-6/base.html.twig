@@ -54,6 +54,17 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/custom.css') }}">
+
+    <style type="text/css">
+        :root {
+            --colorTheme: {{ site.colorTheme }};
+            --textColor: {{ site.textColor }};
+            --headerTextColor: {{ site.lightTheme ? '#333' : 'white'  }};
+            --headerBackgroundColor: {{ site.lightTheme ? 'white' : '#333'  }};
+            --footerTextColor: {{ site.lightTheme ? '#333' : 'white'  }};
+            --footerBackgroundColor: {{ site.lightTheme ? 'white' : '#333'  }};
+        }
+    </style>
     <style type="text/css">
         :root {
             --colorTheme: {{ site.colorTheme }};

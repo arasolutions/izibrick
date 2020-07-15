@@ -17,7 +17,7 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    background: #FFF;
+    /*background: #FFF;*/
     -webkit-transition: min-height 0.3s ease;
     transition: min-height 0.3s ease;
     width: 100%;
