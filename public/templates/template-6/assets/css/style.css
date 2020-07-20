@@ -85,7 +85,7 @@ html.boxed .body {
 
 p {
     margin: 0 0 15px;
-    font-size: 13px;
+    /*font-size: 13px;*/
     line-height: 22px;
     font-weight: 400;
 }

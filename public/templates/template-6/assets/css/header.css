@@ -18,6 +18,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     /*background: #FFF;*/
+    background: var(--headerBackgroundColor) !important;
     -webkit-transition: min-height 0.3s ease;
     transition: min-height 0.3s ease;
     width: 100%;
