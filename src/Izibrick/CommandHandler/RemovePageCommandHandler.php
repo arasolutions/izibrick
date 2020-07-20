@@ -4,6 +4,7 @@ namespace App\Izibrick\CommandHandler;
 
 use App\Entity\Site;
 use App\Entity\Page;
+use App\Enum\Constants;
 use App\Izibrick\Command\AddPageCommand;
 use App\Izibrick\Command\PageTypePresentationCommand;
 use App\Repository\PageTypeBlogRepository;
@@ -58,7 +59,8 @@ class RemovePageCommandHandler
      */
     public function handle($id)
     {
-        $page = $this->pageRepository->get($id);
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        $page = $this->pageRepository->getBySiteAndId($site, $id);
         if (!$page) {
             throw new \Exception(sprintf('Error - Page not found (id: %d)', $id));
         }

@@ -438,9 +438,8 @@ class AdminController extends AbstractController
      */
     public function PageRemove(Request $request, $id = null, RemovePageCommandHandler $removePageCommandHandler)
     {
-        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
         $removePageCommandHandler->handle($id);
-        return $this->redirectToRoute('dashboard');
+        return $this->redirectToRoute('dashboard', ['success' => true]);
     }
 
     /**
