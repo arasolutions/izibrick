@@ -1,0 +1,16 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{ site.name }}{% endblock %}
+{% block description %}{% endblock %}
+
+{% block body %}
+    <div class="v-page-wrap no-top-spacing">
+        <div class="pb-0">
+            <div class="container mt50 text-center">
+                <h1>Aucune page n'est créée sur votre site.<br/>
+                    Vous pouvez créer une page en vous connectant sur le site izibrick puis en accédant à l'administration :
+                <a href="https://www.izibrick.com/login">https://www.izibrick.com</a></h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}

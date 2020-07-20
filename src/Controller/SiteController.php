@@ -272,6 +272,14 @@ class SiteController extends AbstractController
                     'posts' => $posts
                 ]);
             }
+        } else {
+            return $this->render('sites/template-' . $site->getTemplate()->getId() . '/no-result/index.html.twig', [
+                'controller_name' => 'SiteController' . $site->getName(),
+                'site' => $site,
+                'pages' => null,
+                'pagesFooter' => null,
+                'page' => null
+            ]);
         }
     }
 
