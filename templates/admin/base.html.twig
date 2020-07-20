@@ -225,6 +225,11 @@
                 </ol>
             </div>
             <div id="page-content">
+                {% if success is defined and success == true %}
+                    <div class="alert alert-success">
+                        <strong>Parfait !</strong> Vos modifications ont bien été prises en compte.
+                    </div>
+                {% endif %}
                 <hr class="new-section-xs bord-no">
                 {% block body %}{% endblock %}
             </div>

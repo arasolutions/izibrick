@@ -11,11 +11,6 @@
 
 
 {% block body %}
-    {% if success is defined and success == true %}
-        <div class="alert alert-success">
-            <strong>Parfait !</strong> Votre page blog à bien été mise à jour.
-        </div>
-    {% endif %}
     {{ form_start(form) }}
     <div class="tab-base">
         <!--Nav Tabs-->

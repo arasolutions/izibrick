@@ -422,7 +422,7 @@ class AdminController extends AbstractController
             'site' => $site,
             'page' => $page,
             'form' => $form->createView(),
-            'success' => false,
+            'success' => $success,
         ]);
     }
 
@@ -489,7 +489,7 @@ class AdminController extends AbstractController
             'site' => $site,
             'page' => $page,
             'form' => $form->createView(),
-            'success' => false,
+            'success' => $success,
         ]);
     }
 }
