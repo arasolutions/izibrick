@@ -159,9 +159,9 @@ class AdminController extends AbstractController
 
 
     /**
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/dashboard/{success}", name="dashboard")
      */
-    public function index(Request $request)
+    public function index(Request $request, $success = false)
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -207,6 +207,7 @@ class AdminController extends AbstractController
             'contacts' => $userSite->getTrackingContacts(),
             'dataVisiteursUnique' => $dataVisiteursUnique,
             'dataVisiteursRecurrent' => $dataVisiteursRecurrent,
+            'success' => $success
         ]);
     }
 
@@ -373,6 +374,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $addPageCommandHandler->handle($page, $site);
             $success = true;
+            return $this->redirectToRoute('dashboard', ['success' => $success]);
         }
 
         return $this->render('admin/page/add.html.twig', [
