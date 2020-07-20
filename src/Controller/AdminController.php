@@ -183,6 +183,39 @@ class AdminController extends AbstractController
         }
 
         $userSite = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+
+        // Référencement
+        $referencementTitle = 0;
+        $referencementDescription = 0;
+        $referencementTitleTaux = 0;
+        $referencementDescriptionTaux = 0;
+        $referencementTaux = 0;
+        $nbrPages = 0;
+        $nbrPosts = 0;
+        $pages = $this->pageRepository->getAllBySiteId($userSite->getId());
+        foreach ($pages as $page){
+            $nbrPages++;
+            $page->getSeoTitle() != '' ? $referencementTitle++ : '';
+            $page->getSeoTitle() != '' ? $referencementTaux++ : '';
+            $page->getSeoDescription() != '' ? $referencementDescription++ : '';
+            $page->getSeoDescription() != '' ? $referencementTaux++ : '';
+            // On compte le nombre de posts
+            if ($page->getType() == 4) {
+                $nbrPosts = $nbrPosts + $page->getPagesTypeBlog()->getPosts();
+            }
+        }
+        if ($referencementTaux != 0) {
+            $referencementTitleTaux = $referencementTitle / $nbrPages * 100;
+            $referencementDescriptionTaux = $referencementDescription / $nbrPages * 100;
+            $referencementTaux = $referencementTaux / $nbrPages / 2 * 100;
+        }
+
+        $referencement = array(
+            'referencementTitleTaux' => $referencementTitleTaux,
+            'referencementDescriptionTaux' => $referencementDescriptionTaux,
+            'referencementTaux' => $referencementTaux
+        );
+
         // Début Réseaux sociaux
         $nbrReseauxSociaux = 0;
         if ($userSite->getFacebook() != '') $nbrReseauxSociaux++;
@@ -201,13 +234,15 @@ class AdminController extends AbstractController
 
         return $this->render('admin/dashboard/index.html.twig', [
             'site' => $userSite,
-            'referencement' => null,
+            'referencement' => $referencement,
             'nbrReseauxSociaux' => $nbrReseauxSociaux,
             'quotes' => $userSite->getTrackingQuotes(),
             'contacts' => $userSite->getTrackingContacts(),
             'dataVisiteursUnique' => $dataVisiteursUnique,
             'dataVisiteursRecurrent' => $dataVisiteursRecurrent,
-            'success' => $success
+            'success' => $success,
+            'nbrPages' => $nbrPages,
+            'nbrPosts' => $nbrPosts
         ]);
     }
 
