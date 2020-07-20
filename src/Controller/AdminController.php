@@ -200,8 +200,8 @@ class AdminController extends AbstractController
             $page->getSeoDescription() != '' ? $referencementDescription++ : '';
             $page->getSeoDescription() != '' ? $referencementTaux++ : '';
             // On compte le nombre de posts
-            if ($page->getType() == 4) {
-                $nbrPosts = $nbrPosts + $page->getPagesTypeBlog()->getPosts();
+            if ($page->getType() == 4 && $page->getPagesTypeBlog() != null ) {
+                $nbrPosts = $nbrPosts + count($page->getPosts());
             }
         }
         if ($referencementTaux != 0) {
