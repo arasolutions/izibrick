@@ -40,11 +40,6 @@ class EditPageTypePresentationType extends AbstractType
                 'required' => false,
                 'label' => 'Afficher la page dans le menu du bas'
             ))
-            ->add('type', EntityType::class, [
-                'required' => true,
-                'class' => PageType::class,
-                'choice_label' => 'name'
-            ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Présentation',
                 'attr' => array('rows' => '5'),

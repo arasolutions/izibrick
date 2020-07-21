@@ -35,11 +35,6 @@ class PageTypeContactCommand
     public $displayMenuFooter;
 
     /**
-     * @var int
-     */
-    public $type;
-
-    /**
      * @var string
      */
     public $presentation;

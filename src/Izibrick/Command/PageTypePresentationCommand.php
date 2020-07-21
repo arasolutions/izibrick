@@ -35,11 +35,6 @@ class PageTypePresentationCommand
     public $displayMenuFooter;
 
     /**
-     * @var int
-     */
-    public $type;
-
-    /**
      * @var string
      */
     public $content;

@@ -55,7 +55,6 @@ class EditPageTypeBlogCommandHandler
         if (!$pageTypeBlog) {
             throw new \Exception(sprintf('Error - PageTypeBlog not found (id: %d)', $command->id));
         }
-        $page->setType($command->type->getId());
         $page->setNameMenu($command->name);
         $page->setNameMenuUrl(StringHelper::cleanUrl($command->name));
         $page->setDisplayMenuHeader($command->displayMenuHeader);

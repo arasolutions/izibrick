@@ -443,7 +443,6 @@ class AdminController extends AbstractController
         $pageTypeCommand->displayMenuFooter = $page->getDisplayMenuFooter();
         $pageTypeCommand->seoTitle = $page->getSeoTitle();
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
-        $pageTypeCommand->type = $typePage;
         // Spécifique page Présentation
         $pageTypeCommand->content = $pageTypePresentation->getContent();
 
@@ -501,7 +500,6 @@ class AdminController extends AbstractController
         $pageTypeCommand->displayMenuFooter = $page->getDisplayMenuFooter();
         $pageTypeCommand->seoTitle = $page->getSeoTitle();
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
-        $pageTypeCommand->type = $typePage;
         // Spécifique page Contact
         $pageTypeCommand->content = $pageTypeContact->getContent();
         $pageTypeCommand->presentation = $pageTypeContact->getPresentation();

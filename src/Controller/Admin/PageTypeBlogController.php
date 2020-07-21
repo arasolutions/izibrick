@@ -104,7 +104,6 @@ class PageTypeBlogController extends AbstractController
         $pageTypeCommand->seoTitle = $page->getSeoTitle();
         $pageTypeCommand->seoDescription = $page->getSeoDescription();
         $pageTypeCommand->content = $pageTypeBlog->getContent();
-        $pageTypeCommand->type = $typePage;
 
         $form = $this->createForm(EditPageTypeBlogType::class, $pageTypeCommand, ['idSite' => SiteHelper::getuniqueKeySite($site)]);
         $form->handleRequest($request);
