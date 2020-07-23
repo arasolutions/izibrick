@@ -79,3 +79,8 @@ footer, footer p {
 .copyright{
     /*background-color: var(--colorTheme) !important;*/
 }
+
+.text-button-blog {
+    color: #000 !important;
+    background-color: #FFF;
+}
