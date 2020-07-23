@@ -160,11 +160,15 @@
                         <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
                             <nav class="collapse">
                                 <ul class="nav flex-column flex-lg-row" id="mainNav">
-                                    {% for page in site.pages|filter(v => v.displayMenuHeader == true)|sort((a, b) => a.menuHeaderOrder <=> b.menuHeaderOrder) %}
-                                        <li class="dropdown dropdown-mega dropdown-mega-style-2">
-                                            {% set param = siteName|merge({'name':page.nameMenuUrl}) %}
+                                    {% for pageMenu in site.pages|filter(v => v.displayMenuHeader == true)|sort((a, b) => a.menuHeaderOrder <=> b.menuHeaderOrder) %}
+                                    {% if page.nameMenuUrl == pageMenu.nameMenuUrl %}
+                                        <li class="active">
+                                    {% else %}
+                                        <li class="dropdown dropdown-mega dropdown-mega-style-2 ">
+                                    {% endif %}
+                                            {% set param = siteName|merge({'name':pageMenu.nameMenuUrl}) %}
                                             <a class="dropdown-item" href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">
-                                                {{ page.nameMenu }}
+                                                {{ pageMenu.nameMenu }}
                                             </a>
                                         </li>
                                     {% endfor %}
