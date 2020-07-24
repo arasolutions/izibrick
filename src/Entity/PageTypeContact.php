@@ -23,7 +23,7 @@ class PageTypeContact
     private $page;
 
     /**
-     * @ORM\Column(type="string", length=512, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $presentation;
 
