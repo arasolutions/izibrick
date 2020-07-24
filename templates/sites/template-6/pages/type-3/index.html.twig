@@ -17,12 +17,26 @@
                 </div>
             {% endif %}
             <div class="row">
-                <div class="col-sm-9">
-                    <div class="v-comment-form">
 
-                        <div class="v-heading-v2">
-                            <h3>Demande d'informations</h3>
-                        </div>
+                {% if page.pagesTypeContact.email or
+                        page.pagesTypeContact.phone or
+                            page.pagesTypeContact.city or
+                                page.pagesTypeContact.postCode or
+                                    page.pagesTypeContact.country or
+                                        page.pagesTypeContact.openingTime or
+                                            site.twitter or
+                                                site.facebook or
+                                                    site.instagram
+                    %}
+                    <div class="col-sm-9">
+                        <div class="v-comment-form">
+                            <div class="v-heading-v2">
+                                <h3>Demande d'informations</h3>
+                            </div>
+                {% else %}
+                    <div class="col-sm-12">
+                        <div class="v-comment-form">
+                {% endif %}
 
                         <p class="pull-bottom-small">
                             {{ page.pagesTypeContact.presentation|raw }}
@@ -61,13 +75,10 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-
-
                     {% if page.pagesTypeContact.city is defined and page.pagesTypeContact.city is not null %}
                         <div class="v-heading-v2">
                             <h3>Adresse</h3>
                         </div>
-
                         <p>
                             {% if page.pagesTypeContact.name %}
                                 {{ page.pagesTypeContact.name }}<br/>
@@ -75,7 +86,6 @@
                             {{ page.pagesTypeContact.postCode }} {{ page.pagesTypeContact.city }} {{ page.pagesTypeContact.country }}
                         </p>
                     {% endif %}
-
                     {% if (page.pagesTypeContact.email is defined and page.pagesTypeContact.email is not null) or (page.pagesTypeContact.phone is defined and page.pagesTypeContact.phone is not null) %}
                         <div class="v-heading-v2">
                             {% if page.pagesTypeContact.email and page.pagesTypeContact.phone %}
