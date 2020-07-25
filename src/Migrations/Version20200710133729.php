@@ -27,8 +27,6 @@ final class Version20200710133729 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_EAEF38224CDDBD2C ON fir_post');
         $this->addSql('DROP INDEX IDX_EAEF3822DAE07E97 ON fir_post');
         $this->addSql('ALTER TABLE fir_post DROP blog_id, DROP page_type_blog_id');
-        $this->addSql('ALTER TABLE fir_post RENAME INDEX fk_eaef3822c4663e4 TO IDX_EAEF3822C4663E4');
-        $this->addSql('ALTER TABLE fir_site DROP INDEX FK_D9265D4BFEC332A1, ADD UNIQUE INDEX UNIQ_D9265D4BFEC332A1 (default_page_id)');
     }
 
     public function down(Schema $schema) : void

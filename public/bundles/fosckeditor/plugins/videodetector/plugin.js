@@ -44,7 +44,7 @@ CKEDITOR.plugins.add('videodetector', {
 
         editor.on("doubleclick", function (b) {
             if (isVideo(b.data.element)) {
-                b.data.dialog = 'modifyVideoCommand';
+                b.data.dialog = 'videoDialog';
             }
         });
 

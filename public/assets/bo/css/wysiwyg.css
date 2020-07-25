@@ -69,8 +69,52 @@
     object-fit: cover;
 }
 
-.radiogroup div.hide-label td {
+.radiogroup div.hide-label td, div.alignment {
     text-align: center ! important;
+}
+
+div.alignment img {
+    margin: 0 1px;
+    border: solid 1px #AAA;
+    padding: 4px;
+    width: 25px;
+}
+
+div.alignment img.selected {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.carousel-caption.align-tl, .carousel-caption.align-tc, .carousel-caption.align-tr,
+.carousel-caption.align-ml, .carousel-caption.align-mc, .carousel-caption.align-mr,
+.carousel-caption.align-bl, .carousel-caption.align-bc, .carousel-caption.align-br {
+    position: absolute;
+}
+
+.carousel-caption.align-tl, .carousel-caption.align-tc, .carousel-caption.align-tr {
+    top: 0;
+}
+
+.carousel-caption.align-ml, .carousel-caption.align-mc, .carousel-caption.align-mr {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-caption.align-bl, .carousel-caption.align-bc, .carousel-caption.align-br {
+    bottom: 0;
+}
+
+.carousel-caption.align-tl, .carousel-caption.align-ml, .carousel-caption.align-bl {
+    left: 30px;
+    text-align: left;
+}
+
+.carousel-caption.align-tc, .carousel-caption.align-mc, .carousel-caption.align-bc {
+    text-align: center;
+}
+
+.carousel-caption.align-tr, .carousel-caption.align-mr, .carousel-caption.align-br {
+    right: 30px;
+    text-align: right;
 }
 
 .page-header.page-header-text-light h1 {

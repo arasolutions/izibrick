@@ -117,6 +117,17 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                     if (enableAnimation) {
                         this.setValueOf('settings', 'animate', enableAnimation);
                     }
+
+                    // Gestion de l'alignement
+                    var alignments = ['tl', 'tc', 'tr', 'ml', 'mc', 'mr', 'bl', 'bc', 'br'];
+                    var caption = carouselInner.getChild(0).getChild(0);
+                    alignments.forEach(function (alignment) {
+                        if (caption.hasClass('align-' + alignment)) {
+                            CKEDITOR.dialog.getCurrent().setValueOf('settings', 'alignment', alignment);
+                            $('div.alignment img').removeClass('selected');
+                            $('div.alignment img[data-alignment="' + alignment + '"]').addClass('selected');
+                        }
+                    });
                 }
             },
             contents: [
@@ -146,30 +157,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                             a.preview && a.preview.removeStyle("display");
 
                                             var pictures = CKEDITOR.document.getById('pictures');
-                                            /*var row = new CKEDITOR.dom.element('div');
-                                            row.addClass('editor-slider-row');
 
-                                            var colImg = new CKEDITOR.dom.element('div');
-                                            colImg.addClass('editor-slider-col-img');
-
-                                            var img = new CKEDITOR.dom.element('img');
-                                            img.setAttribute('src', b);
-
-                                            colImg.append(img);
-                                            row.append(colImg);
-
-                                            var colAlt = new CKEDITOR.dom.element('div');
-                                            colAlt.addClass('editor-slider-col-alt');
-                                            var inputAlt = new CKEDITOR.dom.element('input');
-                                            inputAlt.addClass('cke_dialog_ui_input_text');
-                                            inputAlt.setAttribute('id', 'alt');
-                                            inputAlt.setAttribute('maxLength', 20);
-
-                                            colAlt.append(inputAlt);
-                                            row.append(colAlt);
-
-                                            pictures.append(row);
-*/
                                             var row = new CKEDITOR.dom.element('div');
                                             row.addClass('editor-slider-row');
 
@@ -293,7 +281,59 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                 {id: "height", type: "text", labelStyle: 'display:none'},
                                 {type: "html", html: "px", style: 'line-height: 32px'}
                             ]
-                        }],
+                        },
+                            {
+                                type: "vbox", padding: 0, children: [{
+                                    type: "radio",
+                                    id: "alignment",
+                                    className: "hidden",
+                                    items: [
+                                        ['Coin haut gauche', 'tl'], ['En haut et centré', 'tc'], ['Coin haut droite', 'tr'],
+                                        ['Centré gauche', 'cl'], ['Centré et centré', 'cc'], ['Centré droite', 'cr'],
+                                        ['Coin bas gauche', 'bl'], ['En bas et centré', 'bc'], ['Coin bas droite', 'br']],
+                                    //style: "display:inline-block;margin-top:14px;",
+                                    align: "center",
+                                    label: "Emplacement"
+                                },
+                                    {
+
+                                        type: "fieldset", label: 'Alignement', children: [
+                                            {
+                                                type: "vbox", padding: 0,
+                                                className: "element-centered", children: [{
+                                                    type: "hbox", className: "element-centered", padding: 0, children: [{
+                                                        type: "html",
+                                                        html: "<div class='alignment'>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='tl' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-tl.png' + "'/>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='tc' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-tc.png' + "'/>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='tr' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-tr.png' + "'/>" +
+                                                            "</div>",
+                                                        align: "center",
+                                                    }],
+                                                }, {
+                                                    type: "hbox", padding: 0, children: [{
+                                                        type: "html",
+                                                        html: "<div class='alignment'>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='ml' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-ml.png' + "'/>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='mc' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-mc.png' + "'/>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='mr' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-mr.png' + "'/>" +
+                                                            "</div>",
+                                                        align: "center",
+                                                    }],
+                                                }, {
+                                                    type: "hbox", padding: 0, children: [{
+                                                        type: "html",
+                                                        html: "<div class='alignment'>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='bl' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-bl.png' + "'/>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='bc' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-bc.png' + "'/>" +
+                                                            "<img onclick='selectAlignment($(this))' data-alignment='br' src='" + CKEDITOR.plugins.getPath('slider') + 'icons/align-br.png' + "'/>" +
+                                                            "</div>",
+                                                        align: "center",
+                                                    }],
+                                                }]
+                                            }]
+                                    }]
+                            }],
                     }],
                 }],
             onOk: function () {
@@ -361,7 +401,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                     divTextItem.addClass('carousel-caption');
                     divTextItem.addClass('d-md-block');
 
-                    var textItemTitle = editor.document.createElement('h5');
+                    var textItemTitle = editor.document.createElement('h2');
                     textItemTitle.appendText(element.find('input').getItem(0).getValue());
 
                     divTextItem.append(textItemTitle);
@@ -375,6 +415,57 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
 
                     divInner.append(divItem);
                 });
+
+                switch (this.getContentElement('settings', 'alignment').getValue()) {
+                    case 'tl':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-tl');
+                        });
+                        break;
+                    case 'tc':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-tc');
+                        });
+                        break;
+                    case 'tr':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-tr');
+                        });
+                        break;
+                    case 'ml':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-ml');
+                        });
+                        break;
+                    case 'mc':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-mc');
+                        });
+                        break;
+                    case 'mr':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-mr');
+                        });
+                        break;
+                    case 'bl':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-bl');
+                        });
+                        break;
+                    case 'bc':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-bc');
+                        });
+                        break;
+                    case 'br':
+                        divInner.getChildren().toArray().forEach(function (element, index) {
+                            element.getChild(0).addClass('align-br');
+                        });
+                        break;
+                    default:
+                        $('.carousel-caption').addClass('align-bc');
+                        break;
+                }
 
                 div.append(divInner);
                 if (pictures.getChildCount() > 1) {
@@ -422,3 +513,9 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
         };
     }
 );
+
+selectAlignment = function (selected) {
+    $('div.alignment img').removeClass('selected');
+    selected.addClass('selected');
+    CKEDITOR.dialog.getCurrent().setValueOf('settings', 'alignment', selected.data('alignment'));
+}
