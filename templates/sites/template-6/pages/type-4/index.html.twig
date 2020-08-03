@@ -13,12 +13,11 @@
             <div class="col-sm-12">
                 <div class="v-blog-widget">
                     <div class="v-blog-wrap">
-
                         {% if posts|length > 0 %}
                             {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                             <div class="v-blog-items-wrap blog-mini">
                                 <ul class="v-blog-items row mini-items clearfix">
-                                    {% for post in posts %}
+                                    {% for post in pagination %}
                                         {% set param = siteName|merge({'name':page.nameMenuUrl})|merge({'post':post.id})|merge({'postTitle':post.title|clean_url}) %}
                                         <li class="v-blog-item col-sm-12">
                                             <div class="mini-v-blog-item-wrap">
@@ -71,6 +70,11 @@
                                     </ul>
                                 </nav>-->
                             </div>
+                            {% if pagination|length > 0 %}
+                                <div class="navigation" style="justify-content: center;">
+                                    {{ knp_pagination_render(pagination) }}
+                                </div>
+                            {% endif %}
                         {% else %}
                             <div>Aucun article n'a été publié.</div>
                         {% endif %}

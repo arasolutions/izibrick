@@ -19,6 +19,7 @@ use App\Repository\PostRepository;
 use App\Repository\PricingRepository;
 use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -104,7 +105,7 @@ class SiteController extends AbstractController
      * @Route("/site/{siteName<.*>}/{name}/", name="site_page",
      *     host="%base_host%")
      */
-    public function page(Request $request, $siteName = null, $name = null, AddTrackingContactCommandHandler $addTrackingContactCommandHandler, \Swift_Mailer $mailer)
+    public function page(Request $request, $siteName = null, $name = null, AddTrackingContactCommandHandler $addTrackingContactCommandHandler, \Swift_Mailer $mailer, PaginatorInterface $paginator)
     {
         /** @var Site $site */
         if ($siteName != null) {
@@ -164,13 +165,21 @@ class SiteController extends AbstractController
                 $success = false;
                 $posts = $this->postRepository->getByPageId($page->getId());
 
+                $pagination = $paginator->paginate(
+                    $posts,
+                    $request->query->getInt('page', 1),
+                    10
+                );
+
+
                 return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
                     'pagesFooter' => $pagesFooter,
                     'page' => $page,
-                    'posts' => $posts
+                    'posts' => $posts,
+                    'pagination' => $pagination
                 ]);
             }
         }
