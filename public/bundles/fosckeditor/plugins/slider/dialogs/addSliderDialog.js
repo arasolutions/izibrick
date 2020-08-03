@@ -86,7 +86,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             inputAlt.setAttribute('placeholder', 'Description');
                             inputAlt.setAttribute('maxLength', 100);
 
-                            if(element.find('div').getItem(0).find('p').count()) {
+                            if (element.find('div').getItem(0).find('p').count()) {
                                 inputAlt.setAttribute('value', element.find('div').getItem(0).find('p').getItem(0).getText());
                             }
 
@@ -96,7 +96,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             inputTitle.setAttribute('placeholder', 'Titre');
                             inputTitle.setAttribute('maxLength', 20);
 
-                            if(element.find('div').getItem(0).find('h2').count()) {
+                            if (element.find('div').getItem(0).find('h2').count()) {
                                 inputTitle.setAttribute('value', element.find('div').getItem(0).find('h2').getItem(0).getText());
                             }
 
@@ -284,7 +284,17 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                 html: "<strong>Hauteur</strong>",
                                 style: 'line-height: 32px'
                             },
-                                {id: "height", type: "text", labelStyle: 'display:none', default: '200'},
+                                {
+                                    id: "height",
+                                    type: "text",
+                                    labelStyle: 'display:none',
+                                    default: '200',
+                                    validate: CKEDITOR.dialog.validate.functions(
+                                        CKEDITOR.dialog.validate.notEmpty(),
+                                        CKEDITOR.dialog.validate.number(),
+                                        'La hauteur doit être remplie'
+                                    )
+                                },
                                 {type: "html", html: "px", style: 'line-height: 32px'}
                             ]
                         },
@@ -407,13 +417,13 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                     divTextItem.addClass('carousel-caption');
                     divTextItem.addClass('d-md-block');
 
-                    if(element.find('input').getItem(0).getValue()) {
+                    if (element.find('input').getItem(0).getValue()) {
                         var textItemTitle = editor.document.createElement('h2');
                         textItemTitle.appendText(element.find('input').getItem(0).getValue());
                         divTextItem.append(textItemTitle);
                     }
 
-                    if(element.find('input').getItem(1).getValue()) {
+                    if (element.find('input').getItem(1).getValue()) {
                         var textItemP = editor.document.createElement('p');
                         textItemP.appendText(element.find('input').getItem(1).getValue());
                         divTextItem.append(textItemP);
