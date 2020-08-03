@@ -70,7 +70,7 @@
                                     </ul>
                                 </nav>-->
                             </div>
-                            {% if pagination|length > 0 %}
+                            {% if posts|length > 10 %}
                                 <div class="navigation" style="justify-content: center;">
                                     {{ knp_pagination_render(pagination) }}
                                 </div>
