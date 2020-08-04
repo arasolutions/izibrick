@@ -8,10 +8,18 @@ php bin/console assets:install public
 # Premium :
 Google Analytics
 Page type portfolio
+Theme Blog
+Stripe : voir si on peut traduire et mettre le logo ARA
+Paiement BO : Travailler l'ergonomie pour faire plus sécurisé
+Front : 1 Choisir Offre, 2 Créer compte + nom projet, on se connecte au bo : on chosit un theme qui créé automatiquement des pages
+Front : Deux offres : 20 et 30 € TTC (récupérer JIMDO pour les infos des offres)
 
 Il manque :
+WYSIWYG : slider : Champs titre et description vides lorsque l'on modifie le caroussel (les champs étaient bien entendu alimentés)
 WYSIWYG : Ajouter un caroussel d'image (pas le meme car il faut pour celui là lui préciser en plus la largeur et qu'il soit intégré dans le container)
 WYSIWYG : Insérer un fichier dans la page
+WYSIWYG : Bandeau : donner la possibilité de mettre l'opacité ou non
+WYSIWYG : Insertion Map
 
 # Idées :
 Ajouter un widget Google Review : Figer en bas a droite un bouton permettant d'afficher les reviews Google
@@ -22,3 +30,5 @@ WYSIWYG : slider : possibilité de mettre le titre en haut du slider
 WYSIWYG : slider : Mettre une taille en pixel par défaut (j'ai cherché pourquoi mon caroussel ne s'affichait pas)
 WYSIWYG : plan tarifaire : possibilité de chnager la couleur de fond pour le titre en modification (poissible uniquement à la création)
 WYSIWYG : Ajouter un bouton pour purger (effacer) le contenu
+
+Test
