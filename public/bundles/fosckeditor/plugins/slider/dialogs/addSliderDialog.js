@@ -84,7 +84,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             inputAlt.addClass('cke_dialog_ui_input_text');
                             inputAlt.addClass('dialog-slider-input');
                             inputAlt.setAttribute('placeholder', 'Description');
-                            inputAlt.setAttribute('maxLength', 100);
+                            inputAlt.setAttribute('maxLength', 1023);
 
                             if (element.find('div').getItem(0).find('p').count()) {
                                 inputAlt.setAttribute('value', element.find('div').getItem(0).find('p').getItem(0).getText());
@@ -94,7 +94,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                             inputTitle.addClass('cke_dialog_ui_input_text');
                             inputTitle.addClass('dialog-slider-input');
                             inputTitle.setAttribute('placeholder', 'Titre');
-                            inputTitle.setAttribute('maxLength', 20);
+                            inputTitle.setAttribute('maxLength', 1023);
 
                             if (element.find('div').getItem(0).find('h2').count()) {
                                 inputTitle.setAttribute('value', element.find('div').getItem(0).find('h2').getItem(0).getText());
