@@ -10,7 +10,6 @@ Google Analytics
 Page type portfolio
 
 Il manque :
-WYSIWYG : plan tarifaire : possibilité de chnager la couleur de fond pour le titre en modification (poissible uniquement à la création)
 WYSIWYG : Ajouter un bouton pour purger (effacer) le contenu
 WYSIWYG : Insérer un fichier dans la page
 WYSIWYG : Ajouter un caroussel d'image (pas le meme car il faut pour celui là lui préciser en plus la largeur et qu'il soit intégré dans le container)
@@ -22,3 +21,4 @@ Ajouter un deuxième template de Blog : Ajouter la page Mansory (vertex)
 Ce qui a été fait :
 WYSIWYG : slider : possibilité de mettre le titre en haut du slider
 WYSIWYG : slider : Mettre une taille en pixel par défaut (j'ai cherché pourquoi mon caroussel ne s'affichait pas)
+WYSIWYG : plan tarifaire : possibilité de chnager la couleur de fond pour le titre en modification (poissible uniquement à la création)
