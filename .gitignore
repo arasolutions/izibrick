@@ -10,6 +10,7 @@
 !/public/bundles/fosckeditor/plugins/cards/
 !/public/bundles/fosckeditor/plugins/videodetector/
 !/public/bundles/fosckeditor/plugins/fakeobjects/
+!/public/bundles/fosckeditor/plugins/resetcontent/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

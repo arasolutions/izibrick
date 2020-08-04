@@ -6,7 +6,7 @@
 
 CKEDITOR.editorConfig = function (config) {
     config.skin = 'office2013';
-    config.extraPlugins = 'background,slider,banner,cards,videodetector';
+    config.extraPlugins = 'background,slider,banner,cards,videodetector,resetcontent';
     config.height = '600px';
     config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
