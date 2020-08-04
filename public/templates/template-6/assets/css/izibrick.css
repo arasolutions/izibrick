@@ -118,3 +118,10 @@ footer, footer p {
     color: #000 !important;
     background-color: #FFF;
 }
+
+.navigation nav ul {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
