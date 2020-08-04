@@ -76,7 +76,7 @@ footer, footer p {
     padding-left: 10px;
 }
 
-.copyright{
+.copyright {
     /*background-color: var(--colorTheme) !important;*/
 }
 
@@ -124,4 +124,8 @@ footer, footer p {
     align-self: center;
     align-content: center;
     justify-content: center;
+}
+
+ul.v-blog-items {
+    padding-inline-start: unset !important;
 }
