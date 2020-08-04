@@ -225,13 +225,13 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                             inputAlt.addClass('cke_dialog_ui_input_text');
                                             inputAlt.addClass('dialog-slider-input');
                                             inputAlt.setAttribute('placeholder', 'Description');
-                                            inputAlt.setAttribute('maxLength', 20);
+                                            inputAlt.setAttribute('maxLength', 1023);
 
                                             var inputTitle = new CKEDITOR.dom.element('input');
                                             inputTitle.addClass('cke_dialog_ui_input_text');
                                             inputTitle.addClass('dialog-slider-input');
                                             inputTitle.setAttribute('placeholder', 'Titre');
-                                            inputTitle.setAttribute('maxLength', 100);
+                                            inputTitle.setAttribute('maxLength', 1023);
 
                                             colAlt.append(inputTitle);
                                             colAlt.append(inputAlt);
