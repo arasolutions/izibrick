@@ -566,7 +566,8 @@ html #header.header-transparent .header-body:before {
     right: 0;
     top: 0;
     bottom: 0;
-    background: #FFF;
+    /*background: #FFF;*/
+    background: var(--headerBackgroundColor) !important;
     opacity: 0;
     -webkit-transition: opacity 0.3s ease;
     transition: opacity 0.3s ease;

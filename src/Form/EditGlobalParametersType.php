@@ -94,7 +94,8 @@ class EditGlobalParametersType extends AbstractType
                 'choices' => [
                     'Clair' => 1,
                     'Sombre' => 2,
-                    'Transparent' => 3,
+                    'Transparent et clair' => 3,
+                    'Transparent et sombre' => 4,
                 ]
 
             ])
