@@ -102,6 +102,15 @@ class EditGlobalParametersType extends AbstractType
                 ]
 
             ])
+            ->add('menuTheme', ChoiceType::class, [
+                'label' => 'Thème du menu',
+                'choices' => [
+                    'Clair' => 1,
+                    'Sombre' => 2,
+                    'Transparant' => 3,
+                ]
+
+            ])
             ->add('font', EntityType::class, [
                 'required' => true,
                 'class' => Font::class,

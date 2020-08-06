@@ -24,6 +24,7 @@ class GlobalParametersCommand
     private $template;
     private $colorTheme;
     private $lightTheme;
+    private $menuTheme;
     private $font;
     private $fontSize;
     private $orderMenu;
@@ -49,6 +50,7 @@ class GlobalParametersCommand
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
         $this->lightTheme = $site->getLightTheme();
+        $this->menuTheme = $site->getMenuTheme();
         $this->font = $site->getFont();
         $this->fontSize = $site->getFontSize();
         $this->orderMenu = 0;
@@ -293,6 +295,22 @@ class GlobalParametersCommand
     public function setLightTheme(?bool $lightTheme): void
     {
         $this->lightTheme = $lightTheme;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuTheme()
+    {
+        return $this->menuTheme;
+    }
+
+    /**
+     * @param mixed $menuTheme
+     */
+    public function setMenuTheme($menuTheme)
+    {
+        $this->menuTheme = $menuTheme;
     }
 
     /**

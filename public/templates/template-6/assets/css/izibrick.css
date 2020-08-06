@@ -129,3 +129,10 @@ footer, footer p {
 ul.v-blog-items {
     padding-inline-start: unset !important;
 }
+
+.no-background {
+    background: none !important;
+}
+.with-background {
+    background: var(--headerBackgroundColor) !important;
+}
