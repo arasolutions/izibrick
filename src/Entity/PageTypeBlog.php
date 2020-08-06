@@ -37,6 +37,12 @@ class PageTypeBlog
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Template", inversedBy="pageTypeBlogs", fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $template;
+
     public function __construct($page)
     {
         $this->page = $page;
@@ -75,6 +81,18 @@ class PageTypeBlog
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getTemplate(): ?Template
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(?Template $template): self
+    {
+        $this->template = $template;
 
         return $this;
     }

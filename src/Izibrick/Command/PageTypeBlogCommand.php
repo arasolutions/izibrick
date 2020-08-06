@@ -3,6 +3,8 @@
 
 namespace App\Izibrick\Command;
 
+use App\Entity\Template;
+
 class PageTypeBlogCommand
 {
     /**
@@ -43,5 +45,10 @@ class PageTypeBlogCommand
      * @var string
      */
     public $originalContent;
+
+    /**
+     * @var Template
+     */
+    public $template;
 
 }

@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Template[]    findAll()
  * @method Template[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TemplateRepository extends ServiceEntityRepository
+class TemplateRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
