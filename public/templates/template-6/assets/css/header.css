@@ -1072,7 +1072,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
         line-height: 1.2;
         padding: 1.93333em 0.9em;
         /*color: var(--headerTextColor);*/
-        color: var(--headerTextColor);
+        color: var(--headerTextColorBandeauDisplayed);
         /*font-family: "Museo500Regular", Arial, Helvetica, Tahoma, sans-serif;
         font-family: "source_sans_proregular";*/
     }

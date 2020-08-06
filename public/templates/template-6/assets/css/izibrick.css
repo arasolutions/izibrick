@@ -29,8 +29,8 @@
 }
 
 #header {
-    background-color: var(--headerBackgroundColor) !important;
-    color: var(--headerTextColor) !important;
+    /*background-color: var(--headerBackgroundColor) !important;
+    color: var(--headerTextColor) !important;*/
 }
 
 #footer {
@@ -74,6 +74,10 @@ footer, footer p {
 .logo-title {
     font-size: 1.5em;
     padding-left: 10px;
+    color: var(--headerTextColor);
+}
+.sticky-header-active .logo-title {
+    color: var(--headerTextColorBandeauDisplayed);
 }
 
 .copyright {
