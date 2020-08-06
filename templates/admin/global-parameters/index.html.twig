@@ -233,16 +233,12 @@
                         <div class="panel-body">
                             <div class="col-sm-6">
                                 <div class="col-sm-12 form-group">
-                                    {{ form_label(form.template) }}
-                                    {{ form_widget(form.template, {'attr':{'class':'form-control'}}) }}
-                                </div>
-                                <div class="col-sm-12 form-group">
                                     {{ form_label(form.colorTheme) }}
                                     {{ form_widget(form.colorTheme) }}
                                 </div>
                                 <div class="col-sm-12 form-group">
-                                    {{ form_label(form.lightTheme) }}
-                                    {{ form_widget(form.lightTheme, {'attr':{'class':'form-control'}}) }}
+                                    {{ form_label(form.displayBoxed) }}
+                                    {{ form_widget(form.displayBoxed, {'attr':{'class':'form-control'}}) }}
                                 </div>
                                 <div class="col-sm-12 form-group">
                                     {{ form_label(form.menuTheme) }}
@@ -251,10 +247,6 @@
                                 <div class="col-sm-12 form-group">
                                     {{ form_label(form.defaultPage) }}
                                     {{ form_widget(form.defaultPage, {'attr':{'class':'form-control'}}) }}
-                                </div>
-                                <div class="col-sm-12 form-group">
-                                    {{ form_label(form.displayBoxed) }}
-                                    {{ form_widget(form.displayBoxed, {'attr':{'class':'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
