@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html class="{{  site.displayBoxed == true ? 'boxed' : '' }}">
+<html class="{{ site.displayBoxed == true ? 'boxed' : '' }}">
 <head>
     <meta charset="utf-8">
     <title>{% block title %}{{ site.name }}{% endblock %}</title>
@@ -8,9 +8,10 @@
     <meta name="description" content="{% block description %}{% endblock %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     {% if site.favicon %}
-        <link rel="icon" type="image/png" href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}" />
+        <link rel="icon" type="image/png"
+              href="{{ vich_uploader_asset(site, 'faviconFile') | imagine_filter('favicon') }}"/>
     {% else %}
-        <link rel="icon" type="image/png" href="{{ asset('/assets/img/logo/favicon.png') }}" />
+        <link rel="icon" type="image/png" href="{{ asset('/assets/img/logo/favicon.png') }}"/>
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -20,6 +21,8 @@
     <!-- Libs CSS -->
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/common/bootstrap/css/bootstrap.min.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('assets/common/videodetector/css/videodetectorI.css') }}"
           rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/font-awesome.min.css') }}"
           rel="stylesheet"/>
@@ -42,6 +45,11 @@
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.theme.css') }}"
           rel="stylesheet"/>
     <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/owl-carousel/owl.carousel.css') }}"
+          rel="stylesheet"/>
+
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/slick/slick.css') }}"
+          rel="stylesheet"/>
+    <link href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/slick/slick-theme.css') }}"
           rel="stylesheet"/>
 
     <!-- Current Page CSS -->
@@ -71,14 +79,14 @@
             --textColor: {{ site.textColor }};
         }
 
-         a.active {
-             color: {{ site.colorTheme }} !important;
-         }
+        a.active {
+            color: {{ site.colorTheme }} !important;
+        }
 
-          footer {
-              background: {{ site.colorTheme }} !important;
-              color: {{ site.textColor }} !important;
-          }
+        footer {
+            background: {{ site.colorTheme }} !important;
+            color: {{ site.textColor }} !important;
+        }
 
 
         .v-pagination li a:hover,
@@ -121,7 +129,11 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analyticsSuiviId }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
             gtag('js', new Date());
 
             gtag('config', '{{ site.analyticsSuiviId }}');
@@ -143,8 +155,8 @@
                     <div class="header-logo">
                         <a href="{{ path('home'|route(app.request.server.get('REQUEST_URI')), siteName) }}">
                             {% if site.logo %}
-                            <img alt="Logo {{ site.name }}" height="35"
-                                 src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo_template') }}"/>
+                                <img alt="Logo {{ site.name }}" height="35"
+                                     src="{{ vich_uploader_asset(site, 'logoFile') | imagine_filter('logo_template') }}"/>
                             {% else %}
                                 <img alt="Logo {{ site.name }}" height="35"
                                      src="{{ asset('assets/img/logo_site_default.png') }}"/>
@@ -161,15 +173,16 @@
                             <nav class="collapse">
                                 <ul class="nav flex-column flex-lg-row" id="mainNav">
                                     {% for pageMenu in site.pages|filter(v => v.displayMenuHeader == true)|sort((a, b) => a.menuHeaderOrder <=> b.menuHeaderOrder) %}
-                                    {% if page.nameMenuUrl == pageMenu.nameMenuUrl %}
-                                        <li class="active">
-                                    {% else %}
-                                        <li class="dropdown dropdown-mega dropdown-mega-style-2 ">
-                                    {% endif %}
-                                            {% set param = siteName|merge({'name':pageMenu.nameMenuUrl}) %}
-                                            <a class="dropdown-item" href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">
-                                                {{ pageMenu.nameMenu }}
-                                            </a>
+                                        {% if page.nameMenuUrl == pageMenu.nameMenuUrl %}
+                                            <li class="active">
+                                        {% else %}
+                                            <li class="dropdown dropdown-mega dropdown-mega-style-2 ">
+                                        {% endif %}
+                                        {% set param = siteName|merge({'name':pageMenu.nameMenuUrl}) %}
+                                        <a class="dropdown-item"
+                                           href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">
+                                            {{ pageMenu.nameMenu }}
+                                        </a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -245,7 +258,9 @@
             <p>© Copyright 2020 by <a href="https://www.izibrick.com">izibrick</a>. Tous droits réservés.</p>
             {% for pageFooter in site.pages|filter(v => v.displayMenuFooter == true)|sort((a, b) => a.menuFooterOrder <=> b.menuFooterOrder) %}
                 {% set param = siteName|merge({'name':pageFooter.nameMenuUrl}) %}
-                <p> {% if loop.first == false %} - {% else %}&nbsp;&nbsp;&nbsp; {% endif %} <a href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ pageFooter.nameMenu }}&nbsp;</a></p>
+                <p> {% if loop.first == false %} - {% else %}&nbsp;&nbsp;&nbsp; {% endif %} <a
+                            href="{{ path('page'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ pageFooter.nameMenu }}
+                        &nbsp;</a></p>
             {% endfor %}
 
             <div class="clearfix pull-right">
@@ -288,6 +303,7 @@
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.validate.js') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme-plugins.js') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/jquery.isotope.min.js') }}"></script>
+<script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/slick/slick.min.js') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/imagesloaded.js') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/view.min.js?auto') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/plugins/aos/aos.js') }}"></script>
@@ -298,5 +314,17 @@
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme-core.js') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme.js') }}"></script>
 <script src="{{ asset('templates/template-' ~ site.template.id ~ '/assets/js/theme.init.js') }}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.slicky').slick();
+
+        $('.slicky-item-block').hover(function(){
+           $(this).find('.slicky-item-title').fadeIn('fast');
+        },function(){
+            $(this).find('.slicky-item-title').fadeOut('fast');
+        });
+    });
+</script>
 </body>
 </html>

@@ -125,3 +125,66 @@ div.alignment img.selected {
     font-size: 30px;
     margin-top: 5px;
 }
+
+#slicky_sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 500px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#slicky_sortable li {
+    margin: 3px;
+    padding: 0.4em;
+    font-size: 1.4em;
+    border-style: dotted;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: transparent;
+    position: relative;
+    cursor: move;
+}
+
+#slicky_sortable li:hover, #slicky_sortable li.selected {
+    border-color: grey;
+    background-color: rgba(127, 127, 127, .3);
+}
+
+#slicky_sortable div.block_img {
+    width: 100px;
+    cursor: move;
+}
+
+#slicky_sortable i.ti-trash {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#slicky_sortable div.block_img img {
+    width: 100%;
+    cursor: move;
+}
+
+#slicky_sortable li span {
+    position: absolute;
+    margin-left: -1.3em;
+}
+
+.slickyParam {
+    margin-top: 10px !important;
+}
+
+img.cke_slicky {
+    background-image: url(http://www.izibrick.test/bundles/fosckeditor/plugins/slicky/imgs/fakeText.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #a9a9a9;
+}
