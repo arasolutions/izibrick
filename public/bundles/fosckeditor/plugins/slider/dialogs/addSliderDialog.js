@@ -305,7 +305,7 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                                     className: "hidden",
                                     items: [
                                         ['Coin haut gauche', 'tl'], ['En haut et centré', 'tc'], ['Coin haut droite', 'tr'],
-                                        ['Centré gauche', 'cl'], ['Centré et centré', 'cc'], ['Centré droite', 'cr'],
+                                        ['Centré gauche', 'ml'], ['Centré et centré', 'mc'], ['Centré droite', 'mr'],
                                         ['Coin bas gauche', 'bl'], ['En bas et centré', 'bc'], ['Coin bas droite', 'br']],
                                     //style: "display:inline-block;margin-top:14px;",
                                     align: "center",
