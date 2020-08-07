@@ -14,6 +14,7 @@ use App\Repository\PageTypeContactRepository;
 use App\Repository\PageTypePresentationRepository;
 use App\Repository\SiteRepository;
 use App\Repository\PageRepository;
+use App\Repository\TemplateRepository;
 
 /**
  * Class AddSupportCommandHandler
@@ -26,6 +27,9 @@ class AddPageCommandHandler
 
     /** @var PageRepository */
     private $pageRepository;
+
+    /** @var TemplateRepository */
+    private $templateRepository;
 
     /** @var PageTypePresentationRepository $pageTypePresentationRepository */
     private $pageTypePresentationRepository;
@@ -40,14 +44,16 @@ class AddPageCommandHandler
      * EditGlobalParametersCommandHandler constructor.
      * @param SiteRepository $siteRepository
      * @param PageRepository $pageRepository
+     * @param TemplateRepository $templateRepository
      * @param PageTypePresentationRepository $pageTypePresentationRepository
      * @param PageTypeContactRepository $pageTypeContactRepository
      * @param PageTypeBlogRepository $pageTypeBlogRepository
      */
-    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, PageTypeBlogRepository $pageTypeBlogRepository)
+    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, TemplateRepository $templateRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, PageTypeBlogRepository $pageTypeBlogRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->pageRepository = $pageRepository;
+        $this->templateRepository = $templateRepository;
         $this->pageTypePresentationRepository = $pageTypePresentationRepository;
         $this->pageTypeContactRepository =  $pageTypeContactRepository;
         $this->pageTypeBlogRepository = $pageTypeBlogRepository;
@@ -77,6 +83,9 @@ class AddPageCommandHandler
             $this->pageTypeContactRepository->save($pageTypeContact);
         } else if ($command->type->getId() == 4) {
             $pageTypeBlog = new PageTypeBlog($page);
+            // On met un template par défaut
+            $defaultTemplate = $this->templateRepository->get(7);
+            $pageTypeBlog->setTemplate($defaultTemplate);
             $this->pageTypeBlogRepository->save($pageTypeBlog);
         }
 

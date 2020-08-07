@@ -67,10 +67,11 @@
         :root {
             --colorTheme: {{ site.colorTheme }};
             --textColor: {{ site.textColor }};
-            --headerTextColor: {{ site.lightTheme ? '#333' : 'white'  }};
-            --headerBackgroundColor: {{ site.lightTheme ? 'white' : '#333'  }};
-            --footerTextColor: {{ site.lightTheme ? '#333' : 'white'  }};
-            --footerBackgroundColor: {{ site.lightTheme ? 'white' : '#333'  }};
+            --headerTextColor: {{ site.menuTheme == 1 ? '#333' : 'white' }};
+            --headerTextColorBandeauDisplayed: {{ site.menuTheme == 1 or site.menuTheme == 3 ? '#333' : 'white' }};
+            --headerBackgroundColor: {{ site.menuTheme == 1 or site.menuTheme == 3 ? 'white' : '#333' }};
+            --footerTextColor: {{ site.menuTheme == 1 or site.menuTheme == 3 ? '#333' : 'white' }};
+            --footerBackgroundColor: {{ site.menuTheme == 1 or site.menuTheme == 3 ? 'white' : '#333' }};
         }
     </style>
     <style type="text/css">
@@ -145,9 +146,9 @@
 <body class="{{ site.displayBoxed == true ? 'body' : '' }}">
 
 <!--Header-->
-<header id="header" class="header-effect-reveal"
+<header id="header" class="header-effect-reveal {{ site.menuTheme >= 3 ? 'header-transparent' : '' }}"
         data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyHeaderContainerHeight': 70, 'stickyStartAt': 120}">
-    <div class="header-body no-shadow">
+    <div class="{{ site.menuTheme >= 3 ? 'no-background' : 'with-background' }} header-body no-shadow">
         <div class="header-container container">
             {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
             <div class="header-row">

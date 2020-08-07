@@ -63,6 +63,7 @@ class EditPageTypeBlogCommandHandler
         $page->setSeoDescription($command->seoDescription);
         $this->pageRepository->save($page);
         $pageTypeBlog->setContent($command->content);
+        $pageTypeBlog->setTemplate($command->template);
         $this->pageTypeBlogRepository->save($pageTypeBlog);
     }
 

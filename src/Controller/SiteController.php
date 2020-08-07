@@ -164,15 +164,18 @@ class SiteController extends AbstractController
                 // Page de type Blog
                 $success = false;
                 $posts = $this->postRepository->getByPageId($page->getId());
+                $limitPagination = 10;
+                if($page->getPagesTypeBlog()->getTemplate()->getId() == 8) {
+                    $limitPagination = 12;
+                }
 
                 $pagination = $paginator->paginate(
                     $posts,
-                    $request->query->getInt('page', 1),
-                    10
+                    $request->query->getInt('page', 1), $limitPagination
                 );
 
 
-                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
+                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index-'.$page->getPagesTypeBlog()->getTemplate()->getId().'.html.twig', [
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,

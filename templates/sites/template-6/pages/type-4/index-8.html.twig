@@ -1,0 +1,88 @@
+{% extends 'sites/template-' ~ site.template.id ~ '/base.html.twig' %}
+
+{% block title %}{{site.name}} | {{ page.seoTitle }}{% endblock %}
+{% block description %}{{ page.seoDescription }}{% endblock %}
+
+{% block blogActive %}active{% endblock %}
+
+{% block body %}
+    <style>
+        .masonry-items .v-blog-item .v-blog-masonry-item,
+        .masonry-items .v-portfolio-item-info { background: #ffffff; }
+    </style>
+
+    <div class="container">
+        {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|raw }}
+        <div class="row">
+            <div class="v-blog-widget col-sm-12">
+                    <div class="v-blog-wrap">
+                        {% if posts|length > 0 %}
+                            {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
+                            <div class="v-blog-items-wrap  v-blog-masonry">
+                                <ul class="v-blog-items row masonry-items clearfix" id="blogGrid">
+                                    {% for post in pagination %}
+                                        {% set param = siteName|merge({'name':page.nameMenuUrl})|merge({'post':post.id})|merge({'postTitle':post.title|clean_url}) %}
+                                        <li class="v-blog-item col-sm-4">
+                                            <div class="v-blog-masonry-item">
+                                                <figure class="animated-overlay overlay-alt">
+                                                    {% if post.image is defined and post.image is not null %}
+                                                        <img src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('post_picture') }}"/>
+                                                    {% endif %}
+                                                    <a href="{{ path('page_blog_detail'|route(app.request.server.get('REQUEST_URI')), param) }}" class="link-to-post"></a>
+                                                    <figcaption>
+                                                        <div class="thumb-info thumb-info-v2"><i class="fa fa-angle-right"></i></div>
+                                                    </figcaption>
+                                                </figure>
+                                                <div class="v-blog-item-info clearfix">
+                                                    <h3>
+                                                        <a href="{{ path('page_blog_detail'|route(app.request.server.get('REQUEST_URI')), param) }}">{{ post.title }}</a>
+                                                    </h3>
+                                                    <div class="v-blog-item-details">
+                                                        Le {{ post.creationDate|date('d/m/Y') }}</div>
+                                                    <div class="excerpt">
+                                                        <p>
+                                                            {{ post.introduction }}
+                                                        </p>
+                                                    </div>
+                                                    <a class="btn v-btn standard white sf-icon-stroke"
+                                                       href="{{ path('page_blog_detail'|route(app.request.server.get('REQUEST_URI')), param) }}" target="_self">
+                                                        <i class="icon-arrow-32"></i><span class="text text-button-blog">Voir la suite</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+
+                                <!--<nav aria-label="...">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item active">
+                                                    <span class="page-link">
+                                                        2
+                                                        <span class="sr-only">(current)</span>
+                                                    </span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>-->
+                            </div>
+                            {% if posts|length > 10 %}
+                                <div class="navigation" style="justify-content: center;">
+                                    {{ knp_pagination_render(pagination) }}
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <div>Aucun article n'a été publié.</div>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

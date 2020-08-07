@@ -226,6 +226,11 @@ class Site
     private $lightTheme;
 
     /**
+     * @ORM\Column(type="integer", options={"default":"1"})
+     */
+    private $menuTheme;
+
+    /**
      * @ORM\Column(type="string", length=65, nullable=true)
      */
     private $stripeSubscriptionId;
@@ -948,5 +953,21 @@ class Site
     public function setDisplayBoxed($displayBoxed)
     {
         $this->displayBoxed = $displayBoxed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuTheme()
+    {
+        return $this->menuTheme;
+    }
+
+    /**
+     * @param mixed $menuTheme
+     */
+    public function setMenuTheme($menuTheme)
+    {
+        $this->menuTheme = $menuTheme;
     }
 }

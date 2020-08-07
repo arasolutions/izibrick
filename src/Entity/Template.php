@@ -37,6 +37,11 @@ class Template
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $urlExample;
 
     /**
@@ -48,6 +53,11 @@ class Template
      * @ORM\OneToMany(targetEntity="App\Entity\Site", mappedBy="template")
      */
     private $sites;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Site", mappedBy="template")
+     */
+    private $pageTypeBlogs;
 
     /**
      * @ORM\Column(name="public", type="boolean", options={"default":true})
@@ -187,5 +197,29 @@ class Template
         $this->defaultFont = $defaultFont;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return Collection|PageTypeBlog[]
+     */
+    public function getPageTypeBlogs(): Collection
+    {
+        return $this->pageTypeBlogs;
     }
 }

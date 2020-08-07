@@ -75,17 +75,12 @@ class EditGlobalParametersType extends AbstractType
                 'label' => 'Lien compte Instagram',
                 'required' => false
             ])
-            ->add('template', EntityType::class, [
-                'required' => true,
-                'class' => Template::class,
-                'choice_label' => 'name'
-            ])
             ->add('nameInLogo', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Le nom est visible dans le logo'
             ])
             ->add('colorTheme', ColorPickerType::class, [
-                'label' => 'Couleur principale du thème',
+                'label' => 'Couleur principale du site',
                 'constraints' => array(
                     new Regex([
                             'pattern' => '/\#(([1-9A-F]){6})/i',
@@ -94,11 +89,13 @@ class EditGlobalParametersType extends AbstractType
                     )
                 )
             ])
-            ->add('lightTheme', ChoiceType::class, [
-                'label' => 'Version claire ou sombre',
+            ->add('menuTheme', ChoiceType::class, [
+                'label' => 'Thème du menu',
                 'choices' => [
-                    'Clair' => true,
-                    'Sombre' => false,
+                    'Clair' => 1,
+                    'Sombre' => 2,
+                    'Transparent et clair' => 3,
+                    'Transparent et sombre' => 4,
                 ]
 
             ])
@@ -121,7 +118,7 @@ class EditGlobalParametersType extends AbstractType
                 'choice_label' => 'nameMenu'
             ])
             ->add('displayBoxed', ChoiceType::class, [
-                'label' => 'Affichage sur toute la largeur de l\'écran',
+                'label' => 'Affichage du contenu du site sur toute la largeur de l\'écran',
                 'required' => true,
                 'choices' => [
                     'Oui' => false,

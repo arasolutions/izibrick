@@ -18,7 +18,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     /*background: #FFF;*/
-    background: var(--headerBackgroundColor) !important;
+    /*background: var(--headerBackgroundColor) !important;*/
     -webkit-transition: min-height 0.3s ease;
     transition: min-height 0.3s ease;
     width: 100%;
@@ -566,7 +566,8 @@ html #header.header-transparent .header-body:before {
     right: 0;
     top: 0;
     bottom: 0;
-    background: #FFF;
+    /*background: #FFF;*/
+    background: var(--headerBackgroundColor) !important;
     opacity: 0;
     -webkit-transition: opacity 0.3s ease;
     transition: opacity 0.3s ease;
@@ -1072,7 +1073,7 @@ html:not(.sticky-header-active) #header.header-transparent-sticky-deactive .head
         line-height: 1.2;
         padding: 1.93333em 0.9em;
         /*color: var(--headerTextColor);*/
-        color: var(--headerTextColor);
+        color: var(--headerTextColorBandeauDisplayed);
         /*font-family: "Museo500Regular", Arial, Helvetica, Tahoma, sans-serif;
         font-family: "source_sans_proregular";*/
     }

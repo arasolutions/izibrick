@@ -125,6 +125,7 @@ class EditGlobalParametersCommandHandler
             $site->setFavicon('');
             $site->setFaviconFile($command->getFavicon());
         }
+        $site->setMenuTheme($command->getMenuTheme());
         $this->siteRepository->save($site);
     }
 
