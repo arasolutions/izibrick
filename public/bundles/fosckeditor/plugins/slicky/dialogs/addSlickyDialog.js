@@ -1,6 +1,6 @@
 CKEDITOR.dialog.add('addSlickyDialog', function (editor) {
         return {
-            title: 'Propriétés du carousel',
+            title: 'Propriétés du carousel d\'image',
             minWidth: 500,
             minHeight: 200,
             getModel: function (a) {

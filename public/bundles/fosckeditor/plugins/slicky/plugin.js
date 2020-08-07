@@ -39,7 +39,7 @@ CKEDITOR.plugins.add('slicky', {
         };
 
         var removeSlickyCommand = {
-            label: 'Supprimer le carousel',
+            label: 'Supprimer le carousel d\'image',
             command: 'removeSlicky',
             group: 'slicky',
             icon: "plugins/slicky/icons/trash.png",
@@ -110,5 +110,5 @@ CKEDITOR.plugins.add('slicky', {
 });
 
 isSlickyParent = function (element) {
-    return element.hasClass('carousel') && element.hasClass('slide');
+    return element.hasClass('cke_slicky');
 }
