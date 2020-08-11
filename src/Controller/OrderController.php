@@ -126,6 +126,10 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      */
     public function orderProduct($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('order_login');
+        }
+
         $productChosen = $this->productRepository->findOneBy(array('id' => $product));
 
         $order = new AddSiteCommand();
@@ -157,23 +161,16 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 $form->get('name')->clearErrors();
             } else {
                 if ($form->isValid()) {
-                    if (empty($form->get('template')->getData())) {
-                        $form->get('template')->addError(new FormError('Veuillez choisir un thème'));
-                    } else {
-                        // Nouveau site
-                        $site = $addSiteCommandHandler->handle($order);
-                        return $this->redirectToRoute('order_options', array('siteId' => $site->getId()));
-                    }
+                    // Nouveau site
+                    $site = $addSiteCommandHandler->handle($order, $this->getUser());
+                    return $this->redirectToRoute('dashboard');
                 }
             }
         }
 
-        $templates = $this->templateRepository->findBy(array('active' => 1));
-
         return $this->render('bo/order/order.html.twig', [
             'form' => $form->createView(),
             'product' => $productChosen,
-            'templates' => $templates,
             'newPrice' => $newPrice,
             'codePromo' => $codePromo,
             'trialDays' => $trialDays,
@@ -339,11 +336,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
     }
 
     /**
-     * @Route("/order/login", name="order_login")
+     * @Route("/order/login2", name="order_login2")
      * @param Request $request
      * @throws \Stripe\Exception\ApiErrorException
      */
-    public function orderLogin(Request $request)
+    public function orderLogin2(Request $request)
     {
         /** @var RegistrationCommand $command */
         $command = new RegistrationCommand($request->get('siteId'));
@@ -402,5 +399,65 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
         /** @var User $user */
         $user = $this->userRepository->get($userId);
         return $this->render('bo/order/payment-completed.html.twig', array('newUser' => !$user->isEnabled()));
+    }
+
+    /**
+     * @Route("/order/login", name="order_login")
+     * @Route("/order/login/product/{product}", name="order_login_product")
+     * @param Request $request
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    public function orderLogin($product, Request $request)
+    {
+        $productChosen = $this->productRepository->findOneBy(array('id' => $product));
+        $order = new AddSiteCommand();
+        $order->setProductId($productChosen->getId());
+
+        /** @var RegistrationCommand $command */
+        $command = new RegistrationCommand();
+        $formLogin = $this->createForm(OrderLoginType::class, $command);
+
+        $formLogin->handleRequest($request);
+        $userFound = $this->userManager->findUserByEmail($command->getUsername());
+
+        //$site = $this->siteRepository->getById($command->getSiteId());
+
+        if ($userFound != null) {
+            $encoder = $this->encoderFactory->getEncoder($userFound);
+            $passwordValid = $encoder->isPasswordValid($userFound->getPassword(), $command->getPlainPassword(), $userFound->getSalt());
+            if (!$passwordValid) {
+                // Mot de passe invalide
+                $formLogin->addError(new FormError('Mauvais mot de passe'));
+            } else {
+                if (!$userFound->isEnabled()) {
+                    $formLogin->addError(new FormError('Veuillez activer votre compte.'));
+                } else {
+                    /** @var User $userRepo */
+                    $userRepo = $this->userRepository->get($userFound->getId());
+                    //$invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
+
+                    // Affectation du site au user
+                    //$userSite = new UserSite($userFound, $site);
+                    //$userSite = $this->userSiteRepository->save($userSite);
+
+                    /*if ($invoice != null) {
+                        return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
+                    }*/
+                    return $this->redirectToRoute('dashboard');
+                }
+            }
+        } else {
+            // User non trouvé
+            $formLogin->addError(new FormError('Compte inconnu'));
+        }
+
+        $formRegister = $this->createForm(RegistrationType::class, $command);
+
+        $formRegister->handleRequest($request);
+
+        return $this->render('@FOSUser/Registration/register.html.twig', array(
+            'form' => $formRegister->createView(),
+            'formLogin' => $formLogin->createView()
+        ));
     }
 }

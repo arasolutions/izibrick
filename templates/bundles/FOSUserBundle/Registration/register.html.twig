@@ -6,26 +6,24 @@
 
 {% block body %}
     <section class="g-bg-izibrick-light-v5">
-        <div class="container g-py-100">
+        <div class="container g-py-50">
             <div class="row justify-content-center">
-                <div class="col-sm-12 col-lg-10">
-                    <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
-                        {% include 'bo/order/wizard.html.twig' with {'step': 4} %}
-
+                <div class="col-sm-12 col-lg-12">
+                    <div class="u-shadow-v21 g-bg-white rounded">
                         <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
                             <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
                                  role="tabpanel">
 
                                 <div id="wizard-tab1" class="tab-pane">
 
-                                    <div class="row justify-content-center align-items-center no-gutters mt20">
+                                    <div class="row justify-content-center align-items-center no-gutters">
                                         <div class="col-lg-5 g-bg-teal g-rounded-left-5--lg-up">
                                             <div class="g-pa-50">
                                                 <!-- Form -->
                                                 {{ form_start(formLogin, {'method': 'post', 'action': path('order_login'), 'attr': {'class': 'g-py-15'}}) }}
-                                                <form class="g-py-15" action="{{ path("order_login") }}"
-                                                      method="post">
-                                                    <h2 class="h3 g-color-white mb-4">J'ai un compte</h2>
+                                                <!--<form class="g-py-15" action="{{ path("order_login") }}"
+                                                      method="post">-->
+                                                    <h2 class="h3 g-color-white mb-4 text-center">J'ai déjà un compte</h2>
                                                     {% if formLogin.vars.errors|length %}
                                                         <div class="alert-error">
                                                             {{ form_errors(formLogin) }}
@@ -78,7 +76,7 @@
                                             <div class="g-pa-50">
                                                 <!-- Form -->
                                                 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'g-py-15'}}) }}
-                                                <h2 class="h3 g-color-black mb-4">Je crée mon compte</h2>
+                                                <h2 class="h3 g-color-black mb-4 text-center">Je crée mon compte</h2>
                                                 {% if error is defined and error is not null %}
                                                     <div class="alert alert-danger">
                                                         {{ error }}<br/>

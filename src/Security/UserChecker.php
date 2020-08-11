@@ -63,10 +63,10 @@ class UserChecker implements UserCheckerInterface
 
         // IZIBRICK
         $sites = $user->getSites();
-        if (sizeof($sites) == 0) {
+        /*if (sizeof($sites) == 0) {
             $ex =  new AuthenticationException('Vous n\'avez aucun site actif.');
             throw $ex;
-        }
+        }*/
     }
 
     /**

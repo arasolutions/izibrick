@@ -19,9 +19,8 @@ class RegistrationCommand
      * RegistrationCommand constructor.
      * @param $siteId
      */
-    public function __construct($siteId)
+    public function __construct()
     {
-        $this->siteId = $siteId;
     }
 
 

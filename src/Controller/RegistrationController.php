@@ -104,7 +104,7 @@ class RegistrationController extends BaseController
         /** @var $dispatcher EventDispatcherInterface */
         $eventDispatcher = $this->get('event_dispatcher');
 
-        $command = new RegistrationCommand($request->get('siteId'));
+        $command = new RegistrationCommand();
 
         if ($this->getUser() != null) {
             // Affectation du site au user
@@ -156,19 +156,9 @@ class RegistrationController extends BaseController
                 $userManager->updateUser($user);
 
                 // Affectation du site au user
-                $site = $this->siteRepository->getById($command->getSiteId());
+                /*$site = $this->siteRepository->getById($command->getSiteId());
                 $userSite = new UserSite($user, $site);
-                $userSite = $this->userSiteRepository->save($userSite);
-
-                /** @var Contact $contact */
-                $contact = $this->contactRepository->getBySiteId($command->getSiteId());
-                $contact->setEmail($user->getEmailCanonical());
-                $this->contactRepository->save($contact);
-
-                /** @var Quote $quote */
-                $quote = $this->quoteRepository->getBySiteId($command->getSiteId());
-                $quote->setEmail($user->getEmailCanonical());
-                $this->quoteRepository->save($quote);
+                $userSite = $this->userSiteRepository->save($userSite);*/
 
                 if (null === $response = $event->getResponse()) {
                     //$url = $this->generateUrl('fos_user_registration_confirmed');
@@ -181,11 +171,12 @@ class RegistrationController extends BaseController
 
                 // Enregistrement du compte dans Stripe
                 /** @var User $userRepo */
-                $userRepo = $this->userRepository->get($user->getId());
+                /*$userRepo = $this->userRepository->get($user->getId());
                 $invoice = $this->addInvoiceCommandHandler->handle($userRepo, $site);
                 if ($invoice != null) {
                     return $this->redirectToRoute('order_billing', array('siteId' => $site->getId(), 'userId' => $userRepo->getId()));
-                }
+                }*/
+                return $this->render('@FOSUser/Registration/check_email.html.twig');
             }
 
             $event = new FormEvent($formRegister, $request);

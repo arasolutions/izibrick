@@ -10,33 +10,21 @@
 
 {% block body %}
     <section class="g-bg-izibrick-light-v5">
-        <div class="container g-py-100">
+        <div class="container g-py-50">
             <div class="row justify-content-center">
                 <div class="col-sm-12 col-lg-10">
-                    <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
-                        {% include 'bo/order/wizard.html.twig' with {'step': step} %}
-
+                    <div class="u-shadow-v21 g-bg-white rounded g-py-20 g-px-30">
                         <div id="nav-1-2-default-hor-left-big-icons" class="tab-content">
 
                             <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
                                  role="tabpanel">
-
-                                <div class="media mt20 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover g-bg-gray-light-v5 g-rounded-4 g-transition-0_3 g-pa-20">
-                                    <div class="media-body">
-                                        <blockquote class="lead g-mb-15">Si vous bénéficiez d'un code promotionnel,
-                                            veuillez le renseigner et cliquez sur le bouton "OK !".<br/>
-                                            Renseignez les informations de votre site.
-                                        </blockquote>
-                                    </div>
-                                </div>
-
                                 <div id="wizard-tab1" class="tab-pane">
                                     {{ form_start(form, {'attr':{'method':'post', 'action': path('order_product', {'product': product.id }),'class':'form-horizontal'}}) }}
                                     <div class="row col-sm-12 text-center mt20">
                                         <div class="col-sm-6 text-bold bandeau-blue">Offre {{ product.name }}</div>
                                         {% if newPrice == 0 and free == false %}
                                             <div class="col-sm-6 bandeau-white">
-                                                A partir de {{ product.price | number_format(2,',', ' ') }} €/mois
+                                               {{ product.price | number_format(2,',', ' ') }} €/mois
                                                 {% if product.trialDays > 0 %}
                                                     <br/>
                                                     {{ product.trialDays }} jours d'essai gratuit
@@ -44,7 +32,7 @@
                                             </div>
                                         {% elseif free == false %}
                                             <div class="col-sm-6 bandeau-white">
-                                                A partir de <span
+                                               <span
                                                         class="old-price">{{ product.price | number_format(2,',', ' ') }}</span>
                                                 <span
                                                         class="new-price">{{ newPrice | number_format(2,',', ' ') }}</span>
@@ -65,31 +53,11 @@
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <hr class="g-brd-gray-light-v4 g-mx-minus-30">
-                                    {% if not codePromo %}
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <div class="input-group mar-btm">
-                                                    {{ form_widget(form.codePromo, {'attr':{'class':'form-control', 'placeholder':'Code promotion'}}) }}
-                                                    <span class="input-group-btn ml20">
-                                                        <button name="checkCodePromotion" type="submit"
-                                                                class="btn btn-blue btn-lg" value="1">OK !</button>
-                                                    </span>
-                                                </div>
-                                                <div class="form-errors">
-                                                    {{ form_errors(form.codePromo) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="g-brd-gray-light-v4 g-mx-minus-30">
-                                    {% else %}
-                                        {{ form_widget(form.codePromo, {'attr':{'class':'d-none'}}) }}
-                                    {% endif %}
                                     <div class="tab-pane fade show active" id="nav-1-2-default-hor-left-big-icons--1"
                                          role="tabpanel">
                                         <div id="wizard-tab1" class="tab-pane mt-4">
                                             <div class="row col-sm-12">
-                                                <h2 class="pull-left text-3x">Étape 2 : choix du thème</h2>
+                                                <h2 class="pull-left text-3x">Votre site</h2>
                                             </div>
                                             {{ form_start(form, {'attr':{'method':'post', 'action': path('order_index', {'product': product.id }),'class':'form-horizontal'}}) }}
                                             <div class="row">
@@ -117,56 +85,40 @@
                                             </div>
                                         </div>
                                         <hr class="g-brd-gray-light-v4 g-mx-minus-30">
-
-                                        <div class="col-sm-12 form-group">
-                                            {{ form_label(form.template, null, {'label_attr':{'class':'g-mb-10'}}) }}
-                                            <span class="form-errors">{{ form_errors(form.template) }}</span>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="cbp text-center" data-controls="#filterControls"
-                                                 data-animation="quicksand"
-                                                 data-x-gap="10" data-y-gap="10" data-media-queries='[
-                                                 {"width": 1500, "cols": 6},
-                                                 {"width": 1100, "cols": 6},
-                                                 {"width": 800, "cols": 4},
-                                                 {"width": 480, "cols": 3},
-                                                 {"width": 300, "cols": 2},
-                                                 {"width": 0, "cols": 1}
-                                               ]'>
-                                                <!-- Cube Portfolio Blocks - Item -->
-                                                {% for template in templates %}
-                                                    <div class="cbp-item identity design"
-                                                         data-id="{{ template.id }}">
-                                                        <div class="u-block-hover g-parent">
-                                                            <img class="img-fluid g-transform-scale-1_1--parent-hover g-transition-0_5 g-transition--ease-in-out"
-                                                                 src="{{ asset('templates/template-' ~ template.id ~ '/sticker.png') }}"
-                                                                 alt="Image description">
-                                                            <div class="d-flex w-100 h-100 g-bg-black-opacity-0_6 opacity-0 g-opacity-1--parent-hover g-pos-abs g-top-0 g-left-0 g-transition-0_3 g-transition--ease-in u-block-hover__additional--fade u-block-hover__additional--fade-in g-pa-15">
-                                                                <ul class="align-items-end flex-column list-inline mt-auto ml-auto mb-0">
-                                                                    <li class="list-inline-item">
-                                                                        <a class="u-icon-v2 u-icon-size--xs g-brd-white g-color-black g-bg-white rounded-circle"
-                                                                           href="{{ template.urlExample }}"
-                                                                           target="_blank">
-                                                                            <i class="et-icon-video u-line-icon-pro"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="g-bg-white text-center g-pa-15">
-                                                            <h3 class="h6 g-font-weight-700 mb-1">{{ template.name }}</h3>
-                                                            <p class="g-font-size-13 mb-0">{{ template.description }}</p>
-                                                        </div>
+                                        {% if not codePromo %}
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="input-group mar-btm">
+                                                        {{ form_widget(form.codePromo, {'attr':{'class':'form-control', 'placeholder':'Code promotion'}}) }}
+                                                        <span class="input-group-btn ml20">
+                                                        <button name="checkCodePromotion" type="submit"
+                                                                class="btn btn-blue btn-lg" value="1">OK !</button>
+                                                    </span>
                                                     </div>
-                                                {% endfor %}
+                                                    <div class="form-errors">
+                                                        {{ form_errors(form.codePromo) }}
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <hr class="g-brd-gray-light-v4 g-mx-minus-30">
+                                        {% else %}
+                                            {{ form_widget(form.codePromo, {'attr':{'class':'d-none'}}) }}
+                                        {% endif %}
                                         <div class="col-sm-12 form-group text-right">
                                             <button type="submit"
                                                     class="btn btn-md u-btn-primary rounded g-py-13 g-px-25">Suivant
                                             </button>
                                         </div>
                                         {{ form_end(form) }}
+                                    </div>
+                                </div>
+
+                                <div class="media mt20 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover g-bg-gray-light-v5 g-rounded-4 g-transition-0_3 g-pa-20">
+                                    <div class="media-body">
+                                        <blockquote class="lead g-mb-15">Si vous bénéficiez d'un code promotionnel,
+                                            veuillez le renseigner et cliquez sur le bouton "OK !".<br/>
+                                            Renseignez les informations de votre site.
+                                        </blockquote>
                                     </div>
                                 </div>
                             </div>

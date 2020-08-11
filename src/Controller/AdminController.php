@@ -168,8 +168,9 @@ class AdminController extends AbstractController
         if (!isset($_SESSION[Constants::SESSION_SITE_ID])) {
             $sites = $user->getSites();
             if (sizeof($sites) == 0) {
-                $request->getSession()->set(Security::AUTHENTICATION_ERROR, new AuthenticationException('Vous n\'avez aucun site actif.'));
-                return $this->redirectToRoute('fos_user_security_login');
+                //$request->getSession()->set(Security::AUTHENTICATION_ERROR, new AuthenticationException('Vous n\'avez aucun site actif.'));
+                //return $this->redirectToRoute('fos_user_security_login');
+                return $this->redirectToRoute('choose-site');
             }
             if (sizeof($sites) > 1) {
                 // Retour au choix d'un site
@@ -183,6 +184,13 @@ class AdminController extends AbstractController
         }
 
         $userSite = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+
+        if(count($userSite->getPages()) === 0) {
+            return $this->render('admin/dashboard/template.html.twig', [
+                'site' => $userSite,
+                'user' => $user
+            ]);
+        }
 
         // Référencement
         $referencementTitle = 0;

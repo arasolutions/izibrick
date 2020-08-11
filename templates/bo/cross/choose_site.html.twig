@@ -41,6 +41,15 @@
                                     <!-- End Listing - Agents -->
                                 </div>
                             {% endfor %}
+                            {% if sites is empty %}
+                                <div class="col-md-12 g-mb-30 text-center">
+                                    <p class="text-center">Pour vous connectez à la console d'administration, vous devez créer un site.</p>
+                                    <a class="btn u-btn-primary g-color-white--hover g-bg-secondary-dark-light-v1--hover g-font-weight-600 g-font-size-12 text-uppercase rounded-0 g-px-25 g-py-15"
+                                       href="{{ path('price') }}">
+                                        Créer un site
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <!-- End Users -->

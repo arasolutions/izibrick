@@ -12,6 +12,8 @@ use App\Entity\Pricing;
 use App\Entity\Quote;
 use App\Entity\Site;
 use App\Entity\User;
+use App\Entity\UserSite;
+use App\Enum\SiteStatus;
 use App\Enum\Constants;
 use App\Helper\ColorHelper;
 use App\Helper\SiteHelper;
@@ -30,6 +32,7 @@ use App\Repository\ProductRepository;
 use App\Repository\QuoteRepository;
 use App\Repository\SiteRepository;
 use App\Repository\TemplateRepository;
+use App\Repository\UserSiteRepository;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mime\MimeTypes;
@@ -46,6 +49,9 @@ class AddSiteCommandHandler
 {
     /** @var SiteRepository */
     private $siteRepository;
+
+    /** @var UserSiteRepository */
+    private $userSiteRepository;
 
     /** @var ProductRepository */
     private $productRepository;
@@ -83,6 +89,7 @@ class AddSiteCommandHandler
     /**
      * AddSiteCommandHandler constructor.
      * @param SiteRepository $siteRepository
+     * @param UserSiteRepository $userSiteRepository
      * @param ProductRepository $productRepository
      * @param TemplateRepository $templateRepository
      * @param HomeRepository $homeRepository
@@ -93,9 +100,10 @@ class AddSiteCommandHandler
      * @param QuoteRepository $quoteRepository
      * @param CodePromotionRepository $codePromotionRepository
      */
-    public function __construct(SiteRepository $siteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository, PricingRepository $pricingRepository, FontRepository $fontRepository)
+    public function __construct(SiteRepository $siteRepository, UserSiteRepository $userSiteRepository, ProductRepository $productRepository, TemplateRepository $templateRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, ContactRepository $contactRepository, QuoteRepository $quoteRepository, CodePromotionRepository $codePromotionRepository, PricingRepository $pricingRepository, FontRepository $fontRepository)
     {
         $this->siteRepository = $siteRepository;
+        $this->userSiteRepository = $userSiteRepository;
         $this->productRepository = $productRepository;
         $this->templateRepository = $templateRepository;
         $this->homeRepository = $homeRepository;
@@ -109,7 +117,7 @@ class AddSiteCommandHandler
     }
 
 
-    public function handle(AddSiteCommand $command)
+    public function handle(AddSiteCommand $command, $user)
     {
         $site = new Site();
         $site->setProduct($this->productRepository->findOneBy(array('id' => $command->getProductId())));
@@ -124,7 +132,7 @@ class AddSiteCommandHandler
             $site->setTextColor("#FFFFFF");
         }
 
-        $templateChosen = $this->templateRepository->findOneBy(array('id' => $command->getTemplate()));
+        $templateChosen = $this->templateRepository->findOneBy(array('id' => 6));
         $site->setTemplate($templateChosen);
         if ($command->getCodePromo()) {
             $codePromo = $this->codePromotionRepository->getByName($command->getCodePromo(), $command->getProductId());
@@ -133,6 +141,7 @@ class AddSiteCommandHandler
             }
         }
 
+        $site->setMenuTheme(1);
         $site->setFontSize(13);
         $site->setFont($templateChosen->getDefaultFont());
         $site->setDisplayBoxed(false);
@@ -178,39 +187,12 @@ class AddSiteCommandHandler
         // Gestion du nom interne
         $internalName = SiteHelper::generateInternalName($site);
         $site->setInternalName($site->getId() . '-' . $internalName);
+        $site->setStatus(SiteStatus::ACTIF['name']);
         $site = $this->siteRepository->save($site);
 
-        // Création de la page Home
-        $home = new Home($site);
-        $home->setSeoTitle('Accueil');
-        $this->homeRepository->save($home);
-
-        // Création de la page Presentation
-        $presentation = new Presentation($site);
-        $presentation->setSeoTitle('Présentation');
-        $this->presentationRepository->save($presentation);
-
-        // Création de la page Blog
-        $blog = new Blog($site);
-        $blog->setSeoTitle('Blog');
-        $this->blogRepository->save($blog);
-
-        // Création de la page Tarif
-        $pricing = new Pricing($site);
-        $pricing->setSeoTitle('Tarifs');
-        $pricing->setDisplay(true);
-        $this->pricingRepository->save($pricing);
-
-        // Création de la page Devis
-        $quote = new Quote($site);
-        $quote->setSeoTitle('Devis');
-        $quote->setDisplay(true);
-        $this->quoteRepository->save($quote);
-
-        // Création de la page Contact
-        $contact = new Contact($site);
-        $contact->setSeoTitle('Contact');
-        $this->contactRepository->save($contact);
+        // Affectation du site au user
+        $userSite = new UserSite($user, $site);
+        $userSite = $this->userSiteRepository->save($userSite);
 
         return $site;
     }
