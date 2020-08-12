@@ -32,7 +32,6 @@ class StripeHelper
             'name' => $name,
             'description' => $description,
             'email' => $email,
-            'currency' => 'eur',
             'preferred_locales' => ['fr'],
 
         ]);
