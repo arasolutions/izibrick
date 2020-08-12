@@ -19,14 +19,15 @@
                     <div class="panel-body text-center">
                         <div class="pad-ver mar-top text-main"><i class="demo-pli-data-settings icon-4x"></i></div>
                         <p class="text-lg text-semibold mar-no text-main">Vitrine</p>
-                        <p class="text-muted">4 pages</p>
+                        <p class="text-muted">5 pages</p>
                         <p class="text-left">Template de site classique avec les pages suivantes :<br/><br/>
                         - Accueil<br/>
                         - Présentation<br/>
                         - Blog<br/>
+                        - Tarif<br/>
                         - Contact</p>
                         <a href="" class="btn btn-success mar-ver">Voir un site vitrine</a>
-                        <button class="btn btn-primary">Générer les pages</button>
+                        <a href="{{ path('bo-dashboard-create-template', {'id':1}) }}" class="btn btn-primary">Générer les pages</a>
                     </div>
                 </div>
             </div>
@@ -40,9 +41,9 @@
                             - Accueil<br/>
                             - Présentation<br/>
                             - Blog<br/>
-                            - Contact</p>
+                            - Contact<br/><br/></p>
                         <a href="" class="btn btn-success mar-ver">Voir un site blog</a>
-                        <button class="btn btn-primary">Générer les pages</button>
+                        <a href="{{ path('bo-dashboard-create-template', {'id':2}) }}" class="btn btn-primary">Générer les pages</a>
                     </div>
                 </div>
             </div>

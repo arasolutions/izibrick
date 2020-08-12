@@ -182,12 +182,6 @@
                             Enregistrer
                         </button>
                     </div>
-
-                    <div class="col-sm-12 mt20">
-                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-danger pull-right mr10" type="button">
-                            Supprimer la page
-                        </a>
-                    </div>
                 </div>
             </div>
             <div id="referencement" class="tab-pane fade">
@@ -223,4 +217,32 @@
         </div>
     </div>
     {{ form_end(form) }}
+    <div class="row" style="text-align: right;">
+        <button data-target="#demo-default-modal" data-toggle="modal" class="btn btn-danger mt20 mr10 mb10" style="text-align: right;">Supprimer la page</button>
+    </div>
+    <div class="modal fade" id="demo-default-modal" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title">Supprimer la page</h4>
+                </div>
+
+                <!--Modal body-->
+                <div class="modal-body">
+                    <p>Voulez-vous vraiment supprimer la page ?</p>
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Annuler</button>
+                    <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert" class="btn btn-primary" type="button">
+                        Oui
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

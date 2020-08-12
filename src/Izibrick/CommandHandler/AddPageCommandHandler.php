@@ -88,6 +88,10 @@ class AddPageCommandHandler
             $pageTypeBlog->setTemplate($defaultTemplate);
             $this->pageTypeBlogRepository->save($pageTypeBlog);
         }
+        if($site->getDefaultPage() == null) {
+            $site->setDefaultPage($page);
+            $this->siteRepository->save($site);
+        }
 
     }
 

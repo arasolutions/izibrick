@@ -64,6 +64,11 @@ class RemovePageCommandHandler
         if (!$page) {
             throw new \Exception(sprintf('Error - Page not found (id: %d)', $id));
         }
+        // Si c'est la page par défaut du site, on met à null la page par défaut
+        if($site->getDefaultPage() != null && $site->getDefaultPage()->getId() == $page->getId()) {
+            $site->setDefaultPage(null);
+            $this->siteRepository->save($site);
+        }
         if($page->getType() == 2) {
             $pageTypePresentation = $this->pageTypePresentationRepository->getByPageId($id);
             if (!$pageTypePresentation) {

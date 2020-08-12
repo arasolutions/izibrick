@@ -16,6 +16,7 @@ use App\Form\EditPageTypePresentationType;
 use App\Helper\SiteHelper;
 use App\Helper\ApiAnalyticsHelper;
 use App\Izibrick\Command\AddPageCommand;
+use App\Izibrick\Command\AddTemplatePagesCommand;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\CustomPageCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
@@ -27,6 +28,7 @@ use App\Izibrick\Command\PresentationCommand;
 use App\Izibrick\Command\QuoteCommand;
 use App\Izibrick\Command\SeoCommand;
 use App\Izibrick\CommandHandler\AddPageCommandHandler;
+use App\Izibrick\CommandHandler\AddTemplatePagesCommandHandler;
 use App\Izibrick\CommandHandler\EditContactCommandHandler;
 use App\Izibrick\CommandHandler\EditCustomPageCommandHandler;
 use App\Izibrick\CommandHandler\EditGlobalParametersCommandHandler;
@@ -531,6 +533,36 @@ class AdminController extends AbstractController
             'site' => $site,
             'page' => $page,
             'form' => $form->createView(),
+            'success' => $success,
+        ]);
+    }
+
+
+    /**
+     * @Route("/dashboard/template/create/{id}", name="bo-dashboard-create-template")
+     * @param Request $request
+     * @param AddTemplatePagesCommandHandler $addTemplatePagesCommandHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function createTemplate(Request $request, $id = null, AddTemplatePagesCommandHandler $addTemplatePagesCommandHandler)
+    {
+        $site = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $success = false;
+        $pageTypeCommand = new AddTemplatePagesCommand();
+        $pageTypeCommand->choice = $id;
+
+        try {
+            $addTemplatePagesCommandHandler->handle($pageTypeCommand, $site);
+            $success = true;
+        } catch (Exception $e) {
+            $success = true;
+        }
+
+        return $this->redirectToRoute('dashboard', [
             'success' => $success,
         ]);
     }
