@@ -168,8 +168,8 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                     $stripe = new StripeHelper();
                     if ($user->getStripeCustomerId() == null) {
                         $customer = $stripe->createCustomer(
-                            $user->getId() . '-' . $user->getEmail(),
-                            $user->getSocietyName(),
+                            $user->getFirstName() . ' ' . $user->getLastName(),
+                            $site->getId() . '-' . $site->getName(),
                             $user->getEmail()
                         );
                         $user->setStripeCustomerId($customer);
