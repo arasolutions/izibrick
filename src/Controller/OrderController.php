@@ -126,7 +126,8 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
      */
     public function orderProduct($product, Request $request, AddSiteCommandHandler $addSiteCommandHandler)
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('order_login');
         }
 
@@ -163,7 +164,32 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
                 if ($form->isValid()) {
                     // Nouveau site
                     $site = $addSiteCommandHandler->handle($order, $this->getUser());
-                    return $this->redirectToRoute('dashboard');
+                    // Stripe : On Contrôle si l'utilisateur a un comtpe Stripe si non, on le créé
+                    $stripe = new StripeHelper();
+                    if ($user->getStripeCustomerId() == null) {
+                        $customer = $stripe->createCustomer(
+                            $user->getId() . '-' . $user->getEmail(),
+                            $user->getSocietyName(),
+                            $user->getEmail()
+                        );
+                        $user->setStripeCustomerId($customer);
+                        $this->userRepository->save($user);
+                    }
+                    // Stripe : Création de l'abonnement dans Stripe
+                    $trialDays = 0;
+                    if ($user->getLastSite()->getSite()->getCodePromotion()) {
+                        $planTarifaireId = $user->getLastSite()->getSite()->getCodePromotion()->getStripePlanTarifaireId();
+                        $trialDays = $user->getLastSite()->getSite()->getCodePromotion()->getTrialDays();
+                    } elseif ($user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId()) {
+                        $planTarifaireId = $user->getLastSite()->getSite()->getProduct()->getStripePlanTarifaireId();
+                        $trialDays = $user->getLastSite()->getSite()->getProduct()->getTrialDays();
+                    }
+                    // Stripe : Abonnement du user au plan tarifaire
+                    $subscription = $stripe->createSubscription($user->getStripeCustomerId(), $planTarifaireId, $trialDays);
+                    $site->setStripeSubscriptionId($subscription['id']);
+                    if ($subscription) {
+                        return $this->redirectToRoute('dashboard');
+                    }
                 }
             }
         }
@@ -178,7 +204,6 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
             'step' => 2
         ]);
     }
-
 
     /**
      * @Route("/order/{siteId}/options", name="order_options")

@@ -31,7 +31,9 @@ class StripeHelper
         $customer = \Stripe\Customer::create([
             'name' => $name,
             'description' => $description,
-            'email' => $email
+            'email' => $email,
+            'currency' => 'eur',
+            'preferred_locales' => ['fr'],
 
         ]);
 
@@ -256,7 +258,7 @@ class StripeHelper
      * @throws \Stripe\Exception\ApiErrorException
      * Créer un abonnement pour un utilisateur
      */
-    public function createSubscription($customerId, $planTarifaireId)
+    public function createSubscription($customerId, $planTarifaireId, $trialDays = 0)
     {
         $subsription = \Stripe\Subscription::create([
             "customer" => $customerId,
@@ -265,7 +267,8 @@ class StripeHelper
                 [
                     "plan" => $planTarifaireId,
                 ],
-            ]
+            ],
+            'trial_period_days' => $trialDays,
         ]);
 
         return $subsription;
