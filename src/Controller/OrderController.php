@@ -428,15 +428,11 @@ class OrderController extends \FOS\UserBundle\Controller\RegistrationController
 
     /**
      * @Route("/order/login", name="order_login")
-     * @Route("/order/login/product/{product}", name="order_login_product")
      * @param Request $request
      * @throws \Stripe\Exception\ApiErrorException
      */
-    public function orderLogin($product, Request $request)
+    public function orderLogin(Request $request)
     {
-        $productChosen = $this->productRepository->findOneBy(array('id' => $product));
-        $order = new AddSiteCommand();
-        $order->setProductId($productChosen->getId());
 
         /** @var RegistrationCommand $command */
         $command = new RegistrationCommand();
