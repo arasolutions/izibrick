@@ -15,9 +15,10 @@ Paiement BO : Travailler l'ergonomie pour faire plus sécurisé
 
 Il manque :
 WYSIWYG : faire des boutons
+CSS : bandeau - aligner en mode container les titre et description
+WYSIWYG : Bandeau : donner la possibilité de mettre l'opacité ou non
 WYSIWYG : slider : Champs titre et description vides lorsque l'on modifie le caroussel (les champs étaient bien entendu alimentés)
 WYSIWYG : Insérer un fichier dans la page
-WYSIWYG : Bandeau : donner la possibilité de mettre l'opacité ou non
 WYSIWYG : Insertion Map
 
 # Idées :
