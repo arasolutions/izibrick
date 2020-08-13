@@ -14,6 +14,7 @@ Stripe : voir si on peut traduire et mettre le logo ARA sur les factures PDF
 Paiement BO : Travailler l'ergonomie pour faire plus sécurisé
 
 Il manque :
+WYSIWYG : faire des boutons
 WYSIWYG : slider : Champs titre et description vides lorsque l'on modifie le caroussel (les champs étaient bien entendu alimentés)
 WYSIWYG : Insérer un fichier dans la page
 WYSIWYG : Bandeau : donner la possibilité de mettre l'opacité ou non
@@ -29,6 +30,7 @@ WYSIWYG : slider : Mettre une taille en pixel par défaut (j'ai cherché pourquo
 WYSIWYG : plan tarifaire : possibilité de chnager la couleur de fond pour le titre en modification (poissible uniquement à la création)
 WYSIWYG : Ajouter un bouton pour purger (effacer) le contenu
 WYSIWYG : Ajouter un caroussel d'image (pas le meme car il faut pour celui là lui préciser en plus la largeur et qu'il soit intégré dans le container)
+CSS : carousel - aligner en mode container les titre et description
 
 # Offre
 # Premium :

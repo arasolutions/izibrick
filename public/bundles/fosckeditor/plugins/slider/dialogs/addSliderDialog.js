@@ -417,17 +417,23 @@ CKEDITOR.dialog.add('addSliderDialog', function (editor) {
                     divTextItem.addClass('carousel-caption');
                     divTextItem.addClass('d-md-block');
 
+                    var divTextContainer = editor.document.createElement('div');
+                    divTextContainer.addClass('container');
+
                     if (element.find('input').getItem(0).getValue()) {
                         var textItemTitle = editor.document.createElement('h2');
                         textItemTitle.appendText(element.find('input').getItem(0).getValue());
-                        divTextItem.append(textItemTitle);
+                        divTextContainer.append(textItemTitle);
                     }
 
                     if (element.find('input').getItem(1).getValue()) {
                         var textItemP = editor.document.createElement('p');
                         textItemP.appendText(element.find('input').getItem(1).getValue());
-                        divTextItem.append(textItemP);
+                        divTextContainer.append(textItemP);
                     }
+
+                    divTextItem.append(divTextContainer);
+
                     divItem.append(divTextItem);
 
                     divInner.append(divItem);
