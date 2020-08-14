@@ -1,4 +1,10 @@
+body {
+    font-size: var(--fontSize);
+    font-family: var(--fontFamily);
+}
+
 .container img {
+}
     max-width: unset !important;
 }
 

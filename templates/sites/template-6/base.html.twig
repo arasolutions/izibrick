@@ -64,6 +64,11 @@
     <link rel="stylesheet" href="{{ asset('templates/template-' ~ site.template.id ~ '/assets/css/custom.css') }}">
 
     <style type="text/css">
+        @font-face {
+            font-family: '{{ site.font.realFontName }}';
+            src: url({{ asset('templates/fonts/' ~ site.font.path) }})
+        }
+
         :root {
             --colorTheme: {{ site.colorTheme }};
             --textColor: {{ site.textColor }};
@@ -72,14 +77,11 @@
             --headerBackgroundColor: {{ site.menuTheme == 1 or site.menuTheme == 3 ? 'white' : '#333' }};
             --footerTextColor: {{ site.menuTheme == 1 or site.menuTheme == 3 ? '#333' : 'white' }};
             --footerBackgroundColor: {{ site.menuTheme == 1 or site.menuTheme == 3 ? 'white' : '#333' }};
+            --fontSize: {{ site.fontSize }}px;
+            --fontFamily: {{ site.font.realFontName }};
         }
     </style>
     <style type="text/css">
-        :root {
-            --colorTheme: {{ site.colorTheme }};
-            --textColor: {{ site.textColor }};
-        }
-
         a.active {
             color: {{ site.colorTheme }} !important;
         }
@@ -320,9 +322,9 @@
     $(document).ready(function () {
         $('.slicky').slick();
 
-        $('.slicky-item-block').hover(function(){
-           $(this).find('.slicky-item-title').fadeIn('fast');
-        },function(){
+        $('.slicky-item-block').hover(function () {
+            $(this).find('.slicky-item-title').fadeIn('fast');
+        }, function () {
             $(this).find('.slicky-item-title').fadeOut('fast');
         });
     });
