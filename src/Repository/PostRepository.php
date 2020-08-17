@@ -23,4 +23,9 @@ class PostRepository extends AbstractRepository
     {
         return $this->findBy(['page' => $pageId]);
     }
+
+    public function getByPageIdAndOrderByDateCreation($pageId)
+    {
+        return $this->findBy(['page' => $pageId], ['creationDate' => 'DESC']);
+    }
 }

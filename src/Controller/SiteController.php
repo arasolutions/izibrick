@@ -163,7 +163,7 @@ class SiteController extends AbstractController
             } else if ($page->getType() == 4) {
                 // Page de type Blog
                 $success = false;
-                $posts = $this->postRepository->getByPageId($page->getId());
+                $posts = $this->postRepository->getByPageIdAndOrderByDateCreation($page->getId());
                 $limitPagination = 10;
                 if($page->getPagesTypeBlog()->getTemplate()->getId() == 8) {
                     $limitPagination = 12;
