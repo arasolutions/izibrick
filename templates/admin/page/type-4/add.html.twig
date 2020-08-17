@@ -55,6 +55,12 @@
                         </div>
                     </div>
                     <div class="col-sm-12 form-group">
+                        <label class="control-label">{{ form_label(form.creationDate) }}</label>
+                        <div>
+                            {{ form_widget(form.creationDate, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
                         <label class="control-label" for="demo-hor-inputemail">Contenu</label>
                         <div>
                             {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}

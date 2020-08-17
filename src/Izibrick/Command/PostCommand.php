@@ -32,4 +32,9 @@ class PostCommand
      */
     public $image;
 
+    /**
+     * @var mixed
+     */
+    public $creationDate;
+
 }
