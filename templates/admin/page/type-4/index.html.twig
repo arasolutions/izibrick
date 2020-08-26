@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Blog{% endblock %}
+{% block title %}Page {{ page.nameMenu }}{% endblock %}
 
-{% block description %}Représente la page Blog de votre site{% endblock %}
+{% block description %}Modifier la page{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
