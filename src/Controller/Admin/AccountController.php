@@ -84,9 +84,14 @@ class AccountController extends AbstractController
 
         // Afficher les moyens de paiement
         $stripe = new StripeHelper();
-        $customer = $stripe->getCustomer($userBDD->getStripeCustomerId());
-        $cards = $stripe->getAllCards($userBDD->getStripeCustomerId());
-        $invoiceUpcoming = $stripe->getInvoiceUpcoming($userBDD->getStripeCustomerId());
+        $customer = null;
+        $cards = null;
+        $invoiceUpcoming = null;
+        if ($userBDD->getStripeCustomerId()) {
+            $customer = $stripe->getCustomer($userBDD->getStripeCustomerId());
+            $cards = $stripe->getAllCards($userBDD->getStripeCustomerId());
+            $invoiceUpcoming = $stripe->getInvoiceUpcoming($userBDD->getStripeCustomerId());
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Mis à jour du user
