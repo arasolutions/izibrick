@@ -46,6 +46,7 @@ class GlobalParametersCommand
         $this->keys = $site->getKeyWords();
         $this->twitter = $site->getTwitter();
         $this->logo = $site->getLogo();
+        $this->favicon = $site->getFavicon();
         $this->nameInLogo = $site->getNameInLogo();
         $this->template = $site->getTemplate();
         $this->colorTheme = $site->getColorTheme();
