@@ -246,3 +246,9 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        var pageArray = {{ pages|json_encode|raw }}
+    </script>
+{% endblock %}

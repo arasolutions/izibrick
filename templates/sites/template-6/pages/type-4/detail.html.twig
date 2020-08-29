@@ -9,7 +9,7 @@
 
     <div class="has-right-sidebar has-one-sidebar">
         <div class="container">
-            {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|raw }}
+            {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|links(site.id, site.internalName, app.request.server.get('REQUEST_URI'))|raw }}
             <div class="row">
 
                 <div class="col-sm-12">

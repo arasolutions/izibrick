@@ -12,7 +12,7 @@
     </style>
 
     <div class="container">
-        {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|raw }}
+        {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|links(site.id, site.internalName, app.request.server.get('REQUEST_URI'))|raw }}
         <div class="row">
             <div class="v-blog-widget col-sm-12">
                     <div class="v-blog-wrap">

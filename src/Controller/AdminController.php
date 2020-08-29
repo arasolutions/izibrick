@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Blog;
+use App\Entity\Page;
 use App\Entity\PricingCategory;
 use App\Entity\Site;
 use App\Entity\User;
@@ -15,6 +16,7 @@ use App\Form\EditPageTypeContactType;
 use App\Form\EditPageTypePresentationType;
 use App\Helper\SiteHelper;
 use App\Helper\ApiAnalyticsHelper;
+use App\Helper\StringHelper;
 use App\Izibrick\Command\AddPageCommand;
 use App\Izibrick\Command\AddTemplatePagesCommand;
 use App\Izibrick\Command\ContactCommand;
@@ -55,6 +57,7 @@ use App\Repository\FontRepository;
 use App\Repository\PageTypeContactRepository;
 use App\Repository\PageTypePresentationRepository;
 use App\Repository\PageTypeRepository;
+use App\Repository\PostRepository;
 use App\Repository\PricingCategoryRepository;
 use App\Repository\PricingProductRepository;
 use App\Repository\PricingRepository;
@@ -64,6 +67,7 @@ use App\Repository\PresentationRepository;
 use App\Repository\BlogRepository;
 use App\Repository\QuoteRepository;
 use App\Repository\ContactRepository;
+use App\Twig\AppExtension;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -104,6 +108,9 @@ class AdminController extends AbstractController
     /** @var BlogRepository $blogRepository */
     private $blogRepository;
 
+    /** @var PostRepository $postRepository */
+    private $postRepository;
+
     /** @var PricingRepository $pricingRepository */
     private $pricingRepository;
 
@@ -133,6 +140,7 @@ class AdminController extends AbstractController
      * @param HomeRepository $homeRepository
      * @param PresentationRepository $presentationRepository
      * @param BlogRepository $blogRepository
+     * @param PostRepository $postRepository
      * @param PricingRepository $pricingRepository
      * @param QuoteRepository $quoteRepository
      * @param ContactRepository $contactRepository
@@ -140,17 +148,18 @@ class AdminController extends AbstractController
      * @param PricingProductRepository $pricingProductRepository
      * @param FontRepository $fontRepository
      */
-    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, PageRepository $pageRepository, PageTypeRepository $pageTypeRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository)
+    public function __construct(SiteRepository $siteRepository, CustomPageRepository $customPageRepository, PageRepository $pageRepository, PageTypeRepository $pageTypeRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, HomeRepository $homeRepository, PresentationRepository $presentationRepository, BlogRepository $blogRepository, PricingRepository $pricingRepository, QuoteRepository $quoteRepository, ContactRepository $contactRepository, PricingCategoryRepository $pricingCategoryRepository, PricingProductRepository $pricingProductRepository, FontRepository $fontRepository, PostRepository $postRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->customPageRepository = $customPageRepository;
         $this->pageRepository = $pageRepository;
         $this->pageTypeRepository = $pageTypeRepository;
         $this->pageTypePresentationRepository = $pageTypePresentationRepository;
-        $this->pageTypeContactRepository =  $pageTypeContactRepository;
+        $this->pageTypeContactRepository = $pageTypeContactRepository;
         $this->homeRepository = $homeRepository;
         $this->presentationRepository = $presentationRepository;
         $this->blogRepository = $blogRepository;
+        $this->postRepository = $postRepository;
         $this->pricingRepository = $pricingRepository;
         $this->quoteRepository = $quoteRepository;
         $this->contactRepository = $contactRepository;
@@ -187,7 +196,7 @@ class AdminController extends AbstractController
 
         $userSite = $this->siteRepository->getById($_SESSION[Constants::SESSION_SITE_ID]);
 
-        if(count($userSite->getPages()) === 0) {
+        if (count($userSite->getPages()) === 0) {
             return $this->render('admin/dashboard/template.html.twig', [
                 'site' => $userSite,
                 'user' => $user
@@ -203,14 +212,14 @@ class AdminController extends AbstractController
         $nbrPages = 0;
         $nbrPosts = 0;
         $pages = $this->pageRepository->getAllBySiteId($userSite->getId());
-        foreach ($pages as $page){
+        foreach ($pages as $page) {
             $nbrPages++;
             $page->getSeoTitle() != '' ? $referencementTitle++ : '';
             $page->getSeoTitle() != '' ? $referencementTaux++ : '';
             $page->getSeoDescription() != '' ? $referencementDescription++ : '';
             $page->getSeoDescription() != '' ? $referencementTaux++ : '';
             // On compte le nombre de posts
-            if ($page->getType() == 4 && $page->getPagesTypeBlog() != null ) {
+            if ($page->getType() == 4 && $page->getPagesTypeBlog() != null) {
                 $nbrPosts = $nbrPosts + count($page->getPosts());
             }
         }
@@ -236,7 +245,7 @@ class AdminController extends AbstractController
         // Analytics
         $dataVisiteursUnique = '';
         $dataVisiteursRecurrent = '';
-        if($userSite->getAnalyticsViewId()){
+        if ($userSite->getAnalyticsViewId()) {
             $analytics = ApiAnalyticsHelper::initializeAnalytics();
             $dataVisiteursUnique = ApiAnalyticsHelper::getReportVisiteurUnique($analytics, $userSite->getAnalyticsViewId());
             $dataVisiteursRecurrent = ApiAnalyticsHelper::getReportVisiteurRecurrent($analytics, $userSite->getAnalyticsViewId());
@@ -463,12 +472,16 @@ class AdminController extends AbstractController
             $editPageTypePresentationCommandHandler->handle($pageTypeCommand, $site);
             $success = true;
         }
+
+        $listPages = $this->getListPages($site);
+
         return $this->render('admin/page/type-2/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'page' => $page,
             'form' => $form->createView(),
             'success' => $success,
+            'pages' => $listPages
         ]);
     }
 
@@ -528,12 +541,15 @@ class AdminController extends AbstractController
             $editPageTypeContactCommandHandler->handle($pageTypeCommand, $site);
             $success = true;
         }
+        $listPages = $this->getListPages($site);
+
         return $this->render('admin/page/type-3/index.html.twig', [
             'controller_name' => 'AdminController',
             'site' => $site,
             'page' => $page,
             'form' => $form->createView(),
             'success' => $success,
+            'pages' => $listPages
         ]);
     }
 
@@ -566,4 +582,37 @@ class AdminController extends AbstractController
             'success' => $success,
         ]);
     }
+
+    private function getListPages(Site $site)
+    {
+        $result = array();
+
+        $pages = $this->pageRepository->getAllBySiteId($site->getId());
+
+        foreach ($pages as $page) {
+            array_push($result, array(
+                    $page->getNameMenu(),
+                    'iziButton://page?id=' . $page->getId())
+            );
+            if ($page->getType() == 4) {
+                //Blog
+                $posts = $this->postRepository->getByPageId($page->getId());
+                foreach ($posts as $post) {
+                    array_push($result, array(
+                            $page->getNameMenu() . ' - ' . $post->getTitle(),
+                            'iziButton://page_blog_detail?id=' . $page->getId() . '&postId=' . $post->getId())
+                    );
+                }
+            }
+        }
+
+        $array_sort = function ($page1, $page2) {
+            return strcmp($page1[1], $page2[1]);
+        };
+
+        usort($result, $array_sort);
+        return $result;
+
+    }
+
 }

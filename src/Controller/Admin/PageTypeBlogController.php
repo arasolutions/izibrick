@@ -10,6 +10,7 @@ use App\Entity\Post;
 use App\Enum\Constants;
 use App\Form\EditPageTypeBlogType;
 use App\Helper\SiteHelper;
+use App\Helper\StringHelper;
 use App\Izibrick\Command\ContactCommand;
 use App\Izibrick\Command\GlobalParametersCommand;
 use App\Izibrick\Command\BlogCommand;
@@ -113,13 +114,15 @@ class PageTypeBlogController extends AbstractController
             $editPageTypeBlogCommandHandler->handle($pageTypeCommand, $site);
             $success = true;
         }
+        $listPages = $this->getListPages($site);
         return $this->render('admin/page/type-4/index.html.twig', [
             'site' => $site,
             'page' => $page,
             'blog' => $site->getBlog(),
             'posts' => $posts,
             'form' => $form->createView(),
-            'success' => $success
+            'success' => $success,
+            'pages' => $listPages
         ]);
     }
 
@@ -149,11 +152,13 @@ class PageTypeBlogController extends AbstractController
             return $this->redirectToRoute('bo-type-blog', array('id' => $page->getId()));
         }
 
+        $listPages = $this->getListPages($site);
         return $this->render('admin/page/type-4/add.html.twig', [
             'site' => $site,
             'page' => $page,
             'form' => $form->createView(),
-            'success' => $success
+            'success' => $success,
+            'pages' => $listPages
         ]);
     }
 
@@ -188,12 +193,14 @@ class PageTypeBlogController extends AbstractController
             return $this->redirectToRoute('bo-type-blog', array('id' => $page->getId()));
         }
 
+        $listPages = $this->getListPages($site);
         return $this->render('admin/page/type-4/add.html.twig', [
             'site' => $site,
             'page' => $page,
             'post' => $post,
             'form' => $form->createView(),
-            'success' => $success
+            'success' => $success,
+            'pages' => $listPages
         ]);
     }
 
@@ -220,6 +227,37 @@ class PageTypeBlogController extends AbstractController
         }
 
         return $this->redirectToRoute('bo-type-blog', array('id' => $page->getId()));
+    }
+    private function getListPages(Site $site)
+    {
+        $result = array();
+
+        $pages = $this->pageRepository->getAllBySiteId($site->getId());
+
+        foreach ($pages as $page) {
+            array_push($result, array(
+                    $page->getNameMenu(),
+                    'iziButton://page?id=' . $page->getId())
+            );
+            if ($page->getType() == 4) {
+                //Blog
+                $posts = $this->postRepository->getByPageId($page->getId());
+                foreach ($posts as $post) {
+                    array_push($result, array(
+                            $page->getNameMenu() . ' - ' . $post->getTitle(),
+                            'iziButton://page_blog_detail?id=' . $page->getId() . '&postId=' . $post->getId())
+                    );
+                }
+            }
+        }
+
+        $array_sort = function ($page1, $page2) {
+            return strcmp($page1[1], $page2[1]);
+        };
+
+        usort($result, $array_sort);
+        return $result;
+
     }
 
 }

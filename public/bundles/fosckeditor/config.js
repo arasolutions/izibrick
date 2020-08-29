@@ -6,7 +6,7 @@
 
 CKEDITOR.editorConfig = function (config) {
     config.skin = 'office2013';
-    config.extraPlugins = 'background,slider,banner,cards,videodetector,resetcontent,slicky';
+    config.extraPlugins = 'background,slider,banner,cards,videodetector,resetcontent,slicky,iziButton';
     config.height = '600px';
     config.toolbarGroups = [
         {name: 'document', groups: ['mode', 'document', 'doctools']},
@@ -30,7 +30,9 @@ CKEDITOR.editorConfig = function (config) {
 
     config.contentsCss = [CKEDITOR.getUrl("contents.css"), '/assets/common/bootstrap/css/bootstrap.min.css', '/assets/plugins/themify-icons/themify-icons.css', '/assets/bo/css/wysiwyg.css'];
 
-    config.extraAllowedContent = 'ol[data-*](*);li[data-*](*);div[data-*][style];a(*)[href,data-*,role];span(*)[aria-hidden];input[placeholder];section(*)[*]{*};h4(*)[*];ul(*)[*];iframe(*)[*];img[data-*]';
+    config.extraAllowedContent = 'p[id];ol[data-*](*);li[data-*](*);div[data-*][style];a(*)[type,href,data-*,role];span(*)[aria-hidden];input[placeholder];section(*)[*]{*};h4(*)[*];ul(*)[*];iframe(*)[*];img[data-*];button(*)[*]{*}';
 };
 CKEDITOR.dtd.$removeEmpty['span'] = false;
 CKEDITOR.dtd.$removeEmpty['p'] = false;
+
+CKEDITOR.addCss(':root {--colorTheme: ' + getComputedStyle(document.documentElement).getPropertyValue("--colorTheme") + ';--textColor: ' + getComputedStyle(document.documentElement).getPropertyValue("--textColor") + ';}');

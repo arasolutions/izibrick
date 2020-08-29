@@ -80,7 +80,7 @@ footer, footer p {
     color: var(--textColor) !important;
 }
 
-.btn, input[type="submit"], input[type="button"], button.btn, .btn-izibrick {
+input[type="submit"], input[type="button"], button.btn, .btn-izibrick {
     background-color: var(--colorTheme) !important;
     color: var(--textColor) !important;
 }
@@ -178,4 +178,39 @@ ul.v-blog-items {
 
 .slicky-item-title, .slicky-item-title a {
     color: white !important;
+}
+
+
+.btn-theme {
+    color: var(--textColor) !important;
+    background-color: var(--colorTheme) !important;
+    border-color: #77838f !important;
+}
+
+.btn-theme:hover {
+    color: var(--textColor) !important;
+    background-color: var(--colorTheme) !important;
+    border-color: #5f6a74 !important;
+}
+
+.btn-theme:focus, .btn-theme.focus {
+    box-shadow: 0 0 0 0.2em rgba(119, 131, 143, 0.5) !important;
+}
+
+.btn-theme.disabled, .btn-theme:disabled {
+    color: var(--textColor) !important;
+    background-color: var(--colorTheme) !important;
+    border-color: #77838f !important;
+}
+
+.btn-theme:not(:disabled):not(.disabled):active, .btn-theme:not(:disabled):not(.disabled).active,
+.show > .btn-theme.dropdown-toggle {
+    color: var(--textColor) !important;
+    background-color: var(--colorTheme) !important;
+    border-color: #5a636d !important;
+}
+
+.btn-theme:not(:disabled):not(.disabled):active:focus, .btn-theme:not(:disabled):not(.disabled).active:focus,
+.show > .btn-theme.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2em rgba(119, 131, 143, 0.5) !important;
 }

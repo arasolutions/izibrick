@@ -151,7 +151,7 @@ class SiteController extends AbstractController
                     $mailer->send($message);
                     $success = true;
                 }
-                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
+                return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-' . $page->getType() . '/index.html.twig', [
                     'controller_name' => 'SiteController' . $site->getName(),
                     'site' => $site,
                     'pages' => $pages,
@@ -186,7 +186,7 @@ class SiteController extends AbstractController
                 ]);
             }
         }
-        if($customPage) {
+        if ($customPage) {
             return $this->render('sites/template-' . $site->getTemplate()->getId() . '/custom-page/index.html.twig', [
                 'controller_name' => 'SiteController' . $site->getName(),
                 'site' => $site,

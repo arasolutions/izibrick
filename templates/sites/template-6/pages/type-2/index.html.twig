@@ -9,7 +9,7 @@
     <div class="v-page-wrap no-top-spacing">
         <div class="pb-0">
             <div class="container">
-                {{ page.pagesTypePresentation.content|wysiwygSlider|wysiwygBanner|raw }}
+                {{ page.pagesTypePresentation.content|wysiwygSlider|wysiwygBanner|links(site.id, site.internalName, app.request.server.get('REQUEST_URI'))|raw }}
             </div>
         </div>
     </div>

@@ -7,14 +7,14 @@
 
 {% block body %}
 
+    {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
     <div class="container">
-        {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|raw }}
+        {{ page.pagesTypeBlog.content|wysiwygSlider|wysiwygBanner|links(site.id, site.internalName, app.request.server.get('REQUEST_URI'))|raw }}
         <div class="row">
             <div class="col-sm-12">
                 <div class="v-blog-widget">
                     <div class="v-blog-wrap">
                         {% if posts|length > 0 %}
-                            {% set siteName = site.internalName|param(app.request.server.get('REQUEST_URI')) %}
                             <div class="v-blog-items-wrap blog-mini">
                                 <ul class="v-blog-items row mini-items clearfix">
                                     {% for post in pagination %}

@@ -51,6 +51,13 @@
     <link href="{{ asset('assets/bo/css/izibrick.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/bo/css/wysiwyg.css') }}">
 
+    <style type="text/css">
+        :root {
+            --colorTheme: {{ site.colorTheme }};
+            --textColor: {{ site.textColor }};
+    </style>
+    <link rel="stylesheet" href="{{ asset('assets/bo/css/bootstrap_btn_dialog.css') }}">
+
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!--=================================================
@@ -82,7 +89,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155056518-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-155056518-1');
@@ -126,7 +137,9 @@
                     </li>
                     <li>
                         <a>
-                            <button id="start-tuto" class="btn btn-md btn-dark"><i class="ti-help-alt"></i>&nbsp;Accéder au tutoriel</button>
+                            <button id="start-tuto" class="btn btn-md btn-dark"><i class="ti-help-alt"></i>&nbsp;Accéder
+                                au tutoriel
+                            </button>
                         </a>
                     </li>
 
@@ -222,7 +235,8 @@
                 <!--End page title-->
 
                 <ol class="breadcrumb">
-                    <li class="header-description"><i class="ti-arrow-right"></i>&nbsp;{% block description %}{% endblock %}</li>
+                    <li class="header-description"><i
+                                class="ti-arrow-right"></i>&nbsp;{% block description %}{% endblock %}</li>
                 </ol>
             </div>
             <div id="page-content">
@@ -324,7 +338,9 @@
 
                                 <li>
                                     <a href="{{ path('bo-page-add') }}">
-                                    <button class="btn btn-large btn-primary"><i class="ti-plus"></i>&nbsp;Ajouter une page</button>
+                                        <button class="btn btn-large btn-primary"><i class="ti-plus"></i>&nbsp;Ajouter
+                                            une page
+                                        </button>
                                     </a>
                                 </li>
 
@@ -339,25 +355,25 @@
                                     {% for page in site.pages|filter(v => v.displayMenuHeader == true)|sort((a, b) => a.menuHeaderOrder <=> b.menuHeaderOrder) %}
                                         <li>
                                             {% if page.type == 1 %}
-                                                <a href="{{ path('bo-page-presentation-edit', { 'id': page.id }) }}">
+                                            <a href="{{ path('bo-page-presentation-edit', { 'id': page.id }) }}">
                                                 <i class="ti-home"></i>
-                                            {% elseif page.type == 2 %}
+                                                {% elseif page.type == 2 %}
                                                 <a href="{{ path('bo-page-presentation-edit', { 'id': page.id }) }}">
-                                                <i class="ti-pencil-alt"></i>
-                                            {% elseif page.type == 3 %}
-                                                <a href="{{ path('bo-page-contact-edit', { 'id': page.id }) }}">
-                                                <i class="ti-email"></i>
-                                            {% elseif page.type == 4 %}
-                                                <a href="{{ path('bo-type-blog', { 'id': page.id }) }}">
-                                                <i class="ti-comment"></i>
-                                            {% else %}
-                                                <a href="{{ path('bo-page-presentation-edit', { 'id': page.id }) }}">
-                                                <i class="ti-email"></i>
-                                            {% endif %}
-                                            <span class="menu-title">
+                                                    <i class="ti-pencil-alt"></i>
+                                                    {% elseif page.type == 3 %}
+                                                    <a href="{{ path('bo-page-contact-edit', { 'id': page.id }) }}">
+                                                        <i class="ti-email"></i>
+                                                        {% elseif page.type == 4 %}
+                                                        <a href="{{ path('bo-type-blog', { 'id': page.id }) }}">
+                                                            <i class="ti-comment"></i>
+                                                            {% else %}
+                                                            <a href="{{ path('bo-page-presentation-edit', { 'id': page.id }) }}">
+                                                                <i class="ti-email"></i>
+                                                                {% endif %}
+                                                                <span class="menu-title">
                                                 {{ page.nameMenu }}
                                             </span>
-                                            </a>
+                                                            </a>
                                         </li>
                                     {% endfor %}
 
@@ -422,10 +438,10 @@
                                 <li class="list-divider"></li>
 
                                 <li class="list-header">Paramètres globaux</li>
-                                    {% if app.request.get('_route') == 'bo-global-parameters' %}
-                                        <li class="active-link">
+                                {% if app.request.get('_route') == 'bo-global-parameters' %}
+                                <li class="active-link">
                                     {% else %}
-                                        <li>
+                                <li>
                                     {% endif %}
                                     <a href="{{ path('bo-global-parameters') }}">
                                         <i class="ti-panel"></i>
@@ -458,7 +474,7 @@
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-        <p class="pad-lft">&#0169; {{"now"|date("Y")}} ARA Solutions</p>
+        <p class="pad-lft">&#0169; {{ "now"|date("Y") }} ARA Solutions</p>
 
 
     </footer>
@@ -481,7 +497,7 @@
 <script src="{{ asset('assets/plugins/bootbox/bootbox.min.js') }}"></script>
 
 <script>
-    if (typeof(CKEDITOR) !== 'undefined') {
+    if (typeof (CKEDITOR) !== 'undefined') {
         CKEDITOR.config.contentsCss = ['/assets/bo/vendor/bootstrap/bootstrap.css'];
     }
 </script>

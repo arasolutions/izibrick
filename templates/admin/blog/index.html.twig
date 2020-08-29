@@ -84,4 +84,7 @@
     <script src="{{ asset('assets/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
     <!--DataTables Sample [ SAMPLE ]-->
     <script src="{{ asset('assets/js/demo/tables-datatables.js') }}"></script>
+    <script type="text/javascript">
+        var pageArray = {{ pages|json_encode|raw }}
+    </script>
 {% endblock %}

@@ -188,3 +188,8 @@ img.cke_slicky {
     background-repeat: no-repeat;
     border: 1px solid #a9a9a9;
 }
+
+.render-btn {
+    display: flex;
+    text-align: center;
+}
