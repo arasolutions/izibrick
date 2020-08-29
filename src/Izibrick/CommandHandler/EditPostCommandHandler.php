@@ -56,6 +56,7 @@ class EditPostCommandHandler
         $post->setTitle($command->title);
         $post->setIntroduction($command->introduction);
         $post->setContent($command->content);
+        $post->setCreationDate($command->creationDate);
         if ($command->image != null) {
             $post->setImage(null);
             $post->setImageFile($command->image);

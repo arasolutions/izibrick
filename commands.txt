@@ -5,20 +5,16 @@ php bin/console assets:install public
 
 
 # A faire :
-Page type portfolio
-Theme Blog
-Menu : donner la possibilité d'avoir un menu transparant
-Front : 1 Choisir Offre, 2 Créer compte + nom projet, on se connecte au bo : on chosit un theme qui créé automatiquement des pages
-Front : Deux offres : 20 et 30 € TTC (récupérer JIMDO pour les infos des offres)
-Stripe : voir si on peut traduire et mettre le logo ARA sur les factures PDF
 Paiement BO : Travailler l'ergonomie pour faire plus sécurisé
+Page type portfolio
+Site Front : Générer mentions légales, politique de confidentialités et CGU
+Référencement : possibilité de modifier l'URL de la page
 
 Il manque :
 WYSIWYG : faire des boutons
-CSS : bandeau - aligner en mode container les titre et description
-WYSIWYG : Bandeau : donner la possibilité de mettre l'opacité ou non
-WYSIWYG : slider : Champs titre et description vides lorsque l'on modifie le caroussel (les champs étaient bien entendu alimentés)
+WYSIWYG : Grid boostrap
 WYSIWYG : Insérer un fichier dans la page
+WYSIWYG : Bandeau : donner la possibilité de mettre l'opacité ou non
 WYSIWYG : Insertion Map
 
 # Idées :
@@ -31,6 +27,12 @@ WYSIWYG : slider : Mettre une taille en pixel par défaut (j'ai cherché pourquo
 WYSIWYG : plan tarifaire : possibilité de chnager la couleur de fond pour le titre en modification (poissible uniquement à la création)
 WYSIWYG : Ajouter un bouton pour purger (effacer) le contenu
 WYSIWYG : Ajouter un caroussel d'image (pas le meme car il faut pour celui là lui préciser en plus la largeur et qu'il soit intégré dans le container)
+WYSIWYG : slider : Champs titre et description vides lorsque l'on modifie le caroussel (les champs étaient bien entendu alimentés)
+Theme Blog
+Menu : donner la possibilité d'avoir un menu transparant
+Front : Deux offres : 20 et 30 € TTC (récupérer JIMDO pour les infos des offres)
+Front : 1 Choisir Offre, 2 Créer compte + nom projet, on se connecte au bo : on choisi un theme qui créé automatiquement des pages
+Stripe : voir si on peut traduire et mettre le logo ARA sur les factures PDF
 CSS : carousel - aligner en mode container les titre et description
 
 # Offre

@@ -95,6 +95,9 @@ class StripeHelper
      */
     public function getCustomer($customerId)
     {
+        if (!$customerId) {
+            return null;
+        }
         $customer = \Stripe\Customer::retrieve(["id" => $customerId, "expand" => ["default_source"]]);
 
         return $customer;

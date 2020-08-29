@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Izibrick\Command\PostCommand;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,6 +41,10 @@ class EditPostType extends AbstractType
                 'required' => false,
                 'label' => 'Image',
                 'data_class' => null
+            ])
+            ->add('creationDate', DateType::class, [
+                'widget' => 'choice',
+                'label' => 'Date de publication',
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',

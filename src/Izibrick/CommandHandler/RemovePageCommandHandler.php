@@ -10,6 +10,7 @@ use App\Izibrick\Command\PageTypePresentationCommand;
 use App\Repository\PageTypeBlogRepository;
 use App\Repository\PageTypeContactRepository;
 use App\Repository\PageTypePresentationRepository;
+use App\Repository\PostRepository;
 use App\Repository\SiteRepository;
 use App\Repository\PageRepository;
 
@@ -41,14 +42,16 @@ class RemovePageCommandHandler
      * @param PageTypePresentationRepository $pageTypePresentationRepository
      * @param PageTypeContactRepository $pageTypeContactRepository
      * @param PageTypeBlogRepository $pageTypeBlogRepository
+     * @param PostRepository $postRepository
      */
-    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, PageTypeBlogRepository $pageTypeBlogRepository)
+    public function __construct(SiteRepository $siteRepository, PageRepository $pageRepository, PageTypePresentationRepository $pageTypePresentationRepository, PageTypeContactRepository $pageTypeContactRepository, PageTypeBlogRepository $pageTypeBlogRepository, PostRepository $postRepository)
     {
         $this->siteRepository = $siteRepository;
         $this->pageRepository = $pageRepository;
         $this->pageTypePresentationRepository = $pageTypePresentationRepository;
         $this->pageTypeContactRepository =  $pageTypeContactRepository;
         $this->pageTypeBlogRepository = $pageTypeBlogRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -85,6 +88,10 @@ class RemovePageCommandHandler
             $pageTypeBlog = $this->pageTypeBlogRepository->getByPageId($id);
             if (!$pageTypeBlog) {
                 throw new \Exception(sprintf('Error - PageTypeBlog not found (id: %d)', $id));
+            }
+            // Suppression des posts appartenant à la page de blog
+            foreach ($page->getPosts() as $post) {
+                $this->postRepository->remove($post);
             }
             $this->pageTypeBlogRepository->remove($pageTypeBlog);
         }

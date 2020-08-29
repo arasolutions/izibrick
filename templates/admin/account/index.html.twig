@@ -39,7 +39,9 @@
 
                     <!-- Profile Details -->
                     <p class="pad-ver text-main text-sm text-uppercase text-bold">A propos de moi</p>
-                    <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> {{ site.contact.postCode }} {{ site.contact.city }}, {{ site.contact.country }}</p>
+                    {% if site.contact.postCode or site.contact.city or site.contact.country %}
+                        <p><i class="demo-pli-map-marker-2 icon-lg icon-fw"></i> {{ site.contact.postCode }} {{ site.contact.city }}, {{ site.contact.country }}</p>
+                    {% endif %}
                     {% if site.contact.phone %}
                         <p><i class="demo-pli-old-telephone icon-lg icon-fw"></i>{{ site.contact.phone }}</p>
                     {% endif %}
@@ -60,6 +62,88 @@
 
                 </div>
                 <div class="fluid">
+                    {% if invoiceUpcoming|default is null %}
+                        <div class="panel panel-mint">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><label class="control-label">Mon offre</label></h3>
+                            </div>
+                            <h4 class="mt20">
+                                Mon avis de prochain prélèvement : Le {{ invoiceUpcoming.next_payment_attempt|date("d/m/Y") }}.
+                            </h4>
+                            <div>
+                                Offre : {{ site.product.name }} pour la période du {{ invoiceUpcoming.period_start|date("d/m/Y") }} au {{ invoiceUpcoming.period_end|date("d/m/Y") }}.<br/>
+                                Montant : {{ (invoiceUpcoming.amount_due / 100) | number_format(2,',',' ') }} € TTC.
+                            </div>
+
+                            <h5 class="mt50">
+                                Mes moyens de paiements (cartes bancaires) :
+                            </h5>
+                            <div class="panel-body">
+
+                                <a href="{{ path('bo-account-card-add') }}">
+                                    <button class="btn btn-success pull-right mb10">
+                                        Ajouter une carte
+                                    </button>
+                                </a>
+                                <table class="table table-bordered text-center">
+                                    <thead>
+                                    <tr>
+                                        <th width="100px" class="text-center">Type</th>
+                                        <th width="100px" class="text-center">Défaut</th>
+                                        <th class="text-center">Titulaire</th>
+                                        <th class="text-center">Carte</th>
+                                        <th class="text-center">Expiration</th>
+                                        <th width="250px" class="text-center">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if cards|length > 0 %}
+                                        {% for card in cards %}
+                                            <tr>
+                                                <td>
+                                                    {% if card.brand == 'Visa' %}
+                                                        <img src="{{ asset('/assets/img/payment/visa.png') }}" class="img-xs img-circle" alt="VISA">
+                                                    {% else %}
+                                                        {{ card.brand }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if customer.default_source.id == card.id %}
+                                                        <span class="label label-primary">Par défaut</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ card.name }}
+                                                </td>
+                                                <td>**** {{ card.last4 }}
+                                                </td>
+                                                <td>{{ card.exp_month }}/{{ card.exp_year }}</td>
+                                                <td>
+                                                    {% if customer.default_source.id != card.id %}
+                                                        <a href="{{ path('bo-account-card-default', {'id':card.id}) }}">
+                                                            <button class="btn btn-sm btn-primary">
+                                                                Définir par défaut
+                                                            </button>
+                                                        </a>
+                                                    {% endif %}
+                                                    <a href="{{ path('bo-account-card-delete', {'id':card.id}) }}">
+                                                        <button class="btn btn-sm btn-danger">
+                                                            Supprimer
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="4">Aucun carte recensée</td>
+                                        </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {% endif %}
+
                     <div class="panel panel-mint">
                         <div class="panel-heading">
                             <h3 class="panel-title"><label class="control-label">Informations postales</label></h3>
@@ -102,87 +186,6 @@
                             {{ form_end(form) }}
                         </div>
                     </div>
-                    <div class="panel panel-mint">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><label class="control-label">Mon offre</label></h3>
-                        </div>
-
-                        <h4 class="mt20">
-                            Mon avis de prochain prélèvement : Le {{ invoiceUpcoming.next_payment_attempt|date("d/m/Y") }}.
-                        </h4>
-                        <div>
-                            Offre : {{ site.product.name }} pour la période du {{ invoiceUpcoming.period_start|date("d/m/Y") }} au {{ invoiceUpcoming.period_end|date("d/m/Y") }}.<br/>
-                            Montant : {{ (invoiceUpcoming.amount_due / 100) | number_format(2,',',' ') }} € TTC.
-                        </div>
-
-                        <h5 class="mt50">
-                            Mes moyens de paiements (cartes bancaires) :
-                        </h5>
-                        <div class="panel-body">
-
-                            <a href="{{ path('bo-account-card-add') }}">
-                                <button class="btn btn-success pull-right mb10">
-                                    Ajouter une carte
-                                </button>
-                            </a>
-                            <table class="table table-bordered text-center">
-                                <thead>
-                                <tr>
-                                    <th width="100px" class="text-center">Type</th>
-                                    <th width="100px" class="text-center">Défaut</th>
-                                    <th class="text-center">Titulaire</th>
-                                    <th class="text-center">Carte</th>
-                                    <th class="text-center">Expiration</th>
-                                    <th width="250px" class="text-center">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% if cards|length > 0 %}
-                                    {% for card in cards %}
-                                        <tr>
-                                            <td>
-                                                {% if card.brand == 'Visa' %}
-                                                    <img src="{{ asset('/assets/img/payment/visa.png') }}" class="img-xs img-circle" alt="VISA">
-                                                {% else %}
-                                                    {{ card.brand }}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if customer.default_source.id == card.id %}
-                                                    <span class="label label-primary">Par défaut</span>
-                                                {% endif %}
-                                            </td>
-                                            <td>{{ card.name }}
-                                            </td>
-                                            <td>**** {{ card.last4 }}
-                                            </td>
-                                            <td>{{ card.exp_month }}/{{ card.exp_year }}</td>
-                                            <td>
-                                                {% if customer.default_source.id != card.id %}
-                                                    <a href="{{ path('bo-account-card-default', {'id':card.id}) }}">
-                                                        <button class="btn btn-sm btn-primary">
-                                                            Définir par défaut
-                                                        </button>
-                                                    </a>
-                                                {% endif %}
-                                                <a href="{{ path('bo-account-card-delete', {'id':card.id}) }}">
-                                                    <button class="btn btn-sm btn-danger">
-                                                        Supprimer
-                                                    </button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                {% else %}
-                                    <tr>
-                                        <td colspan="4">Aucun carte recensée</td>
-                                    </tr>
-                                {% endif %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

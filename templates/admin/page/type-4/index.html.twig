@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
 
-{% block title %}Page Blog{% endblock %}
+{% block title %}Page {{ page.nameMenu }}{% endblock %}
 
-{% block description %}Représente la page Blog de votre site{% endblock %}
+{% block description %}Modifier la page{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('assets/plugins/summernote/summernote.min.css') }}" rel="stylesheet">
@@ -60,15 +60,13 @@
                 <div class="panel" style="display: flow-root;">
                     <div class="panel panel-mint">
                         <div class="panel-heading">
-                            <h2 class="panel-title">Mes posts</h2>
+                            <h2 class="panel-title">Mes articles</h2>
                         </div>
                         <div class="panel-body">
                             <div id="page-content">
                                 <div style="text-align: right;">
                                     <a href="{{ path('bo-type-post-add', {id: page.id}) }}">
-                                        <button id="demo-edit-text" class="btn btn-primary" type="button"><i
-                                                    class="fa fa-paint-brush"></i> Ajouter un post
-                                        </button>
+                                        <button id="demo-edit-text" class="btn btn-primary" type="button"><i class="fa fa-paint-brush"></i> Ajouter un article</button>
                                     </a>
                                 </div>
                                 <div class="panel">
@@ -92,10 +90,7 @@
                                                     <tr>
                                                         <td>
                                                             {% if post.image is defined and post.image is not null %}
-                                                                <img class="img-responsive img-sm"
-                                                                     style="display: unset;"
-                                                                     src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('logo') }}"
-                                                                     alt="{{ post.title }}">
+                                                                <img class="img-responsive img-sm" style="display: unset;width:60%;" src="{{ vich_uploader_asset(post, 'imageFile') | imagine_filter('logo') }}" alt="{{ post.title }}">
                                                             {% endif %}
                                                         </td>
                                                         <td>{{ post.title }}</td>
@@ -175,13 +170,6 @@
                             Enregistrer
                         </button>
                     </div>
-
-                    <div class="col-sm-12 mt20">
-                        <a href="{{ path('bo-page-remove', { 'id': page.id }) }}" id="form-revert"
-                           class="btn btn-danger pull-right mr10" type="button">
-                            Supprimer la page
-                        </a>
-                    </div>
                 </div>
             </div>
             <div id="referencement" class="tab-pane fade">
@@ -218,6 +206,7 @@
             </div>
         </div>
     </div>
+    {{ form_end(form) }}
     <div class="row" style="text-align: right;">
         <button data-target="#demo-default-modal" data-toggle="modal" class="btn btn-danger mt20 mr10 mb10"
                 style="text-align: right;">Supprimer la page
@@ -251,7 +240,6 @@
             </div>
         </div>
     </div>
-    {{ form_end(form) }}
 
 {% endblock %}
 {% block javascripts %}

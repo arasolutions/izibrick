@@ -141,6 +141,7 @@ class PageTypeBlogController extends AbstractController
         $posts = $this->postRepository->getByPageId($id);
 
         $command = new PostCommand();
+        $command->creationDate = new \DateTime();
 
         $success = false;
 
@@ -182,6 +183,7 @@ class PageTypeBlogController extends AbstractController
         $command->introduction = $post->getIntroduction();
         $command->image = $post->getImage();
         $command->content = $post->getContent();
+        $command->creationDate = $post->getCreationDate();
 
         $success = false;
 

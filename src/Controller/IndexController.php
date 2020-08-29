@@ -110,4 +110,16 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+
+    /**
+     * @Route("/mentions-legales",
+     *     name="mentions-legales"
+     * )
+     */
+    public function mentionsLegalesAction()
+    {
+        return $this->render('bo/mentions-legales/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }

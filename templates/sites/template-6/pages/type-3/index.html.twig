@@ -101,7 +101,7 @@
                                 Email : <a href="mailto:{{ page.pagesTypeContact.email }}?subject=[{{site.name}}] Site - Contact" target="_blank">{{ page.pagesTypeContact.email }}</a><br/>
                             {% endif %}
                             {% if page.pagesTypeContact.phone %}
-                                Phone : {{ page.pagesTypeContact.phone }}
+                                Téléphone : {{ page.pagesTypeContact.phone }}
                             {% endif %}
                         </p>
                     {% endif %}
@@ -111,7 +111,7 @@
                             <h3>Horaires</h3>
                         </div>
                         <p>
-                            {{ page.pagesTypeContact.openingTime }}
+                            {{ page.pagesTypeContact.openingTime|nl2br }}
                         </p>
                     {% endif %}
 
@@ -124,17 +124,17 @@
                         <div class="contact-social">
                             {% if site.twitter %}
                                 <p>
-                                    <span class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i> {{ site.getTwitterKey() }}</a></span>
+                                    <span class="twitter"><a href="{{ site.twitter }}" target="_blank"><i class="fa fa-twitter"></i> {{ site.getName() }}</a></span>
                                 </p>
                             {% endif %}
                             {% if site.facebook %}
                                 <p>
-                                    <span class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i> {{ site.getFacebookKey() }}</a></span>
+                                    <span class="facebook"><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i> {{ site.getName() }}</a></span>
                                 </p>
                             {% endif %}
                             {% if site.instagram %}
                                 <p>
-                                    <span class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i> {{ site.getInstagramKey() }}</a></span>
+                                    <span class="instagram"><a href="{{ site.instagram }}" target="_blank"><i class="fa fa-instagram"></i> {{ site.getName() }}</a></span>
                                 </p>
                             {% endif %}
                         </div>
