@@ -6,9 +6,6 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
             getModel: function (a) {
                 var b = (a = a.getSelection().getSelectedElement()) && "img" === a.getName(),
                     c = a && "input" === a.getName() && "image" === a.getAttribute("type");
-                console.log(a);
-                console.log(b);
-                console.log(c);
                 return b || c ? a : null
             },
             onShow: function () {
@@ -18,7 +15,7 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 var renderImg = CKEDITOR.document.getById('render');
                 if (d) {
                     this.setValueOf('banner', 'idOriginal', d.getAttribute("id"));
-                    this.setValueOf('banner', 'height', d.getStyle('height').substr(0,d.getStyle('height').length - 2));
+                    this.setValueOf('banner', 'height', d.getStyle('height').substr(0, d.getStyle('height').length - 2));
                     if (d.getAttribute('data-image-src')) {
                         // C'est une image de fond
                         this.setValueOf('banner', 'typeFond', 'image');
@@ -34,8 +31,12 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                         this.setValueOf('banner', 'typeFond', 'color');
                     }
 
-                    this.setValueOf('banner', 'description', d.getElementsByTag('h2').getItem(0).getText());
-                    this.setValueOf('banner', 'title', d.getElementsByTag('h1').getItem(0).getText());
+                    if (d.getElementsByTag('h2').count() > 0) {
+                        this.setValueOf('banner', 'description', d.getElementsByTag('h2').getItem(0).getText());
+                    }
+                    if (d.getElementsByTag('h1').count() > 0) {
+                        this.setValueOf('banner', 'title', d.getElementsByTag('h1').getItem(0).getText());
+                    }
 
                 } else {
                     CKEDITOR.document.getById('renderBg').setStyle("background-color", "#FFFFFF");
@@ -136,27 +137,30 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                             'label': "Texte du bandeau",
                             style: "margin-top:10px",
                             children: [{
-                                type: "vbox", padding: 0, children: [{
-                                    type: "text",
-                                    id: "title",
-                                    style: "display:inline-block",
-                                    align: "center",
-                                    maxLength: 50,
-                                    size: 100,
-                                    label: "Titre"
-                                }, {
-                                    type: "text",
-                                    id: "description",
-                                    style: "display:inline-block;margin-top:14px;",
-                                    align: "center",
-                                    maxLength: 100,
-                                    size: 100,
-                                    label: "Description"
+                                type: "hbox", padding: 0, children: [{
+                                    type: "vbox", padding: 0, children: [{
+                                        type: "text",
+                                        id: "title",
+                                        style: "display:inline-block",
+                                        align: "center",
+                                        maxLength: 50,
+                                        size: 100,
+                                        label: "Titre"
+                                    }, {
+                                        type: "text",
+                                        id: "description",
+                                        style: "display:inline-block;margin-top:14px;",
+                                        align: "center",
+                                        maxLength: 100,
+                                        size: 100,
+                                        label: "Description"
+                                    }]
                                 }]
                             }]
                         }]
                     }]
-                }],
+                }
+            ],
             onOk: function () {
                 // Action quand on valide le formulaire et on insère dans l'éditeur
                 var dialog = this;
@@ -220,9 +224,11 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 title.setHtml(dialog.getValueOf('banner', 'title'));
                 divCol12.append(title);
 
-                var description = editor.document.createElement('h2');
-                description.setHtml(dialog.getValueOf('banner', 'description'));
-                divCol12.append(description);
+                if (dialog.getValueOf('banner', 'description')) {
+                    var description = editor.document.createElement('h2');
+                    description.setHtml(dialog.getValueOf('banner', 'description'));
+                    divCol12.append(description);
+                }
 
                 divRow.append(divCol12);
                 divContainer.append(divRow);
@@ -231,7 +237,8 @@ CKEDITOR.dialog.add('addBannerDialog', function (editor) {
                 editor.insertElement(section);
                 editor.insertElement(editor.document.createElement('p'));
             }
-        };
+        }
+            ;
     }
 );
 
