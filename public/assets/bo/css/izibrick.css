@@ -368,10 +368,54 @@ ul.no-vertical-spacing > li {
     padding: 20px;
 }
 
-#nestable li{
+#nestable li {
     cursor: move;
 }
 
-#nestable2 li{
+#nestable2 li {
     cursor: move;
 }
+
+.dialog-izigrid-block-lines, .dialog-izigrid-block-cells {
+    text-align: center !important;
+}
+
+.dialog-izigrid-block-lines > .block {
+    clear: both;
+    padding: 2px 0 2px 50px;
+}
+
+.dialog-izigrid-block-cells > .block {
+    width: 50%;
+    float: left;
+}
+
+.dialog-izigrid-block-lines > .block > button, .dialog-izigrid-block-cells > .block > button {
+    float: left;
+}
+
+.dialog-izigrid-block-lines > .block > .text, .dialog-izigrid-block-cells > .block > .text {
+    float: left;
+    margin: auto;
+    line-height: 32px;
+    padding-left: 5px;
+}
+
+.dialog-izigrid-btn {
+    border: solid 1px #333 !important;
+    border-radius: 2px !important;
+}
+
+.dialog-izigrid-btn:not(:first-child) {
+    margin-left: 20px;
+}
+
+.dialog-izigrid-btn:hover {
+    background-color: #EEE;
+}
+
+.dialog-izigrid-btn img {
+    padding: 4px;
+    width: 20px;
+}
+
