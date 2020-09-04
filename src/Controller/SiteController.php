@@ -132,6 +132,10 @@ class SiteController extends AbstractController
                 // Page de type Contact
                 $success = false;
                 $command = new AddTrackingContactCommand();
+                $emailDestinataire = '';
+                if ($page->getPagesTypeContact()->getEmail()) {
+                    $emailDestinataire = $page->getPagesTypeContact()->getEmail();
+                }
 
                 $form = $this->createForm(AddTrackingContactType::class, $command);
                 $form->handleRequest($request);
@@ -140,7 +144,7 @@ class SiteController extends AbstractController
 
                     $message = (new \Swift_Message('Demande de contact'))
                         ->setFrom($_ENV['SITE_MAILER_USER'])
-                        ->setTo($site->getContact()->getEmail())
+                        ->setTo($emailDestinataire)
                         ->setReplyTo($command->getEmail())
                         ->setBody($this->renderView(
                             'sites/emails/contact.txt.twig',
@@ -158,7 +162,7 @@ class SiteController extends AbstractController
                     'pagesFooter' => $pagesFooter,
                     'page' => $page,
                     'form' => $form->createView(),
-                    'success' => false,
+                    'success' => $success,
                 ]);
             } else if ($page->getType() == 4) {
                 // Page de type Blog
