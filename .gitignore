@@ -13,6 +13,8 @@
 !/public/bundles/fosckeditor/plugins/resetcontent/
 !/public/bundles/fosckeditor/plugins/slicky/
 !/public/bundles/fosckeditor/plugins/iziButton/
+!/public/bundles/fosckeditor/plugins/iziGrid/
+
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -30,3 +32,5 @@
 /.idea
 
 /public/uploads
+/public/media
+

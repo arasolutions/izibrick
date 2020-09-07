@@ -193,3 +193,18 @@ img.cke_slicky {
     display: flex;
     text-align: center;
 }
+
+.izigrid .col-md-1,
+.izigrid .col-md-2,
+.izigrid .col-md-3,
+.izigrid .col-md-4,
+.izigrid .col-md-5,
+.izigrid .col-md-6,
+.izigrid .col-md-7,
+.izigrid .col-md-8,
+.izigrid .col-md-9,
+.izigrid .col-md-10,
+.izigrid .col-md-11,
+.izigrid .col-md-12 {
+    border: dotted 1px #AAA;
+}

@@ -1,0 +1,127 @@
+.dialog-izigrid-render-desktop {
+    border: dotted 1px #DDD !important;
+}
+
+.dialog-izigrid-ruler {
+    height: 5px !important;
+    margin: 5px 0 !important;
+}
+
+.dialog-izigrid-ruler .dialog-col-1 {
+    height: 5px !important;
+}
+
+.dialog-izigrid-ruler .dialog-col-1 > div {
+    border-left: solid 1px black !important;
+    border-top: none;
+    border-bottom: none;
+    height: 5px !important;
+    margin: 0 2px !important;
+}
+
+
+.dialog-izigrid-ruler .dialog-col-1:last-child > div {
+    border-right: solid 1px black !important;
+    border-top: none;
+    border-bottom: none;
+}
+
+.dialog-row {
+    margin: 2px !important;
+    padding: 2px !important;
+    /* display: flex !important;*/
+}
+
+.dialog-row:before,
+.dialog-row:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+
+.dialog-row:after {
+    clear: both;
+}
+
+.dialog-izigrid-render-desktop .dialog-col-1 > div,
+.dialog-izigrid-render-desktop .dialog-col-2 > div,
+.dialog-izigrid-render-desktop .dialog-col-3 > div,
+.dialog-izigrid-render-desktop .dialog-col-4 > div,
+.dialog-izigrid-render-desktop .dialog-col-5 > div,
+.dialog-izigrid-render-desktop .dialog-col-6 > div,
+.dialog-izigrid-render-desktop .dialog-col-7 > div,
+.dialog-izigrid-render-desktop .dialog-col-8 > div,
+.dialog-izigrid-render-desktop .dialog-col-9 > div,
+.dialog-izigrid-render-desktop .dialog-col-10 > div,
+.dialog-izigrid-render-desktop .dialog-col-11 > div,
+.dialog-izigrid-render-desktop .dialog-col-12 > div {
+    border: dotted 1px #AAA !important;
+    padding: 2px !important;
+    cursor: cell !important;
+    height: 20px !important;
+    margin: 0 2px !important;
+}
+
+.dialog-col-1, .dialog-col-2, .dialog-col-3, .dialog-col-4, .dialog-col-5, .dialog-col-6, .dialog-col-7, .dialog-col-8, .dialog-col-9, .dialog-col-10, .dialog-col-11, .dialog-col-12 {
+    float: left !important;
+}
+
+.dialog-izigrid-render-desktop .dialog-col-1:hover > div, .dialog-izigrid-render-desktop .dialog-col-2:hover > div, .dialog-izigrid-render-desktop .dialog-col-3 :hover > div, .dialog-izigrid-render-desktop .dialog-col-4 :hover > div, .dialog-izigrid-render-desktop .dialog-col-5 :hover > div, .dialog-izigrid-render-desktop .dialog-col-6 :hover > div, .dialog-izigrid-render-desktop .dialog-col-7 :hover > div, .dialog-izigrid-render-desktop .dialog-col-8 :hover > div, .dialog-izigrid-render-desktop .dialog-col-9 :hover > div, .dialog-izigrid-render-desktop .dialog-col-10 :hover > div, .dialog-izigrid-render-desktop .dialog-col-11 :hover > div, .dialog-izigrid-render-desktop .dialog-col-12 :hover > div {
+    background-color: #EEE;
+}
+
+.dialog-col-1.selected > div, .dialog-col-2.selected > div, .dialog-col-3.selected > div, .dialog-col-4.selected > div, .dialog-col-5.selected > div, .dialog-col-6.selected > div, .dialog-col-7.selected > div, .dialog-col-8.selected > div, .dialog-col-9.selected > div, .dialog-col-10.selected > div, .dialog-col-11.selected > div, .dialog-col-12.selected > div {
+    background-color: #DDD;
+}
+
+/*.dialog-row > div:not(:first-child) {
+    margin-left: 2px;
+}*/
+
+.dialog-col-12 {
+    width: 100% !important;
+}
+
+.dialog-col-11 {
+    width: 91.66666667% !important;
+}
+
+.dialog-col-10 {
+    width: 83.33333333% !important;
+}
+
+.dialog-col-9 {
+    width: 75% !important;
+}
+
+.dialog-col-8 {
+    width: 66.66666667% !important;
+}
+
+.dialog-col-7 {
+    width: 58.33333333% !important;
+}
+
+.dialog-col-6 {
+    width: 50% !important;
+}
+
+.dialog-col-5 {
+    width: 41.66666667% !important;
+}
+
+.dialog-col-4 {
+    width: 33.33333333% !important;
+}
+
+.dialog-col-3 {
+    width: 25% !important;
+}
+
+.dialog-col-2 {
+    width: 16.66666667% !important;
+}
+
+.dialog-col-1 {
+    width: 8.33333333% !important;
+}
