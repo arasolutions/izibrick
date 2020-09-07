@@ -263,24 +263,46 @@ class SiteController extends AbstractController
                 // Page de type Contact
                 $success = false;
                 $command = new AddTrackingContactCommand();
+                $command->secureValue = time();
+
+                $emailDestinataire = '';
+                if ($page->getPagesTypeContact()->getEmail()) {
+                    $emailDestinataire = $page->getPagesTypeContact()->getEmail();
+                }
 
                 $form = $this->createForm(AddTrackingContactType::class, $command);
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
                     $addTrackingContactCommandHandler->handle($command, $site);
-
-                    $message = (new \Swift_Message('Demande de contact'))
-                        ->setFrom($_ENV['SITE_MAILER_USER'])
-                        ->setTo($site->getContact()->getEmail())
-                        ->setReplyTo($command->getEmail())
-                        ->setBody($this->renderView(
-                            'sites/emails/contact.txt.twig',
-                            ['command' => $command,
-                                'site' => $site]
-                        ), 'text/html'
-                        );
-                    $mailer->send($message);
-                    $success = true;
+                    $domain = "";
+                    if ($site->getDomainActif() == true && $site->getDomain() != ''){
+                        $domain = $site->getDomain();
+                    } else {
+                        $domain = 'https://www.izibrick.com';
+                    }
+                    // Controle anti spam : Demande de contact uniquement depuis le site
+                    if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $domain){
+                        $checkTimestamp = time() - $command->secureValue;
+                        // Controle anti spam : pot de miel et formulaire chargée depuis moins d'une heure
+                        if (empty($command->secureBlank) && $checkTimestamp < 3600){
+                            if (true === false ) {
+                                $message = (new \Swift_Message('Demande de contact'))
+                                    ->setFrom($_ENV['SITE_MAILER_USER'])
+                                    ->setTo($emailDestinataire)
+                                    ->setReplyTo($command->getEmail())
+                                    ->setBody($this->renderView(
+                                        'sites/emails/contact.txt.twig',
+                                        ['command' => $command,
+                                            'site' => $site]
+                                    ), 'text/html'
+                                    );
+                                $mailer->send($message);
+                                $success = true;
+                            }
+                        } else {
+                            $success = false;
+                        }
+                    }
                 }
                 return $this->render('sites/template-' . $site->getTemplate()->getId() . '/pages/type-'.$page->getType().'/index.html.twig', [
                     'controller_name' => 'SiteController' . $site->getName(),
