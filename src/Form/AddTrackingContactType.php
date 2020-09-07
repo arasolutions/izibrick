@@ -37,6 +37,14 @@ class AddTrackingContactType extends AbstractType
                 'required' => false,
                 'label' => 'Votre message',
                 'attr' => array('rows' => '10'),
+            ])
+            ->add('secureBlank', HiddenType::class, [
+                'required' => false,
+                'label' => 'Secure Blank',
+            ])
+            ->add('secureValue', HiddenType::class, [
+                'required' => false,
+                'label' => 'Secure Value',
             ]);
     }
 

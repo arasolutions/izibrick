@@ -24,6 +24,16 @@ class AddTrackingContactCommand
     public $content;
 
     /**
+     * @var string
+     */
+    public $secureBlank;
+
+    /**
+     * @var string
+     */
+    public $secureValue;
+
+    /**
      * @return string
      */
     public function getName(): ?string
