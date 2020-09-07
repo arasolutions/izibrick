@@ -148,7 +148,7 @@ class SiteController extends AbstractController
                     } else {
                         $domain = 'https://www.izibrick.com';
                     }
-                    // Controle anti spam : Demande initialisée par le site
+                    // Controle anti spam : Demande de contact uniquement depuis le site
                     if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $domain){
                         $checkTimestamp = time() - $command->secureValue;
                         // Controle anti spam : pot de miel et formulaire chargée depuis moins d'une heure
