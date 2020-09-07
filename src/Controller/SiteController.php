@@ -153,20 +153,18 @@ class SiteController extends AbstractController
                         $checkTimestamp = time() - $command->secureValue;
                         // Controle anti spam : pot de miel et formulaire chargée depuis moins d'une heure
                         if (empty($command->secureBlank) && $checkTimestamp < 3600){
-                            if (true === false ) {
-                                $message = (new \Swift_Message('Demande de contact'))
-                                    ->setFrom($_ENV['SITE_MAILER_USER'])
-                                    ->setTo($emailDestinataire)
-                                    ->setReplyTo($command->getEmail())
-                                    ->setBody($this->renderView(
-                                        'sites/emails/contact.txt.twig',
-                                        ['command' => $command,
-                                            'site' => $site]
-                                    ), 'text/html'
-                                    );
-                                $mailer->send($message);
-                                $success = true;
-                            }
+                            $message = (new \Swift_Message('Demande de contact'))
+                                ->setFrom($_ENV['SITE_MAILER_USER'])
+                                ->setTo($emailDestinataire)
+                                ->setReplyTo($command->getEmail())
+                                ->setBody($this->renderView(
+                                    'sites/emails/contact.txt.twig',
+                                    ['command' => $command,
+                                        'site' => $site]
+                                ), 'text/html'
+                                );
+                            $mailer->send($message);
+                            $success = true;
                         } else {
                             $success = false;
                         }
@@ -285,20 +283,18 @@ class SiteController extends AbstractController
                         $checkTimestamp = time() - $command->secureValue;
                         // Controle anti spam : pot de miel et formulaire chargée depuis moins d'une heure
                         if (empty($command->secureBlank) && $checkTimestamp < 3600){
-                            if (true === false ) {
-                                $message = (new \Swift_Message('Demande de contact'))
-                                    ->setFrom($_ENV['SITE_MAILER_USER'])
-                                    ->setTo($emailDestinataire)
-                                    ->setReplyTo($command->getEmail())
-                                    ->setBody($this->renderView(
-                                        'sites/emails/contact.txt.twig',
-                                        ['command' => $command,
-                                            'site' => $site]
-                                    ), 'text/html'
-                                    );
-                                $mailer->send($message);
-                                $success = true;
-                            }
+                            $message = (new \Swift_Message('Demande de contact'))
+                                ->setFrom($_ENV['SITE_MAILER_USER'])
+                                ->setTo($emailDestinataire)
+                                ->setReplyTo($command->getEmail())
+                                ->setBody($this->renderView(
+                                    'sites/emails/contact.txt.twig',
+                                    ['command' => $command,
+                                        'site' => $site]
+                                ), 'text/html'
+                                );
+                            $mailer->send($message);
+                            $success = true;
                         } else {
                             $success = false;
                         }
